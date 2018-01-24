@@ -1,0 +1,5 @@
+System.Configuration.ConfigurationManager	读取计算机，应用，用户的配置信息
+
+static string host = ConfigurationManager.AppSettings["WebApi"];
+
+Web.config：<add key="WebApi" value="http://180.142.104.4:81/"/>

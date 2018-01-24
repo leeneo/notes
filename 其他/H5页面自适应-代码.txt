@@ -1,0 +1,6 @@
+var cw=document.documentElement.clientWidth;
+clientWidth 就是不同设备下的html文档大小;
+高度可以设置为100%;
+
+
+

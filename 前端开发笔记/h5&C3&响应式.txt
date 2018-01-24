@@ -1,0 +1,750 @@
+h5 2020正式发布，未来的发展趋势
+
+版本的发展：html标记的发展与完善
+
+doctype声明 ：定义文件 dtd 格式
+
+相对路径：../../ 返回上两级
+工作中推荐使用相对路径
+
+职场上问到H5，指的就是html5加CSS3加脚本的综合网页效果。
+也是一套标准，在之前html的版本上，新增了一些标签和api以及属性
+
+h5新增的特性:
+1、h5网页的骨架很简洁，
+2、语法极其松散，有很多标签可以不写，也有很多标签可以只写开始，不写结束。
+3、新增的标签具有很强的语义化
+4、h5目前来说并没有做到所有浏览器兼容，所以我们在使用的时候要有选择的使用
+
+H5新增特点，面试回答：
+1、增加了很多语义化标签
+2、增强了智能表单
+3、提供了多媒体的支持
+4、更加丰富的api接口
+
+浏览器内核：
+1、chrome内核浏览器(opera也是chrome内核、safari)
+2、firefox,mozilla基金会
+3、ie6-11、edge
+
+xp自带浏览器版本：ie6
+win7自带浏览器版本：ie8
+
+h5对表单的增强：
+某些表单元素要提交内容，需要指定name属性;
+checked autofocus reuired readonly这一类属性值等于属性名的属性，只写属性名就可以
+
+autocomplete:on|off; 自动完成，浏览器记录之前输入的内容，并在再次输入时，自动提示不否填充
+autofocus 自动获取输入焦点；
+required 指定该项为必填项
+placeholder 定位光标在文本前，并且输入文本时，清空原始文本
+method="get"会显示用户数据；post不会显示；
+
+<input type="text" name="" autofocus required placeholder="请输入" autocomplete="on" />
+
+form action=‘#’“#”提交到当前页面。action会跳转到指定页面。
+
+range 滑块标签
+value值，指示滑块所处的位置
+<input type="range" max="255" value="0" />
+background:rgb(aa,bb,cc);
+
+jquery change()事件，与js onchange()事件，效果相同，动作发生后触发事件。
+jquery mouseover(),mousemove(),动作发生时触发事件
+
+1、datalist 里面添加 option 标签默认下拉数据列表是隐藏的。
+2、上边的标签必须是 ipnut，为了让它和下面 datalist 联系起来我们需要在 input 的身上添加 list 属性，指向相应的id名为***的 datalist 结构。
+<input type="text" list="con1"/>
+<datalist id="con1">
+	<option value="JavaScript"></option>
+	<option value="Jquery"></option>
+	<option value="HTML5"></option>
+	<option value="CSS3"></option>
+</datalist>
+
+新增表单元素：input(email,url,number,color,search,datetime-local,month,date,time,week)
+
+新增audio标签
+		<audio autoplay controls loop>
+			
+			<!-- 下面这段文本内容只有当前浏览器不支持audio标签的时候才会显示在网页中 -->
+			对不起，您的浏览器不支持该标签，请前往 <a href="icd.itcast.cn">传智UI学院</a>
+			<source src="music/yinyue.mp3" />
+			<source src="music/yinyue.ogg" />
+			
+		</audio>
+
+01 pause() || play() ：这二个函数 是js中提供的专门用来控制声音暂停和播放的。
+02 如果我们在使用 jq 选择元素，那么一定要注意需要将 jq 对象转为 js 对象之后才能去调用js 的方法
+03 $( ‘audio’ ).get( 0 )  ||  $(‘audio’)[0]
+
+
+video标签
+<video width="800" autoplay controls>
+			<source src="video/movie.mp4"></source>
+			<source src="video/movie.ogg"></source>
+			<source src="video/movie.webm"></source>
+			当前浏览器不支持 video直接播放，点击这里下载视频： <a href="myvideo.webm">下载视频</a>
+</video>
+
+01 video 标签可以设置宽和高，但是建义只设置一个即可，另外一边自动缩放
+02 目前也没有哪种视频格式可以被所有浏览器都支持，因此和 audio 一样需要通过 source 引入不同的视频资源。
+在JS中新增了二个事件来监测当前视频暂停还是播放
+onpause   onplay --->这是二个事件，和之前讲的 play() pause() 有质的区别
+
+
+本地存储：保存用户数据（实现user&pwd等数据再次自动填充）
+localStorage、sessionStorage
+localStorage.setItem('qq','123');
+sessionStorage.setItem('qq','123');
+localStorage.getItem('qq');
+sessionStorage.getItem('qq');
+
+localStorage是永久存储，关闭后再打开依然存在；
+sessionStorage是会话存储，仅限于当前会话。
+
+a标记作为一个按钮使用，只点击不跳转，而是做其他处理，就需要设置href属性为javascript:;
+<a href="javsscript" >按钮</a>
+
+img标签必需带alt,width,height属性，且width,height的值为原大小，不带单位。
+
+CSS3属性选择器
+
+自定义属性：
+data-**:"***";
+
+li[data-aihao]{		//匹配所有带有data-aihao属性的li
+	background:blue;
+}
+li[data-aihao='td']{		//匹配data-aihao='td'的li
+	background:pink;
+}
+li[data-aihao *='s']{	//data-aihao的属性值包含字母s
+	background:#afb;
+}
+li[data-aihao ^='k']{	//首字母以k开头
+	background:orange;
+}
+li[data-aihao $='x']{	//以字母x结尾
+	background:lightblue;
+}
+li[data-aihao |='abc']{	//以abc开头，或者等于abc
+	background:#fab;
+}
+
+<li data-aihao="td">特定</li>
+<li data-aihao="cf">吃饭</li>
+<li data-aihao="sj">睡觉</li>
+<li data-aihao="ks">看书</li>
+<li data-aihao="lx">旅行</li>
+<li data-aihao="xx">学习</li>
+<li data-aihao="abc-lq">学习</li>
+<li data-aihao="abc">学习</li>
+
+CSS3关系选择器
+
+01 > （子选择器）选中的是子元素，不包括穿透选择（ 只选儿子不选孙子 ）；区别于后代选择器（div span）,表示选     中div下所有的span，包括孙子；
+02 + 选中兄弟元素，但是只能选中紧挨着某一个元素后面显示的兄弟元素
+03 ~ 选中某一个元素后面所有的兄弟元素
+
+伪元素：:before,:after,:first-letter,:first-line;
+其他以:后缀的都是伪类；
+
+CSS3结构伪类选择器
+nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型;n:在所有子元素中的位置。
+nth-of-type(n) 选择器匹配属于父元素的特定类型,同类元素中的第 N 个子元素；n：在同类元素中的位置。
+
+01 :nth-child( n )--->选中第n个编号的元素
+02 :nth-child( 2n )---> 其中的 n 表示从0 开始的自然数，所以 2n 选中的就是偶数个编号
+03 :nth-child( 2n+1 )--> 选中编号为奇数的元素
+04 :nth-child( odd || even )---> 分别表示选中编号为奇数(odd)和偶数(even)的元素
+注意：
+01 这里的表达式只能识别数值（n） ，而不识别其它字符。
+02 规律可以随的写，不一定非得是奇偶数。
+03 以上的这些选择器都是站在父元素的角度来选择元素。
+
+Li:nth-child(1)---> 选择的是 li 元素，并且这个 li元素是它父元素下第一个子元素，否则选不到元素。
+Li:nth-of-type(1)---> 选择的仍然是 li 元素，但是这个li只要是它父元素下所有li中第一个 li 就可以了。
+:nth-last-child()--> 用法和 :nth-child()一样，只不过选择的顺序是从后向前。
+:nth-last-of-type---> 同上，也是从后向前选
+
+图标字体制作：
+1、ai设计-->存储为svg格式；
+2、在iconfont.cn将svg格式转换成相应的字体格式。
+
+css文件定义
+@font-face {font-family: "iconfont";
+  src: url('../fonts/iconfont.eot?t=1459920430'); /* IE9*/
+  src: url('../fonts/iconfont.eot?t=1459920430#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/iconfont.woff?t=1459920430') format('woff'), /* chrome, firefox */
+  url('../fonts/iconfont.ttf?t=1459920430') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../fonts/iconfont.svg?t=1459920430#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+<link href='iconfont.css' />
+
+使用：
+1、css调用，div{font-family:'iconfont';} <div>&#xe63f;</div>//图标字符码在demo-unicode.html中查询
+2、类名引用，<div class="iconfont icon-gouwuche"></div>//图标名称为#icon-gouwuche在demo_symbol.html中查询
+
+content 配合:after|:before 使用，插入内容；
+
+CSS3新属性
+
+text-shadow:x y 羽化 阴影颜色
+
+01 第一个参数表示水平方向阴影偏移量，正值向右移动,px
+02 第二个参数表示垂直方向偏移量，正值向下移动,px
+03 第三个参数值越大表示阴影越模糊,px
+04 在C3中允许给一段文本同时添加多个阴影，之间用逗号隔开即可。
+
+盒子阴影
+box-shadow: x y 羽化 扩展 颜色 内外阴影
+
+注意：
+01 前面三个参数和文字阴影完全一样。
+02 第四个参数表示扩展，就是阴影向外延伸多大距离之后才开始模糊
+03 可以设置第六个参数用来表示当前的阴影是内还是外，如果是外则默认不写，如果是内阴影则定义 inset 即可。
+
+圆角边框
+border-radius: px px px px|px/px px/px px/px|px px px px /px px px px
+
+px/px是椭圆写法。
+
+注意：
+01 参数的格式可以是具体数值也可以是百分比，如果是百分比那么它的值就是相对于元素的宽和高来定义的。具体数值也可以设置 x/y 的形式，分别表示每个角上 水平和 垂直方向半径不一样。不过一般我们不这样使用。
+02 参数的个数可以不定，最多个四个，设置二个的时候 第一个参数表示 左上 右下、第二个参数表示 右上左下  设置三个参数的时候 分别表示 左上 | 右上左下| 右下
+
+1.10	线性渐变
+Background:linear-gradient(  )
+
+注意：
+01 线性渐变不是一个独立的属性，它是添加在我们 background 属性下面的。
+02 如果设置二个颜色参数分别表示开始和结束颜色。理论上在它们之间可以设置无数个过渡色，颜色之间用逗号隔开。可以在颜色的后面用空格隔开设置百分比，表示当前颜色结束的位置。
+03 设置多个参数时，第一个参数可以用来设置 渐变的方向，有二种形式直接利用 to 关键字+方向名词，或者书写相应的角度，单位是 deg ，0deg 表示从下向上，顺时针旋转一圈 表示各个角度。
+
+1.11	径向渐变
+目前为止各个浏览器对于径向渐变的支持力度是有限的。
+Background:radial-gradient(  )
+
+注意:
+01 在第一个参数中可以设置渐变的形状，ellipse 表示椭圆，此时必须设置二个半径，circle 表示正圆此时设置一个半径，中间用空格隔开，利用 at 关键字可以设置渐变的起始位置，位置可以用关键字来确定也可以用具体的数值来表示，参考点都是相对于原盒子左上角的位置。
+02 后面数和线性渐变完全一致
+
+新增颜色模式(!会把之前的背景图片属性重写)：
+Background:rgba( r,g,b,alpha )
+
+background: url('../images/nav-bkg.png') center 0 no-repeat rgba(0, 0, 0,0.5);
+同时会有背景图片和背景色；
+
+也可以这样写，用/区分开position/size;
+background:url() center/cover no-repeat;
+
+background-size:cover|contain|length|percentage
+cover:按比例缩放，填充至盒子，可能会造成图像裁切
+contain:按比例缩放，放大图像至盒子的左边和底边，可能造成右边空缺。
+length:width height;如果只设置一个值，则第二个值会被设置为 "auto"。
+
+
+C3轮廓（outline）
+
+outline:color style width;设置所有的轮廓属性
+轮廓线不会占据空间，也不一定是矩形
+
+outline-color		轮廓的颜色
+
+outline-style:		轮廓类型
+dotted(点状)|dashed(虚线)|solid(实线)|double(双线)		
+		
+outline-width：		轮廓宽度
+thin(细的)|medium(中等)|thick(粗的)|length(npx)
+
+outline-offset:npx	指定轮廓偏移量，相对边框而言（如果有的话，没有就是相对盒子边缘）
+
+dispaly:flex;
+flex盒子的子元素默认转换为块元素；
+
+内减盒模型：
+盒子加上边框之后，盒子大小会增加；为了保持盒子加上边框之后，大小保持不变，给盒子添加box-sizing:border-box;属性
+
+样式过渡：
+transition:all 0 ease 0;
+
+transition-property:none|all|prop	prop:CSS 属性名称列表，列表以逗号分隔;一般都用all;
+
+transition-duration:time		完成过渡效果需要多少秒或毫秒。
+
+transition-timing-function:linear|ease(default)|ease-in|ease-out|ease-in-out|cubic-bezier(n,n,n,n);
+
+linear	规定以相同速度开始至结束的过渡效果（等于 cubic-bezier(0,0,1,1)）。
+ease	规定慢速开始，然后变快，然后慢速结束的过渡效果（cubic-bezier(0.25,0.1,0.25,1)）。
+ease-in	规定以慢速开始的过渡效果（等于 cubic-bezier(0.42,0,1,1)）。
+ease-out	规定以慢速结束的过渡效果（等于 cubic-bezier(0,0,0.58,1)）。
+ease-in-out	规定以慢速开始和结束的过渡效果（等于 cubic-bezier(0.42,0,0.58,1)）。
+cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中定义自己的值。可能的值是 0 至 1 之间的数值。
+
+transition-delay:time	规定过渡效果何时开始。
+
+2D转换&3D转换：transform
+
+2D转换：
+transform:translate(left,top)	位移
+transform:rotate(ndeg)	旋转	/*数值后面带deg:degree，程度的意思*/
+transform:scale(x,y)	缩放,scal(2,4):把宽度转换为原始尺寸的 2 倍，把高度转换为原始高度的 4 倍
+transform:skew(xdeg,ydeg)	斜切
+transform:matrix()  	matrix() 方法把所有 2D 转换方法组合在一起。matrix() 方法需要六个参数，包含数学				函数，允许您：旋转、缩放、移动以及倾斜元素。
+
+transform-origin:50% 50% 0(default)	改变元素变换围绕的轴，2D 转换元素能够改变元素 x 和 y 轴。3D 转						换元素还能改变其 Z 轴。
+
+transform-origin：left|center|right|length|%
+
+X轴：水平轴，向右为正；Y轴：竖轴，向下为正；Z轴：垂直屏幕的轴
+
+transform居中法
+div{top:50%;left:50%;transform:translate(-50%,-50%);position:absolute}
+
+
+3D转换
+
+Internet Explorer 10 和 Firefox 支持 3D 转换。
+Chrome 和 Safari 需要前缀 -webkit-。
+Opera 仍然不支持 3D 转换（它只支持 2D 转换）。
+
+translate3d(x,y,z)	定义 3D 转化。
+translateX(x)	定义 3D 转化，仅使用用于 X 轴的值。
+translateY(y)	定义 3D 转化，仅使用用于 Y 轴的值。
+
+rotate3d(x,y,z,angle)	定义 3D 旋转。
+rotateX(angle)	定义沿 X 轴的 3D 旋转。
+rotateY(angle)	定义沿 Y 轴的 3D 旋转。
+rotateZ(angle)	定义沿 Z 轴的 3D 旋转。
+
+scale3d(x,y,z)	定义 3D 缩放转换。
+scaleX(x)	定义 3D 缩放转换，通过给定一个 X 轴的值。
+scaleY(y)	定义 3D 缩放转换，通过给定一个 Y 轴的值。
+scaleZ(z)	定义 3D 缩放转换，通过给定一个 Z 轴的值。
+
+perspective:number(px)|none; 			规定 3D 元素的透视效果(景深)，常用数值：800-2000。
+
+perspective 属性定义 3D 元素距视图的距离，以像素计。该属性允许您改变 3D 元素查看 3D 元素的视图。
+当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身。
+注释：perspective 属性只影响 3D 转换元素。
+提示：请与 perspective-origin 属性一同使用该属性，这样您就能够改变 3D 元素的底部位置。
+
+transform-style:preserve-3d|flat(default)	规定被嵌套元素(子元素)如何在 3D 空间中显示。
+						preserve-3d	子元素将保留其 3D 位置。
+						flat	子元素将不保留其 3D 位置。
+
+transform-style:preserve-3d;
+如果需要哪个元素在做3D转换的时候能显示出3D效果，那么我们就需要在它的父元素身上设置该属性，并且需要注意，该属性不能和 overflow:hidden 同时出现在同一个元素身上。
+
+C3动画
+
+1.	单组动画
+@keyframes 自定义动名称{
+	From{	/*from等同0%*/
+		// 这里就是动画的起始位置/*from等同0%*/
+	}
+	To{
+		// 这里就是动画的目标点/*t0等同100%*/
+	}
+
+}
+
+2.	分段动画
+@keyframes 自定义动名称{
+	0%{	
+
+	}
+	25%{	
+
+	}
+	50%{	
+
+	}
+	75%{	
+
+	}
+	100%{	
+
+	}
+
+}
+
+调用动画的形式是一样的，都由 animation 来完成
+
+animation : aname 0 ease 0 1 normal;动画名称 动画时长 动画形式 动画延时 动画播放次数 动画是否反向播放
+
+animation-name				规定需要绑定到选择器的 keyframe 名称。。
+animation-duration			规定完成动画所花费的时间，以秒或毫秒计。
+animation-timing-function		规定动画的速度曲线。
+animation-delay				规定在动画开始之前的延迟。
+animation-iteration-count:inifinite	规定动画应该播放的次数,inifinite:代表无限循环
+animation-direction			规定是否应该轮流反向播放动画。
+
+浏览器内核前缀
+
+01 -webkit- ：chrome 内核 
+02 -moz-    : ff 
+03 -ms-     : 微软
+04 -o-      : opera
+
+在我们书写C3属性时，我们一般会先写一堆带前缀的语法，然后再写一条标准的语法【随着现在C3越来越流行，标准的事法已经被大多数浏览器所支持】
+
+手机屏幕尺寸
+
+安卓：320*480（1倍，淘汰）；480*800（1.5倍，淘汰）；720*1280（2倍，主流）；1080*1920（3倍，趋势）
+
+苹果：@1x:1\2\3(320*480 )；@2x:4\4S(640*960),5\5S\5c\5se(640*1136),6\6s(750*1334)；@3x:6\6s plus(1080*1920)
+
+tips:6\6s plus 开发尺寸:1242*2208
+@1x,@2x,@3x指的是iphone设备在浏览器中的像素比率(window.devicePixelRatio,js对象);
+
+以iphone6举例，它的设备尺寸宽度为 375【逻辑分辨率】，而它的屏幕物理分辨率为 750px 
+，它们之间存在一个 2 倍的关系...
+其实在每一块屏都会存在这么一个比值关系，这个比值我们称之为独立像素比，它就屏幕的物理分辨率/屏幕的逻辑分辨率得到，这几个值我们都是只能读来使用而不能用代码进行修改。也正是利用这些个关系我们可以动态来缩放当前的 html 达到合理视口的设置。
+
+物理分辨率（physic pixel）：屏幕所能显示的像素点信息
+逻辑分辨率(logic point)：设备的物理尺寸
+设备像素比（DPR：devicePixelRatio）：物理分辨率/逻辑分辨率
+比如说：iphone6的物理分辨率为750*1334，逻辑分辨率为375点，dpr=2;
+
+实际上像素分为两种：设备像素和CSS像素
+
+　　1、设备像素(device independent pixels): 设备屏幕的物理像素，任何设备的物理像素的数量都是固定的
+
+　　2、CSS像素(CSS pixels): 又称为逻辑像素，是为web开发者创造的，在CSS和javascript中使用的一个抽象的层
+
+　　每一个CSS声明和几乎所有的javascript属性都使用CSS像素，因此实际上从来用不上设备像素 ，唯一的例外是screen.width/height；DPR对应javascript属性window.devicePixelRatio。
+
+在桌面端，css的1个像素往往都是对应着电脑屏幕的1个物理像素。
+而在手机端，由于屏幕尺寸的限制，缩放是经常性的操作。
+　　//当用户进行缩小操作时，一个设备像素覆盖了多个CSS像素
+　　//当用户进行放大操作时，一个CSS像素覆盖了多个设备像素
+不论我们进行缩小或放大操作，元素设置的CSS像素(如width:300px)是始终不变的，而一个CSS像素对应多少个设备像素是根据当前的缩放比例来决定的
+	
+视口：浏览器的可视区域
+视口概念最早由苹果公司提出，只针对移动设备而言，视口默认大小980px
+
+获取视口大小：
+var vw=document.documentElement.clientWidth;
+console.log(vw);
+
+视口标签：
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+
+//这里不管width=?,web端视口都等于当前分辨率大小。width 还有initail-scale只影响手机端界面
+
+页面添加<meta='viewport'>标记的作用，是使页面内容同一元素在手机端和web端大小看起来一样大。
+
+/*通过缩放系数的变化（不同设备的 dpr:devicePixelRatio 不一样），动态设置视口大小*/
+//!!注意：这个脚本外面不能用window.onload；否则，重写meta标签会把所有文档写成只用一个meta标记的文档
+
+var iScale = 1/window.devicePixelRatio;
+document.write( '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale='+ iScale +', maximum-scale='+ iScale +', minimum-scale='+ iScale +'" />' );
+
+
+/*淘宝适配移动端解决方案，将整个视口分成10份，然后在根元素添加基数字体大小，即1rem的字体大小*/	
+document.documentElement.style.fontSize = document.documentElement.clientWidth/10+"px";	
+
+tips:我的神舟本（1920*1080）的1em字体大小等于14px;
+
+CSS@viewport属性 未来趋势，目前支持该属性浏览器还不多。
+
+多大的视口称之为合适？
+			
+目前来说如果我们想要做到绝对的适配，那么我们在设计PSD的时候就需要给所有尺寸的设备都设计一个PSD，但是这样的工作量就非常的大也没有特别的必要。因此我们真正在做设计的时候，对于移动端页面不管是什么手机操作系统我们都走一版设计稿，然后让这个设计稿去适配所有的设备。
+
+设计稿的版心是多少？
+				
+目前来说使用的非常多的一个标准就是 750*1334，首页这个尺寸是iphone6的屏幕物理分辨率然后如果我们用的是比6小的手机那么相当于将大图缩小，展示不会失真。如果比6要大，相当于将
+..这个缩放的比例是在用户能接受的范围内
+
+
+响应式：所谓响应式就是一个页面在不同的设备上（不同的浏览器宽度）可以很好的展示。
+
+响应式实现方法：
+0、首先代码能做的事情就是100%的去还原设计稿，所以想要实现一个响应式网站就必须要有响应式的设计。
+1、早期利用js不断的监测，当前屏的变化，来选择性的加载对应的一套CSS样式。
+2、有了C3之后我们会采用它里面新增的媒体查询属性来快速简洁的实现上述的操作
+
+C3 媒询语句
+@media属性可以对当前的设备进行相应条件的查询（clientWidth,color,screen or all,等等）；
+
+@media(条件语句){}
+例：@media all and (min-width:600px) and (max-width:900px){	//这个条件表示当检测到的设备尺寸大于等于600，小于等于900
+							时，执行此样式
+	div{background:orange}
+}
+
+条件语句可以用单个，多个的话需要用and关键字联结
+
+媒询语句定义的 CSS 样式仍然遵循之前的 CSS 语法规则，后写的一定会覆盖先写的，所以一般我们会将媒询样式写在默认样式的后面
+
+媒询常用条件
+01 max-width: 最大尺寸，即当宽度小于等于这个值的时候满足条件
+02 min-width: 最小尺寸，即当宽度大于等于这个值的时候满足条件
+03 orientation(方向):landScape|portrait; 它是用来检测当前设备模竖屏的属性
+landScape: 表示横屏
+portrait : 表示竖屏
+
+媒询常用关键字
+01 and : 可以用来连接多个条件，或者连接条件和设备类型。
+02 only: 这个关键字的使用是从设备类型的角度上来考虑的，表示只选中某一种设备去生效
+03 not : 和之前遇到的not 类似，表示排除的意思
+04 all : 一般在工作中我们可以用这个关键字来表示选中所有设备类型
+
+tips:and关键字左右两边的空格不能省略，否则样式不生效
+
+css media 设备类型有screen 和 print 两种;
+/*浏览器模拟打印设备：chrome 调试器 导航栏右侧竖3点，点开--more tools-rendering--Emulate(模拟) CSS Media --下拉菜单--print*/
+			@media not|only screen{
+				div{
+					background: seagreen;
+				}
+			}
+
+媒询样式的引入：
+一般在实际工作过程我们不会在外链的CSS文件中书写媒询语句；而是直接书写相应的样式然后再需要显示该样式的时候通过 link标记身上的 media 属性让该套 CSS 出现。
+
+<link rel="stylesheet" href="media08.css" media="all and (min-width:800px) and (max-width:1000px)" />
+
+media.css:
+/* 在这套CSS中我们来书写750-1000px之间的 div样式 */
+div{
+	background: lightcoral;
+}
+
+如果需要适配多种设备，就需要在外部定义多套CSS样式，然后通过link标记的media属性分别处理。一套CSS样式，应该对应一套设计稿。
+tips:可以先把基准的，不需要适配的CSS样式单独写到一个文件里（例：base.css），然后只针对需要适配的部分（布局等）写多套CSS。这样可以减少代码重复，从而减少文件kb。
+
+
+响应式开发框架-Bootstrap
+
+Bottstrap 框架由twitter 公司推出，基于 JQ 的前端响应式网站制作框架。
+
+使用步骤：
+
+1、引入bootstrap.min.css,bootstrap.min.js,jquery.min.js
+
+!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- js引入脚本放到页面结尾，以使页面加载速度更快 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+tips:必需先引入jquery文件再引入bootstrap.js，因为bootstrap是基于jq的。
+
+2、样式复制，在需要设置样式的标签处，添加相应类名。
+
+
+Bootstrap的响应式实现
+
+也是通过 @media 语句来判断尺寸变化从而决定页面的显示样式。
+
+Bootstrap 的设计者根椐市面上主流的设备，经过分析然后将它们的尺寸分为了四个区间。
+1、当屏幕尺寸大于等于1200px的时候定义版心为 1170,此类设备归为大屏桌面设备	对应:lg
+2、尺寸大于996px 的时候定义版心为 970px 此类设备归不一般桌面设备		对应:md
+3、尺寸大于768px的时候定义版心为750px 此类设备归不平板 pad 		对应:sm
+4、小于768px 时都认为是手持设备，版心直接auto 布局。			对应:xs
+
+
+Bootstrap中删格化布局
+
+在bootstrap中有了上面的四个版心之后，为了方便的实现响应式布局，它又采用了一种删格化的思想，将当前设备屏幕宽度等分为12份，这在给每一个元素写样式的时候就不去定义具体的 px 值，只会给它定义相应的列数就可以了。比如说 col-lg-4 就表示当前元素在超大屏设备下占据4列，也就1/3布局，与四个版心相对应的会有四个类前缀： col-lg- ? col-md-? Col-sm-? Col-xs-?
+
+Bootstrap常用的类名
+
+1 container: 根据当前设备尺寸会自动定义宽度值的容器类
+2 container-fuild:也是一个容器类，始终满屏显示
+3 col-lg-pull-?: 表示在超大屏幕下让当前元素向左拉***列
+4 col-lg-push-?：和上面一样表示向右推***列
+5 btn | btn-lg | btn-primary : 分别表示按钮基础类，定义按钮大小类，定义按钮颜色类。
+6 bg-danger: bg-就表示该类是定义背景色的类( background )
+7 hidden-lg: 该类表示只在超大屏设备下才会隐藏
+8 visible-lg: 该类表示只在超大屏幕下才会显示
+注意：
+只要上面出现了***-lg***-的地方都会对应着有四套类名规则。
+
+
+Bootstrap实例应用--传智云课堂
+
+·导航条
+
+01 navbar: 定义了一个通栏的导航条样式
+02 navbar-inverse: 定义了一深色背景
+03 navbar-fixed-top: 将当前元素固定定位在屏幕顶部
+04 navbar-brand: 专门用存放logo图片和文字的盒子
+05 navbar-header: 响应式导航条中用来存放最终显示内容的容器
+06 navbar-toggle: 响应式导航条中最终的点击切换按钮
+07 icon-bar    : 定义了一条白色的线条
+08 nav : 它下面的 li 及 a 标签会有一定的样式
+09 navbar-nav: 将它下面的 li a 做了一些适合在导航条中显示的样式
+10 navbar-btn: 将它下面的btn 做了一些适合导航条显示的样式
+11 pull-right: 定义了右浮样式
+12 collapse : 将需要切换显示的内容放置在该容器中，默认是隐藏的
+13 navbar-collapse: 定义了导航条中需要切换显示的内容默认是显示的
+14 data-toggle=”collapse”: 该自定义属性表示需要开启切换功能
+15 data-taraget=”选择器”： 指定了当前切换的目标元素
+
+
+·轮播图
+
+01 carousel: 做为轮播图最大的容器内，里面管理三个模块。
+02 slide: 定义了轮播图滑动动画的形式
+03 data-ride=”carousel” : 表示开启轮播图的自动播放
+04 data-interval=”” ：设置时间，单位是毫秒 表示每过多久切换一张图片
+05 carousel-inner: 用来存放图片的大容器
+06 item : 一个item 就可以存放一张图片，默认都是隐藏的。通过 active 进行显示
+07 carousel-indicators: 圆点导航按钮的容器
+08 data-slide-to: 设置一个编号，表示点击时跳转到第几张图片
+
+移动端常见适配方案
+
+1、将当前设备的尺寸做为视口的大小。元素定高不定宽（width:0-100%）,采用灵活布局来适配
+
+将当前设备的尺寸大小做为视口大小，这样的做的好处就是在书写CSS样式的时候可以1:1的对应屏幕像素。相对的缺点就是本来当设备可能可以渲染更多的像素信息，结果这个时候只能渲染有限的像素。所以在色彩上会有所丢失。这种适配的方案一般只用来处理文字内容居多而且布局相对简单，图片信息相对较少的移动网站。
+
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+
+2、动态设置视口大小，rem适配
+ 
+利用当前屏幕的独立像素比动态的来设置视口大小，将设备的屏幕物理分辨率来做为视口。此种做法的有点就是可以最大限度的来按着设备的分辨率来渲染页面。相对的缺点就是在具体布局的时候需要选择相对单位 rem ，这样的话才可以达到适配。这种方案我们一般会用来处理综合性网站，布局复杂，图片信息相对较多。
+
+<script type="text/javascript">
+	var iScale = 1/window.devicePixelRatio;
+	document.write( '<meta name="viewport" content="width=device-width, user-scalable=no, 	initial-scale='+ iScale +', maximum-scale='+ iScale +', minimum-scale='+ iScale +'" />' );	
+	document.documentElement.style.fontSize = document.documentElement.clientWidth/10+"px";	
+</script>
+
+3、固定视口大小，适用H5
+ 
+在某些平台上实现HTML5页面的时候我们一般会选择将当前视口设置为一个固定的值，目前来说 640||750这二种情况相对较多。
+
+<meta name="viewport" content="width=640px, user-scalable=no" />
+
+
+JQ中的事件操作
+
+1 绑定
+$( ‘div’ ).on( {
+	‘事件名1’:function(){  },
+	‘事件名2’：function(){  }
+} );
+
+2 清除
+$( ‘div’ ).off( ‘需要清除的事件名称列表，中间用空格隔开’ );
+
+$('div').off();/*表示清除所有已绑定的事件*/
+
+
+移动端手指事件操作
+
+01 touchstrat: 手指在屏幕下按下时触发
+02 touchmove: 滑屏操作
+03 touchend : 手指抬起操作
+
+<script type="text/javascript">
+	
+	var aLi = $('.list > li');
+	var strartY,endY;
+	aLi.on( 'touchstart',function(){
+		strartY = ev.originalEvent.changedTouches[0].clientY;
+		$(this).on( 'touchmove',function(){
+			endY = ev.originalEvent.changedTouches[0].clientY;
+			if( strartY > endY ){
+				console.log( '上' );
+			}else if( strartY < endY ){
+				console.log( '下' );
+			}
+		} );
+		
+		$(this).on( 'touchend',function(){
+			console.log( 3 );
+		} );
+		
+	} );
+	
+</script>
+
+/* ev.originalEvent.changedTouches[0].clientY;记录了手指事件中，手指距离屏幕x轴和y轴的值。*/
+
+
+javascript:transitionend 事件
+
+//	？arrayLi.on();与$(arrayLi).on()的效果一样;那么哪个才是标准呢？
+//	arrayLi.on( 'transitionend',function(){
+//		
+//		aLi.eq(nextIndex).css( {'transition':''} )
+//		aLi.eq(nextIndex).show().siblings().hide();
+//		
+//	} );
+
+	$(arrayLi).on( 'transitionend',function(){
+		
+		aLi.eq(nextIndex).css( {'transition':''} )
+		aLi.eq(nextIndex).show().siblings().hide();
+		
+	} );
+
+APP类型根据开发模式分为：原生App	WebApp	混合App 三种
+
+WebApp	就是一个为移动设备开发的H5站点，类似于云应用，不需要安装，需要联网加载数据，虽然有容易卡顿，没网不能用，使用体验差等缺点，但是是未来的趋势
+
+原生APP 就是我们使用手机操作系统自带的语言实现的APP开发，所以原生APP可以直接去访问手机的原生底层模块，那么这样做带来的好处就是APP在使用的时候会非常的流畅。相对来说它也会有一定的缺点，例如：一套代码不能实现多平台使用（ IOS 安卓 ） ，当版本出现更新的时候用户需要重新下载安装才可以使用，从开发成本上来说，原生APP开发成本相对较高。
+
+混合APP 融合WebApp与原生App的一种既能兼顾体验，又能跨平台的app。此时我们可以将手机底层模块映射成相应的JS对象，那么这个时候们可以通过JS来访问到手机底层模块。这样做的好处就是 一套代码可以在多个平台上使用。但是它同样会有不足，最大的缺点就是在使用上会有卡顿，因为都是通过浏览器来预览的，所以在没有网的情况下不能使用。
+	
+利用 hbuilder & mui框架 & html5+ 可以开发混合APP
+
+mui: 它是一个框架，类似我们之前讲的bootstrap ，它里面提供了一套基于IOS7风格的界面UI样式，以及各种常见页面组件
+
+html5plus(+): 它就是我们刚在上面所提及到的一套JS标准，在这套JS标准中将手机的底层模块定义成了相应的JS对象，我们如果想对手机进行操作那么就可以通过这套JS来实现。
+
+hbuilder开发混合app步骤
+
+新建app项目--mui项目--运行--在手机运行
+
+tips:需要先将手机连接电脑，并开启开发者模式；需要配置json文件
+
+Mui+html5plus 初始化
+Mui 可以理解为用来管理界面 和 手机二大块的一个对象，在我们当前的混合APP开发中，我们需要事先进行二个初始化操作
+1 界面初始化：mui.init() 在这个init 函数中可以进行相应的界面、组作、功能、一些操作的默认值设置。
+2 功能初始化：mui.plusReady 它有点类似于之前的window.onload 如果不进行功能初始化那么在我们需要操作手机底层模块的时候就不能使用到 plus 这个对象，所以代码会报错。
+
+打开新窗口
+Mui.openwindow({
+	Url: 被打开新窗口的页面 url，Id: 被打开新窗口的id,
+	Extras:{
+		键名：键值
+		// 可以像新窗口传递数据
+	}
+	Show:{
+		autoShow: true //目标窗口loaded事件发生后，是否自动显示，默认为true；若为false，则仅创建但不显示webview
+		AniShow :’zoom-fade-out’ 设置新窗口进场的动画形式
+		Duration: 时间，单位是毫秒 表示进场需要的时长
+	}，
+	Waiting:{
+		autoShow: true //是否自动显示等待框，默认为true；若为false，则不显示等待框
+
+		Title    : 提示性文字
+	}
+})
+
+mui简单api介绍
+官网API :  http://dev.dcloud.net.cn/mui/window/
+
+css兼容性解决方案：
+1、css hack
+.selector {
+　　color: #ff0\0;/*ie8*/
+　　color: #f00\9\0;/*ie9+*/
+}
+2、ie浏览器文档注释
+<!DOCTYPE html>
+<!--[if IE 8 ]> <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]> <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]--> 

@@ -1,0 +1,22 @@
+修改快捷键：
+工具-选项-环境-键盘
+快捷键分配方式有全局和子项。
+
+alt+shift+f10:自动引入缺失类命名空间
+ctrl+j:代码 自动补全
+ctrl+K+C:注释选中行
+ctrl+K+U:取消注释
+alt+shift+f10:自动引入缺失类命名空间
+ctrl+j:代码 自动补全
+ctrl+K+C:注释选中行
+ctrl+K+U:取消注释
+Ctrl+J / Ctrl+K,L: 列出成员
+Shift+Alt+Enter: 切换全屏编辑
+alt+上下方向键，代码上移/下移
+ctrl+m+l:展开/折叠所有代码
+ctrl+m+t:折叠当前行
+ctrl+m+m:展开当前行
+ctrl+m+g:控制器/视图之间切换
+ctrl+K+D:格式化文档*（分配为全局：ctrl+e+d）
+ctrl+k+f:格式化当前行
+ctrl+m+o:折叠到定义（可以折叠js代码）

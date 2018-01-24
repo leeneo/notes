@@ -1,0 +1,15 @@
+var cw=document.documentElement.clientWidth;
+clientWidth 就是不同设备下的html文档大小;
+高度可以设置为100%;
+
+
+H5页面自适应
+
+对于一些带底图跟文字的H5页面要求自适应的，发现一些网站是这么干的
+设计图宽度为320时，
+document.documentElement.style.fontSize = document.body.clientWidth / 320 + "px";
+页面中的元素在设置字号及大小时候，使用rem即可。
+如 设计图上 页面宽度为320px时 字号为12px，则设置为 12rem;
+
+
+1366*768分辨率下，浏览器单屏可视面积只有不到620px（chrome）,580px(360)

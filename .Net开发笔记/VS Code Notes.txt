@@ -1,0 +1,169 @@
+F11:全屏
+F1/ctrl+shift+p：命令面板
+ctrl + `:终端
+ctrl+shift+x:扩展
+ctrl+shift+n:开新窗口
+ctrl+k ctrl+o：打开文件夹
+ctrl+b:侧边栏
+
+自动保存：File -> AutoSave ，或者Ctrl+Shift+P，输入 auto
+
+格式调整：
+
+代码行缩进               Ctrl+[ ， Ctrl+]
+折叠展开当前代码块             Ctrl+Shift+[ ， Ctrl+Shift+]
+折叠所有代码			    ctrl+K+0(零)
+打开所有代码    		    ctrl+K+J
+折叠所有子区域代码		    Ctrl + K Ctrl + [	
+展开所有折叠的子区域代码	 　Ctrl + k Ctrl + ]
+
+如果不选中，默认复制或剪切一整行	Ctrl+C Ctrl+X Ctrl+V
+代码格式化：Shift+Alt+F，或Ctrl+Shift+P后输入format code
+修剪空格Ctrl+Shift+X
+上下移动一行： Alt+Up 或 Alt+Down
+向上向下复制一行： Shift+Alt+Up或Shift+Alt+Down
+在当前行下边插入一行Ctrl+Enter
+在当前行上方插入一行Ctrl+Shift+Enter
+
+光标相关：
+
+选中当前行Ctrl+i（双击）
+选择从光标到行尾Shift+End
+选择从行首到光标处Shift+Home
+*删除光标右侧的所有字Ctrl+Delete（实用）
+*选择多处，一起修改：Alt+Click 依次点击，或者Ctrl+Alt+Down 或 Ctrl+Alt+Up（实用）
+*同时选中所有匹配的Ctrl+Shift+L（实用）
+选中下一个相同的匹配：Ctrl+Shift+K(原为Ctrl+D)
+删除当前行：Ctrl+D(自定义,原为Ctrl+Shift+K)
+回退上一个光标操作Ctrl+U
+
+重构代码
+
+跳转到定义处：F12
+浏览快速定义：只看一眼而不跳转过去Alt+F12
+列出所有的引用：Shift+F12
+同时修改本文件中所有匹配的：Ctrl+F12
+重命名：比如要修改一个方法名，可以选中后按F2，输入新的名字，回车，会发现所有的文件都修改过了。
+跳转到下一个Error或Warning：当有多个错误时可以按F8逐个跳转
+查看diff 在explorer里选择文件右键 Set file to compare，然后需要对比的文件上右键选择Compare with 'file_name_you_chose'.
+
+
+设置自动换行：
+用户设置-->
+editor.wordWrap:"on"
+
+vscode部署的网站会有一个默认样式（localhost:5000/home/Index.cshtml）
+此文件目录在Views--Home。
+
+开发项目流程
+
+cmd-->md coreApp
+cd-->coreApp-->dotnet new web|mvc|angular-->dotnet restore-->dotnet run
+
+dotnet new ‘模板名称’
+
+*创建项目需要在项目根目录下， 模板名后不跟项目名
+
+以下模板会部分匹配输入。请具体指出模板名称和/或语言。
+
+模板                                                短名称              语言
+        标记
+------------------------------------------------------------------------------------------------
+Console Application                               console          [C#], F#, VB
+     Common/Console
+Class library                                     classlib         [C#], F#, VB
+     Common/Library
+Unit Test Project                                 mstest           [C#], F#, VB
+     Test/MSTest
+xUnit Test Project                                xunit            [C#], F#, VB
+     Test/xUnit
+ASP.NET Core Empty                                web              [C#], F#
+ Web/Empty
+ASP.NET Core Web App (Model-View-Controller)      mvc              [C#], F#
+ Web/MVC
+ASP.NET Core Web App                              razor            [C#]
+ Web/MVC/Razor Pages
+ASP.NET Core with Angular                         angular          [C#]
+ Web/MVC/SPA
+ASP.NET Core with React.js                        react            [C#]
+ Web/MVC/SPA
+ASP.NET Core with React.js and Redux              reactredux       [C#]
+ Web/MVC/SPA
+ASP.NET Core Web API                              webapi           [C#], F#
+ Web/WebAPI
+Razor Page                                        page
+ Web/ASP.NET
+MVC ViewImports                                   viewimports
+ Web/ASP.NET
+MVC ViewStart                                     viewstart
+ Web/ASP.NET
+
+dotnet- restore 命令 通过 读取. NET Core 项目 中 project. json 配置文件 中的 内容， 通过 NuGet 工具 下载 和 配置 当前. NET Core 项目 的 依赖 库 和 项目。
+为了 让 NuGet 能够 下载 项目 需要 的 依赖 库， 需要 为 NuGet 工具 指定 下载 源。 下载 源 通常 保存 在 nuget. config 文件 中， 在 线 的 nuget. org 源 作为 默认 源 已经 保存 在 配置文件 中。 开发 人员 也可以 根据 需要 使用- source 参数 指定 自己的 NuGet 下载 源。- packages 参数 用来 指定 依赖 库 的 物理 位置， 如果 没有 指定- packages 参数， 那么 就会 使用. NET Core 全局 缓存 位置。 如果 用 户名 是 user1， 默认 情况下 这个 位置 在 Linux 和 OS X 操作系统 的/ home/ user1 路径 下， Windows 操作系统 的C：\ Users\ user1 路径 下。
+
+dotnet- run 命令 首先 会 编译 源 代码， 生成 输出 程序， 然后 运行 这个 程序。 dotnet- run 依赖. NET Core 的 构建 功能 来 编译 源 代码， 编译 的 输出 结果 会 保存 在当 前 目录 中的 bin 子 文件夹 内。 在 一个 部署 有 多个. NET 运行时 的 计算 机上， dotnet 会 首选. NET Core 作为 运行时。 如果 需要 使用 其他. NET 框架， 那么 就要 使用 -framework 参数 来 指定。
+dotnet- run 命令 需要 在当 前项 目上 下文 环境 中 执行， 也就 是在 项目 所在 文件夹 路径 下 执行。 如果 需要 运行 一个 程序 集， 那么 需要 直接 使用 dotnet 而 不是 dotnet run， 如 dotnet my. dll。
+
+}
+
+dotnet- build 负责 编译 项目 源 代码 和 项目 依赖 项 目的 源 代码。 编译 结果是 包含 有 中间 语言 代码 的 二进制 DLL 文件。 同时. NET Core 的 编译 功能 也会 生成 deps 文件， 用来 描述 主机 需要 什么样 的 环境 来 运行 这个 项目。 在编 译 开始 之前，. NET Core 构建 功能 将对 项目 进行 增量 安全检查。 如果 所有 的 检查 都 通过了， 那么 就 执行 增量 编译 操作。 这种 编译 只 针对 上次 编译 后 修改 的 部分 进行 编译， 编译 速度 较快。 如果 增量 检查 没有 通过， 那么 就 执行 全 量 编译。
+对于 当前 项目 依赖 的 其他 需要 编译 的 项目， 必须 通过 下面 的 安全检查， 以便 确保 编译 过程 是 增量 编译： （1） 没有 使用 编译 前/ 编译 后脚 本； （2） 没有 从 PATH 指定 的 路径 中 加载 编译 工具； （3） 只 使用 已知 的 编译器 比如 C#、 VB、 FSharp 等 编译器。 如果 编译 的 是 一个 可执行 的 项目， 需要 在 项目 的 配置文件 project. json 中 包含 以下 内容，
+{
+	"compilerOptions":{
+		"emitEntryPoint":true
+	}
+}
+
+dotnet- publish 命令 用来 把 当前 项目 中 需要 发布 或者 可执行 的 部分 以及 相关 的 依赖 项 打包， 使之 成为 可以 发布 的 状态。
+dotnet- publish 命令 执行 发布 动作 时， 首先 会 编译 当前 项目 并从 project. json 文件 中 读取 相关 的 依赖 项， 最后 将 全部 需要 发布 的 部分 存放 在 项目 的 bin/ publish 文件夹 内。
+
+其他 命令 的 详细 描述 请 参考： https:// docs. microsoft. com/ en- us/ dotnet/ articles/ core/ tools/ index。
+
+
+新版的vs code 输入 dotnet new web-->回车后会自动执行 dotnet restore;
+dotnet new web:dotnet run -->浏览器访问localhost:5000;出现hello world！    该语句是'在项目下startup.cs中生成的'
+ dotnet new mvc:会在项目下分别生成   Controllers,Models,Views三个目录，和系列json配置文件（此模板默认会有个view样式，资源在Views目录中）
+
+
+launch.json配置
+"program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/core app.dll",
+
+如果项目移动了，要修改此参数；
+workspaceRoot:项目所在目录。
+
+同时还要修改tasks.json-->tasks参数，args的值到对应目录；
+"tasks": [
+        {
+            "taskName": "build",
+            "args": [
+                "${workspaceRoot}/C#app.csproj"
+            ],
+            "isBuildCommand": true,
+            "problemMatcher": "$msCompile"
+        }
+    ]
+
+
+运行/调试项目
+
+1、命令行：dotnet run-->localhost:5000
+2、vs code f5 调试
+
+
+vs code 部署解释：
+
+Microsoft.AspNetCore.Server.Kestrel包封装了一个名叫Kestrel的轻量Http Server，使Web应用程序可以脱离IIS进行部署运行。
+
+vs code 打开文件夹（ctrl+k ctrl+o或者拖动打开），资源管理器不显示目录问题解决
+删除C\users\adminstrator\AppData\Roaming\Code\Local Storage 下的file文件。
+用户设置文件也在此目录Code下
+
+解决中文注释乱码问题
+
+1、右下角切换字符集编码
+
+2、用户设置："files.autoGuessEncoding": true,
+
+
+
+

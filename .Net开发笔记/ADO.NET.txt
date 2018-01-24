@@ -1,0 +1,36 @@
+ADO.NET的名称起源于ADO(Activex Data Objects).
+我们的数据库是一个单独的进程,我们要与数据库进程通讯,不同的数据库,它的通讯方式是不一样的.
+除了数据库通讯方式不一样,还有不同的编程语言,每一种语言写出来的通讯也不一样.
+
+比如我现在有Java.NET.C++三种编程语言.
+还有三种数据库. mysql sqlserver oracle
+那么就会有九种连接方法.
+每一种都需要不同的驱动去完成这件事情.
+所以微软就想把数据库统一,不管你使用语言或者数据库,我都是这样操作的.
+
+最早的时候出现了一个叫做odbc.开放数据库互连（Open Database Connectivity，ODBC）是微软公司开放服务结构!以前很多数据库使用这种方法.比如我们的Access. 后来再这个基础上又发展出来了oledb.
+
+后来在oledb上又发展处了ado技术.ado技术不是ado.net!ado是火了很长时间的!其实那个时候,先有了asp网站编程语言.然后呢?java觉得asp很不错,就有了jsp.而微软发现java的虚拟机不错,就又学过来了,有了.NET!
+
+用ado做网站最多的是asp网站(90年代末)包括我们现在市场上也有很多asp开发的网站.asp是非常强大,但后来出来了php.  asp就没落了.如果你学过asp和php. 你会发现它们的编程方式几乎一模一样,只是语法不一样!
+
+在98年的时候,微软的VC最火的时候,微软提出一个概念,叫做.NET概念.它提出这个概念的原因还是统一.微软那个时候火的是VC++,微软号称它的操作系统的上层是C++做的.可能你听说过MFC,后来也就有了我们的.NET!
+
+随着.NET的发展,所以微软出一个产品,都会加一个.NET!所以,在这样的情况下,我们的ado自然就升级成了ado.net了.ado.net就是与数据库连接操作的方法.如果你学过.NET技术的面对对象类.那么它就是.NET技术操作数据库的一套类库.
+
+在.NET中,这个类库在两个命名空间中.分别是System.Data;  描述数据的命名空间.System.Data.SqlClient; 这个是专门针对SQL SERVER的命名空间.当然还有其他命名空间.不同的数据库有不同的命名空间.
+
+简单总结一下四大类,四大模型.Connection 连接类库.Command   运行命令DataReader 数据读取DataAdapter 数据适配器把数据库理解成一个仓库.Connection就是钥匙,进了仓库,东西比较多,你要找东西需要一个管理员帮你忙.那么Command就是这个管理员,如果你要拿100本英文书籍出来,管理员替你找到了,需要拿出来,但是它体力不行,就需要找了辆车运输,就是DataReader.最后一个 DataAdapter是为了转换数据用的. 直接运出来英文书籍看不懂,所以它就可以转换成汉语.
+
+下面举个例子：
+
+static void Main(string[] args)
+        {
+            string 连接字符串 = @"server=.;database=geek;Integrated Security=true"; //设置连接字符串.这种方式仅限于本机访问数据库.  采用的是Windows方式登陆验证
+            SqlConnection 连接对象 = new SqlConnection(); //初始化连接对象
+            连接对象.ConnectionString=连接字符串; //告诉连接对象怎么个连法.
+            连接对象.Open();
+            Console.WriteLine("打开数据库了");
+	}
+
+

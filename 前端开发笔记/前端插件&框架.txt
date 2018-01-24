@@ -1,0 +1,24 @@
+iScroll:移动端页面插件，模拟手机app，头尾固定，中间可以上下滑动的效果---iscroll.js
+
+SuperSlide&TouchSlide(by 大话主席):移动端页面插件,javascript触屏滑动特效插件---TouchSlide.1.1.js	http://www.superslide2.com
+
+Bootstrap:基于JQ的开发框架，用于开发响应式布局、移动设备优先的 WEB 项目。
+http://www.bootcss.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

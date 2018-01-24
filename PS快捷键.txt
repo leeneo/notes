@@ -1,0 +1,9 @@
+显示/隐藏选择区域 【Ctrl】+【H】
+反选:Shift＋Ctrl＋I
+取消选择区:Ctrl＋D
+填充为前景色：Alt＋Delete
+填充为背景色：Ctrl＋Delete
+隐藏工具箱，属性面板：Tab
+隐藏右侧面板：shift+tab
+隐藏选项卡/全屏：F
+关闭当前文档：ctrl+w

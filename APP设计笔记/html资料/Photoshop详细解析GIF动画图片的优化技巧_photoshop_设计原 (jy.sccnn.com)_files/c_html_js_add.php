@@ -1,0 +1,13 @@
+var bloghost = "http://jy.sccnn.com/";
+var cookiespath = "/";
+var ajaxurl = "http://jy.sccnn.com/zb_system/cmd.php?act=ajax&src=";
+var lang_comment_name_error = "名称不能为空或格式不正确";
+var lang_comment_email_error = "邮箱格式不正确，可能过长或为空";
+var lang_comment_content_error = "评论内容不能为空或过长";
+
+$(function () {var $cpLogin = $(".cp-login").find("a");var $cpVrs = $(".cp-vrs").find("a");SetCookie("timezone", (new Date().getTimezoneOffset()/60)*(-1));var $addoninfo = GetCookie("addinfo");if(!$addoninfo){LoadRememberInfo();return ;}$addoninfo = eval("("+$addoninfo+")");if($addoninfo.chkadmin){$(".cp-hello").html("欢迎 " + $addoninfo.useralias + " (" + $addoninfo.levelname  + ")");if ($cpLogin.length == 1 && $cpLogin.html().indexOf("[") > -1) { $cpLogin.html("[后台管理]");} else {$cpLogin.html("后台管理");};}if($addoninfo.chkarticle){if ($cpLogin.length == 1 && $cpVrs.html().indexOf("[") > -1) {$cpVrs.html("[新建文章]"); } else {$cpVrs.html("新建文章");};$cpVrs.attr("href", bloghost + "zb_system/cmd.php?act=ArticleEdt");}});
+
+document.writeln("<script src='http://jy.sccnn.com/zb_users/plugin/UEditor/third-party/prism/prism.js' type='text/javascript'></script><link rel='stylesheet' type='text/css' href='http://jy.sccnn.com/zb_users/plugin/UEditor/third-party/prism/prism.css'/>");$(function(){var compatibility={as3:"actionscript","c#":"csharp",delphi:"pascal",html:"markup",xml:"markup",vb:"basic",js:"javascript",plain:"markdown",pl:"perl",ps:"powershell"};var runFunction=function(doms,callback){doms.each(function(index,unwrappedDom){var dom=$(unwrappedDom);var codeDom=$("<code>");if(callback)callback(dom);var languageClass="prism-language-"+function(classObject){if(classObject===null)return"markdown";var className=classObject[1];return compatibility[className]?compatibility[className]:className}(dom.attr("class").match(/prism-language-([0-9a-zA-Z]+)/));codeDom.html(dom.html()).addClass("prism-line-numbers").addClass(languageClass);dom.html("").addClass(languageClass).append(codeDom)})};runFunction($("pre.prism-highlight"));runFunction($('pre[class*="brush:"]'),function(preDom){var original;if((original=preDom.attr("class").match(/brush:([a-zA-Z0-9\#]+);/))!==null){preDom.get(0).className="prism-highlight prism-language-"+original[1]}});Prism.highlightAll()});
+
+function Nobird_Cache_LoadViewNums(prevalue,postid,callback){$.post(ajaxurl + "Nobird_Cache",{"postid":postid,"add":0,"prevalue":prevalue},function(data){$("#nbcache" + postid+callback).html(data);});return false;}
+function Nobird_Cache_AddViewNums(prevalue,postid,callback){$.post(ajaxurl + "Nobird_Cache",{"postid":postid,"add":1,"prevalue":prevalue},function(data){$("#nbcache" + postid+callback).html(data);});return false;}

@@ -1,0 +1,86 @@
+/*EntityFramework Core 1.1迁移*/
+
+/*首先还是给出本文需要说到的两个类，博客类（Blog）和文章发表类（Post）。基于每个类都有主键Id，我们定义一个接口。如下：*/
+
+public interface IEntityBase
+    {
+        int Id { get; set; }
+    }
+
+    public class Blog : IEntityBase
+    {
+       public virtual int Id { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Url { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
+    }
+
+    public class Post : IEntityBase
+    {
+        public virtual int Id { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string Content { get; set; }
+
+        public virtual int BlogId { get; set; }
+        public virtual Blog Blog { get; set; }
+    }
+
+/*EF 6.x中我们可以直接通过继承EntityTypeConfigiration<T>来进行映射，但是在EF Core中则没有;但是还是在GitHub上找到了解决方案，EF团队给出的答案是后续有可能会实现，当前对于这个映射优先级比较低暂时还未实现。链接【https://github.com/aspnet/EntityFramework/issues/2805#issue-99973931】*/
+
+public class BlogMap : EntityMappingConfiguration<Blog>
+    {
+        public override void Map(EntityTypeBuilder<Blog> b)
+        {
+            b.ToTable("Blog");
+            b.HasKey(k => k.Id);
+            b.Property(p => p.Name);
+            b.Property(p => p.Url);
+            b.HasMany(p => p.Posts).WithOne(p => p.Blog).HasForeignKey(p => p.BlogId);
+        }
+    }
+
+    public class PostMap : EntityMappingConfiguration<Post>
+    {
+        public override void Map(EntityTypeBuilder<Post> b)
+        {
+            b.ToTable("Post");
+            b.HasKey(k => k.Id);
+            b.Property(p => p.Title);
+            b.Property(p => p.Content);
+        }
+    }
+
+    /*EF上下文定义如下*/
+        public class EFCoreContext : DbContext
+    {
+        public EFCoreContext(DbContextOptions options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.AddEntityConfigurationsFromAssembly(GetType().GetTypeInfo().Assembly);
+        }
+    }
+
+    /*接着在服务中注入EF上下文*/
+        services.AddDbContext<EFCoreContext>(options =>
+            {
+                options.UseSqlServer(sqlStr);
+            });
+
+/*Startup.cs中在注入EF时明确告诉要执行的命令要将EF迁移文件生成到当前应用程序的程序集下即可*/
+            services.AddDbContext<EFCoreContext>(options =>
+            {
+                options.UseSqlServer(sqlStr, d => d.MigrationsAssembly("StudyEFCore"));
+            });
+
+搭建一个解决方案，我们将EF这一层放在StudyEFCore.Data下，实体放在StudyEFCore.Model下。
+
+来接下来我们进行迁移看看。我们通过如下命令行来进行：
+@需要事先安装ef-cli，即引入Microsoft.EntityFrameworkCore.Tools.DotNet包。
+dotnet ef migrations add Initial
+
+详见：
+例1：http://www.cnblogs.com/CreateMyself/p/6207500.html
+例2：http://www.cnblogs.com/nele/p/5831434.html
+例3：http://www.bkjia.com/Asp_Netjc/1200652.html（附带问题处理办法）
+例4：https://github.com/aspnet/EntityFrameworkCore/issues/2805#issue-99973931（通过继承EntityTypeConfigiration<T>来进行映射）

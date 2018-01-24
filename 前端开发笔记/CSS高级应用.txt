@@ -1,0 +1,435 @@
+“//”注释只能包含在脚本或CSS定义花括号内，花括号外会失注释后内容失效。
+
+CSS-BOX
+
+/*盒子三要素：margin,border,padding，可以单独设置某个边的属性（left|right|top|bottom）*/
+margin:外边距，当前容器与父级容器的距离
+padding:内容到容器边距的距离
+border:容器边框属性;{border|boder-top|boder-left|boder-right|boder-bottom|:1px solid #000;}
+
+margin/padding:
+四值写法：上、右、下、左（从上开始顺时针转一圈）
+三值写法：上、左右、下
+两值写法：上下、左右
+单值写法：4个方向的设置
+
+盒子尺寸计算公式：border+padding+实体化尺寸(width,height范围)
+Tips:：如果盒子添加了padding和border属性，会撑大盒子的尺寸，想要保证盒子尺寸不变，需要在有宽度和高度的前提下减去padding和border的相应取值
+
+=======================================================================================
+元素居中方法
+
+版心居中（相对于body）：必需设置有width属性，且显示模式是块级，dispaly:block;没有设置width可以设置text-align:center.
+方法：margin:0 auto;
+
+子容器左右居中（相对于父级）：margin:0 auto;
+文字内容上下居中：设置容器line-height的值与height的值相等；该属性设置在内容所在容器，而不是内容本身。
+
+设置子盒子在父盒子内，水平垂直居中：
+设置父元素
+postion:relative;
+子元素
+postion:absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;	
+margin:auto;
+
+
+=======================================================================================
+CSS初始化/CSS reset
+清空标签默认样式:
+需要清空所有可能会用的标签的默认内外边距和列表样式
+body,div,span,h1,h2,h3,h4,h5,h6,p,ul,li,ol,dl,dt,dd,a,img,input{ margin:0; padding:0; list-style:none;/*清空列表样式*/}
+
+设置全局样式
+设置body标签的文字三属性（字体、字号、颜色）
+body{ font-size:12px; color:#333; font-family:"宋体";}
+
+设置超链接的默认样式
+设置超链接的文字颜色和下划线
+a{ text-decoration:none; color:#333;}
+a:hover{ color:#000;}
+
+外边距合并/塌陷问题
+出现环境：
+1、当垂直排列的两个盒子，垂直外边距紧挨在一起，就会产生合并/塌陷问题，取值方法：取值取两者之间较大值
+2、嵌套排列的两个盒子也有外边距合并问题，解决办法：
+   2.1.给父级添加border属性，完整的划分出盒子的边缘；
+   2.2.给父级添加overflow:hidden属性
+
+子容器与父容器的间距设置：
+设置父容器的padding属性，或者给父级添加个border-再给子级加margin;如果直接给子容器添加margin，父级也会受到影响
+
+行内标签的垂直内外边距:
+行内标签想要改变垂直方向的位置，通过margin和padding都不生效，唯独通过设置行高属性line-height才能生效（原因是因为行高属性可以改变行内标签的中心基线的位置）
+
+修饰性图片，没有实际意义，用背景图；有内容，有实际意义的用插入图。
+
+=======================================================================================
+/*在此li 与.divMain达成父子关系，下面引用divMain中的li时，必需带上.divMain*/		
+		.divMain li{
+			padding-left:10px;
+			height:40px;
+			line-height:40px;
+			border-bottom:1px solid #fff ;
+			background:url("about-arrow-hover.png") no-repeat 120px center;
+		}
+/*在此不加.divMain topLi中的样式就不会生效*/
+		.divMain .topLi{
+			background:#49f url('about-arrow.png') no-repeat 120px center;
+		}
+		.topA{
+			color:#fff;
+		}
+
+	<div class="divMain">
+		<ul>
+			<li class="topLi"><a href="#" class="topA">企业介绍</a></li>
+			<li><a href="#">管理团队</a></li>
+			<li><a href="#">组织架构</a></li>
+			<li><a href="#">公司照片</a></li>
+			<li><a href="#">合作伙伴</a></li>
+			<li><a href="#">媒体报道</a></li>
+		</ul>
+	</div>
+=======================================================================================
+CSS-浮动（float;over-flow）
+用于网页布局（多用于左右布局）;
+
+标准流/文档流：所有标签默认的显示模式（块级元素独占一行，行内元素一行共存多个）
+
+浮动流的出现：是为了打破原有文档流的默认元素排列方式。以使块元素和行元素能自由排列。
+
+浮动-半脱离：是一种脱离文档流的形式，主要负责网页排版；
+浮动后的元素显示模式为行内块，并且是完全没有间距的顶对齐；任何元素都可以浮动。
+浮动的元素不占标准文档（块独占一行|多行）的位置，而是在页面空白位置浮动。
+
+浮动元素会生成一个块级框，而不论它本身是何种元素，都将渲染为块状化显示（等同添加display:inline-block|block）。 
+
+float 是相对定位的，会随着浏览器的大小和分辨率的变化而改变。
+
+float:none|left|right;
+指定文本或内容将在该对象的哪一侧流动
+
+常见布局
+以后工作中页面结构会很复杂，所有结构都是由最基本的左右结构变换而来
+结构搭建方法：任何的左右结构都是由3个标签完成，一个父级和两个浮动的子级
+
+清除浮动
+指的清除浮动对后续元素的影响
+
+额外标签法
+1、在浮动盒子之后（与浮动盒子同为子级）添加一个块级标签（div），添加一个类名为clear
+1、<div class="clear"></div>
+2、给clear盒子添加css属性：clear：both
+clear是清除浮动影响的属性，其中取值分别为：
+left -- 清除左侧浮动的影响
+right -- 清除右侧浮动的影响
+both -- 清除两侧浮动的影响
+.clear{ clear:both;}
+弊端：造成页面有多余的盒子
+
+父级元素添加overflow：hidden法
+主要作用让浏览器检查父级和浮动的子级
+.className{overflow:hidden;}
+弊端：万一子级内容超出的话会被修剪掉
+
+伪元素清除浮动方法代码（after|before伪类）
+after:在父标签结尾处追加一个盒子
+    .clearfix:after{
+	content:'';
+	//height:0;
+	//visibility:hidden;
+	clear:both;
+	display:block;
+    }
+.clearfix{ zoom:1;/*兼容ie6*/}
+html代码调用：
+    <div class="clearfix">
+	<div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+    <div class="footer">footer</div>
+=======================================================================================
+
+overflow:visible|scroll|auto|hidden
+规定超过容器的内容如何显示，visible-可见，不带滚动条；scroll-可见，且带滚动条；hidden：溢出隐藏；默认值：visible；
+
+网站内部文件结构：images,css,js,index.html
+
+FireWorks使用
+切图
+快捷键K（切片工具） -- 页面出现绿色蒙版 -- 点击蒙版 -- 右击 -- 导出所选切片 -- 选择位置并输入名城管即可
+
+用切片工具量尺寸
+切片工具 -- 属性面板 -- 宽高和位置
+
+用参考线量尺寸
+菜单栏 -- 视图 -- 调出标尺 -- 拖拽参考线 -- 鼠标刚到两条参考线之间 -- V（选择并移动工具） -- 按住shift键 -- 页面会立即显示尺寸
+=======================================================================================
+
+CSS-定位（position;left;right;top;bottom;z-index;）
+
+作用：实现元素的堆叠效果
+
+相对定位：相对于其正常位置进行定位--未添加positon属性前的位置（position:relative）
+相对定位是脱离标准流的形式 -- 占位脱离；相对定位不能改变盒子的显示模式
+div{ border:1px solid #000; position:relative; left:100px; top:200px;}
+
+绝对定位：相对于 static 定位以外的第一个父元素进行定位,默认：参照浏览器定位。
+绝对定位能将盒子的显示模式转换成行内块；绝对定位是完全脱离标准流的形式，且不占位置
+
+相对和绝对工作中使用方法
+子定父相：子级绝对定位，父级相对定位（子级的参照物变成父级）
+原理 -- 绝对定位参照物选取方式：以最近的已经定位的父级为参照物，如果条件不满足，则以浏览器为参照物定位
+
+固定定位 -- fixed
+作用：实现盒子固定在屏幕之上，不随滚动条滚动
+
+固定定位可以改变盒子的显示模式为行内块；ie6不支持固定定位
+
+改变位置
+通过设置偏移量属性（方向英文：left、right、top、bottom），必需配合position使用。
+
+偏移量注意事项
+水平方向的left和right属性冲突的时候，浏览器以left取值为准；当垂直方向的top和bottom冲突的时候，浏览器以top取值为准
+
+position默认值：static,没有定位，元素出现在正常流中，忽略偏移量属性和z-index。
+z-index:默认值：auto;数值越大位置越在上;0大于auto.
+width:1-100%;height1-100%;相对于父级容器宽高度伸缩最大与父级相等,可能需要指定父级postion:relative;子级postion:absolute.
+
+=======================================================================================
+CSS3新属性
+
+【transform 】
+
+属性向元素应用 2D 或 3D 转换,对元素进行旋转、缩放、移动或倾斜。
+
+div
+{
+transform:rotate(7deg);/*定义旋转*/
+-ms-transform:rotate(7deg); 	/* IE 9 */
+-moz-transform:rotate(7deg); 	/* Firefox */
+-webkit-transform:rotate(7deg); /* Safari 和 Chrome */
+-o-transform:rotate(7deg); 	/* Opera */
+}
+
+
+【border-radius】
+
+设置边角直角到圆角的转变，值越大，圆角率越大，值1-100px|1-100em|1-100%;
+必需配合border属性使用；
+border-bottom-left-radius(左下角);border-bottom-right-radius(右下角);
+border-top-left-radius(左上角);border-top-right-radius(右上角);
+border-radius:*px|*em|*%;设置四个角
+
+/*例子 1
+border-radius:2em;
+等价于：
+border-top-left-radius:2em;
+border-top-right-radius:2em;
+border-bottom-right-radius:2em;
+border-bottom-left-radius:2em;
+*/
+/*例子2
+border-radius: 2em 1em / 0.5em 3em;
+等价于：
+border-top-left-radius: 2em 0.5em;
+border-top-right-radius: 1em 3em;
+border-bottom-right-radius: 4em 0.5em;
+border-bottom-left-radius: 1em 3em;
+*/
+
+
+【cursor】设置鼠标划过元素时的显示样式
+/*
+cursor:auto|help|move|pointer|...：
+<STYLE>
+P { cursor : hand; }
+</STYLE>
+
+<body>
+  <P >cursor:pointer</p>
+  <P onmouseover="this.style.cursor='hand'">cusor:hand</p>
+</body>
+*/
+
+CSS半透明效果
+
+1.1 css2的滤镜写法
+弊端：能够把背景和内容同时半透明
+Ie低版本支持的滤镜：filter：alpha（opacity=60）；百分数去掉百分号
+其他浏览器支持的滤镜：opacity：小数；半分比转换的小数
+{opacity:0.6; filter:alpha(opacity=60);}
+opacity:0-1;控制透明度
+
+1.2 css3写法
+background:rgba(0,0,0,0.6);//rgb值:0-255;其中a指的是alpha（透明度）：0-1
+
+
+CSS精灵
+
+又称为：css雪碧、CSS sprite
+大图称之为精灵图或雪碧图
+
+background-position;规定图像的位移量，默认为0，即不移动。
+
+图片整合技术，就是将一系列的小图整合到一张大图之上，然后利用background-position:x y;x y的位移量去显示指定位置的icon;值为正时，X向右，Y向下移动。
+
+css精灵针对的必须是背景图，核心css属性是背景图定位
+
+
+CSS-滑动门
+
+代码滑动门的作用：制作自适应的非直角矩形
+滑动门的核心技术：内部所有盒子都要左浮动
+
+=======================================================================================
+CSS动画
+	/*创建CSS动画，需要声明@keyframes 规则。在 @keyframes 中规定某项 CSS 样式，就能创建由当前样式逐渐改为新样式的动画效果*/
+	/*@keyframes 中创建动画时，请把它捆绑到某个选择器，否则不会产生动画效果。
+	通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：
+	规定动画的名称
+	规定动画的时长*/
+<style>
+	@keyframes myfirst
+	{
+		0%   {background:red;background:rgba(255,0,0,0.9);transform:rotate(1deg);margin-left:0}
+		25%  {background:yellow;background:rgba(255,255,0,0.6);transform:rotate(180deg);margin-left:20%}
+		50%  {background:blue;background:rgba(0,0,255,0.3);transform:rotate(360deg);margin-left:90%}
+		750%  {background:purple;background:rgba(255,0,255,0.6);transform:rotate(180deg);margin-right:50%}
+		100% {background:green;background:rgba(0,255,0,0.9);transform:rotate(1deg);margin-right:90%}
+	}
+
+	div
+	{
+		width:100px;
+		height:100px;
+		background:red;
+		animation:myfirst 9s;
+		-moz-animation:myfirst 9s; /* Firefox */
+		-webkit-animation:myfirst 9s; /* Safari and Chrome */
+		-o-animation:myfirst 9s; /* Opera */
+	}	
+</style>
+<body>
+	<div></div>
+</body>
+
+=======================================================================================
+a标记不显示背景图问题解决方法：
+
+1.添加宽高值（值为图像大小），转为块状显示
+a{width:311px; height:34px; 
+background:url('../images/logo.png') no-repeat; 
+display:inline-block;}
+/*转为块状元素，但是会换行;inline-block比block的（相对下一行内容）间距大*/
+
+2.将a标记设置为浮动元素，即添加float属性,要有宽高值
+a{width:311px; height:34px; 
+background:url('../images/logo.png') no-repeat; 
+float:left;}
+
+3.将height属性值转给padding属性，值与图像height值相等
+	a{width:311px; height:0; 
+	background:url('../images/logo.png') no-repeat; 
+	display:inline-block; 
+	padding-top:63px; 
+	/*overflow:hidden;*/ }
+
+此法同时也时SEO优化方式之一。
+SEO优化原理：通过设置padding属性让文本超出盒子满园，然后添加overflow：hidden属性，将超出盒子范围的文本显示截断；
+	a{width:311px; height:0; 
+	background:url('../images/logo.png') no-repeat; 
+	display:inline-block; 
+	padding-top:63px; 
+	/*overflow:hidden;*/ }
+
+另一种SEO代码优化方式是利用text-indent:-999em;属性将a标记文本移到窗口外面。//不提倡
+
+细线表格
+
+	table{
+		background:#abf;
+		border:1px solid black;
+		margin:0 auto;
+		border-spacing:1px;  /*设置单元格之间的间距*/ 
+		//border-spacing:1px 2px;/*x,y;x-水平；y-垂直；*/
+	}
+
+	table td{background:#ccc;}
+
+=======================================================================================
+超父级元素不能添加line-height属性，值会附本显示错位。
+
+行级元素与块级元素的区别
+
+行级元素高度不生效，默认就是一行文本的高度，一行可以有多个；垂直内外边距都不生效
+块级元素默认独占一行，设置有背景时，必需指定高度
+
+行级元素：a span b u i
+行内块元素：input img
+
+
+outline:none 去除文本框获得焦点时的边线显示
+background:url() no-repeat x y;
+background-position:x y;x y的坐标意思让背景图移动多少像素；值为正，图向上，向右移动；值为负，图向左，向下移动，以图像左顶点位置为基点（x:0 y:0）
+
+span元素已使用时，用<i></i>,<b></b>...元素修饰文字，iconfont等文字性内容；然后用font-weight:normal;font-style:norml;去掉i,b标记的样式；font-style对应i;font-weight对应b;
+
+input:text 控件使用小技巧：
+可用placeholder属性代替value属性，例：placeholder
+placeholder效果：文本呈灰色弱化样式，点击后焦点定在文本前，且输入文字时，placeholder值消失，类似onclick="this.value=''";
+<!--label通过id属性绑定到input:text控件,label id=input:text id
+    label通过accesskey属性可以设置text控件的获取焦点的快捷键.
+    accesskey='1',获取焦点快捷键：alt+1.
+-->
+<label id="forInp" accesskey="1">
+<input type="text" id="forInp" tabindex="1" size='17' maxlength='8'/> 
+
+CSS子元素类名不可与顶级元素(body下第一级)类名相同，即使兄弟元素下的子元素一样会继承顶级类元素的样式，与顶级元素下的子元素类名相同无碍。
+<body>
+  <div class="obj1">
+	<div class="title"></div>
+  </div>
+
+  <div class="obj2"></div>
+
+  <div class="obj3">
+	<span class="obj1">
+	</span>			/*span.obj1会继承顶级元素div.obj1的属性；
+				  但span.title不会继承div.title的属性*/
+	<span class="title">
+	</span>
+  </div>
+
+</body>
+
+letter-spacing:*px;调整字间距
+word-spacing:*px;英文：单词间距；中文：短文与短文间距
+white-space:normal|nowrap|pre;/*pre 效果同<pre>标记*/
+vertical-align:文字对齐图片；常用于图文混排。
+input-image:边框大小无法清除，需要无边框文本框，可以用：input-text
+background-size:x:*px y:*px定义图片大小；x-宽度，Y-高度；x:auto y:auto;设置图片自适应
+
+设置有font属性的样式的行高需在font字号后设置，line-hight失效；
+正确：/* font:16px/28px '宋体';*/ 
+错误：font-size:16px;font:16px '宋体';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

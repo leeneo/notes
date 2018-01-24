@@ -1,0 +1,4 @@
+网站服务器可根据网站应用的需要，部署搭建ASP/JSP/.NET/PHP等应用环境。流行两种环境.
+一种是 Linux+ Apache( Nginx)+ Mysql+ Php 也就是LAMP/LNMP环境；
+另一种是 WINDOWS+ IIS+ ASP/ .NET+ MSSQL环境。
+还有一种是Java的JSP/Servlet+Tomcat服务器环境。

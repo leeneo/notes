@@ -1,0 +1,6 @@
+XHTML（Extensible HyperText Markup Language）：可扩展超文本标记语言，HTML向XML的过渡技术；
+
+是一种增强了的HTML,XHTML 是更严谨更纯净的 HTML 版本。它的可扩展性和灵活性将适应未来网络应用更多的需求。XML虽然数据转换能力强大，完全可以替代HTML，但面对成千上万已有的基于HTML语言设计的网站，直接采用XML还为时过早。因此，在HTML4.0的基础上，用XML的规则对其进行扩展，得到了XHTML。所以，建立XHTML的目的就是实现HTML向XML的过渡。国际上在网站设计中推崇的WEB标准就是基于XHTML的应用（即通常所说的CSS+DIV）
+
+XML（Extensible Markup Language）：可扩展标记语言;
+XML与HTML的设计区别是：XML是用来存储数据的，重在数据本身。而HTML是用来定义数据的，重在数据的显示模式。

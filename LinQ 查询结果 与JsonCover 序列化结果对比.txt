@@ -1,0 +1,39 @@
+数据库中直接返回的 （return res）：
+[{"Count":10,"TypeCode":"01","TypeName":"细胞修复舱理疗","Price":380.00,"CashCoupon":380.00,"IsUsed":"N","Create_date":"2017-10-25","ValidDate":"2017-11-24","Use_date":null},{"Count":5,"TypeCode":"08","TypeName":"泥疗热敷护理","Price":150.00,"CashCoupon":150.00,"IsUsed":"N","Create_date":"2017-10-25","ValidDate":"2017-11-24","Use_date":null}]
+
+经过JsonConvert 序列化后返回的字符串：
+（ return JsonConvert.SerializeObject(new { success = true, msg = "", data = res.ToList() });）
+
+{"success":true,"msg":"","data":[{"Count":10,"TypeCode":"01","TypeName":"细胞修复舱理疗","Price":380.00,"CashCoupon":380.00,"IsUsed":"N","Create_date":"2017-10-25","ValidDate":"2017-11-24","Use_date":null},{"Count":5,"TypeCode":"08","TypeName":"泥疗热敷护理","Price":150.00,"CashCoupon":150.00,"IsUsed":"N","Create_date":"2017-10-25","ValidDate":"2017-11-24","Use_date":null}]}
+
+var res = from vtd in db.View_TicketDetail
+                      join tt in db.TicketType on vtd.TypeCode equals tt.TypeCode
+                      where vtd.WeChatId == openID
+                      group new
+                      {
+                          vtd,
+                          tt
+                      } by new
+                      {
+                          vtd.TypeCode,
+                          tt.TypeName,
+                          tt.Price,
+                          tt.CashCoupon,
+                          vtd.IsUsed,
+                          vtd.Create_date,
+                          vtd.ValidDate,
+                          vtd.Use_date
+
+                      } into list
+                      select new
+                      {
+                          Count = list.Sum(x => 1),
+                          list.Key.TypeCode,
+                          list.Key.TypeName,
+                          list.Key.Price,
+                          list.Key.CashCoupon,
+                          list.Key.IsUsed,
+                          list.Key.Create_date,
+                          list.Key.ValidDate,
+                          list.Key.Use_date
+                      };

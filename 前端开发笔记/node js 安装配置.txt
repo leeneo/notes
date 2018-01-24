@@ -1,0 +1,20 @@
+node.exe 所在路径-->path
+用户变量--path:d:\nodejs
+系统变量--NODE_PATH:d:\nodejs\node_modules
+
+
+D:\>node -v
+v0.6.2
+
+D:\>npm -v
+1.0.104
+
+D:\>express -v
+2.5.1
+
+D:\>express hello //创建exrpess项目
+D:\>cd hello
+D:\hello>node app.js //启动
+
+-g 	全局
+不加-g  本地

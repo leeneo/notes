@@ -1,0 +1,56 @@
+ECMA是一家国际性会员制度的信息和电信标准组织。1994年之前，名为欧洲计算机制造商协会（European Computer Manufacturers Association）。是1961年成立的旨在建立统一的电脑操作格式标准--包括程序语言和输入输出的组织。
+
+.NET 是具有多种实现（.NET Framework、Mono、Unity 和现在的 .NET Core）的 ECMA 标准。
+
+.net core 跨平台，可运行在Windows、OS X 和 Linux。针对 .NET Core 编写的代码是可移植。
+
+.NET Core 四种方案：跨平台 ASP.NET Web 应用、跨平台控制台应用、跨平台库和框架、UWP 应用。
+
+ASP.NET Core 1.0 是用于 .NET Core 的跨平台 Web 堆栈。
+
+跨平台库和框架之间的区别之一在于其规模。库是在 .NET Core 上构建功能的最自然的候选对象之一。但是在更大的范围上，用于分布式计算的框架也是极佳的候选对象。
+
+.NET Core 和 .NET Framework 可以看作两个重合且共同进化的堆栈。.NET Framework 和 .NET Core 代码可以在同一解决方案中和谐共存。
+编写用于 Windows 7 到 Windows 10 的桌面应用程序时，现在和将来使用的都是 .NET Framework 堆栈。
+
+Nuget是一个.NET平台下的开源的项目，它是Visual Studio的扩展。在使用Visual Studio开发基于.NET Framework的应用时，Nuget能把在项目中添加、移除和更新引用的工作变得更加快捷方便。
+
+Nuget是 ASP .NET Gallery 的一员。NuGet 是免费、开源的包管理开发工具，专注于在 .NET 应用开发过程中，简单地合并第三方的组件库。
+
+Unity3D是一个用于创建诸如三维视频游戏、建筑可视化、实时三维动画等类型互动内容的综合型创作工具。Unity类似于Director，Blender，Virtools或Torque Game Builder等利用交互的图型化开发环境为首要方式的软件其编辑器运行在Windows 和Mac OS X下，可发布游戏至Windows、Wii、OSX或iOS平台。也可以利用Unity web player插件发布网页游戏，支持Mac 和Windows的网页浏览.
+
+Mono是一个致力于开创.NET在Linux上使用的开源工程,由Novell公司主持。它包含了一个C#语言的编译器，一个CLR的运行时，和一组类库，并实现了ADONET和ASPNET。能够使得开发人员在Linux用C#开发程序。
+
+该项目的目标是创建一系列符合标准ECMA(Ecma-334和Ecma-335)的.Net工具,包括C#编译器和共同语言(CL即CommonLanguage)执行平台(Platform).与微软的.Net不同,Mono项目不仅可以运行于Windows系统内,还可以运行于Linux,FreeBSD,Unix,MacOSX和Solaris。
+
+ppi是指屏幕上每英寸可以显示的像素点的数量，即屏幕像素密度
+
+Node.js 就是运行在服务端的 JavaScript。
+Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。
+Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。
+
+SWIFT，苹果于2014年WWDC（苹果开发者大会）发布的新开发语言，可与Object-C共同运行于MAC OS和iOS平台，用于搭建基于苹果平台的应用程序。
+
+JSP 是 Servlet 技术的扩展，本质上是 Servlet 的简易方式，更强调应用的外表表达。相同点：JSP和Servlet和本质上都是java类。Servlet 和 JSP 最主要的不同点在于， Servlet 的应用逻辑是在 Java 文件中，并且完全从表示层中的 HTML 里分离开来。
+而 JSP 的情况是 Java和 HTML 可以组合成一个扩展名为.jsp 的文件。
+JSP 侧重于视图，Servlet 主要用于控制逻辑。
+
+ADO.NET的名称起源于ADO(Activex Data Objects).
+我们的数据库是一个单独的进程,我们要与数据库进程通讯,不同的数据库,它的通讯方式是不一样的.
+除了数据库通讯方式不一样,还有不同的编程语言,每一种语言写出来的通讯也不一样.
+
+RIA（Rich Internet Applications）是集桌面应用程序的最佳用户界面功能与Web应用程序的普遍采用和快速、低成本部署以及互动多媒体通信的实时快捷于一体的新一代网络应用程序。RIA富互联网应用，具有高度互动性、丰富用户体验以及功能强大的客户端。RIA的特点是在客户端可以进行完整的数据处理，与用户的交互更加的友好、迅速。
+
+SSR，服务器渲染。简单来说就是，服务器将每个要展示的页面都运行完成后，将整个相应流传送给浏览器，所有的运算在服务器端都已经完成，浏览器只需要解析 HTML 就行。
+
+个人博客之前已经将 vue-router 的模式改为了 history，即 url 中不包含 hash，再通过将所有的静态请求转发到 index.html，使它看上去似乎像一个静态多页的网站。
+
+然而，它其实和其他的 SPA (Single Page Application 单页应用)来说没有任何的区别，最终是通过前端的路由去控制页面的显示。单页应用虽然在交互体验上比传统多页更友好，但它也有一个天生的缺陷，就是对搜索引擎不友好，不利于爬虫爬取数据。
+
+正所谓成也萧何，败也萧何。
+
+讲人话就是，搜索引擎搜不到我的博客啊~哭...
+
+那什么对搜索引擎和爬虫友好的哪？答案就是静态页，而非浏览器渲染，这就需要服务器直接渲染，也就 SSR(Server Side Render)。
+
+

@@ -1,0 +1,526 @@
+构建一个应用需要的软硬件设施
+
+硬件：网络（ 如 路由器、 交换机、 网线）、 存储（ 如 普通 磁盘、 SAN 和 LUN）、 服务器（ PC Server）
+
+软件：虚拟 化 技术（ Ctrix、 VirtualBox、 Hyper- V 等）、 操作系统（ Windows、 Linux 等）、 中间 件（ 消息 中间 件、 缓存 中间 件 等）、 运行时（ CRT、 JRE、. NET Runtime 等）， 以及 应用 程序 的 数据 和 应用 程序 本身。
+
+这些 在 传统 的 应用 部署 模式 中共 同组 成了 一个 完整 的 应用。 这种 环境 我们 叫做 On- Premise 环境。
+
+应用部署模式
+
+1、On-Premise （传统模式：企业预置型），所有设施用户需自行搭建和管理
+
+2、IssS（Infrastructure as a Service:基础设施即服务）	
+应用部署的基础设施由供应商提供，企业只需管理软件部分
+
+3、PaaS（Platform as a Service:平台即服务）		
+供应商提供：硬件设施和打包中间件（操作系统，中间件，运行层），打包中间件称作平台；用户只需管理：应用程序和数据
+
+4、Saas(Software as a Service:软件即服务)		
+供应商提供的整体应用解决方案，从硬件到软件都由供应商提供
+
+云计算机房，一般都搭建在气候比较寒冷的区域，利于降温
+
+
+Azure--微软的公有云
+
+2010年2月1日上线，微软的云计算服务构建在微软的Hyper-V虚拟化技术和微软的微服务Service Fabric之上。
+
+Azure云的一个经典应用
+在 2016 年的 4 月， 微软 还在 Azure 上 推出 了 智 能化 的 认知 服务 套 件 Cognitive Service， 助力 客户 在 云 平台 上进 行 创新。 一个 经典 的 基于 Azure 认知 服务 套 件 的 创新 应用 是 帮助 寻找 丢失 儿童 的 应用。 一方面， 丢失 儿童 的 家长 可以 上传 照片 到 Azure 云端， 另一方面 手机 中 安装 有这 个 应 用的 人 可以 在任 何时 间 地点 来 拍摄 疑似 走失 的 儿童 并将 照片 和 拍摄 地点 上传 到 Azure 云端。 再由 Azure 上 的 认知 服务 来 比 对 照片 的 相似性， 如果 相似 度 较高， 就会 通知 丢失 儿童 的 家长。
+
+云计算的商业模式：云 计算 让 客户 由 购买 软件 产品 变成 了 租赁 服务， 把 软件 与 客户 的 关 系从 一次 性地 购买 变成 了 长期 稳定 的 合作关系。
+
+2016年微软提出“Conversation as a Service” ，会话（沟通）即服务；应对人工智能领域的人机交互。
+
+UAP(Universal Application Platform):统一开发模型，windows 8.1时代，微软在pc端和phone端合并了UAP。
+
+windows 10，UAP变成UWP(Universal Windows Platform)，即windows平台的所有设备都运行同一个IDE，同一个运行时。
+在windows 10上编写的UWP应用可以运行在windows平台的所有设备。
+
+苹果的Universal 开发模型，仅限于iOS（iPhone和iPad）,但与Mac OS操作系统无法兼容。
+iOS是在Mac OS的基础上开发的，但是一个针对移动端，一个针对pc端，两套是不同的操作系统。
+
+Windows Bridge for iOS,这是一个允许iOS开发者，将XCode项目导入vs的工具。然后用object-c编译和调试，最终快速生成一个本已在iOS商店发布的windows平台应用。
+
+ASP.NET由红衣教主Scott Guthrie领导开发。
+
+.NET跨平台的基础--CLI(Common Language Infrastructure):公共语言基础规范
+这个 规范 是一 个 文档， 任何 人和 组织 都可以 按照 CLI 的 要求 实现 自己的. NET 运行 环境。
+
+CLI文档地址：http://www.ecma-international.org/publications/standards/Ecma-335.html
+CLI样例源代码：https://www.microsoft.com/en-us/download/details.aspx？id=14124。
+
+目前为止，只有 微软、 Mono 和 Portable. NET 三个 组织 实现 了 可以 运行 的. NET 运行 环境。
+
+2014 年 12 月 30 日 微软 在 Github. com 上面 创建 了 一个 名为 Coreclr 的 代码 仓库。
+目的 是 创建 一个 可以 运行 在 所有 主流 操作系统 上 的 一个. NET 运行 环境，目前这个运行环境已经支持了几乎全部的主流操作系统，包括FreeBSD这样的UNIX操作系统。
+
+
+JSON与XML的区别
+
+（1） JSON 无须 定义 含有 语义 的 标签， 因此 比 XML 格式 来说 更轻； 
+（2） JSON 格式 的 符号 仅 限于 单 引号、 小 括号、 中 括号、 大 括号、 冒号 和 逗号； 
+（3） JSON 与 XML 一样， 支持 格式 验证、 层次 化 嵌套 等 特性； 
+（4） JSON 没有 命名 空间， 因此 不支持 相同 数据 描述 段 彼此 混合； 
+（5） JSON 文件 的 解析 成本 比 XML 要 低 一些。
+
+
+OWIN ：Open Web Interface for .NET 的 缩写， 这是 一组 预 定义 的 接口， 用来 解 耦 Web 服务器 和 Web 应用 程序。 
+
+Web 服务器：就是 承载 Web 应用， 处理 HTTP 请求 的 Web 容器， IIS、 Apache 都是 Web 服务器。
+
+运行ASP.NET应用的WEB服务器是IIS,ASP. NET 是 通过 在 IIS 上部 署 一个 ISAPI 插件 来 实现 对 ASP. NET 网 站 请求 处理 的。当 IIS 发现 用户 HTTP 请求 的 资源 自己 无法 处理 时， 就来 查询 IIS 上 的 处理 程序 映射 表， 然后 将 HTTP 请求 转发 给 ASP. NET ISAPI 扩展， 再由 ISAPI 扩展 程序 执行 页面 代码 生成 要 展示 的 Web 页面 结果， 最后 再由 IIS 把 页面 结果 透 传给 用户。
+
+由于IIS与Windows系统严密绑定，之前asp.net 应用只能运行在windows平台上。
+
+OWIN的出现使ASP.NET跨平台成为可能。OWIN 规范 和 定义 了 Web 服务器 和 Web 应用 程序 之间 的 相互 调用 关系。
+只要 是 完整 地 实现 了 OWIN 接口 的 Web 服务器 就都 可以 支持 ASP. NET Web 应用 程序 的 运行 了。
+
+
+依赖 注入 是 控制 反转（ IoC） 的 一种 常见 实现 形式。 被 调用 组件 不再 由 调用 端 直接 创建， 而是 通过 组件 容器 创建 再 注入 到 调用 端。 这 在 一个 组件 化 的 松 耦合 架构 中 十分 常见。
+
+ASP. NET Core 定义 的 IServiceProvider 是 整个 依赖 注入 机制 的 主要 接口， 有 且 仅有 的 一个 方法 GetService（ Type） 可以 让 开发者 获取 到之 前 注册 到 容器 中的 对象 实例。
+
+所有 的 中间 件 有机 会 获得 如下 两个 IServiceProvider 的 实例：
+（1） 应用 程序 级： 通过 HttpContext. ApplicationServices 属性 获得。 
+（2） 请求 级： 通过 HttpContext. RequestServices 属性 获得。 这个 ServiceProvider 实例 在 请求 到达 时 创建， 在 请求 处理 结束 后 就可以 被 销毁 了。
+
+ASP. NET Core 需要 开发者 在 启动 类 中的 方法 ConfigureServices， 函数 的 参数 IServiceCollection 中含有 一个 服务 描述 列表。 开发者 需 要做 的 就是 把 全部 的 服务 描述（ ServiceDescriptor） 加入 到 参数 对象 的 服务 描述 列表 中。 Web 应用 程序 将 在 使用 时 提取 这个 列表， 并在 容器 中 注册 组件，如下所示：
+服务器注入实例
+@demo
+public void ConfigureServices(IServiceCollection services)
+{
+	var serviceDescriptor=new ServiceDescriptor(typeof(IBankManger),typeof(BankManager),ServiceLifetime.Transient);
+	services.Add(serviceDescriptor);
+	//Add MVC services to the services container.
+	services.AddMvc();
+}
+
+ASP.NET之前的版本会将源代码编译成为IL中间语言的程序集并保存在bin文件夹下；
+ASP.NET Core 的 Roslyn 编译器在内存中编译代码，且支持网站热修改。
+
+MVC6时代，MVC与WebAPI 共享技术栈（Controllers,Actions,Filters,Model binding,DI）等
+MVC6的路由配置项放在Configure()函数中。Configure()函数是通过OWIN的接口透露给.NET运行时的，由.NET运行时在恰当时机调用Configure()函数配置MVC路由。
+@demo
+public void Configure(IApplicationBuilder app,IHostingEnvironment env,ILoggerFactory loggerFactory){
+	...
+	app.UseMvc(routes =>{routes.MapRoute(name:"default",template:"{controller=Home}/{action=Index}/{id?}");})
+}
+
+* => 兰姆达表达式，可解读为“goes to”，.net 3.5的新语法。左侧是输入参数（如果有），右边包含表达式或语句块。
+
+Lambda 表达式是一种可用于创建委托或表达式目录树类型的匿名函数。通过使用 lambda 表达式，可以写入可作为参数传递或作为函数调用值返回的本地函数。Lambda 表达式对于编写 LINQ 查询表达式特别有用。
+
+若要创建 Lambda 表达式，需要在 Lambda 运算符 => 左侧指定输入参数（如果有），然后在另一侧输入表达式或语句块。例如，lambda 表达式 x => x * x 指定名为 x 的参数并返回 x 的平方值
+
+=> 运算符具有与赋值运算符 (=) 相同的优先级并且是右结合运算
+
+
+MVC 模型 绑 定， 是一 种 帮助 开发 人员 将 HTTP 请求 附带 数据 变成 要 操作 的 业务 模型 的 功能。
+有了 这个 功能， 开发 人员 无须 自行 处理 序列 化 字 节流， 而 是由 MVC 帮助 转换 成 指定 的 模型 对象。 这 使得 开发者 可以 很容易 地 访问 表单 数据， MVC 组件 帮助 开发 人员 自动 地 将 请求 数据（ POST/ GET） 转入 开发 人员 指定 的 数据 模型。
+ASP. NET Core MVC 6 的 绑 定 属性 会 自动 地 从 HTTP 请求 的 HEAD、 BODY、 查询 串 表单 等 地方 把 字节 流 反序 列 化成 业务 实体 对象。
+
+
+*Razor 是一种标记语法，支持C#和VB,可以让您将基于服务器的代码（Visual Basic 和 C#）嵌入到网页中
+Razor 是基于 ASP.NET 的，是为创建 Web 应用程序而设计的。它具有传统 ASP.NET 的功能，但更容易使用并且更容易学习.
+
+Razor 使用了与 PHP 和经典 ASP 相似的语法。
+主要的 Razor C# 语法规则
+Razor 代码块包含在 @{ ... } 中
+内联表达式（变量和函数）以 @ 开头
+代码语句用分号结束
+变量使用 var 关键字声明
+字符串用引号括起来
+C# 代码区分大小写
+C# 文件的扩展名是 .cshtml
+
+Razor：
+<ul>
+@for (int i = 0; i < 10; i++) 
+{<li>@i</li>}
+</ul>
+
+PHP：
+<ul>
+<?php 
+for ($i = 0; $i < 10; $i++) {
+echo("<li>$i</li>");
+} 
+?>
+</ul>
+
+Web Forms（经典 ASP）：
+<ul>
+<% for (int i = 0; i < 10; i++) { %>
+<li><% =i %></li>
+<% } %>
+</ul>
+
+TagHelper组件，类似AngularJS 的"ng-"属性绑定
+<label asp-for="username" class="col-md-2" ></label>
+
+.NET CLI,即.NET命令行接口，.NET Core SDK 附带的命令行工具，跨平台，运行dotnet 命令。
+
+dotnet命令：
+
+创建项目：
+cmd-->md coreApp
+cd-->coreApp-->dotnet new web|mvc|angular-->dotnet restore-->dotnet run
+
+*创建项目需要在项目根目录下， 模板名后不跟项目名
+
+运行：-->dotnet run
+
+dotnet new 模板名称；必需指定模板名称。
+
+模板                                                短名称              语言
+        标记
+----------------------------------------------------------------------------
+--------------------
+ASP.NET Core Empty                                web              [C#], F#
+ Web/Empty
+ASP.NET Core Web App (Model-View-Controller)      mvc              [C#], F#
+ Web/MVC
+ASP.NET Core Web App                              razor            [C#]
+ Web/MVC/Razor Pages
+ASP.NET Core with Angular                         angular          [C#]
+ Web/MVC/SPA
+ASP.NET Core with React.js                        react            [C#]
+ Web/MVC/SPA
+ASP.NET Core with React.js and Redux              reactredux       [C#]
+ Web/MVC/SPA
+ASP.NET Core Web API                              webapi           [C#], F#
+ Web/WebAPI
+Razor Page                                        page
+ Web/ASP.NET
+MVC ViewImports                                   viewimports
+ Web/ASP.NET
+MVC ViewStart                                     viewstart
+ Web/ASP.NET
+
+dotnet- restore 命令 通过 读取. NET Core 项目 中 project. json 配置文件 中的 内容， 通过 NuGet 工具 下载 和 配置 当前. NET Core 项目 的 依赖 库 和 项目。
+为了 让 NuGet 能够 下载 项目 需要 的 依赖 库， 需要 为 NuGet 工具 指定 下载 源。 下载 源 通常 保存 在 nuget. config 文件 中， 在 线 的 nuget. org 源 作为 默认 源 已经 保存 在 配置文件 中。 开发 人员 也可以 根据 需要 使用- source 参数 指定 自己的 NuGet 下载 源。- packages 参数 用来 指定 依赖 库 的 物理 位置， 如果 没有 指定- packages 参数， 那么 就会 使用. NET Core 全局 缓存 位置。 如果 用 户名 是 user1， 默认 情况下 这个 位置 在 Linux 和 OS X 操作系统 的/ home/ user1 路径 下， Windows 操作系统 的C：\ Users\ user1 路径 下。
+
+dotnet- run 命令 首先 会 编译 源 代码， 生成 输出 程序， 然后 运行 这个 程序。 dotnet- run 依赖. NET Core 的 构建 功能 来 编译 源 代码， 编译 的 输出 结果 会 保存 在当 前 目录 中的 bin 子 文件夹 内。 在 一个 部署 有 多个. NET 运行时 的 计算 机上， dotnet 会 首选. NET Core 作为 运行时。 如果 需要 使用 其他. NET 框架， 那么 就要 使用 -framework 参数 来 指定。
+dotnet- run 命令 需要 在当 前项 目上 下文 环境 中 执行， 也就 是在 项目 所在 文件夹 路径 下 执行。 如果 需要 运行 一个 程序 集， 那么 需要 直接 使用 dotnet 而 不是 dotnet run， 如 dotnet my. dll。
+
+dotnet- build 负责 编译 项目 源 代码 和 项目 依赖 项 目的 源 代码。 编译 结果是 包含 有 中间 语言 代码 的 二进制 DLL 文件。 同时. NET Core 的 编译 功能 也会 生成 deps 文件， 用来 描述 主机 需要 什么样 的 环境 来 运行 这个 项目。 在编 译 开始 之前，. NET Core 构建 功能 将对 项目 进行 增量 安全检查。 如果 所有 的 检查 都 通过了， 那么 就 执行 增量 编译 操作。 这种 编译 只 针对 上次 编译 后 修改 的 部分 进行 编译， 编译 速度 较快。 如果 增量 检查 没有 通过， 那么 就 执行 全 量 编译。
+对于 当前 项目 依赖 的 其他 需要 编译 的 项目， 必须 通过 下面 的 安全检查， 以便 确保 编译 过程 是 增量 编译： （1） 没有 使用 编译 前/ 编译 后脚 本； （2） 没有 从 PATH 指定 的 路径 中 加载 编译 工具； （3） 只 使用 已知 的 编译器 比如 C#、 VB、 FSharp 等 编译器。 如果 编译 的 是 一个 可执行 的 项目， 需要 在 项目 的 配置文件 project. json 中 包含 以下 内容，
+{
+	"compilerOptions":{
+		"emitEntryPoint":true
+	}
+}
+
+dotnet- publish 命令 用来 把 当前 项目 中 需要 发布 或者 可执行 的 部分 以及 相关 的 依赖 项 打包， 使之 成为 可以 发布 的 状态。
+dotnet- publish 命令 执行 发布 动作 时， 首先 会 编译 当前 项目 并从 project. json 文件 中 读取 相关 的 依赖 项， 最后 将 全部 需要 发布 的 部分 存放 在 项目 的 bin/ publish 文件夹 内。
+
+其他 命令 的 详细 描述 请 参考： https:// docs. microsoft. com/ en- us/ dotnet/ articles/ core/ tools/ index。
+
+
+*ARM架构处理器，32位精简指令集架构，区别于x86架构处理器（桌面端），应用于便捷设移动设备，现今市面上99%的移动设备（iphone,ipad,android），都搭载的这一架构处理器。
+
+Windows CE:Windows Compact Edition,精简化的windows系统，适用于轻巧的移动设备，现仍广泛存在于福特车载系统中。
+最终演化为Windows Phone 7.5;被Windows 8取代；
+
+Android,最初并不是谷歌研发的，而是由硅谷的一位创业大师Andy Rubin发明于2004年。最早Andy公司设计了一款操作系统，以2亿美元把该系统知识产权卖给了微软。微软以此推出一款名为Kin的针对儿童市场的智能手机。但仅卖出400多部。平均下来，kin算是世界上单机成本最高的手机了。
+Andy Rubin，卖掉第一款操作系统后（Danger 被微软收购），研发了第二款操作系统，就是现在的Android.
+Andy 隐居开曼群岛，创办Andorid,宗旨是设计一款对所有软件开发者开放的移动平台，即Android,2005年被Google收购。
+2013年3月14日，Andy Rubin辞去Android业务主管一职.
+2017现况，自己跑去造了新手机Essential Phone,以及Ambient OS. link:www.essential.com
+Ambient OS,应用于智能家居AI产品，开源。
+Ambient OS 并不是一个简单为智能家居打造的操作系统，它更像是在目前所有的智能家居协议之上，开发的一个可以容纳之前所有的协议和不同家的生态系统的操作系统。会不会是下一个成功的人工智能设备操作系统呢？
+
+
+成功移动应用开发的特点
+
+1、用户体验第一位
+简化输入，能查询或者推算的，就不让用户输入。信息缓存，复用。好的用户体验，参考微信。
+
+2、资源限制
+尽可能的降低系统资源占用，减少网络带宽占用，优化算法，降低功耗等
+
+3、处理移动设备的特殊事件
+移动设备的应用相比桌面端（运行和停止）多了一个挂机状态。
+挂起（suspended）：用户 在 移动 设备 商 将 当前 运行 应用 切换 成 另一个 应用 程序， 但是 老的 应用 程序 并没有 被关 闭 仍然 驻留 内存 的 一种 状态。 当 应用 程序 由 运行 状态 切换 为 挂起 状态 时， 需要 程序员 保存 当前 操作 会话 的 临时 数据， 以便 当 程序 从 挂起 状态 切换回 运行 状态 时 将临 时数 据 恢复。
+
+其他事件：电池事件，蓝牙事件，网络连接（频繁断线）事件，调用底层设备组件事件（摄像头，录音机）
+
+4、处理好数据同步和数据冲突的问题
+由于 网络 条件 和 网络 带宽 的 限制， 往往 需要 缓存 一部分 数据 到 移动 应用 程序 中， 待 网络 条件 允许 后再 把 数据 批量 同步 到 服务 端。
+
+
+各大平台开发环境
+
+iOS:XCode集成开发环境，使用Object-C,Swift等。
+Android:Android Studio集成开发环境，使用Java,C等。
+
+
+现今（2017）跨平台开发技术：
+
+（1、QT Library
+QT Library,为解决OS X,Linux,Windows GUI应用程序跨平台而创立。Linux著名KDE，基于QT二次开发而成。
+QT 自己实现了线程，封装了针对不同操作系统的原生线程API；基于QT开发的桌面应用，针对不同平台进行编译，就可实现一套代码，三个平台运行。
+08年被诺基亚收购，12年被卖于芬兰，后开始支持移动平台。
+QT的源码开放，获取 源 代码 请 参考： http:// wiki. qt. io/ Get_ The_ Source。
+
+（2、Xamarin
+Xamarin公司，2011年成立;
+Xamarin 公司负责人Miguel de Icaza,1997年创建了Gnome(著名的一款Linux图形桌面环境)，2001年与Xamarin CEO-Nat Friedman创立了.net Mono.
+Xamarin 构建在Mono Framework上。使用C语言开发。提供 了 一套 对 移动 开发 所需 要的 界面、 I/ O 等 功能 进行 了 封装 的. NET 类 库。 使得 开发 人员 可以 像 开发 WinForm 或者 UWP 应用 程序 一样 开发 运行 在 iOS 和 Android 操作系统 上 的 应用 程序。
+自己跨平台的IDE，Xamarin Studio,可以作为扩展插件，植入VS中。
+统一界面库：Xamarin.Forms:界面保持相对统一的风格，细节处符合各自平台的设计规划。
+2016年，2月24日，被微软以5亿美元，全资收购。
+VS用户可免费使用Xamarin,且Xamarin，Xamarin.Forms代码开源。
+https://github.com/xamarin/Xamarin.Forms
+
+(3、Cordova
+Cordova:Apache Cordova,一个跨平台开发框架，由Nitobi小组创建，横跨多个移动平台。
+Nitobi小组 2011年被Adobe收购，后Adobe将Nitobi小组的代码捐献给了Apache,成立了开源项目Apache Cordova.
+Cordova 是一种寄宿在浏览器上的跨平台开发技术，不是架构在原生界面上库的技术。支持Javascript和Typescript,使用HTML5渲染界面，并支持与移动设备资源交互。
+从 本质上 来说，Cordova 技术就是用HTML 页面 与用户 交互， 用 脚本 语言 表达 逻辑 运行 在 移动 设备 浏览器 上 的 一组 动态 页面。
+
+Cordova 的 优势 在于 可以 快速 低成本 地 开发 一 款 横跨 多种 移动 平台 的 应用， 但是 由于 界面 和 代码 严重 依赖 浏览器 渲染， 性 能上 与 原生 应用 尚 存 一定 的 差距。 因此 比较 适合 信息 展示 类 的 应用 程序 开发， 如 商店、 新闻、 RSS 阅读 等， 不适合 游戏 开发 场景。 Cordova 对于 一般 的 商业 应用 来说， 已经 足够 了。 它最 大的 优势 就是 可以 快速 开发 和 部署 一个 移动 应用。 这 对于 创业者 来说 弥 足 珍贵， 因为 创业 本身 是 一个 试 错的 过程。 能用 最小 的 时间 和 金钱 代价 进行 试 错， 才是 创业者 的 最优 技术 方案。
+
+VS自visual studio 2013 update 4起，内置对Cordova的开发支持。
+
+
+
+Web还是App?
+
+那么既然响应式设计网站也可以在移动浏览器上很好的展示，那么为什么还要开发众多的移动端应用呢？
+因为，移动端应用的易用性，只需要单击一下图标就能访问，不需要记忆那么多域名。
+只有移动端应用才能获取用户更多的使用机会和时间。
+
+
+移动应用开发方式的选择？
+
+微软平台：
+(1、HTML+Javascript，最高抽象级别，原生应用商店+浏览器/混合，开发成本最低。
+(2、Java或者C#开发，灵活抽象级别，原生应用商店/windows phone/桌面应用+使用Xamarin和C#支持原生的Android/iOS；开发成本适中。
+(3、C/C++原生开发，最低抽象级别，大多数的操作系统，但通过标准C++源代码进行重构，开发成本最高。
+
+技术选型的决定性因素不一定在技术本身，而是开发成本，包括财务成本和时间成本。
+互联网应用市场，在 一个 创业 想法 有 多家 对 标 公司 在 同时 抢占 市场 的 情况下， 谁能 最快 地 推出 应用， 谁 就能 占 得 市场 的 先机。
+
+人力成本：会HTML+JS的技术人员远比会C/C++的人员好招聘的多，HTML+JS的需求远大于C/C++.
+
+以上三种开发模式，开发成本自上而下，逐级增加。但是出于对性能和硬件访问有一定需求的项目而言，位于中间层次的开发模式会是更加均衡且适宜的一种方式。
+
+
+那么选Cordova还是Xamarin呢？
+
+1、大部分Cordova程序员表示，选择Cordova的原因有3：
+（1、使用了熟悉的编程语言HTML+JavaScript（学习曲线平滑，容易掌握）
+（2、跨平台
+（3、性能还可以接受
+
+2、Xamarin吸引程序员的理由：
+（1、可高性能的访问本机API
+（2、支持强类型和面向对象开发
+（3、用户界面设计，支持控件拖拽；
+（4、使用XAML定义界面设计和自适应布局
+（5、基于Mono
+
+
+Cordova 技术适用场景：
+（1） 移动 应用 在 不同 的 平台 之间 界面 保持 较高 的 一致性， 不需要 为 特定 的 移动 平台 定制 界面；
+（2） 与 移动 应用 对应 的 服务器 端 Web 网 站 可以 共享 界面 元素 资源； 
+（3） 开发 人员 有 HTML5+ JavaScript 开发 背景。
+
+Xamarin 技术适用场景：
+（1） Xamarin.Forms 可以 帮助 程序员 实现 特定 的 应用 界面； 
+（2） 开发 人员 背景 是. NET 技术 背景， 尤其是 进行 UWP 应用 开发； 
+（3） 应用 运行 需要 较高 的 性能， 比如 要 开发 一 款 游戏。
+
+Cordova和Xamarin 都是开源且免费的。
+
+环境配置：
+
+（1、安装Visual Studio 2017 Community(免费)
+
+Azure账号登录 http://manage.windowsazure.cn（Azure新管理门户：portal.azure.cn）；->新建虚拟机->从库中->Windows Server 2012 R2 Datacenter 简体 中文版 镜像->配置A2双核，标准->添加HTTP:80端口->安装VM代理,安全扩展：Microsoft Antimalware ->创建成功，附加空磁盘->200G，缓存：无 ->连接，等待虚拟机运行（时间较长），进入虚拟机后->本地服务器：IE增强安全配置-关闭->工具：计算机管理，给外挂的磁盘配置盘符 ->
+
+（2、启用Visual Studio Online，现叫做Visual Studio Team Services(Git、TFVC、敏捷工具、持续集成、版本管理、适用于Java团队的工具)
+
+VSO是微软为开发人员推出的软件生命周期管理（ALM：Application Lifecycle Management）的PaaS服务。集成了Scrum开发过程、源代码管理、自动化测试等功能。需要使用微软账号。
+启用 VSO 服务， 需要 用 IE 访问 https:// app. vssps. visualstudio. com/， 并使 用 已经 申请 好的 微软 账号 进行 登录。
+
+(3、使用Azure PowerShell管理缓存服务。
+
+通过 AzurePowerShell 可以 实现 管理 门户 的 全部 功能， 还可以 管理 门户 上 暂时 无法 管理 的 功能， 比如 我们 会 用到 的 Redis Cache。
+Redis Cache 是一 款 非常 流行 的 缓存 中间 件。 通过 Redis Cache 可以 把 常用 数据 缓存 在 内存 中 以便 提高 数据 的 读写 效率。 Redis Cache 还 支持 序列 化， 因此 广 受好评。
+AzurePowerShell 工具 是 通过 微软 Platform Installer 这个 统一 的 包管 理 工具 来 下载 安装
+https:// www. microsoft. com/ web/ downloads/ platform. aspx 下载 并 安装 Platform Installer 工具。
+
+AzurePowerShell 命令查看版本信息：
+Get-Module -ListAvailable | Where-Object {$_.name -like "*Azure*"}
+
+（4、安装ASP.NET Core 1.0 和 Apache Cordova
+
+ASP.NET Core 2.0 已于2017年8月14日发布，引进Razor Pages编程。
+下载地址：https://www.microsoft.com/net/core
+
+
+构建实体模型
+
+MVC设计模式中，实体模型Model是创建整个应用的基石。视图（view）用来显示Model,控制器Controller用来处理Model.
+
+(1、识别实体模型
+从需求中识别出有效的实体模型。有效的实体模型是良好设计的开端。
+统一软件开发过程（RUP）中定义了四种模型：用例模型（Use Case Model）、分析模型（Analysis Model）、设计模型（Design Model）和实现模型（Implementation Model）。用例模型是其他三种模型的基础，通过构建用例模型和分析用例模型，可以获得设计模型和实现模型。
+
+(2、创建实体模型
+
+Entity Framework 微软推出的ORM（对象关系映射-Object-Relational Mapping）组件。
+通过 Entity Framework， 开发 人员 可以 将 关系 数据库 中的 一行 数据 自动 变成 一个 内存 中的 对象 实例 实现 增、 删、 改、 查 操作。 Entity Framework 负责 实现 数据库 一行 数据 与 内存 中 对象 实例 的 映射 转换。 Entity Framework 还 支持 LINQ 语法， 开发者 可以 使用 LINQ 更加 流畅 地表 达 业务 逻辑。 Entity Framework 将 LINQ 查询 转换 为 SQL 语句 的 操作 是 自动 的。
+LINQ（Language Integrated Query）语言集成查询是一组用于C#和Visual Basic语言的扩展。它允许编写C#或者Visual Basic代码以查询数据库相同的方式操作内存数据。
+
+Entity Framework Core特点：
+（1） Entity Framework Core 支持. NET Core 运行时，可以跨平台运行。这赋予了.NET Core 运行时访问数据库的能力。（ADO.NET未开源）
+（2） Entity Framework Core 全 面倒 向 Code- First 模式。
+（3） Entity Framework Core 将 支持 更多 的 数据 源。
+
+*Code- First 模式， 是指 开发者 可以 先 构建 应用 所需 的 业务 实体 模型， 再通过 Entity Framework 将 业务 实体 模型 类 转换 为 数据库 中的 表。
+Database- First 模式 则 相反， 开发者 在 根据 需求 完成 设计 之后， 首先 要 确定 数据库 的 架构（ schema）， 然后 再由 Entity Framework 反向 生成 业务 实体 类 声明。
+Model-First:以数据库为基准来编写代码，这里需要先新建一个实体数据模型，根据这个模型将会自动生成数据库文件
+
+
+创建Models项目->解决方案->添加，新建项目->.NET Core，.NET Core类库->依赖项->右键引用->管理NuGet程序包->浏览，EntityFramework 安装。
+
+
+DbContext:数据上下文对象，负责作业对象与数据交互;
+上下文 类 管理 在 运行 期间 的 主要 功能 包括 在 数据库 中 新建、 删除 和 修改 已经 持久 化 数据 到 数据库 中的 实体 对象。 这个 对象 需要 继承 于 IdentityDbContext 这个 泛 型 类，
+
+
+.NET Core 不再支持 project.json 文件，取而代之的 MSBuild/csproj 格式。
+dotnet restore, dotnet build, dotnet publish, dotnet run 都会使用这个 .csproj 文件，不再支持 project.json。
+
+将 project.json 转换为csproj格式 ：
+在 project.json 所在的项目文件夹，运行 dotnet migrate 命令。
+
+*Microsoft.EntityFremeworkCore.Tools我们也可以用Microsoft.EntityFrameworkCore.Design代替
+
+此时我们只需要在Startup.cs中在注入EF时明确告诉要执行的命令要将EF迁移文件生成到当前应用程序的程序集下即可，如下：
+
+            services.AddDbContext<EFCoreContext>(options =>
+            {
+                options.UseSqlServer(sqlStr, d => d.MigrationsAssembly("StudyEFCore"));
+            });
+
+添加依赖包的方式：
+
+1、VS-工具-NuGet包管理器-PackageManager：
+Install-Package Microsoft.EntityFrameworkCore.SqlServer;
+Install-Package Microsoft.EntityFrameworkCore.Tools
+
+2、dotnet 命令行添加包：
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+
+以上两种方式(会在csproj文件中ItemGroup节点下生成<PackageReference Include="" Version="" />节点)；
+
+EF-cli 的引入：
+在csproj文件中手动添加以下节点：
+<ItemGroup>
+<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+</ItemGroup>
+
+在项目文件中添加此条引用后，即可在该项目目录下使用dotnet ef命令。
+
+*该命令仅在添加引用的项目目录下有效。
+
+dotnet ef 命令：
+Commands:
+  database    Commands to manage the database.
+  dbcontext   Commands to manage DbContext types.
+  migrations  Commands to manage the Migrations.
+
+dotnet ef migrations add Initail	将数据模型映射成表
+dotnet ef database update		更新数据库并生成表
+
+DOTNET-EF-数据库
+Usage: dotnet ef database [options] [command]
+
+Options:
+  --no-color       Don't colorize output.
+  --prefix-output  Prefix output with level.
+
+Commands:
+  drop    Drops the database.
+  update  Updates the database to a specified migration.
+
+
+DOTNET-EF-的DbContext
+Usage: dotnet ef dbcontext [options] [command]
+
+Options:
+  --no-color       Don't colorize output.
+  --prefix-output  Prefix output with level.
+
+Commands:
+  info      Gets information about a DbContext type.
+  list      Lists available DbContext types.
+  scaffold  Scaffolds a DbContext and entity types for a databas
+
+DOTNET-EF-迁移
+Usage: dotnet ef migrations [options] [command]
+
+Options:
+  --no-color       Don't colorize output.
+  --prefix-output  Prefix output with level.
+
+Commands:
+  add     Adds a new migration.
+  list    Lists available migrations.
+  remove  Removes the last migration.
+  script  Generates a SQL script from migrations.
+
+Use "migrations [command] --help" for more information about a command.
+
+cli命令详见：https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet
+Entity Framework Core(EF Core)说明文档：https://docs.microsoft.com/en-us/ef
+
+
+数据迁移
+
+（1）vs pm 方式
+
+Add-Migration MyFirstMigration/init	以支持迁移以创建模型的初始表（此命令生成一个目录（Migration））
+Update-Database				以将新迁移应用于数据库。
+@https://docs.microsoft.com/en-us/ef/core/get-started/full-dotnet/new-db
+
+（2）dotnet ef 命令方式
+
+dotnet ef migrations add Initial	将数据模型映射成表
+dotnet ef database update		更新数据库并生成表
+
+ef-cli命令详见：https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet
+
+新建项目ASP.Net Core 2.0 WEB项目：添加新项目->.Net Core -> Asp.Net Core Web 应用程序->Web MVC
+注意事项：模板选择.Net Core -> Asp.Net Core 2.0;
+
+依赖注入(DI):
+传统上来说，如果一个对象A想使用对象B的功能,需要在调用B的功能之前先创建对象B和调用对象B的方法。
+依赖注入则是反转此过程，对象B作为服务的提供者，不需要A来创建。而是通过对象容器来创建，这个过程称为控制反转(IoC).对象A需要使用对象B时，只需要向对象容器进行声明，由对象容器把B对象的实例提供给A来使用。
+这种方式就是依赖注入（对象A依赖对象B）。
+作用：有效的解耦程序架构。
+对象容器：Java 平台:Spring，.NET 平台:Spring .Net,Prism,Unity(不是游戏那个Unity);
+
+VS中更改csproj文件的<Project>节点，可以转换项目类型
+.Net Core 类库项目csproj文件<Project Sdk="Microsoft.NET.Sdk">
+.Net Core Web:MVC项目csproj文件<Project Sdk="Microsoft.NET.Sdk.Web">
+
+
+
+
+
+
+
+
+
+
+
+
+
+

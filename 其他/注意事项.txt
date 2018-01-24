@@ -1,0 +1,22 @@
+印刷制品：可不加投影和描边，黑色投影印刷出来效果并不好。
+若加的话切忌太大，颜色太重。
+
+出品尽量压边，以便掩盖周围视线，突出主体内容
+
+引导页没有标注
+
+页面上很少用浮雕，内阴影这些效果，h5除外
+
+
+平面类：PS、AI、CDR
+ 网页设计：Flash、Fire Works、Dreamweaver
+ 三维制作：3D MAX、MAYA
+ 建筑机械：AutoCAD建筑、AutoCAD机械
+ 语言类：英语
+ 影视编辑：After Effects、Premiere、Cinema4d
+ Office办公：Word、Excel、PowerPoint
+ 网络营销：电子商务、淘宝装修、C2A、B2A(B2G)、B2M、B2B、C2C、B2C、M2C
+
+sketch mac平台，专门应对UI，图标设计
+
+1920*1080分辨率下，谷歌浏览器的内容宽度不能超过1263px,超出即出现滚动条

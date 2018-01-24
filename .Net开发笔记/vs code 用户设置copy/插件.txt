@@ -1,0 +1,28 @@
+open in browser
+color pick
+Quokka
+visual studio Code Format
+visual studio Team Services
+vscode-icons
+Angular2+Snippets-...
+Beautify
+C#
+C# FixFormat	ctrl+alt+i
+Debugger for Chrome
+Easy LESS
+ESLint
+HTML Snippets
+JavaScript(ES6)code Snippets
+minify
+open in browser		alt+shift+b
+Prettier-Js formatter
+minify
+auto close tag
+asp.net helper
+auto import
+auto rename tag
+c/c++
+python
+pyton for vscode
+
+http://blog.csdn.net/zdhsoft/article/details/70209546

@@ -1,0 +1,14 @@
+css 选择器
+
+not 选择器
+
+/* nav a:not(:nth-child(1)){
+    color:#666;    
+} */
+nav a:not(:first-child){
+    color:#666;    
+}
+上面两者效果一样
+
+css 里没有 :first/:last 选择器
+但有:first-child/:last-child 选择器

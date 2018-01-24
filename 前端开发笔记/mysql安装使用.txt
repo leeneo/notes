@@ -1,0 +1,155 @@
+免安装版，需要在根目下配置如下：
+
+代码：（把里面D:\mysql\mysql-5.6.17-winx64改成你自己的软件路径，保存）
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8 
+[mysqld]
+#设置3306端口
+port = 3306 
+# 设置mysql的安装目录
+basedir=D:\mysql\mysql-5.6.17-winx64
+# 设置mysql数据库的数据的存放目录
+datadir=D:\mysql\mysql-5.6.17-winx64\data
+# 允许最大连接数
+max_connections=200
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB 
+
+安装服务
+cmd-->定位到bin(或者先set path)--mysqld install--net start mysql
+
+打开mysql
+cmd--mysql -uroot -p
+
+设置密码：mysqladmin -u root -p password 密码
+
+使用
+mysql show databases
+use [dbname]--showtables;
+查询：sql select * from [tablename]--exit
+
+退出mysql--exit
+
+图形化管理工具：
+1、phpMyAdmin
+2、MySQLDumper
+3、Navicat
+4、MySQL GUI Tools
+5、MySQL ODBC Connector
+
+mysql瘦身--删掉多余的源文件和lib下debug文件
+
+mysql command line client ==>连接mysql
+
+C:\Users\Administrator>mysql -hbdm-004.hichina.com -ubdm004032 —default-charac
+
+ter-set=utf8 -ppassword  bdm0040320_db < d:\bdm0040320_db.sql 
+
+-h后面是数据库地址 -u后面是用户名 —default-character-set= 后面指定字符集，当初备份的时候用的什么字符集这里就还用什么   -p后面是密码    最后是跟上数据库名    d:\bdm0040320_db.sql 是数据库备份文件路径；
+
+PHP数据库连接例程说明:
+$dbh = mysql_connect(' localhost','数据库用户名','数据库密码');
+mysql_select_db('数据库名');
+$query = "insert into requests(date, request, email, priority,status) values (NOW(),'$description', '$email', '$priority', 'NEW')";
+$res = mysql_query($query, $dbh);
+$query = "select max(id) from requests";
+$res = mysql_query($query, $dbh);
+$err = mysql_error();
+if($err){
+echo "发生错误，请通知管理员";
+}
+$row = mysql_fetch_row($res);
+echo "未来您使用的号码为: ".$row[0];
+?>
+
+
+Linux云虚拟主机通过pdo链接mysql数据库
+更新时间：2017-06-07 13:26:11   分享：   
+PDO(PHP Data Object) 是PHP5中新加入的模块，是PHP5新加入的一个重大功能，使用非常方便，php3/4没法使用，链接实例可以参考如下代码：
+
+<?php 
+$pdo = new PDO("mysql:host=数据库地址;dbname=数据库名","数据库用户名","数据库密码"); 
+if(!$pdo){
+ echo("fail");
+}else{
+ echo("sucess");
+} 
+?>
+
+ 
+
+常用的一些函数：
+
+PDO::query() 主要是用于有记录结果返回的操作，特别是SELECT操作。
+PDO::exec() 主要是针对没有结果集合返回的操作，如INSERT、UPDATE等操作。
+PDO::lastInsertId() 返回上次插入操作，主键列类型是自增的最后的自增ID。 
+PDOStatement::fetch() 是用来获取一条记录。 
+PDOStatement::fetchAll() 是获取所有记录集到一个中。
+
+
+asp.net连接实例
+
+using MySql.Data.MySqlClient;
+
+namespace ConnectMySql
+{
+    class Class1
+    {
+        public MySqlDataReader GetData()
+        {
+            string connection = "server=localhost;user id=root;password=123456;database=ABC; pooling=true;";
+            MySqlConnection conn = new MySqlConnection(connection);
+            string sqlQuery = "SELECT * FROM Article";
+            MySqlCommand comm = new MySqlCommand(sqlQuery, conn);
+            conn.Open();
+            MySqlDataReader dr = comm.ExecuteReader();
+            conn.Close();
+            return dr;
+        }
+    }
+}
+
+代码注意两点：一是使用using MySql.Data.MySqlClient; 二是写好连接字符串connection，当然，这个连接字符串可以不象上面那样写在具体的代码中，而是推荐写在ASP.NET应用的根目录中的配置文件web.config的<connectionStrings>节内，如下：
+
+3-2、在web.config中配置连接字符串完成对MySQL数据库的连接（推荐，替代方法3-1）
+
+复制代码
+ <connectionStrings>
+    <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-Sanlogic.MSTWebsite-20140219093639;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-Sanlogic.MSTWebsite-20140219093639.mdf" providerName="System.Data.SqlClient" />
+
+    <add name="DBConnection"   connectionString="server=localhost;user id=root;password=123456;database=ABC; pooling=true;"
+           providerName="MySql.Data.MySqlClient" />  
+    
+  </connectionStrings>
+
+其中DBConnection即是对MySQL的连接，如果是这样的配置连接字符串，可以使用下面的代码将其取出（注意仍然有 using MySql.Data.MySqlClient; 语句）：
+
+        public static MySqlConnection CreateConn()
+        {
+            string _conn = WebConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
+            MySqlConnection conn = new MySqlConnection(_conn);
+            return conn;
+        }
+使用这种办法取出连接字符串并建立对数据库的连接，今后的使用直接调用该方法创建对MySQL数据库的连接，并使用ADO.NET完成任务。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

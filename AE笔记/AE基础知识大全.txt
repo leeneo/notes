@@ -1,0 +1,265 @@
+AE基础知识大全  
+
+这篇文章也是自己在学习过程中发现的，因为对自己帮助挺大的，所以将它整理标注了一下，发到自己的博客，供博友学习交流之用，对于AE要在实践中学习，学习中实践，结合学习，来锻炼自己的动手操作的能力
+
+1、AE层模式（混合模式）介绍
+在时间线上，通过按下时间线窗口左下角不同的层展开/折叠开关按钮，可以展开层控制和层模式面板，按下快捷键F4，时间线窗口会在层面板和层模式面板之间进行切换，在层模式面板Mode栏中可以选择不同的层叠加方式：
+Normal正常模式、Dissolve溶解模式、Dancing Dissolve动态溶解模式、Darken变暗模式、Multiply正片叠底模式、Linear Burn线性加深模式、Color Burn颜色加深模式、Classic Color Burn为兼容早版本的Color Burn模式、Add增加模式、Lighten变亮模式、Screen屏幕模式、Linear Dodge线性减淡模式、Overlay叠加模式、Soft Light柔光模式、Hard Light强光模式、Liner Light线性加光模式、Vivid Light清晰加光模式、Din Light阻光模式、Hard Mix强光混合模式、Difference差别模式、Classic Difference兼容老版本的差别模式、Exclusion排除模式、Hue色相模式、Saturation饱和度模式、Color颜色模式、Luminosity高度模式。
+上面所列的层模式，是通上下层的颜色通道混合产生影响变化，而下层的层模式则是通过层的Alpha通道影响混合变化。
+Stencil Alpha：Alpha通道模式
+Stencil Luma：亮度模式
+Slihouette Alpha：Alpha通道轮廓
+Slihouette Luma：亮度轮廓
+Alpha Add：Alpha添加
+Luminescent Premul：冷光模式。
+
+2、AE的视频转场特效
+Transition切换 Block Dissolve块面溶解 Card Wipe卡片擦拭 Gradient Wipe渐变擦拭 Iris Wipe星形擦拭 Linear Wipe线性擦拭 Radial Wipe径向擦拭 Venetian Blinds百叶窗Transition Completion转场完成度
+Block Width块状的宽度 Block Height块状的高度 Feather羽化 Soft Edges（Best Quality）边缘羽化
+
+3、AE风格化的使用
+Effect/Stylize风格化
+Brush Strokes画笔描边 Color Emboss彩色浮雕 Emboss浮雕 Find Edges查找边缘
+Glow辉光 Mosaic马赛克 Motion Tile粗糙边缘 Scatter扩散
+Strobe Light闪光灯 Texturize纹理化 Threshold阈值
+
+4、AE精彩文字特效
+Effect/Text文字
+Basic Text 基本文字头 Number 数字 Path Text 路径文字 Time Code 时码
+基本文字特效
+1、Ctrl+N新建合成，长度为5秒。
+2、Ctrl+Y新建固态层。
+3、建立文字特效：右击固态层/Effect/Text/Basic Text
+Font：字体
+Style：字形（Bold：加粗、Bold Italic：加粗倾斜、Italic：倾斜、Regular：常规）
+Drection：文字方向（Horizontal：水平、Vertical：垂直、
+Rotate：旋转）
+Alignment：对齐方式（Left：左对齐、Center：中对齐、
+Right：右对齐）
+弹出的特效控制面板参数
+Position：轴心点
+Fill and stroke：填充和描边
+Display Options：显示属性（Fill only仅有填充 Fill stroke仅有描边 Fill over stroke填充压着描边 Stroke over fill描边压着填充）
+Fill color填充颜色 Stroke color描边颜色 Stroke width描边宽度
+Size：字号 Tracking：字间距 Reset：复位 Edit Text:重置
+路径文字特效
+1、Ctrl+N新建合成（背景为深红色）。
+2、Ctrl+Y新建固态层（黑色，施加文字特效）。
+3、建立文字特效：右击黑色固态层/Effect/Text/Path Text输入文字
+Information：信息
+Path Options 路径属性
+Shape Type 形状类型、（Bezier贝塞尔控制、Circle圆环控制、
+Loop循环控制、Line直线控制）、Control Points控制点设置 Custom Path常用路径、Reverse Path反转路径。
+Fill and stroke填充和描边
+Character字体设置（Size字号、Tracking字间距、Kerning克恩间距、Orientation方向设置、Horizontal Shear水平倾斜、Horizontal Scale水平大小、Vertical Scale垂直设置）
+Paragraph段落设置（Alignment对齐方式、Left Margin左缩进）
+Advanced高级设置
+Visible Characters 可见字幕
+Jitter Settings抖动设置（Baseline Jitter Max基本底线进行抖动、Kerning Jitter Max基本水平抖动、Rotation Jitter Max旋转抖动、Scale Jitter Max文字缩放抖动）
+
+5、AE抠像的使用
+Effect/Keying键控
+Color Difference Key色彩差异键控（有些没有） Color Key色彩键控 Color Range色彩范围
+Linear Color Key线性色彩键控 Luma Key亮度键控 Color Tolerance相近颜色
+Edge Thin边缘收缩 Edge Feather边缘羽化
+
+6、AE路径文字的制作                                                          1、 1、Ctrl+N新建合成，进行命名，设置播放时间为10秒。
+2、 导入一图片做为背景。
+3、 新建文字层（普通文字），输入文字。
+4、 在文字层上用钢笔工具描画一条弯曲的路径。
+5、 在时间线上展开文字层的属性，Text/Path options路径属性，再次展开，在Path相应的选择中选择Mask1路径，可以看到文字已移到了路径上。
+6、 设置Perpendicular To Path为Off。
+7、 打开First Margin选项前的码表，设置动画，施加关键帧，第0秒为595，第2秒为177，第4秒为-122，第6秒为-581。（数值仅供参考）
+8、 为文字添加辉光和阴影：
+Effect/Perspective/Drop Shadow（阴影）
+Effect/Stylize/Glow（辉光）
+9、 渲染输出
+
+AE蒙版动态文字的制作
+1、 Ctrl+N新建合成。
+2、 Ctrl+Y新建黑色固态层。
+3、 施加基本（Basic）文字特效，输入文字，文字设为“fill only”、白色，并且无限放大。
+4、 在Position上施加关键帧，从大到小。
+5、 插入动态背景。
+6、 选中动态素材None/Alpha Matte“Black”。
+7、 选中两个图层，Ctrl+D复制两个完全相同的图层。
+8、 选择上层固态层，特效文字设为Stroke only形式。
+9、 选中上层动态素材层施加特效Color Correction调色（在AE6.5中是Effect/Adjust）/Brightness&Contrast高度与对比度。
+10、 加大亮度、对比度值，并且加大描边的值。
+11、 渲染输出。
+
+7、AE特效中的产生及扭曲
+Effect/Generate（这在AE7.0以上版本中，在AE6.5中是Effect/render）产生
+4—Color Gradient四色渐变 Advanced Lightning高级闪电 Audio Spectrum声谱 Audion Waveform声波 Beam光束 Cell Pattern单元图案
+Checkerborad棋盘格 Circle圆形 Ellipse椭圆 Eyedropper Fill滴管填充 Fill填充 Fractal分形
+Grid网格 Lens Flare镜头光斑 Lightning闪电 Paint Bucket油漆桶 Radio Waves电波 Ramp渐变
+Scribble涂写 Stroke描边 Vegas勾画 Write—on书写
+Effect/Distort扭曲
+Bezier Warp贝塞尔曲线弯曲 Bulge凸凹镜 Corner Pin边角定位 Displacement Wap置换贴图 Liquify液化 Magnify放大
+Mesh Warp网格变形 Mirror镜像 Offset位移 Optics Compensation镜头变形 Polar Coordinates极坐标转换 Reshape变形
+Ripple波纹 Smear涂抹 Spherize球面化 Transform变换 Turbulent Displace剧烈置换 Twirl扭转
+Warp弯曲 Wave Warp波浪变形
+
+8、AE图片的调色
+Effect/Color Correction（这在AE7.0以上版本中，在AE6.5中是Effect/Adjust）调色
+Auto Color自动色彩 Auto Contrast自动对比度 Auto Levels自动色阶
+Brightness&Contrast亮度/对比度 Broadcast Colors广播级颜色 Change Colors转换色彩
+Change to Colors定向转换色彩 Change Mixer通道混合 Color Balance色彩平衡
+Color Balance（HLS）HLS色彩平衡 Color Link色彩链接 Color Stabilizer色彩稳定（有的没有） Colorama彩色 Curves曲线
+Equalize均衡 Exposure暴光 Gamma/Pedestal/Gain伽马/基色/增益 Hue/Saturation色相/饱和度 Leave Color色调分离
+Levels色阶 Levels（Individual Contronls）个体控制 Photo Filter照片滤镜 PS Arbitrary Map映像 Shadow/Highlight阴影/高光
+Tint染色
+
+9、AE运动文字的制作{（和特效问子有区别，做动画）（常和矢量画笔一块使用，左手写字效果较好）}
+1、 Ctrl+N新建合成，PAL D1/DV形式，大小为720*576，时长为5秒。
+2、 Layer/New/Text（直接单击工具栏上的文字工具也可以），在合成窗口中输入“以德为本言而有信”的一些字样。在Character面板中设置文字的字体、大小、颜色、字间距、位置等。
+3、单击文字层前面的小三角，展开Text，单击打开“Animate”后，弹出的菜单中选择“Opacity（不透明度）、为其添加一个Animator动画，设置Opacity为0%，展开Range Selector1，在第0帧时打开Offset前的码表，设置动画如下：第0秒为0%，第2秒为100%。
+4、单击Animator1右侧的Add，选择Property/Scale（缩放），并将下方出现的Scale设置为1500%。
+5、单击Animator1右侧的Add选择Property/Rotation（旋转），设置其反转2周，即“-2*0.0”。
+6、 单击“Text”后方的“Animate”，在弹出的菜单中选择“Anchor Point”添加一个Animator2，并且设置为0，-17。
+7、 添加一个画面延续和倒角效果：
+（1）Effect/Time/Echo（画面延续），Echo特效在层的不同时间对前后帧进行混合，产生拖影或动感模糊的效果。
+（2）Effect/Perspective/Bevel Alpha（倒角）。
+8、 Ctrl+Y新建红色固态层，并用矩形遮罩工具画出一个矩形遮罩。
+9、在时间线上展开固态层，按下快捷键M，出现Mask1选择，打开后面的Inverted开关，反转Mask，并将其拖至最底层。
+10、 渲染输出。
+
+10、AE中的杂点和颗粒特效（也翻译 噪波和颗粒）
+Noise&Grain杂点和颗粒
+Add Grain增加颗粒 Dust&Scratches梦尘与划痕 Fractal Noise分形噪波 Match Grain条形颗粒
+Median中值 Noise噪波 Noise Alpha:Alpha噪波 Noise HLS：HLS噪波
+Noise HLS Auto：自动HLS噪波 Remove Grain降噪
+
+11、仿真特效（也翻译模拟特效）
+Simulation仿真
+Card Dance卡片舞蹈 Caustics折射反射 Foam 汽泡Partcle Playground粒子运动场
+Shatter爆炸Wave World波纹（当然还有很多，以后会添上……）
+音频特效
+
+12、Audio音频
+Backwards倒放 Bass&Treble低音和高音 Reverb回声 Delay延迟
+Stereo Mixer立体声混合 Flange&Chorus变调和合声 Tone音质 High—Low Pass高低音过滤 Modulatox调节器 Parametric EQ：EQ参数
+
+13、通道特效
+Channel通道
+Alpha Levels：Alpha色阶 Arithmetic运算 Blend混合 Calculations计算
+Channel Conbiner通道混合 Compound Arithmetic复合计算 Invert反转 Minimax扩亮扩暗
+Remore color Matting删除蒙版颜色 Set Channels设置通道 Set Matte设置蒙版
+Shift Channels转换通道 Solid Composite固态合成
+
+14、AE中模糊与锐化及透视特效
+Effect/Blur&Sharpen模糊与锐化
+Box Blur立方体模糊 Channel Blur通道模糊 Compound Blur混合模糊我 Directional Blur方向模糊 Past Blur快速模糊 Gaussian Blur高斯模糊
+Lens Blur镜头模糊 Radial Blur径向模糊 Reduce Interlace Flicker消除交错闪烁 Sharpen锐化 Smart Blur智能模式 Unsharp Mask反遮罩锐化
+Effect/Perspective透视
+3D Glasses：3D眼镜 Basic 3D：基本三维 Bevel Alpha：Alpha倒角 Bevel Edges：边缘倒角 Drop Shadow：投影 Radial Shadow径向投影
+
+15、AE中常用的快捷键
+新建项目：Ctrl+Alt+N 项目设置：Ctrl+Shift+K
+添加素材：Ctrl+I 新建合成：Crtl+N
+合成设置 ：Ctrl+K 背景颜色：Ctrl+Shift+B
+输出影片 ：Ctrl+M 跳转到某时间:Ctrl+G
+到工作区开始：Home 到工作区结束：End
+新建文字层：Ctrl+Alt+Shift+T 新建固态层：Ctrl+Y
+特效控制 ：F3 显示标尺：Ctrl+R
+开始工作区域 ：B 结束工作区域：N
+工具箱：Ctrl+/ 信息调板：Ctrl+2
+时间控制面板：Ctrl+3 音频调板：Ctrl+4
+特效及预设面板：Ctrl+5 字符调板：Ctrl+6
+段落调板：Ctrl+7 绘画调板：Ctrl+8
+笔刷技巧调板：Ctrl+9 激活合成项目：Ctrl+0
+激合渲染队列 ：Ctrl+Alt+0 位置：P
+缩放：S 旋转：R
+不透明：T 显示关键帧：U
+满屏显示：Ctrl+Alt+F 选择工具：V
+抓手工具：H（空格） 缩放工具：Z
+旋转工具：W 照相机工具：C
+轴心点工具：Y 矩形遮罩工具：Q
+钢笔工具：G 文字工具：Ctrl+T
+画笔工具：Ctrl+B 图章工具：Ctrl+B
+橡皮工具：Ctrl+B 放大：Ctrl+“+”
+缩小：Ctrl+“-” 属性：T
+修改固态层：Ctrl+Shift+Y 返回：Ctrl+Z
+还原：Ctrl+Shift+Z 素材的入点：Alt+“[”
+素材的出点：Alt+“]” 剪切：Shift+Ctrl+D
+复制图层：Ctrl+D
+多层拼合：Ctrl+Shift+C
+设置默认帧速率：Ctrl+Alt+Shift+K
+
+16、窗口组成元素
+菜单栏、合成窗口、工具栏、信息窗口/音乐编辑窗口、项目窗口/特效窗口、时间线窗口、特效及预设窗口。
+菜单栏
+File（文件）、Edit（编辑）、Composition（合成）、Layer （图层）、Effects（特效）、Animation（动画）、View（视图）、Window（窗口）、Help（帮助）
+Project项目面板
+项目面板是用来导入和管理合成文件的一个窗口，在这个窗口中，可以清楚地看到每个文件的类型、尺寸大小、时间长短、文件路径等信息。
+Tools工具栏
+工具栏提供了对合成窗口中的对象进行操作的各种工具。
+注：AE是作影视特效处理，功能依附于各种插件，而对工具则用的不多，所以工具栏中的工具会少些。
+工具栏各按扭
+选择工具：V 抓手工具：H(空格) 缩放工具：Z 旋转工具：W
+照相机工具：C 轴心点工具：Y 矩形遮罩工具：Q 钢笔工具：G 文字工具：Ctrl+T 画笔工具：Ctrl+B 图章工具: Ctrl+B 橡皮工具: Ctrl+B
+自身坐标系统模式 世界坐标系统模式 视图坐标系统模式
+Effect Controls特效窗口
+特效窗口是用来控制特效参数调节的一个窗口，所有的参数调节都可以在此完成，并且能够记录参数关键帧。
+Timeline时间线窗口
+是AE7.0效果合成的最重要窗口之一，可以调整素材层在合成图像中的位置、素材长度、叠加方式、合成图像的范围以及层的动画和各种效果。
+Composition（comp）合成窗口：显示合成的最终效果。
+
+17、AE常见术语及基础参数设置
+AE新建的时候是一个工程文件，其实是一个工程目录，之中可以包含多个工程信息，如视频、音频、图片等，要为这些素材放置在一个合适的文件夹里，这样素材的链接才不会丢失。
+新建工程文件：File/NewProject（Ctrl+Alt+N）
+新建影片剪辑：Composition/New Compsition（Ctrl+N）
+相关参数
+Composition Name 影片剪辑名字 Basic基础面板
+Advanced高极面板 Preset预设
+Width宽度 Height高度
+Pixel Aspect Ratio像素宽高比 Fram Rate 帧速率
+Resolution分辨率 Star TimeCode开始时间帧
+Duration结束时间帧
+
+18、AE的基本操作
+导入素材：
+1、在项目窗口中双击
+2、File/Import/File（Ctrl+I）
+新建固态层：Layer/New/Solid （Ctrl+Y）
+修改：Layer/Solid Settings（Ctrl+Shift+Y）
+输入文字：Effect/Txet/Basic Text
+返 回：Ctrl+Z
+向 前：Ctrl+Shift+Z
+修改影片：Composition/Composition Settings（Ctrl+K）
+
+19、AE的初始化设置
+帧的速度：AE7.0初次装载时，帧速主要为30 fps（每秒30帧），这是NTSC制式的帧速率，而国内使用的统一制式为PAL制式，即25fps（每秒25帧），因此需要设置一个默认的帧速率。
+操作：File/Project Settings（Ctrl+Alt+Shift+K）/Time Code Bace
+当我们在项目窗口中调入序列图片时，也要设置其帧速率
+操作：Edit Preferences/Import（静态图片设置播放速度）
+Preferences的其它设置
+General：设置返回步数，默认为20
+Output：输出时的虚拟空间，选择硬盘空间最多的
+输出模板设置
+为了提高渲染的效率，避免重复设置，通常我们会将输出的方式设定为统一的模板。
+操作：Edit/Templates/Render Settings（渲染设置）
+将其均设为Best Settings
+单击“Edit”弹出一对话框，其参数如下：
+Quality（渲染质量Best）
+Resolution（渲染分辨率Full）
+Field Render（场渲染）：
+Upper Field First（上场优先）
+Lower Field First（下场优先）
+
+20、层的基本操作
+展开素材层前面的小三角，再次展开Transform前面的小三角，可以看到层的5个基本属性操作，即Anchor Point（轴心点）、Position（位置）、Scal（缩放）、Rotation（旋转）、Opacity（不透明度）。
+对应键盘上的5个快捷键：A、P、S、R、T
+单独按下这些键，只能打开单个属性，当按住Shift键再按这些键时，可以同时显示多个属性。
+编辑功能
+Alt键和“[”或“]”可以设备素材的入点和出点。同时按下Shift+Ctrl+D键可以把素材在当前时间标志处剪断为两段。同时按下Ctrl+D键可以复制该层。多层拼合：Ctrl+Shift+C或Layer/pre—compose。
+
+21、初识动画
+用Photoshop处理图片，导入AE中进行编辑。为各层设置动画。
+AE的动画曲线调整
+注：改变素材播放长度，右击素材/Interpret Footage/Main/在Loop中设置循环次数。
+AE的动作捕捉器使用：Window/Motion Sketch（动作捕捉器）
+项目窗口中文件设置
+在项目窗口中任意右击一个文件，会弹出一个菜单，其功能如下：
+Replace Footage（替换素材）：当我们不小心删掉了合成文件的素材或移动了素材到不同的位置时，再次打开该工程文件，合成窗口中就会以一个彩色条纹的图标来代替该素材，使用菜单命令Replace Footage/File可以重新定位该素材或更换素材。
+Reload Footage（重载素材）：如果在源文件名不变的情况下，源文件发生了变化，可以通过此命令重新装载该文件。Interpert Footage/Main可以设置素材

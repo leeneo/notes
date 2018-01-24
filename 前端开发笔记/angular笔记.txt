@@ -1,0 +1,105 @@
+概述：
+
+Angular 程序的基本组成：模块（module），组件（component）
+
+每个Shell都有一个根模块(AppModule)
+每个组件都由component.ts,component.html,component.css 三个文件；每个component都有一个装饰器函数（@Component）
+每个模块或组件文件都会export一个类，可以被其他模块或组件import，ts文件就是类的导出和引入文件；
+组件的装饰器函数（@Componet）定义自身标记（selector），templateUrl,styleUrls三部分。
+
+
+ng命令操作
+
+ng generate component login --inline-template --inline-style	-->
+
+简化:ng g c login -it -is
+
+运行：ng serve 此命令需要在项目根目录下执行（shift 右键-->在此处运行cmd）
+
+0、引用
+#usernameRef 表示引用，这里引用的就是input这个对象。
+<div>
+  <input #usernameRef type="text">
+  <input #passwordRef type="password" name="pwd" id="pwd">
+  <button (click)="onClick(usernameRef.value,passwordRef.value)">Login</button>
+</div> -->
+
+
+1、注入器通过提供商新建依赖，提供商--交付服务的配方，被关联到一个令牌；
+初始化注入器，通常用组件或者根元素中的providers数组进行注册。
+
+依赖性注入：app.module 中配置 providers: [{provide:'auth',useClass:AuthService}]，需要引入(import)AuthService
+使用时在构造中声明@Inject('auth') private service,需要import {Inject} from '@angular/core'
+任何类都可以提供注入，这是一种解耦方式，通过providers提供，通过构造注入
+@demo
+constructor( userService: UserService) { }
+
+提供商providers:[]提供服务的几种方式
+
+(1)、简单的类
+@demo
+providers:[AuthService,UserService]
+
+使用：constructor(private service:AuthService){}
+
+(2)、令牌
+@我们通常在构造函数里面，为参数指定类型，让 Angular 来处理依赖注入。该参数类型就是依赖注入器所需的令牌。
+
+providers: [ { provide: 'auth', useClass: AuthService }, { provide: 'user', useClass: UserService }, { provide: BASE_ URL, useValue: 'http:// localhost: 3000/ todos' }, AuthGuardService ]
+@tips
+providers是由provide对象组成的一个数组：
+{ provide: 'auth', useClass: AuthService }，对应类供应商
+{ provide: BASE_ URL, useValue: 'http:// localhost: 3000/ todos' }，这种形式对应值供应商
+第一个属性叫令牌，第二个属性叫定义对象 
+AuthGuardService 这是一个语法糖，等价于{provide:AuthGuardService,useClass:AuthGuardService}
+
+(3)、别名提供商
+{ provide: MinimalLogger, useExisting: LoggerService },
+
+(4)、工厂提供商：调用工厂函数新建一个依赖对象
+{ provide: HELLO, useFactory: helloFactory( 2), deps: [Greeting, HelloService] } 
+@使用这项技术，可以用包含了一些依赖服务和本地状态输入的工厂函数来建立一个依赖对象。
+helloFactory自身不是提供商工厂函数;
+真正的提供商工厂函数是helloFactory返回的函数：
+export function helloFactory( take: number) { return (greeting: Greeting, helloService: HelloService): string => { /* ... */ }; };
+
+
+2、双向数据绑定机制
+
+原理：组件中提供成员数据变量，然后模板中引用这个数据变量
+
+<!-- [{ngModel}],方括号的含义是将“=”后面当成表达式来解析而不是字符串
+[]是单向绑定，我们 在 组件 中 给 model赋 的 值 会 设置 到 HTML 的 input 控 件 中。
+[()]是双向绑定，意思， 就是说 HTML 对应 控 件 的 状态 改变 会 反射 设置 到 组件 的 model 中。
+ngModel 是 FormModule 中 提供 的 指令， 它 负责 从 Domain Model（ 这里 就是 username 或 password， 以后 我们 可以 绑 定 更 复杂 的 对象） 中 创建 一个 FormControl 的 实例， 并将 这个 实例 和 表单 的 控 件 绑 定 起来。 -->
+
+
+*ngFor指令用于迭代引用指令的元素
+For Example:
+<li *ngFor="let hero of heroes">
+heroes 是一个在模板对应组件中定义的数组或者List集合；
+
+*ngIf指令根据条件决定是否显示某元素
+For Example:
+<div *ngIf="selectedHero"></div>
+当selectedHero 存在时显示div,undefine时不显示div
+selectedHero是在组件中定义的对象。
+
+[class.css-class]="some-condition" 用于设定符合某些条件下元素的显示样式
+For Example:
+<li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" ></li>
+CSS File:.selected{}
+
+函数定义
+functionName(obj:Object):Object|Const{return Object|Const}
+functionName(参数:参数类型):返回类型{}
+
+
+cmd:ng g s serviceName  创建服务
+在向组件注入服务之前，必需先在依赖注入系统中注册此服务
+服务提供方式可以在UserComponent，AppComponent,AppModule中进行，每种方式都有各自的优缺点。
+自动注册：ng g s serviceName --module=app 创建服务时，附加--module=app 可在AppModule中注册此服务
+建议手动注册，自动注册可能会有问题
+手动注册：app.module.ts => providers:[serviceName1,serviceName2],
+*The providers array tells Angular to create a single, shared instance of HeroService and inject into any class that asks for it.
+

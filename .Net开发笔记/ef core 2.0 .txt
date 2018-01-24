@@ -1,0 +1,23 @@
+﻿目前 EF Core 的最新版本为 2.0.0-priview1-final，所以本篇文章主要是针对此版本的一些说明。
+
+注意：如果你要在Visual Studio 中使用 .NET Core 2.0 , 你需要至少 Visual Studio 2017 15.3 预览版本。
+
+安装或升级到 EF Core 2.0
+
+你可以通过以下命令来安装或者升级你目前的 .NET Core 版本。
+// 安装
+PM > install-package Microsoft.EntityFrameworkCore.SqlServer -Pre -Version 2.0.0-preview1-final
+
+// 升级
+PM > update-package Microsoft.EntityFrameworkCore.SqlServer -Pre -Version 2.0.0-preview1-final
+
+
+工具包
+// 直接修改 CSPROJ 文件
+<ItemGroup >
+   <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" 
+       Version="2.0.0" / >
+</ItemGroup >
+
+// 或者通过以下命令
+PM > update-package Microsoft.EntityFrameworkCore.Tools 
