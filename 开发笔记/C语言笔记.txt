@@ -23,8 +23,17 @@ INCLUDE=C:\COMPILER\INCLUDE；S:\SOURCE\HEADERS；编译程序将首先到C:\COM
 
 *GNU标准头文件路径
 ...\mingw32\lib\gcc\i686-w64-mingw32\版本号\include
-
+...\mingw32\i686-w64-mingw32\include
 ****************************************************************************************
 中文乱码问题解决方案
 
 1、win环境下源码用GBK保存正常，其他编码保存输出中文乱码
+
+VS code 安装c++ Intellisense 插件
+配置c_cpp_properties.json:
+            "includePath": [
+                "/usr/include",
+                "/usr/local/include",
+                "C:\\Program Files\\mingw-w64\\i686-7.2.0-posix-dwarf-rt_v5-rev1\\mingw32\\i686-w64-mingw32\\include",
+                "${workspaceRoot}"
+            ],
