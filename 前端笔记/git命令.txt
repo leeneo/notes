@@ -1,0 +1,97 @@
+git命令
+
+*初次使用-配置*
+git-bash|bash:严格区分大小写
+#设置账户
+$ git config --global user.name "your name"
+$ git config --global user.email "@mail.com"
+#github.com 建仓
+#github.com 添加ssh key
+$ ssh-keygen -t rsa -C "name@mail.com"
+$ ssh -T git@github.com   验证keygen结果
+#将生成的.pub(.git目录中) 文件的所有内容添加进github.com/settings--> ssh key content 标题随意
+
+#报错：Permission denied (publickey) 
+解决方案：git账户添加公共ssh key
+settings-->生成ssh key-->title:id_rsa.pub,
+content: 执行 cat ~/.ssh/id_rsa.pub命令，复制输出内容到content 即可(需要本地已经生成id_rsa.pub文件，如无，
+先执行 ssh-keygen -t rsa 命令，
+再执行 cat ~/.ssh/id_rsa.pub 命令
+最后     ssh -T git@github.com 确认结果)。
+cd ~/.ssh
+$ ls 查看是否有id_rsa（私钥）和id_rsa.pub（公钥）两个文件
+
+md repos-->cd repos
+git init 初始化
+git add 1.txt/. 添加指定或者所有文件到预仓库
+git commit -m "test" 将预仓文件，提进仓库
+git remote add origin ssh_url|https
+git push origin master
+#有时需要输入账户用户名，密码
+[rejected]错误解决方法(当git仓中已有代码时，从其它本地分支推送就会报此错误)：
+1，git push origin -f 强推覆盖远程分支
+2，git fetch =>git merge;这两句等价于git pull.
+git pull:refusing to merge unrelated histories错误:
+git pull origin aaa --allow-unrelated-histories
+
+不同分支推送远程仓合并案例：
+有本地两个分支aaa,bbb；关联到github上同一个仓：aaa.git.
+aaa,bbb的分支名都叫<aaa>,aaa有一个本地文件a.txt(内容：aaa);bbb有一个本地文件b.txt(内容：bbb);
+aaa先使用git push origin aaa 推送到远程仓。
+bbb无法直接push,需要先pull,这里拉取远程仓的内容到本地有两种方式：
+1，git pull origin aaa --allow-unrelated-histories
+2，git fetch origin aaa=>git merge
+结果：bbb:b.txt=>aaa bbb
+bbb:git push origin aaa=>远程aaa:a.txt=>aaa bbb
+aaa:修改a.txt=>ccc ddd
+aaa:push origin aaa=>提示CONFLICT 冲突。
+修改a.txt=>ccc ddd
+aaa:git add a.txt=>git commit -m '1'
+aaa:git push origin aaa=>成功=>远程aaa:a.xt=>ccc ddd
+
+cmd-->bash等价于git bash;不过不能复制文本
+
+从远程仓拉取数据
+git pull origin master --allow-unrelated-histories=>等价于git fetch origin master->git merge（相对安全）
+ 
+
+本地更新到远程仓
+git push origin webs 更新到远程分支 webs
+git pull origin webs 从远程webs拉取更新
+git pull origin :aaa 本地新建分支(aaa)
+
+git push origin --delete bname 删除远程分支
+git push origin :aaa 推送时不指定本地分支，则删除远程分支aaa，等价于 push --delete
+
+git remote -v 查看远程仓
+git remote rename old new 修改关联的远程仓
+git remote remove origin 移除远程仓
+git branch --set-upstream devtest origin/devtest 关联到远程分支
+
+
+管理分支
+建仓时 master是默认分支，建议在其他分支上开发，完成后合并回主分支
+git branch 查看所有分支
+git branch bn 列出或创建分支 bn
+git checkout -b  bn 创建并切换到分支 bn
+git checkout bn 切换到分支bn
+git branch -d c 删除分支 c
+
+.gitignore(windows下建.gitignore.)
+管理规则
+/mtk/ 过滤整个文件夹
+*.zip 过滤所有.zip文件
+/mtk/do.c 过滤某个具体文件
+!/mtk/one.txt 不过滤文件
+(
+# 此为注释
+/mtk #注释会被git忽略
+!/mtk/one.txt
+ )只管理 one.txt
+*一旦push之后，新加的过滤规则就无效了，所以要在push之前添加规则
+
+vim模式
+输入i或者insert键进入文本编辑模式
+按esc回到命令模式，键入：wq 保存并退出；键入:w 保存不退出，:q 退出。
+放弃修改并退出：:q!
+放弃修改不退出：:e!
