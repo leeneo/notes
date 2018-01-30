@@ -8,8 +8,8 @@ ctrl+K+C:注释选中行
 ctrl+K+U:取消注释
 alt+shift+f10:自动引入缺失类命名空间
 ctrl+j:代码 自动补全
-ctrl+K+C:注释选中行
-ctrl+K+U:取消注释
+ctrl+K+C|ctrl+e+c:注释选中行
+ctrl+K+U|ctrl+e+u|z:取消注释
 Ctrl+J / Ctrl+K,L: 列出成员
 Shift+Alt+Enter: 切换全屏编辑
 alt+上下方向键，代码上移/下移
@@ -20,3 +20,11 @@ ctrl+m+g:控制器/视图之间切换
 ctrl+K+D:格式化文档*（分配为全局：ctrl+e+d）
 ctrl+k+f:格式化当前行
 ctrl+m+o:折叠到定义（可以折叠js代码）
+
+
+C# Interactive(c# 交互)-vs->视图->其他窗口->c#->交互
+可以以脚本的方式执行自己开发的dll
+命令：#r "dll Path" enter
+
+代码模块化：新建D:\*.csx=>#r "D:\*.dll"=>#load "D:\*.csx" 
+
