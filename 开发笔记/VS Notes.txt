@@ -20,7 +20,7 @@ ctrl+m+g:控制器/视图之间切换
 ctrl+K+D:格式化文档*（分配为全局：ctrl+e+d）
 ctrl+k+f:格式化当前行
 ctrl+m+o:折叠到定义（可以折叠js代码）
-
+ctrl+shift+f:在文件（解决方案）中查找
 
 C# Interactive(c# 交互)-vs->视图->其他窗口->c#->交互
 可以以脚本的方式执行自己开发的dll
