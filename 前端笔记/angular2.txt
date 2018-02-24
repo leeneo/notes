@@ -1,0 +1,90 @@
+angular
+ng new helloAngular -->cd helloangular
+--> cnpm install --> ng serve -o | --open 
+ng set -g packageManager=cnpm --global
+@：ng serve 不带 -o 指令貌似打开速度更快一点
+
+更新 Angular CLI  
+全局：npm uninstall @angular/cli
+npm cache verify (避免使用 cache clean --force)
+本地Packages：
+rd node_modules dist
+npm install --save-dev @angular/cli@latest
+
+使用为aot预编译之前，安装npm依赖：
+cnpm install @angular/compiler-cli        @angular/platform-server --save
+
+使用@angular/compiler-cli包中提供的ngc编译器来代替TypeScript编译器（tsc）
+ngc 配置-->新建tsconfig.aot.json(拷贝原tsconfig.json代码)-->修改：compilerOptions{“module”:“es2015”,"outDir": "./aot-src"},
+ "angularCompilerOptions": {
+   "genDir": "aot",
+   "skipMetadataEmit" : true
+ }@:outDir属性告诉编译器把编译文件保存在aot-src目录下
+执行-->"node_modules/.bin/ngc" -p tsconfig-aot.json
+@切换回JIT模式：
+"node_modules/.bin/tsc" -p tsconfig.json
+linux下不用带引号
+
+ngc (AOT)编译：html+css+js的纯静态环境，会把所有的ts类文件转译为js文件放在ts文件同目录下。开发时不要用这种，因为一旦ngc了会出现n多静态文件。
+AOT的优点：代码构建期间编译，所有静态文件是编译好了，浏览器渲染更快；体积小，无额外代码；
+JIT：运行期间编译，每次运行都会编译一次；
+总的来说：AOT，纯静态文件；JIT 封装的静态文件；
+
+生产：ng b -t --aot
+
+报错集锦：
+1，global cli is greater than local cli 
+>>:更新本地CLI版本--> cnpm install --save-dev @angular/cli@latest
+2，instance of the wrong class
+>>:npm ls @ngtools/webpack
+-->cd 目录 node_modules
+-->rd /q /s @ngtools/webpack@x.x.x old版本
+
+即时（JiT）编译器动态引导，一般在进行开发调试时，默认采用这种方式
+//main.ts
+ import  './polyfills.ts';
+//  连同Angular编译器一起发布到浏览器
+ import {  platformBrowserDynamic }  from  '@angular/platform-browser-dynamic';
+ import {  enableProdMode }  from  '@angular/core';
+ import {  environment }  from  './ements/environment';
+ import {  AppModule }  from  './app/';
+if  (environment.production) {
+   enableProdMode();}
+//Angular编译器在浏览器中编译并引导该应用
+platformBrowserDynamic().bootstrapModule(AppModule);
+
+（Ahead-Of-Time，AoT）进行静态引导，静态方案可以生成更小、启动更快的应用，建议优先使用它，特别是在移动设备里或高延迟网络下.
+//  不把编译器发布到浏览器
+ import {  platformBrowser }  from  '@angular/platform-browser';
+//  静态编译器会生成一个AppModule的工厂AppModuleNgFactory
+ import {  AppModuleNgFactory }  from  './app.module.ngfactory';
+ //  引导AppModuleNgFactory
+platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+
+ng generate component name
+模板文件，样式文件，类文件分开放置
+
+简写：ng g c -it -is name
+等同于=>ng g c --inline-tempalte --inline-style
+模板代码和css代码入到ts类中。
+
+DI就是将对象，服务或者常量通过providers提供，在构造中注入；
+注入方式有两种：
+1，内部引用对象，providers提供，构造中注入
+import { AuthService };
+providers:[AuthService]
+constructor(private service:AuthService)
+2，通过令牌方式，在构造中注入constructor(@Inject('auth') private service) { }
+令牌声明/app.module.ts
+providers:[
+{provide: 'auth',userClass:AuthService},    { provide: BASE_URL,  useValue:   'http://localhost:3000/todos' },
+UserService]
+auth,BASE_URL就是声明的令牌
+useClass 形式叫“类供应商”
+userValue 形式叫“值供应商”
+*值供应商一般用来设置运行期常量，比如网站的baseUrl,logo等
+
+引入第三方JS类库
+1,包中已有*.d.ts后缀的类型定义文件，直接使用npm i --save packageName
+2,没有.d.ts文件，npm i --save packageName=>npm i @types/packageName --save-dev(意思是在@types/搜索安装类 型定义文件)
+3，找不到类型定义文件，需要手动添加类型定义：src/typings.d.ts=>declare module 'packageName'=>组件中  import * as friendName(别名) from 'packageName'=> friendName.method()
