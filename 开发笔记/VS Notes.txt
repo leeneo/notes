@@ -4,10 +4,6 @@
 
 alt+shift+f10:自动引入缺失类命名空间
 ctrl+j:代码 自动补全
-ctrl+K+C:注释选中行
-ctrl+K+U:取消注释
-alt+shift+f10:自动引入缺失类命名空间
-ctrl+j:代码 自动补全
 ctrl+K+C|ctrl+e+c:注释选中行
 ctrl+K+U|ctrl+e+u|z:取消注释
 Ctrl+J / Ctrl+K,L: 列出成员
