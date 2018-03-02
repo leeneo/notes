@@ -16,7 +16,7 @@ ionic cordova run android --device 在android设备上调试（需要启用开�
 生产构建：ionic cordova run|build android --prod --release
 *这会将您应用程序的代码缩小为Ionic的源代码，并从APK中删除任何调试功能。将应用程序部署到Google Play商店时通常会使用此功能。
 
-apk 签名：keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+apk 签名：keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -validity 10000 -alias my-alias
 您将首先被提示为密钥库创建密码。然后，回答其他好的工具问题，当完成所有工作时，应该在当前目录中创建一个名为my-release-key.jks的文件。
 注意：确保将此文件保存在安全的地方，如果您丢失了文件，您将无法将更新提交到您的应用程序
 
@@ -24,7 +24,7 @@ apk 签名：keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysiz
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks android-release-unsigned.apk my-alias
 
 zipalign 工具优化apk(adt sdk\sdk\build-tools\26.x.x):
-zipalign -v 4 android-release-unsigned.apk HelloWorld.apk
+zipalign -v 4 android-release-unsigned.apk(要优化的apk) HelloWorld.apk(优化后的apk)
 
 apksigner 验证apk是否已签名(路径同zipalign)：
 apksigner verify HelloWorld.apk
@@ -38,7 +38,8 @@ gradle --stop 停止现有的进程
 禁用gradle daemon 在C:\users\administrator\.gradle\下创建gradle.properties 文件=>
 添加org.gradle.daemon = FALSE
 
-cordova build android --release 报错处理
+报错处理
+cordova build android --release 
 *Gradle Daemon 初始化错误（虚拟机内存不够）： 
 error occurred during initialization of VM Could not reserve enough space for 2097152KB object heap
 方法1，gradle 用户目录：c:\users\administrator\.gradle目录下=>gradle.properties（没有就新建）=>org.gradle.java.home=C:\\Program Files\\Java\\jdk1.8.0_144
