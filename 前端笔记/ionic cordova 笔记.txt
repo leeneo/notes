@@ -28,3 +28,12 @@ zipalign -v 4 android-release-unsigned.apk HelloWorld.apk
 
 apksigner 验证apk是否已签名(路径同zipalign)：
 apksigner verify HelloWorld.apk
+
+Gradle Daemon 守护进程：在jvm上运行
+gradle --status 运行状态
+gradle --profile
+gradle --daemon start the Daemon if not running
+gradle --stop 停止现有的进程
+
+禁用gradle daemon 在C:\users\administrator\.gradle\下创建gradle.properties 文件=>
+添加org.gradle.daemon = FALSE
