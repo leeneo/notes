@@ -1,0 +1,30 @@
+1,npm install -g ionic cordova
+2,环境配置：安装java jdk,android sdk(adt套件);配置JAVA_HOME;CLASSPATH;ANDROID_HOME;安装android studio;
+3,配置GRADLE_HOME;PATH添加%配置GRADLE_HOME%\bin;(路径在android studio\gradle目录下)
+
+START PROJECT:
+ionic 是基于 angularjs 的扩展框架；
+cordova 是一套处理javascript 与原生移动设备通信的接口api;
+
+ionic start appname template --command=>ex:ionic start helloApp tabs --cordova
+*ionic start --list 查看可供使用的模板
+
+cd helloApp =>ionic serve 在浏览器中运行当前项目
+
+ionic cordova run android --device 在android设备上调试（需要启用开发者模式&usb调试）
+
+生产构建：ionic cordova run|build android --prod --release
+*这会将您应用程序的代码缩小为Ionic的源代码，并从APK中删除任何调试功能。将应用程序部署到Google Play商店时通常会使用此功能。
+
+apk 签名：keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+您将首先被提示为密钥库创建密码。然后，回答其他好的工具问题，当完成所有工作时，应该在当前目录中创建一个名为my-release-key.jks的文件。
+注意：确保将此文件保存在安全的地方，如果您丢失了文件，您将无法将更新提交到您的应用程序
+
+要签署未签名的APK，请运行也包含在JDK中的jarsigner工具:
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks android-release-unsigned.apk my-alias
+
+zipalign 工具优化apk(adt sdk\sdk\build-tools\26.x.x):
+zipalign -v 4 android-release-unsigned.apk HelloWorld.apk
+
+apksigner 验证apk是否已签名(路径同zipalign)：
+apksigner verify HelloWorld.apk
