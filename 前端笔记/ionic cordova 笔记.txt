@@ -47,4 +47,7 @@ org.gradle.jvmargs=-Xmx512m
 
 方法2，设置系统环境变量：_JAVA_OPTIONS：-Xmx512M
 
+方法3，android studio=>file=>project structure=>
+SDK Location:adt目录\sdk;勾选use embeded JDK
+
 然后重启编辑器

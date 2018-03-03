@@ -1,0 +1,15 @@
+System.Configuration.ConfigurationManager	读取计算机，应用，用户的配置信息
+
+static string host = ConfigurationManager.AppSettings["WebApi"];
+
+Web.config：<add key="WebApi" value="http://180.142.104.4:81/"/>
+
+
+通过IIS部署：
+1，首先看IIS中网站功能视图页是否有asp.net 相关功能；
+若无：控制面板=>程序和功能=>打开功能（Internet 信息服务=>万维网服务，勾选所有应用程序开发功能）
+
+2，新建网站=>基本设置=>将发布的dll和资源文件路径绑定到网站物理路径=>选择对应应用程序池（asp。net v4.0 或其他）
+
+3，绑定ip地址端口
+*可通过启用iis配置项（目录浏览）打开相应权限
