@@ -5,10 +5,10 @@ ng set -g packageManager=cnpm --global
 @：ng serve 不带 -o 指令貌似打开速度更快一点
 
 更新 Angular CLI  
-全局：npm uninstall @angular/cli
+全局：npm uninstall -g @angular/cli
 npm cache verify (避免使用 cache clean --force)
 本地Packages：
-rd node_modules dist
+rimraf|rd node_modules
 npm install --save-dev @angular/cli@latest
 
 使用为aot预编译之前，安装npm依赖：
