@@ -34,15 +34,15 @@ MVC ViewImports                                   viewimports
 MVC ViewStart                                     viewstart
  Web/ASP.NET
 
-dotnet- restore 命令 通过 读取. NET Core 项目 中 project. json 配置文件 中的 内容， 通过 NuGet 工具 下载 和 配置 当前. NET Core 项目 的 依赖 库 和 项目。
+dotnet restore 命令 通过 读取. NET Core 项目 中 project. json 配置文件 中的 内容， 通过 NuGet 工具 下载 和 配置 当前. NET Core 项目 的 依赖 库 和 项目。
 为了 让 NuGet 能够 下载 项目 需要 的 依赖 库， 需要 为 NuGet 工具 指定 下载 源。 下载 源 通常 保存 在 nuget. config 文件 中， 在 线 的 nuget. org 源 作为 默认 源 已经 保存 在 配置文件 中。 开发 人员 也可以 根据 需要 使用- source 参数 指定 自己的 NuGet 下载 源。- packages 参数 用来 指定 依赖 库 的 物理 位置， 如果 没有 指定- packages 参数， 那么 就会 使用. NET Core 全局 缓存 位置。 如果 用 户名 是 user1， 默认 情况下 这个 位置 在 Linux 和 OS X 操作系统 的/ home/ user1 路径 下， Windows 操作系统 的C：\ Users\ user1 路径 下。
 
-dotnet- run 命令 首先 会 编译 源 代码， 生成 输出 程序， 然后 运行 这个 程序。 dotnet- run 依赖. NET Core 的 构建 功能 来 编译 源 代码， 编译 的 输出 结果 会 保存 在当 前 目录 中的 bin 子 文件夹 内。 在 一个 部署 有 多个. NET 运行时 的 计算 机上， dotnet 会 首选. NET Core 作为 运行时。 如果 需要 使用 其他. NET 框架， 那么 就要 使用 -framework 参数 来 指定。
-dotnet- run 命令 需要 在当 前项 目上 下文 环境 中 执行， 也就 是在 项目 所在 文件夹 路径 下 执行。 如果 需要 运行 一个 程序 集， 那么 需要 直接 使用 dotnet 而 不是 dotnet run， 如 dotnet my. dll。
+dotnet run 命令 首先 会 编译 源 代码， 生成 输出 程序， 然后 运行 这个 程序。 dotnet- run 依赖. NET Core 的 构建 功能 来 编译 源 代码， 编译 的 输出 结果 会 保存 在当 前 目录 中的 bin 子 文件夹 内。 在 一个 部署 有 多个. NET 运行时 的 计算 机上， dotnet 会 首选. NET Core 作为 运行时。 如果 需要 使用 其他. NET 框架， 那么 就要 使用 -framework 参数 来 指定。
+dotnet run 命令 需要 在当 前项 目上 下文 环境 中 执行， 也就 是在 项目 所在 文件夹 路径 下 执行。 如果 需要 运行 一个 程序 集， 那么 需要 直接 使用 dotnet 而 不是 dotnet run， 如 dotnet my. dll。
 
 }
 
-dotnet- build 负责 编译 项目 源 代码 和 项目 依赖 项 目的 源 代码。 编译 结果是 包含 有 中间 语言 代码 的 二进制 DLL 文件。 同时. NET Core 的 编译 功能 也会 生成 deps 文件， 用来 描述 主机 需要 什么样 的 环境 来 运行 这个 项目。 在编 译 开始 之前，. NET Core 构建 功能 将对 项目 进行 增量 安全检查。 如果 所有 的 检查 都 通过了， 那么 就 执行 增量 编译 操作。 这种 编译 只 针对 上次 编译 后 修改 的 部分 进行 编译， 编译 速度 较快。 如果 增量 检查 没有 通过， 那么 就 执行 全 量 编译。
+dotnet build 负责 编译 项目 源 代码 和 项目 依赖 项 目的 源 代码。 编译 结果是 包含 有 中间 语言 代码 的 二进制 DLL 文件。 同时. NET Core 的 编译 功能 也会 生成 deps 文件， 用来 描述 主机 需要 什么样 的 环境 来 运行 这个 项目。 在编 译 开始 之前，. NET Core 构建 功能 将对 项目 进行 增量 安全检查。 如果 所有 的 检查 都 通过了， 那么 就 执行 增量 编译 操作。 这种 编译 只 针对 上次 编译 后 修改 的 部分 进行 编译， 编译 速度 较快。 如果 增量 检查 没有 通过， 那么 就 执行 全 量 编译。
 对于 当前 项目 依赖 的 其他 需要 编译 的 项目， 必须 通过 下面 的 安全检查， 以便 确保 编译 过程 是 增量 编译： （1） 没有 使用 编译 前/ 编译 后脚 本； （2） 没有 从 PATH 指定 的 路径 中 加载 编译 工具； （3） 只 使用 已知 的 编译器 比如 C#、 VB、 FSharp 等 编译器。 如果 编译 的 是 一个 可执行 的 项目， 需要 在 项目 的 配置文件 project. json 中 包含 以下 内容，
 {
 	"compilerOptions":{
@@ -50,8 +50,8 @@ dotnet- build 负责 编译 项目 源 代码 和 项目 依赖 项 目的 源 代码。 编译 结果是 
 	}
 }
 
-dotnet- publish 命令 用来 把 当前 项目 中 需要 发布 或者 可执行 的 部分 以及 相关 的 依赖 项 打包， 使之 成为 可以 发布 的 状态。
-dotnet- publish 命令 执行 发布 动作 时， 首先 会 编译 当前 项目 并从 project. json 文件 中 读取 相关 的 依赖 项， 最后 将 全部 需要 发布 的 部分 存放 在 项目 的 bin/ publish 文件夹 内。
+dotnet publish 命令 用来 把 当前 项目 中 需要 发布 或者 可执行 的 部分 以及 相关 的 依赖 项 打包， 使之 成为 可以 发布 的 状态。
+dotnet publish 命令 执行 发布 动作 时， 首先 会 编译 当前 项目 并从 project. json 文件 中 读取 相关 的 依赖 项， 最后 将 全部 需要 发布 的 部分 存放 在 项目 的 bin/ publish 文件夹 内。
 
 其他 命令 的 详细 描述 请 参考： https:// docs. microsoft. com/ en- us/ dotnet/ articles/ core/ tools/ index。
 
@@ -85,62 +85,3 @@ workspaceRoot:项目所在目录。
 1、命令行：dotnet run-->localhost:5000
 2、vs code f5 调试
 
-dotnet 命令行添加包：
-dotnet add package Microsoft.EntityFrameworkCore.Tools
-
-ef-cli 的引入：
-在csproj文件中手动添加<DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />节点至<ItemGroup>项下。
-在项目文件中添加此条引用后，即可在该项目目录下使用dotnet ef命令。
-
-*该命令仅在添加引用的项目目录下有效。
-
-dotnet ef 命令：
-Commands:
-  database    Commands to manage the database.
-  dbcontext   Commands to manage DbContext types.
-  migrations  Commands to manage the Migrations.
-
-dotnet ef migrations add Initail	将数据模型映射成表
-dotnet ef database update		更新数据库并生成表
-
-DOTNET-EF-数据库
-Usage: dotnet ef database [options] [command]
-
-Options:
-  --no-color       Don't colorize output.
-  --prefix-output  Prefix output with level.
-
-Commands:
-  drop    Drops the database.
-  update  Updates the database to a specified migration.
-
-
-DOTNET-EF-的DbContext
-Usage: dotnet ef dbcontext [options] [command]
-
-Options:
-  --no-color       Don't colorize output.
-  --prefix-output  Prefix output with level.
-
-Commands:
-  info      Gets information about a DbContext type.
-  list      Lists available DbContext types.
-  scaffold  Scaffolds a DbContext and entity types for a databas
-
-DOTNET-EF-迁移
-Usage: dotnet ef migrations [options] [command]
-
-Options:
-  --no-color       Don't colorize output.
-  --prefix-output  Prefix output with level.
-
-Commands:
-  add     Adds a new migration.
-  list    Lists available migrations.
-  remove  Removes the last migration.
-  script  Generates a SQL script from migrations.
-
-Use "migrations [command] --help" for more information about a command.
-
-cli命令详见：https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet
-Entity Framework Core(EF Core)说明文档：https://docs.microsoft.com/en-us/ef
