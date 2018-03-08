@@ -1,34 +1,50 @@
 ﻿目前 EF Core 的最新版本为 2.0.0-priview1-final，所以本篇文章主要是针对此版本的一些说明。
 
 注意：如果你要在Visual Studio 中使用 .NET Core 2.0 , 你需要至少 Visual Studio 2017 15.3 预览版本。
+同时Powershell 要更新到3.0以上版本
+查看Powershell版本：cmd=>Powershell=>$psversiontable(.psversion)
 
 安装或升级到 EF Core 2.0
 
 你可以通过以下命令来安装或者升级你目前的 EF Core 版本。
 // 安装
-PM > install-package Microsoft.EntityFrameworkCore.SqlServer -Pre -Version 2.0.0-preview1-final
-或者 dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 2.0.0
-
+PM > install-package Microsoft.EntityFrameworkCore.SqlServer 
+或者 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 // 升级
-PM > update-package Microsoft.EntityFrameworkCore.SqlServer -Pre -Version 2.0.0-preview1-final
+PM > update-package Microsoft.EntityFrameworkCore.SqlServer
+// 查看版本
+PM > Get-Help about_EntityFrameworkCore
+cmd> dotnet ef -v
 
-// 在VS中引入EF Core cli
-PM > update-package Microsoft.EntityFrameworkCore.Tools 
-
-ef-cli 的引入：
-// 在项目文件中添加此条引用后，即可在该项目目录下使用dotnet ef命令。
+// ef-cli 的引入：
+PM > install-package Microsoft.EntityFrameworkCore.Tools 
+或者
 // 直接修改 CSPROJ 文件
 <ItemGroup >
    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" 
        Version="2.0.0" />
 </ItemGroup >
+*在项目文件中添加此条引用后，即可在该项目目录下使用dotnet ef命令。
 
 EF Core的.NET Core CLI工具还需要一个名为Microsoft.EntityFrameworkCore.Design的单独包:
-dotnet add package Microsoft.EntityFrameworkCore.Design
+PM > install-package Microsoft.EntityFrameworkCore.Design
+||dotnet add package Microsoft.EntityFrameworkCore.Design
  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
  </ItemGroup>
+
+创建新数据库(Codefirst)
+PM >Add-Migration MyFirstMigration
+PM >Update-Database
+*如果将来对模型进行了更改，则可以使用该Add-Migration命令对新迁移进行支架，以便对数据库进行相应的模式更改。一旦检查了脚手架代码（并进行了必要的更改），就可以使用该Update-Database命令将更改应用到数据库。
+EF使用__EFMigrationsHistory数据库中的表来跟踪哪些迁移已经应用到数据库。
+
+逆向工程：从已有数据库创建模型
+PM > Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -verbose
+*通过将-Tables参数添加到上面的命令中，您可以指定要为其生成实体的表。例如-Tables Blog,Post;
+*PM默认项目要选择对应的构建模型的项目，且解决方案不能有错误，否则build failed;
+
 
 dotnet ef 命令：
 *该命令仅在添加引用的项目目录下有效。
@@ -87,13 +103,3 @@ EF Core 创建数据库：https://docs.microsoft.com/en-us/ef/core/get-started/f
 EF Core Git sample:
 https://github.com/aspnet/EntityFramework.Docs/tree/master/samples/core/GetStarted/FullNet/ConsoleApp.NewDb
 
-创建新数据库(Codefirst)
-PM >Add-Migration MyFirstMigration
-PM >Update-Database
-
-*如果将来对模型进行了更改，则可以使用该Add-Migration命令对新迁移进行支架，以便对数据库进行相应的模式更改。一旦检查了脚手架代码（并进行了必要的更改），就可以使用该Update-Database命令将更改应用到数据库。
-EF使用__EFMigrationsHistory数据库中的表来跟踪哪些迁移已经应用到数据库。
-
-逆向工程：从已有数据库创建模型
-
-PM >Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServe
