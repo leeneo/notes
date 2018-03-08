@@ -4,19 +4,20 @@
 
 alt+shift+f10:自动引入缺失类命名空间
 ctrl+j:代码 自动补全
-ctrl+K+C|ctrl+e+c:注释选中行
-ctrl+K+U|ctrl+e+u|z:取消注释
+ctrl+K+C|ctrl+e+z(自定义):注释选中行
+ctrl+K+U|ctrl+e+c(自定义):取消注释
 Ctrl+J / Ctrl+K,L: 列出成员
 Shift+Alt+Enter: 切换全屏编辑
 alt+上下方向键，代码上移/下移
 ctrl+m+l:展开/折叠所有代码
-ctrl+m+t:折叠当前行
-ctrl+m+m:展开当前行
+ctrl+m+o:折叠到定义（方法头）
+ctrl+m+m:折叠/展开当前行
+ctrl+m+t:折叠当前标记（只针对html代码）
 ctrl+m+g:控制器/视图之间切换
-ctrl+K+D:格式化文档*（分配为全局：ctrl+e+d）
-ctrl+k+f:格式化当前行
-ctrl+m+o:折叠到定义（可以折叠js代码）
+ctrl+K+D|ctrl+e+d(自定义):格式化文档
+ctrl+k+f|ctrl+e+f(自定义):格式化当前行
 ctrl+shift+f:在文件（解决方案）中查找
+ctrl+shift+l|ctrl+shift+d(自定义):删除当前行  *ctrl+x 也行，只不过会覆盖剪切板内容
 
 C# Interactive(c# 交互)-vs->视图->其他窗口->c#->交互
 可以以脚本的方式执行自己开发的dll
