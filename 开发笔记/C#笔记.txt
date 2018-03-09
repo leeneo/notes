@@ -28,6 +28,13 @@ http://msdn.microsoft.com/library/chs/default.asp?url=/library/CHS/vbcon/html/vb
 #region 大纲功能折叠，使在大纲功能预览时，代码看起来更简洁
 
 
+/* 异步函数的执行方式：
+*  public async Task ExecAsync(){}
+*  1，await x.ExecAsync()（将所在函数声明为async）
+*  2，x.ExecAsync().Wait()
+*/
+
+
 
 
 
