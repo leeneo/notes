@@ -1,8 +1,35 @@
-public DateTime? _time=null;
+apiclient.invoke 方法 可以直接调用DAL中的查询类方法,参数是一个json 类的model。
+var BindCard = ApiClient.Invoke<List<regcard>>("DCard", "GetMemberCard", openID, false);
+T.PageSize = 10;
+                T.s_account_no = T.s_account_no;
+                 T.s_code = s_code;
+                T.s_account_no = card.s_account_no;
+                var query = ApiClient.Invoke<DataTables<MemberPrepaidDebitLog>>("DCard", "GetCardAccountLog", T);
+apiclient.get 方法通过调用api控制器来间接查询数据，参数可通过拼接字符串的方式传递
+ResponseData<List<Report_SellOut>> res = JsonConvert.DeserializeObject<ResponseData<List<Report_SellOut>>>(ApiClient.Get("/Report/SellOutTotal?" + "Bdate=" + data.Bdate + "&Edate=" + data.Edate + "&Type=" + data.Type));
+            return View(res.data);
 
+T 泛型 ，通用数据类型修饰符，实例化时必需指定具体类型
+<T> 泛型约束符，实例化时指定具体的类型
+
+public DateTime? _time=null;
 "?" 问号表示允许为空；
 
+C#中“？”有三种用法。
+1、可空类型修饰符(？)：引用类型可以使用空引用表示一个不存在的值，而值类型通常不能表示为空，例如:string str=null;是正确的。int i=null；编译器将报错。为了使值类型也可为空，可空类型出现了，可空类型使用可空类型修饰符？来表示，表现形式为T?。例：int?表示是可空的整形，DateTime?表示为可空的时间。T?其实是System.Nullable<T>（泛型结构）的缩写形式，也就意味着当你用到T？时编译器在编译时会把T？编译成System.Nullable<T>的形式，例如：int?,编译后便是System.Nullable<int>的形式。更多细节待续……。
 
+2、三元（运算符）表达式(条件:表达1？表达式2)  先判断条件表达的值是否为true,条件为真，执行表达式1；条件为假，执行表达式2。
+a=3>4?3:4;输出为4。
+a=3<4?3:4;输出为3。
+
+3、空合并运算符(？？)：用于定义可空类型和引用类型的默认值。如果此运算符的左操作数不为 null，则此运算符将返回左操作数；否则返回右操作数。 例：a??b,当a为null时则返回b,a不为空时返回a本身。空合并运算符为右结合运算符，即操作时从右向左进行组合的。如，“a??b??c”的形式按“a??(b??c)”计算
+
+
+lamda表达式=>匿名函数
+param=>param*2 等价于
+fn(int param){
+   return param*2;
+}
 * => 兰姆达表达式，可解读为“goes to”，.net 3.5的新语法。左侧是输入参数（如果有），右边包含表达式或语句块。
 
 Lambda 表达式是一种可用于创建委托或表达式目录树类型的匿名函数。通过使用 lambda 表达式，可以写入可作为参数传递或作为函数调用值返回的本地函数。Lambda 表达式对于编写 LINQ 查询表达式特别有用。
@@ -34,9 +61,10 @@ http://msdn.microsoft.com/library/chs/default.asp?url=/library/CHS/vbcon/html/vb
 *  2，x.ExecAsync().Wait()
 */
 
-
-
-
+C# 7.1(目前仅.net core 2.0 支持)：
+1,可以使用 async 关键字标记 Main 方法（应用程序入口点）。
+2,推断的元组名称。
+3,默认表达式。
 
 
 
