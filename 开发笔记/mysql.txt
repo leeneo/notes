@@ -1,0 +1,3 @@
+show databases|tables|columns							/* show */
+select FirstName,LastName from people LIMIT	 5;			/*返回结果集中从6开始的记录*/
+select FirstName,LastName from people LIMIT	 5,2;		/*返回结果集中从6开始的两条记录*/

@@ -1,0 +1,79 @@
+/*SQL 命令大全*/
+
+/*分离附加*/
+
+//附加数据库
+use master
+
+1,EXEC sp_attach_db @dbname = N'pubs', 
+@filename1 = N'c:\Program Files\Microsoft SQL Server\MSSQL\Data\pubs.mdf', 
+@filename2 = N'c:\Program Files\Microsoft SQL Server\MSSQL\Data\pubs_log.ldf' 
+此功能将在未来版本的Microsoft SQL Server中删除。避免在新的开发工作中使用此功能，并计划修改当前使用此功能的应用程序。我们建议您使用CREATE DATABASE database_name FOR ATTACH来代替
+
+2,
+CREATE DATABASE newhotel_xyjd
+ON PRIMARY (FILENAME = 'D:\data\newhotel_xyjd.mdf') 
+FOR ATTACH 
+GO
+
+//分离数据库 
+
+sp_detach_db [ @dbname= ] 'database_name'   
+
+可以使用 sp_detach_db 存储过程分离该数据库，然后使用带有 FOR ATTACH 子句的 CREATE DATABASE 重新附加。 
+sp_detach_db 'dbname'
+GO 
+CREATE DATABASE 'dbname'
+ON PRIMARY (FILENAME = 'c:\program files\microsoft sqlserver\mssql\data\archdat1.mdf') 
+FOR ATTACH 
+GO
+
+//truncate table tbname
+删除表内容，释放表空间，不删除表结构（定义）
+
+//delete from tbname
+清空表内容，保留表结构，同truncate
+
+
+/*db命令*/
+sp_helpdb 
+sp_helpdb master
+use master
+create database TestDB
+sp_renamedb 'TestDB','MyLocalDb'
+sp_helpdb MyLocalDb
+
+/*table命令*/
+use MyLocalDb
+sp_help	/*查询当前数据库中对象(表，视图等)*/
+
+create table People(
+	FirstName nvarchar(6),
+	LastName nvarchar(4),
+	Age int,
+	ID int identity (1,1),
+	Primary key (ID)
+);
+
+sp_help people;		/*查询指定表结构*/
+
+drop table People
+
+insert into People (LastName,FirstName,Age) values(N'张',N'三','29');
+insert into People (LastName,FirstName,Age) values(N'李',N'飞','29');
+insert into People (LastName,FirstName,Age) values('张1','三2','29');	/*不管是varchar还是nvarchar结构表，
+这样插入中文 显示乱码*/
+
+
+select distinct FirstName from People
+
+select * from people where id between 2 and 5;		/*返回结果集中id<=5&>=2的记录*/
+
+/*声明变量并赋值*/
+declare @Bdate varchar(20),@Edate varchar(20)
+set 
+@Bdate='2017-10-01'
+set 
+@Edate='2018-02-16'
+
+SELECT * from table where SYS_DATE >= @Bdate AND SYS_DATE <= @Edate group by REGCARD.S_CARD_TYPE,s_describe ORDER BY REGCARD.S_CARD_TYPE ASC
