@@ -1,8 +1,9 @@
 /*SQL 命令大全*/
+--代表注释
 
 /*分离附加*/
 
-//附加数据库
+--附加数据库
 use master
 
 1,EXEC sp_attach_db @dbname = N'pubs', 
@@ -16,7 +17,7 @@ ON PRIMARY (FILENAME = 'D:\data\newhotel_xyjd.mdf')
 FOR ATTACH 
 GO
 
-//分离数据库 
+--分离数据库 
 
 sp_detach_db [ @dbname= ] 'database_name'   
 
@@ -28,12 +29,6 @@ ON PRIMARY (FILENAME = 'c:\program files\microsoft sqlserver\mssql\data\archdat1
 FOR ATTACH 
 GO
 
-//truncate table tbname
-删除表内容，释放表空间，不删除表结构（定义）
-
-//delete from tbname
-清空表内容，保留表结构，同truncate
-
 
 /*db命令*/
 sp_helpdb 
@@ -42,6 +37,7 @@ use master
 create database TestDB
 sp_renamedb 'TestDB','MyLocalDb'
 sp_helpdb MyLocalDb
+
 
 /*table命令*/
 use MyLocalDb
@@ -55,19 +51,29 @@ create table People(
 	Primary key (ID)
 );
 
-sp_help people;		/*查询指定表结构*/
+sp_help people;				--查询指定表结构
 
 drop table People
 
+truncate table tbname		--删除表内容，释放表空间，不删除表结构（定义）
+
+delete from tbname			--清空表内容，保留表结构，同truncate
+
+
+/*结果集命令*/
+
 insert into People (LastName,FirstName,Age) values(N'张',N'三','29');
 insert into People (LastName,FirstName,Age) values(N'李',N'飞','29');
-insert into People (LastName,FirstName,Age) values('张1','三2','29');	/*不管是varchar还是nvarchar结构表，
-这样插入中文 显示乱码*/
+insert into People (LastName,FirstName,Age) values('张1','三2','29');		--不管是varchar还是nvarchar结构表，
+这样插入中文 显示乱码
 
 
 select distinct FirstName from People
 
-select * from people where id between 2 and 5;		/*返回结果集中id<=5&>=2的记录*/
+select * from people where id between 2 and 5;		--返回结果集中id<=5&>=2的记录
+
+
+/*存储过程*/
 
 /*声明变量并赋值*/
 declare @Bdate varchar(20),@Edate varchar(20)
