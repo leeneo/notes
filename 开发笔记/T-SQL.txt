@@ -55,6 +55,13 @@ truncate table tbname		--删除表内容，释放表空间，不删除表结构（定义）
 delete from tbname			--清空表内容，保留表结构，同truncate
 
 
+/*视图*/
+
+CREATE VIEW [dbo].[v_wx_NewOrders]
+AS
+select * from someTable1
+union select * from someTable2
+
 /*结果集命令*/
 
 insert into People (LastName,FirstName,Age) values(N'张',N'三','29');
