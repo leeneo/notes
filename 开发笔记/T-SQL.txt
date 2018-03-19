@@ -3,29 +3,24 @@
 
 /*分离附加*/
 
---附加数据库
-use master
+--分离数据库 
 
-1,EXEC sp_attach_db @dbname = N'pubs', 
+use master
+sp_detach_db [ @dbname= ] 'database_name'   
+
+--附加数据库
+
+--1,
+use master
+EXEC sp_attach_db @dbname = N'pubs', 
 @filename1 = N'c:\Program Files\Microsoft SQL Server\MSSQL\Data\pubs.mdf', 
 @filename2 = N'c:\Program Files\Microsoft SQL Server\MSSQL\Data\pubs_log.ldf' 
 此功能将在未来版本的Microsoft SQL Server中删除。避免在新的开发工作中使用此功能，并计划修改当前使用此功能的应用程序。我们建议您使用CREATE DATABASE database_name FOR ATTACH来代替
 
-2,
+--2,
+use master
 CREATE DATABASE newhotel_xyjd
 ON PRIMARY (FILENAME = 'D:\data\newhotel_xyjd.mdf') 
-FOR ATTACH 
-GO
-
---分离数据库 
-
-sp_detach_db [ @dbname= ] 'database_name'   
-
-可以使用 sp_detach_db 存储过程分离该数据库，然后使用带有 FOR ATTACH 子句的 CREATE DATABASE 重新附加。 
-sp_detach_db 'dbname'
-GO 
-CREATE DATABASE 'dbname'
-ON PRIMARY (FILENAME = 'c:\program files\microsoft sqlserver\mssql\data\archdat1.mdf') 
 FOR ATTACH 
 GO
 
@@ -71,6 +66,8 @@ insert into People (LastName,FirstName,Age) values('张1','三2','29');		--不管是v
 select distinct FirstName from People
 
 select * from people where id between 2 and 5;		--返回结果集中id<=5&>=2的记录
+
+delete from MemberInfo where MemberName is null		--删除为空数据 is null
 
 
 /*存储过程*/

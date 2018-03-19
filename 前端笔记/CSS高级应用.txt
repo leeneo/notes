@@ -421,7 +421,9 @@ background-size:x:*px y:*px¶¨ÒåÍ¼Æ¬´óĞ¡£»x-¿í¶È£¬Y-¸ß¶È£»x:auto y:auto;ÉèÖÃÍ¼Æ¬×
 -webkit-appearance:button|radio|... ;ÉèÖÃÔªËØÍâ¹ÛÑùÊ½
 *²¢·Çc3¹æ·¶
 
-
+<textarea wrap='hard/soft'></textarea>
+soft	ÔÚ±íµ¥Ìá½»Ê±£¬textarea ÖĞµÄÎÄ±¾²»»»ĞĞ¡£Ä¬ÈÏ¡£
+hard	ÔÚ±íµ¥Ìá½»Ê±£¬textarea ÖĞµÄÎÄ±¾»»ĞĞ£¨°üº¬»»ĞĞ·û£©¡£µ±Ê¹ÓÃ "hard" Ê±£¬±ØĞëÖ¸¶¨ cols ÊôĞÔ¡£
 
 
 
