@@ -1,0 +1,36 @@
+mvc4 迁移mvc5:
+
+1，更新相关dll至对应版本
+2，修改Views\Web.config：
+System.Web.Razor,System.Web.WebPages,System.Web.WebPages.Razor,System.Web.WebPages.Deployment 修改为3.0版本；mvc 更新为最新版
+
+更新后视图Razor代码报错解决方法：
+原因：全局程序集缓存（GAC） 对system.core 3.5版本的引用
+解决：制裁3.5版本缓存，保留4.0版本
+
+GAC 目录：C:\Windows\assembly，对于.NET4.0，GAC位于以下目录：C:\Windows\Microsoft.NET\assembly
+
+GAC管理工具（gacutil.exe）: C:\Program Files\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools>gacutil.exe
+
+gacutil -l System.Core
+To remove the reference to the old version of System.Core i did the following steps:
+
+- cd %systemroot%\assembly\
+From here you may have more that one "gac" directory, so you will have to search within each to find your component. For me, it was within the "gac_MSIL" directory.
+
+- cd gac_msil
+- cd System.Core
+- cd <assembly version number>__<public key token>
+- erase *.* Say "y" to are you sure.
+- cd ..
+- rd <assembly version number>__<public key token>
+- cd ..
+- rd System.Core
+
+*也可以将gac所在路径复制到压缩软件目录中，然后对dll进行安装或删除
+
+
+安全透明方法“WebMatrix.WebData.PreApplicationStartCode.Start()..." 的错误解决方法：
+
+Install-Package Microsoft.AspNet.WebPages.WebData
+Install-Package Microsoft.AspNet.WebPages.Data
