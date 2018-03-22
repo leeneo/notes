@@ -6,7 +6,7 @@
 --分离数据库 
 
 use master
-sp_detach_db [ @dbname= ] 'database_name'   
+sp_detach_db 'database_name'   
 
 --附加数据库
 
