@@ -1,6 +1,9 @@
 /*SQL 命令大全*/
 --代表注释
 
+/*计算字符串字节长度*/
+select LEN('00000002201803291912093015984')
+
 /*分离附加*/
 
 --分离数据库 
@@ -54,6 +57,12 @@ truncate table tbname		--删除表内容，释放表空间，不删除表结构（定义）
 
 delete from tbname			--清空表内容，保留表结构，同truncate
 
+/*增加字段*/
+alter table card_type add IsShowInWeChat varchar(1) NOT NULL DEFAULT ('Y')
+/*修改字段长度*/
+alter table wxStoreOrders alter column paytype varchar(36)
+/*删除字段*/
+alter table wxStoreOrders drop column paytype varchar(36)
 
 /*视图*/
 
@@ -66,9 +75,8 @@ union select * from someTable2
 
 insert into People (LastName,FirstName,Age) values(N'张',N'三','29');
 insert into People (LastName,FirstName,Age) values(N'李',N'飞','29');
-insert into People (LastName,FirstName,Age) values('张1','三2','29');		--不管是varchar还是nvarchar结构表，
-这样插入中文 显示乱码
-
+insert into People (LastName,FirstName,Age) values('张1','三2','29');		--不管是varchar还是nvarchar结构表，这样插入中文 显示乱码
+--N'张'与'张' 字节长度是一样的
 
 select distinct FirstName from People
 
