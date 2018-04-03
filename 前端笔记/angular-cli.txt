@@ -1,4 +1,4 @@
-angular
+
 ng new helloAngular -->cd helloangular
 --> cnpm install --> ng serve -o | --open 
 ng set -g packageManager=cnpm --global
