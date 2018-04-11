@@ -1,3 +1,5 @@
 jq 选择器所取的元素都是数组，哪怕是$('#id');
 $('#id')[0]才代表该元素本身
 实例$('#dateInput')[0].valueAsDate 才下标才有效
+
+toFixed() 只能用于number 类型的变量

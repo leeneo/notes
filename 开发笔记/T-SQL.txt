@@ -3,6 +3,9 @@
 
 /*计算字符串字节长度*/
 select LEN('00000002201803291912093015984')
+select LEN('汉字') //=2 ，汉字一般占两个字节。
+
+insert into MemberInfo (RegisterTime) values(GETDATE()) --GETDATE()== 当前时间，精确到毫秒
 
 /*分离附加*/
 
