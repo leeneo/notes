@@ -2,89 +2,89 @@
 ng new helloAngular -->cd helloangular
 --> cnpm install --> ng serve -o | --open 
 ng set -g packageManager=cnpm --global
-@£ºng serve ²»´ø -o Ö¸ÁîÃ²ËÆ´ò¿ªËÙ¶È¸ü¿ìÒ»µã
+@ï¼šng serve ä¸å¸¦ -o æŒ‡ä»¤è²Œä¼¼æ‰“å¼€é€Ÿåº¦æ›´å¿«ä¸€ç‚¹
 
-¸üÐÂ Angular CLI  
-È«¾Ö£ºnpm uninstall -g @angular/cli
-npm cache verify (±ÜÃâÊ¹ÓÃ cache clean --force)
-±¾µØPackages£º
+æ›´æ–° Angular CLI  
+å…¨å±€ï¼šnpm uninstall -g @angular/cli
+npm cache verify (é¿å…ä½¿ç”¨ cache clean --force)
+æœ¬åœ°Packagesï¼š
 rimraf|rd node_modules
 npm install --save-dev @angular/cli@latest
 
-Ê¹ÓÃÎªaotÔ¤±àÒëÖ®Ç°£¬°²×°npmÒÀÀµ£º
+ä½¿ç”¨ä¸ºaoté¢„ç¼–è¯‘ä¹‹å‰ï¼Œå®‰è£…npmä¾èµ–ï¼š
 cnpm install @angular/compiler-cli        @angular/platform-server --save
 
-Ê¹ÓÃ@angular/compiler-cli°üÖÐÌá¹©µÄngc±àÒëÆ÷À´´úÌæTypeScript±àÒëÆ÷£¨tsc£©
-ngc ÅäÖÃ-->ÐÂ½¨tsconfig.aot.json(¿½±´Ô­tsconfig.json´úÂë)-->ÐÞ¸Ä£ºcompilerOptions{¡°module¡±:¡°es2015¡±,"outDir": "./aot-src"},
+ä½¿ç”¨@angular/compiler-cliåŒ…ä¸­æä¾›çš„ngcç¼–è¯‘å™¨æ¥ä»£æ›¿TypeScriptç¼–è¯‘å™¨ï¼ˆtscï¼‰
+ngc é…ç½®-->æ–°å»ºtsconfig.aot.json(æ‹·è´åŽŸtsconfig.jsonä»£ç )-->ä¿®æ”¹ï¼šcompilerOptions{â€œmoduleâ€:â€œes2015â€,"outDir": "./aot-src"},
  "angularCompilerOptions": {
    "genDir": "aot",
    "skipMetadataEmit" : true
- }@:outDirÊôÐÔ¸æËß±àÒëÆ÷°Ñ±àÒëÎÄ¼þ±£´æÔÚaot-srcÄ¿Â¼ÏÂ
-Ö´ÐÐ-->"node_modules/.bin/ngc" -p tsconfig-aot.json
-@ÇÐ»»»ØJITÄ£Ê½£º
+ }@:outDirå±žæ€§å‘Šè¯‰ç¼–è¯‘å™¨æŠŠç¼–è¯‘æ–‡ä»¶ä¿å­˜åœ¨aot-srcç›®å½•ä¸‹
+æ‰§è¡Œ-->"node_modules/.bin/ngc" -p tsconfig-aot.json
+@åˆ‡æ¢å›žJITæ¨¡å¼ï¼š
 "node_modules/.bin/tsc" -p tsconfig.json
-linuxÏÂ²»ÓÃ´øÒýºÅ
+linuxä¸‹ä¸ç”¨å¸¦å¼•å·
 
-ngc (AOT)±àÒë£ºhtml+css+jsµÄ´¿¾²Ì¬»·¾³£¬»á°ÑËùÓÐµÄtsÀàÎÄ¼þ×ªÒëÎªjsÎÄ¼þ·ÅÔÚtsÎÄ¼þÍ¬Ä¿Â¼ÏÂ¡£¿ª·¢Ê±²»ÒªÓÃÕâÖÖ£¬ÒòÎªÒ»µ©ngcÁË»á³öÏÖn¶à¾²Ì¬ÎÄ¼þ¡£
-AOTµÄÓÅµã£º´úÂë¹¹½¨ÆÚ¼ä±àÒë£¬ËùÓÐ¾²Ì¬ÎÄ¼þÊÇ±àÒëºÃÁË£¬ä¯ÀÀÆ÷äÖÈ¾¸ü¿ì£»Ìå»ýÐ¡£¬ÎÞ¶îÍâ´úÂë£»
-JIT£ºÔËÐÐÆÚ¼ä±àÒë£¬Ã¿´ÎÔËÐÐ¶¼»á±àÒëÒ»´Î£»
-×ÜµÄÀ´Ëµ£ºAOT£¬´¿¾²Ì¬ÎÄ¼þ£»JIT ·â×°µÄ¾²Ì¬ÎÄ¼þ£»
+ngc (AOT)ç¼–è¯‘ï¼šhtml+css+jsçš„çº¯é™æ€çŽ¯å¢ƒï¼Œä¼šæŠŠæ‰€æœ‰çš„tsç±»æ–‡ä»¶è½¬è¯‘ä¸ºjsæ–‡ä»¶æ”¾åœ¨tsæ–‡ä»¶åŒç›®å½•ä¸‹ã€‚å¼€å‘æ—¶ä¸è¦ç”¨è¿™ç§ï¼Œå› ä¸ºä¸€æ—¦ngcäº†ä¼šå‡ºçŽ°nå¤šé™æ€æ–‡ä»¶ã€‚
+AOTçš„ä¼˜ç‚¹ï¼šä»£ç æž„å»ºæœŸé—´ç¼–è¯‘ï¼Œæ‰€æœ‰é™æ€æ–‡ä»¶æ˜¯ç¼–è¯‘å¥½äº†ï¼Œæµè§ˆå™¨æ¸²æŸ“æ›´å¿«ï¼›ä½“ç§¯å°ï¼Œæ— é¢å¤–ä»£ç ï¼›
+JITï¼šè¿è¡ŒæœŸé—´ç¼–è¯‘ï¼Œæ¯æ¬¡è¿è¡Œéƒ½ä¼šç¼–è¯‘ä¸€æ¬¡ï¼›
+æ€»çš„æ¥è¯´ï¼šAOTï¼Œçº¯é™æ€æ–‡ä»¶ï¼›JIT å°è£…çš„é™æ€æ–‡ä»¶ï¼›
 
-Éú²ú£ºng b -t --aot
+ç”Ÿäº§ï¼šng b -t --aot
 
-±¨´í¼¯½õ£º
-1£¬global cli is greater than local cli 
->>:¸üÐÂ±¾µØCLI°æ±¾--> cnpm install --save-dev @angular/cli@latest
-2£¬instance of the wrong class
+æŠ¥é”™é›†é”¦ï¼š
+1ï¼Œglobal cli is greater than local cli 
+>>:æ›´æ–°æœ¬åœ°CLIç‰ˆæœ¬--> cnpm install --save-dev @angular/cli@latest
+2ï¼Œinstance of the wrong class
 >>:npm ls @ngtools/webpack
--->cd Ä¿Â¼ node_modules
--->rd /q /s @ngtools/webpack@x.x.x old°æ±¾
+-->cd ç›®å½• node_modules
+-->rd /q /s @ngtools/webpack@x.x.x oldç‰ˆæœ¬
 
-¼´Ê±£¨JiT£©±àÒëÆ÷¶¯Ì¬Òýµ¼£¬Ò»°ãÔÚ½øÐÐ¿ª·¢µ÷ÊÔÊ±£¬Ä¬ÈÏ²ÉÓÃÕâÖÖ·½Ê½
+å³æ—¶ï¼ˆJiTï¼‰ç¼–è¯‘å™¨åŠ¨æ€å¼•å¯¼ï¼Œä¸€èˆ¬åœ¨è¿›è¡Œå¼€å‘è°ƒè¯•æ—¶ï¼Œé»˜è®¤é‡‡ç”¨è¿™ç§æ–¹å¼
 //main.ts
  import  './polyfills.ts';
-//  Á¬Í¬Angular±àÒëÆ÷Ò»Æð·¢²¼µ½ä¯ÀÀÆ÷
+//  è¿žåŒAngularç¼–è¯‘å™¨ä¸€èµ·å‘å¸ƒåˆ°æµè§ˆå™¨
  import {  platformBrowserDynamic }  from  '@angular/platform-browser-dynamic';
  import {  enableProdMode }  from  '@angular/core';
  import {  environment }  from  './ements/environment';
  import {  AppModule }  from  './app/';
 if  (environment.production) {
    enableProdMode();}
-//Angular±àÒëÆ÷ÔÚä¯ÀÀÆ÷ÖÐ±àÒë²¢Òýµ¼¸ÃÓ¦ÓÃ
+//Angularç¼–è¯‘å™¨åœ¨æµè§ˆå™¨ä¸­ç¼–è¯‘å¹¶å¼•å¯¼è¯¥åº”ç”¨
 platformBrowserDynamic().bootstrapModule(AppModule);
 
-£¨Ahead-Of-Time£¬AoT£©½øÐÐ¾²Ì¬Òýµ¼£¬¾²Ì¬·½°¸¿ÉÒÔÉú³É¸üÐ¡¡¢Æô¶¯¸ü¿ìµÄÓ¦ÓÃ£¬½¨ÒéÓÅÏÈÊ¹ÓÃËü£¬ÌØ±ðÊÇÔÚÒÆ¶¯Éè±¸Àï»ò¸ßÑÓ³ÙÍøÂçÏÂ.
-//  ²»°Ñ±àÒëÆ÷·¢²¼µ½ä¯ÀÀÆ÷
+ï¼ˆAhead-Of-Timeï¼ŒAoTï¼‰è¿›è¡Œé™æ€å¼•å¯¼ï¼Œé™æ€æ–¹æ¡ˆå¯ä»¥ç”Ÿæˆæ›´å°ã€å¯åŠ¨æ›´å¿«çš„åº”ç”¨ï¼Œå»ºè®®ä¼˜å…ˆä½¿ç”¨å®ƒï¼Œç‰¹åˆ«æ˜¯åœ¨ç§»åŠ¨è®¾å¤‡é‡Œæˆ–é«˜å»¶è¿Ÿç½‘ç»œä¸‹.
+//  ä¸æŠŠç¼–è¯‘å™¨å‘å¸ƒåˆ°æµè§ˆå™¨
  import {  platformBrowser }  from  '@angular/platform-browser';
-//  ¾²Ì¬±àÒëÆ÷»áÉú³ÉÒ»¸öAppModuleµÄ¹¤³§AppModuleNgFactory
+//  é™æ€ç¼–è¯‘å™¨ä¼šç”Ÿæˆä¸€ä¸ªAppModuleçš„å·¥åŽ‚AppModuleNgFactory
  import {  AppModuleNgFactory }  from  './app.module.ngfactory';
- //  Òýµ¼AppModuleNgFactory
+ //  å¼•å¯¼AppModuleNgFactory
 platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
 
 ng generate component name
-Ä£°åÎÄ¼þ£¬ÑùÊ½ÎÄ¼þ£¬ÀàÎÄ¼þ·Ö¿ª·ÅÖÃ
+æ¨¡æ¿æ–‡ä»¶ï¼Œæ ·å¼æ–‡ä»¶ï¼Œç±»æ–‡ä»¶åˆ†å¼€æ”¾ç½®
 
-¼òÐ´£ºng g c -it -is name
-µÈÍ¬ÓÚ=>ng g c --inline-tempalte --inline-style
-Ä£°å´úÂëºÍcss´úÂëÈëµ½tsÀàÖÐ¡£
+ç®€å†™ï¼šng g c -it -is name
+ç­‰åŒäºŽ=>ng g c --inline-tempalte --inline-style
+æ¨¡æ¿ä»£ç å’Œcssä»£ç å…¥åˆ°tsç±»ä¸­ã€‚
 
-DI¾ÍÊÇ½«¶ÔÏó£¬·þÎñ»òÕß³£Á¿Í¨¹ýprovidersÌá¹©£¬ÔÚ¹¹ÔìÖÐ×¢Èë£»
-×¢Èë·½Ê½ÓÐÁ½ÖÖ£º
-1£¬ÄÚ²¿ÒýÓÃ¶ÔÏó£¬providersÌá¹©£¬¹¹ÔìÖÐ×¢Èë
+DIå°±æ˜¯å°†å¯¹è±¡ï¼ŒæœåŠ¡æˆ–è€…å¸¸é‡é€šè¿‡providersæä¾›ï¼Œåœ¨æž„é€ ä¸­æ³¨å…¥ï¼›
+æ³¨å…¥æ–¹å¼æœ‰ä¸¤ç§ï¼š
+1ï¼Œå†…éƒ¨å¼•ç”¨å¯¹è±¡ï¼Œprovidersæä¾›ï¼Œæž„é€ ä¸­æ³¨å…¥
 import { AuthService };
 providers:[AuthService]
 constructor(private service:AuthService)
-2£¬Í¨¹ýÁîÅÆ·½Ê½£¬ÔÚ¹¹ÔìÖÐ×¢Èëconstructor(@Inject('auth') private service) { }
-ÁîÅÆÉùÃ÷/app.module.ts
+2ï¼Œé€šè¿‡ä»¤ç‰Œæ–¹å¼ï¼Œåœ¨æž„é€ ä¸­æ³¨å…¥constructor(@Inject('auth') private service) { }
+ä»¤ç‰Œå£°æ˜Ž/app.module.ts
 providers:[
 {provide: 'auth',userClass:AuthService},    { provide: BASE_URL,  useValue:   'http://localhost:3000/todos' },
 UserService]
-auth,BASE_URL¾ÍÊÇÉùÃ÷µÄÁîÅÆ
-useClass ÐÎÊ½½Ð¡°Àà¹©Ó¦ÉÌ¡±
-userValue ÐÎÊ½½Ð¡°Öµ¹©Ó¦ÉÌ¡±
-*Öµ¹©Ó¦ÉÌÒ»°ãÓÃÀ´ÉèÖÃÔËÐÐÆÚ³£Á¿£¬±ÈÈçÍøÕ¾µÄbaseUrl,logoµÈ
+auth,BASE_URLå°±æ˜¯å£°æ˜Žçš„ä»¤ç‰Œ
+useClass å½¢å¼å«â€œç±»ä¾›åº”å•†â€
+userValue å½¢å¼å«â€œå€¼ä¾›åº”å•†â€
+*å€¼ä¾›åº”å•†ä¸€èˆ¬ç”¨æ¥è®¾ç½®è¿è¡ŒæœŸå¸¸é‡ï¼Œæ¯”å¦‚ç½‘ç«™çš„baseUrl,logoç­‰
 
-ÒýÈëµÚÈý·½JSÀà¿â
-1,°üÖÐÒÑÓÐ*.d.tsºó×ºµÄÀàÐÍ¶¨ÒåÎÄ¼þ£¬Ö±½ÓÊ¹ÓÃnpm i --save packageName
-2,Ã»ÓÐ.d.tsÎÄ¼þ£¬npm i --save packageName=>npm i @types/packageName --save-dev(ÒâË¼ÊÇÔÚ@types/ËÑË÷°²×°Àà ÐÍ¶¨ÒåÎÄ¼þ)
-3£¬ÕÒ²»µ½ÀàÐÍ¶¨ÒåÎÄ¼þ£¬ÐèÒªÊÖ¶¯Ìí¼ÓÀàÐÍ¶¨Òå£ºsrc/typings.d.ts=>declare module 'packageName'=>×é¼þÖÐ  import * as friendName(±ðÃû) from 'packageName'=> friendName.method()
+å¼•å…¥ç¬¬ä¸‰æ–¹JSç±»åº“
+1,åŒ…ä¸­å·²æœ‰*.d.tsåŽç¼€çš„ç±»åž‹å®šä¹‰æ–‡ä»¶ï¼Œç›´æŽ¥ä½¿ç”¨npm i --save packageName
+2,æ²¡æœ‰.d.tsæ–‡ä»¶ï¼Œnpm i --save packageName=>npm i @types/packageName --save-dev(æ„æ€æ˜¯åœ¨@types/æœç´¢å®‰è£…ç±» åž‹å®šä¹‰æ–‡ä»¶)
+3ï¼Œæ‰¾ä¸åˆ°ç±»åž‹å®šä¹‰æ–‡ä»¶ï¼Œéœ€è¦æ‰‹åŠ¨æ·»åŠ ç±»åž‹å®šä¹‰ï¼šsrc/typings.d.ts=>declare module 'packageName'=>ç»„ä»¶ä¸­  import * as friendName(åˆ«å) from 'packageName'=> friendName.method()

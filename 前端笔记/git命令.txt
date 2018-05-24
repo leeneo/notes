@@ -1,97 +1,97 @@
-gitÃüÁî
+gitå‘½ä»¤
 
-*³õ´ÎÊ¹ÓÃ-ÅäÖÃ*
-git-bash|bash:ÑÏ¸ñÇø·Ö´óĞ¡Ğ´
-#ÉèÖÃÕË»§
+*åˆæ¬¡ä½¿ç”¨-é…ç½®*
+git-bash|bash:ä¸¥æ ¼åŒºåˆ†å¤§å°å†™
+#è®¾ç½®è´¦æˆ·
 $ git config --global user.name "your name"
 $ git config --global user.email "@mail.com"
-#github.com ½¨²Ö
-#github.com Ìí¼Óssh key
+#github.com å»ºä»“
+#github.com æ·»åŠ ssh key
 $ ssh-keygen -t rsa -C "name@mail.com"
-$ ssh -T git@github.com   ÑéÖ¤keygen½á¹û
-#½«Éú³ÉµÄ.pub(.gitÄ¿Â¼ÖĞ) ÎÄ¼şµÄËùÓĞÄÚÈİÌí¼Ó½øgithub.com/settings--> ssh key content ±êÌâËæÒâ
+$ ssh -T git@github.com   éªŒè¯keygenç»“æœ
+#å°†ç”Ÿæˆçš„.pub(.gitç›®å½•ä¸­) æ–‡ä»¶çš„æ‰€æœ‰å†…å®¹æ·»åŠ è¿›github.com/settings--> ssh key content æ ‡é¢˜éšæ„
 
-#±¨´í£ºPermission denied (publickey) 
-½â¾ö·½°¸£ºgitÕË»§Ìí¼Ó¹«¹²ssh key
-settings-->Éú³Éssh key-->title:id_rsa.pub,
-content: Ö´ĞĞ cat ~/.ssh/id_rsa.pubÃüÁî£¬¸´ÖÆÊä³öÄÚÈİµ½content ¼´¿É(ĞèÒª±¾µØÒÑ¾­Éú³Éid_rsa.pubÎÄ¼ş£¬ÈçÎŞ£¬
-ÏÈÖ´ĞĞ ssh-keygen -t rsa ÃüÁî£¬
-ÔÙÖ´ĞĞ cat ~/.ssh/id_rsa.pub ÃüÁî
-×îºó     ssh -T git@github.com È·ÈÏ½á¹û)¡£
+#æŠ¥é”™ï¼šPermission denied (publickey) 
+è§£å†³æ–¹æ¡ˆï¼šgitè´¦æˆ·æ·»åŠ å…¬å…±ssh key
+settings-->ç”Ÿæˆssh key-->title:id_rsa.pub,
+content: æ‰§è¡Œ cat ~/.ssh/id_rsa.pubå‘½ä»¤ï¼Œå¤åˆ¶è¾“å‡ºå†…å®¹åˆ°content å³å¯(éœ€è¦æœ¬åœ°å·²ç»ç”Ÿæˆid_rsa.pubæ–‡ä»¶ï¼Œå¦‚æ— ï¼Œ
+å…ˆæ‰§è¡Œ ssh-keygen -t rsa å‘½ä»¤ï¼Œ
+å†æ‰§è¡Œ cat ~/.ssh/id_rsa.pub å‘½ä»¤
+æœ€å     ssh -T git@github.com ç¡®è®¤ç»“æœ)ã€‚
 cd ~/.ssh
-$ ls ²é¿´ÊÇ·ñÓĞid_rsa£¨Ë½Ô¿£©ºÍid_rsa.pub£¨¹«Ô¿£©Á½¸öÎÄ¼ş
+$ ls æŸ¥çœ‹æ˜¯å¦æœ‰id_rsaï¼ˆç§é’¥ï¼‰å’Œid_rsa.pubï¼ˆå…¬é’¥ï¼‰ä¸¤ä¸ªæ–‡ä»¶
 
 md repos-->cd repos
-git init ³õÊ¼»¯
-git add 1.txt/. Ìí¼ÓÖ¸¶¨»òÕßËùÓĞÎÄ¼şµ½Ô¤²Ö¿â
-git commit -m "test" ½«Ô¤²ÖÎÄ¼ş£¬Ìá½ø²Ö¿â
+git init åˆå§‹åŒ–
+git add 1.txt/. æ·»åŠ æŒ‡å®šæˆ–è€…æ‰€æœ‰æ–‡ä»¶åˆ°é¢„ä»“åº“
+git commit -m "test" å°†é¢„ä»“æ–‡ä»¶ï¼Œæè¿›ä»“åº“
 git remote add origin ssh_url|https
 git push origin master
-#ÓĞÊ±ĞèÒªÊäÈëÕË»§ÓÃ»§Ãû£¬ÃÜÂë
-[rejected]´íÎó½â¾ö·½·¨(µ±git²ÖÖĞÒÑÓĞ´úÂëÊ±£¬´ÓÆäËü±¾µØ·ÖÖ§ÍÆËÍ¾Í»á±¨´Ë´íÎó)£º
-1£¬git push origin -f Ç¿ÍÆ¸²¸ÇÔ¶³Ì·ÖÖ§
-2£¬git fetch =>git merge;ÕâÁ½¾äµÈ¼ÛÓÚgit pull.
-git pull:refusing to merge unrelated histories´íÎó:
+#æœ‰æ—¶éœ€è¦è¾“å…¥è´¦æˆ·ç”¨æˆ·åï¼Œå¯†ç 
+[rejected]é”™è¯¯è§£å†³æ–¹æ³•(å½“gitä»“ä¸­å·²æœ‰ä»£ç æ—¶ï¼Œä»å…¶å®ƒæœ¬åœ°åˆ†æ”¯æ¨é€å°±ä¼šæŠ¥æ­¤é”™è¯¯)ï¼š
+1ï¼Œgit push origin -f å¼ºæ¨è¦†ç›–è¿œç¨‹åˆ†æ”¯
+2ï¼Œgit fetch =>git merge;è¿™ä¸¤å¥ç­‰ä»·äºgit pull.
+git pull:refusing to merge unrelated historiesé”™è¯¯:
 git pull origin aaa --allow-unrelated-histories
 
-²»Í¬·ÖÖ§ÍÆËÍÔ¶³Ì²ÖºÏ²¢°¸Àı£º
-ÓĞ±¾µØÁ½¸ö·ÖÖ§aaa,bbb£»¹ØÁªµ½githubÉÏÍ¬Ò»¸ö²Ö£ºaaa.git.
-aaa,bbbµÄ·ÖÖ§Ãû¶¼½Ğ<aaa>,aaaÓĞÒ»¸ö±¾µØÎÄ¼şa.txt(ÄÚÈİ£ºaaa);bbbÓĞÒ»¸ö±¾µØÎÄ¼şb.txt(ÄÚÈİ£ºbbb);
-aaaÏÈÊ¹ÓÃgit push origin aaa ÍÆËÍµ½Ô¶³Ì²Ö¡£
-bbbÎŞ·¨Ö±½Ópush,ĞèÒªÏÈpull,ÕâÀïÀ­È¡Ô¶³Ì²ÖµÄÄÚÈİµ½±¾µØÓĞÁ½ÖÖ·½Ê½£º
-1£¬git pull origin aaa --allow-unrelated-histories
-2£¬git fetch origin aaa=>git merge
-½á¹û£ºbbb:b.txt=>aaa bbb
-bbb:git push origin aaa=>Ô¶³Ìaaa:a.txt=>aaa bbb
-aaa:ĞŞ¸Äa.txt=>ccc ddd
-aaa:push origin aaa=>ÌáÊ¾CONFLICT ³åÍ»¡£
-ĞŞ¸Äa.txt=>ccc ddd
+ä¸åŒåˆ†æ”¯æ¨é€è¿œç¨‹ä»“åˆå¹¶æ¡ˆä¾‹ï¼š
+æœ‰æœ¬åœ°ä¸¤ä¸ªåˆ†æ”¯aaa,bbbï¼›å…³è”åˆ°githubä¸ŠåŒä¸€ä¸ªä»“ï¼šaaa.git.
+aaa,bbbçš„åˆ†æ”¯åéƒ½å«<aaa>,aaaæœ‰ä¸€ä¸ªæœ¬åœ°æ–‡ä»¶a.txt(å†…å®¹ï¼šaaa);bbbæœ‰ä¸€ä¸ªæœ¬åœ°æ–‡ä»¶b.txt(å†…å®¹ï¼šbbb);
+aaaå…ˆä½¿ç”¨git push origin aaa æ¨é€åˆ°è¿œç¨‹ä»“ã€‚
+bbbæ— æ³•ç›´æ¥push,éœ€è¦å…ˆpull,è¿™é‡Œæ‹‰å–è¿œç¨‹ä»“çš„å†…å®¹åˆ°æœ¬åœ°æœ‰ä¸¤ç§æ–¹å¼ï¼š
+1ï¼Œgit pull origin aaa --allow-unrelated-histories
+2ï¼Œgit fetch origin aaa=>git merge
+ç»“æœï¼šbbb:b.txt=>aaa bbb
+bbb:git push origin aaa=>è¿œç¨‹aaa:a.txt=>aaa bbb
+aaa:ä¿®æ”¹a.txt=>ccc ddd
+aaa:push origin aaa=>æç¤ºCONFLICT å†²çªã€‚
+ä¿®æ”¹a.txt=>ccc ddd
 aaa:git add a.txt=>git commit -m '1'
-aaa:git push origin aaa=>³É¹¦=>Ô¶³Ìaaa:a.xt=>ccc ddd
+aaa:git push origin aaa=>æˆåŠŸ=>è¿œç¨‹aaa:a.xt=>ccc ddd
 
-cmd-->bashµÈ¼ÛÓÚgit bash;²»¹ı²»ÄÜ¸´ÖÆÎÄ±¾
+cmd-->bashç­‰ä»·äºgit bash;ä¸è¿‡ä¸èƒ½å¤åˆ¶æ–‡æœ¬
 
-´ÓÔ¶³Ì²ÖÀ­È¡Êı¾İ
-git pull origin master --allow-unrelated-histories=>µÈ¼ÛÓÚgit fetch origin master->git merge£¨Ïà¶Ô°²È«£©
+ä»è¿œç¨‹ä»“æ‹‰å–æ•°æ®
+git pull origin master --allow-unrelated-histories=>ç­‰ä»·äºgit fetch origin master->git mergeï¼ˆç›¸å¯¹å®‰å…¨ï¼‰
  
 
-±¾µØ¸üĞÂµ½Ô¶³Ì²Ö
-git push origin webs ¸üĞÂµ½Ô¶³Ì·ÖÖ§ webs
-git pull origin webs ´ÓÔ¶³ÌwebsÀ­È¡¸üĞÂ
-git pull origin :aaa ±¾µØĞÂ½¨·ÖÖ§(aaa)
+æœ¬åœ°æ›´æ–°åˆ°è¿œç¨‹ä»“
+git push origin webs æ›´æ–°åˆ°è¿œç¨‹åˆ†æ”¯ webs
+git pull origin webs ä»è¿œç¨‹websæ‹‰å–æ›´æ–°
+git pull origin :aaa æœ¬åœ°æ–°å»ºåˆ†æ”¯(aaa)
 
-git push origin --delete bname É¾³ıÔ¶³Ì·ÖÖ§
-git push origin :aaa ÍÆËÍÊ±²»Ö¸¶¨±¾µØ·ÖÖ§£¬ÔòÉ¾³ıÔ¶³Ì·ÖÖ§aaa£¬µÈ¼ÛÓÚ push --delete
+git push origin --delete bname åˆ é™¤è¿œç¨‹åˆ†æ”¯
+git push origin :aaa æ¨é€æ—¶ä¸æŒ‡å®šæœ¬åœ°åˆ†æ”¯ï¼Œåˆ™åˆ é™¤è¿œç¨‹åˆ†æ”¯aaaï¼Œç­‰ä»·äº push --delete
 
-git remote -v ²é¿´Ô¶³Ì²Ö
-git remote rename old new ĞŞ¸Ä¹ØÁªµÄÔ¶³Ì²Ö
-git remote remove origin ÒÆ³ıÔ¶³Ì²Ö
-git branch --set-upstream devtest origin/devtest ¹ØÁªµ½Ô¶³Ì·ÖÖ§
+git remote -v æŸ¥çœ‹è¿œç¨‹ä»“
+git remote rename old new ä¿®æ”¹å…³è”çš„è¿œç¨‹ä»“
+git remote remove origin ç§»é™¤è¿œç¨‹ä»“
+git branch --set-upstream devtest origin/devtest å…³è”åˆ°è¿œç¨‹åˆ†æ”¯
 
 
-¹ÜÀí·ÖÖ§
-½¨²ÖÊ± masterÊÇÄ¬ÈÏ·ÖÖ§£¬½¨ÒéÔÚÆäËû·ÖÖ§ÉÏ¿ª·¢£¬Íê³ÉºóºÏ²¢»ØÖ÷·ÖÖ§
-git branch ²é¿´ËùÓĞ·ÖÖ§
-git branch bn ÁĞ³ö»ò´´½¨·ÖÖ§ bn
-git checkout -b  bn ´´½¨²¢ÇĞ»»µ½·ÖÖ§ bn
-git checkout bn ÇĞ»»µ½·ÖÖ§bn
-git branch -d c É¾³ı·ÖÖ§ c
+ç®¡ç†åˆ†æ”¯
+å»ºä»“æ—¶ masteræ˜¯é»˜è®¤åˆ†æ”¯ï¼Œå»ºè®®åœ¨å…¶ä»–åˆ†æ”¯ä¸Šå¼€å‘ï¼Œå®Œæˆååˆå¹¶å›ä¸»åˆ†æ”¯
+git branch æŸ¥çœ‹æ‰€æœ‰åˆ†æ”¯
+git branch bn åˆ—å‡ºæˆ–åˆ›å»ºåˆ†æ”¯ bn
+git checkout -b  bn åˆ›å»ºå¹¶åˆ‡æ¢åˆ°åˆ†æ”¯ bn
+git checkout bn åˆ‡æ¢åˆ°åˆ†æ”¯bn
+git branch -d c åˆ é™¤åˆ†æ”¯ c
 
-.gitignore(windowsÏÂ½¨.gitignore.)
-¹ÜÀí¹æÔò
-/mtk/ ¹ıÂËÕû¸öÎÄ¼ş¼Ğ
-*.zip ¹ıÂËËùÓĞ.zipÎÄ¼ş
-/mtk/do.c ¹ıÂËÄ³¸ö¾ßÌåÎÄ¼ş
-!/mtk/one.txt ²»¹ıÂËÎÄ¼ş
+.gitignore(windowsä¸‹å»º.gitignore.)
+ç®¡ç†è§„åˆ™
+/mtk/ è¿‡æ»¤æ•´ä¸ªæ–‡ä»¶å¤¹
+*.zip è¿‡æ»¤æ‰€æœ‰.zipæ–‡ä»¶
+/mtk/do.c è¿‡æ»¤æŸä¸ªå…·ä½“æ–‡ä»¶
+!/mtk/one.txt ä¸è¿‡æ»¤æ–‡ä»¶
 (
-# ´ËÎª×¢ÊÍ
-/mtk #×¢ÊÍ»á±»gitºöÂÔ
+# æ­¤ä¸ºæ³¨é‡Š
+/mtk #æ³¨é‡Šä¼šè¢«gitå¿½ç•¥
 !/mtk/one.txt
- )Ö»¹ÜÀí one.txt
-*Ò»µ©pushÖ®ºó£¬ĞÂ¼ÓµÄ¹ıÂË¹æÔò¾ÍÎŞĞ§ÁË£¬ËùÒÔÒªÔÚpushÖ®Ç°Ìí¼Ó¹æÔò
+ )åªç®¡ç† one.txt
+*ä¸€æ—¦pushä¹‹åï¼Œæ–°åŠ çš„è¿‡æ»¤è§„åˆ™å°±æ— æ•ˆäº†ï¼Œæ‰€ä»¥è¦åœ¨pushä¹‹å‰æ·»åŠ è§„åˆ™
 
-vimÄ£Ê½
-ÊäÈëi»òÕßinsert¼ü½øÈëÎÄ±¾±à¼­Ä£Ê½
-°´esc»Øµ½ÃüÁîÄ£Ê½£¬¼üÈë£ºwq ±£´æ²¢ÍË³ö£»¼üÈë:w ±£´æ²»ÍË³ö£¬:q ÍË³ö¡£
-·ÅÆúĞŞ¸Ä²¢ÍË³ö£º:q!
-·ÅÆúĞŞ¸Ä²»ÍË³ö£º:e!
+vimæ¨¡å¼
+è¾“å…¥iæˆ–è€…inserté”®è¿›å…¥æ–‡æœ¬ç¼–è¾‘æ¨¡å¼
+æŒ‰escå›åˆ°å‘½ä»¤æ¨¡å¼ï¼Œé”®å…¥ï¼šwq ä¿å­˜å¹¶é€€å‡ºï¼›é”®å…¥:w ä¿å­˜ä¸é€€å‡ºï¼Œ:q é€€å‡ºã€‚
+æ”¾å¼ƒä¿®æ”¹å¹¶é€€å‡ºï¼š:q!
+æ”¾å¼ƒä¿®æ”¹ä¸é€€å‡ºï¼š:e!
