@@ -9,7 +9,7 @@ ng set -g packageManager=cnpm --global
 npm cache verify (避免使用 cache clean --force)
 本地Packages：
 rimraf|rd node_modules
-npm install --save-dev @angular/cli@latest
+npm install -g --save-dev @angular/cli@latest
 
 使用为aot预编译之前，安装npm依赖：
 cnpm install @angular/compiler-cli        @angular/platform-server --save
