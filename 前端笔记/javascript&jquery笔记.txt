@@ -309,8 +309,12 @@ console.log('cY'+e.clientY);	//距离可视区域（不含滚动区域）最顶端
 $(window).height();	//获取当前窗口高度。
 $(document).height();	//获取当前文档高度。
 
-
-
+'~~' 运算符等同于ParseInt();只不过能把false,true,undefined转换成对应的0和1：
+~~"9.99"=9
+~~'false'=0
+~~'true'=1
+~~undefined=0
+~~!undefined=1
 
 
 
