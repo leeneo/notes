@@ -93,12 +93,18 @@ video标签
 onpause   onplay --->这是二个事件，和之前讲的 play() pause() 有质的区别
 
 
-本地存储：保存用户数据（实现user&pwd等数据再次自动填充）
+H5 本地存储：保存用户数据（实现user&pwd等数据再次自动填充）
 localStorage、sessionStorage
-localStorage.setItem('qq','123');
-sessionStorage.setItem('qq','123');
-localStorage.getItem('qq');
-sessionStorage.getItem('qq');
+//保存
+localStorage.setItem('qq','123'); 	//==localStorage.qq='123'
+sessionStorage.setItem('qq','123');	//==sessionStorage.qq='123'
+localStorage.getItem('qq');			//==localStorage.qq
+sessionStorage.getItem('qq');		//==sessionStorage.qq
+//删除，清空
+localStorage.removeItem('qq');
+sessionStorage.removeItem('qq');
+localStorage.clear('qq');
+sessionStorage.clear('qq');
 
 localStorage是永久存储，关闭后再打开依然存在；
 sessionStorage是会话存储，仅限于当前会话。
