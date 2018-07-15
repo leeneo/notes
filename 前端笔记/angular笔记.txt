@@ -10,6 +10,9 @@ Angular 程序的基本组成：模块（module），组件（component）
 
 ng命令操作
 
+ng help
+ng v 版本
+
 新建项目：ng new helloAngular -->cd helloangular
 --> cnpm install --> ng serve -o | --open 
 ng set -g packageManager=cnpm --global
