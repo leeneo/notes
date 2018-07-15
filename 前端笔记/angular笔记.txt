@@ -1,105 +1,132 @@
-¸ÅÊö£º
+æ¦‚è¿°ï¼š
 
-Angular ³ÌĞòµÄ»ù±¾×é³É£ºÄ£¿é£¨module£©£¬×é¼ş£¨component£©
+Angular ç¨‹åºçš„åŸºæœ¬ç»„æˆï¼šæ¨¡å—ï¼ˆmoduleï¼‰ï¼Œç»„ä»¶ï¼ˆcomponentï¼‰
 
-Ã¿¸öShell¶¼ÓĞÒ»¸ö¸ùÄ£¿é(AppModule)
-Ã¿¸ö×é¼ş¶¼ÓÉcomponent.ts,component.html,component.css Èı¸öÎÄ¼ş£»Ã¿¸öcomponent¶¼ÓĞÒ»¸ö×°ÊÎÆ÷º¯Êı£¨@Component£©
-Ã¿¸öÄ£¿é»ò×é¼şÎÄ¼ş¶¼»áexportÒ»¸öÀà£¬¿ÉÒÔ±»ÆäËûÄ£¿é»ò×é¼şimport£¬tsÎÄ¼ş¾ÍÊÇÀàµÄµ¼³öºÍÒıÈëÎÄ¼ş£»
-×é¼şµÄ×°ÊÎÆ÷º¯Êı£¨@Componet£©¶¨Òå×ÔÉí±ê¼Ç£¨selector£©£¬templateUrl,styleUrlsÈı²¿·Ö¡£
+æ¯ä¸ªShelléƒ½æœ‰ä¸€ä¸ªæ ¹æ¨¡å—(AppModule)
+æ¯ä¸ªç»„ä»¶éƒ½ç”±component.ts,component.html,component.css ä¸‰ä¸ªæ–‡ä»¶ï¼›æ¯ä¸ªcomponentéƒ½æœ‰ä¸€ä¸ªè£…é¥°å™¨å‡½æ•°ï¼ˆ@Componentï¼‰
+æ¯ä¸ªæ¨¡å—æˆ–ç»„ä»¶æ–‡ä»¶éƒ½ä¼šexportä¸€ä¸ªç±»ï¼Œå¯ä»¥è¢«å…¶ä»–æ¨¡å—æˆ–ç»„ä»¶importï¼Œtsæ–‡ä»¶å°±æ˜¯ç±»çš„å¯¼å‡ºå’Œå¼•å…¥æ–‡ä»¶ï¼›
+ç»„ä»¶çš„è£…é¥°å™¨å‡½æ•°ï¼ˆ@Componetï¼‰å®šä¹‰è‡ªèº«æ ‡è®°ï¼ˆselectorï¼‰ï¼ŒtemplateUrl,styleUrlsä¸‰éƒ¨åˆ†ã€‚
 
 
-ngÃüÁî²Ù×÷
+ngå‘½ä»¤æ“ä½œ
 
-ng generate component login --inline-template --inline-style	-->
+æ–°å»ºé¡¹ç›®ï¼šng new helloAngular -->cd helloangular
+--> cnpm install --> ng serve -o | --open 
+ng set -g packageManager=cnpm --global
+@ï¼šng serve ä¸å¸¦ -o æŒ‡ä»¤è²Œä¼¼æ‰“å¼€é€Ÿåº¦æ›´å¿«ä¸€ç‚¹
+è¿è¡Œï¼šng serve æ­¤å‘½ä»¤éœ€è¦åœ¨é¡¹ç›®æ ¹ç›®å½•ä¸‹æ‰§è¡Œï¼ˆshift å³é”®-->åœ¨æ­¤å¤„è¿è¡Œcmdï¼‰
 
-¼ò»¯:ng g c login -it -is
+æ–°å»ºç»„ä»¶ï¼š
+1ï¼Œng generate component login --inline-template --inline-style	-->
+æ¨¡æ¿ï¼Œæ ·å¼ï¼Œç»„ä»¶åœ¨ä¸€ä¸ªæ–‡ä»¶é‡Œ
+ç®€åŒ–:ng g c login -it -is
+2ï¼Œng generate component name
+æ¨¡æ¿æ–‡ä»¶ï¼Œæ ·å¼æ–‡ä»¶ï¼Œç±»æ–‡ä»¶åˆ†å¼€æ”¾ç½®
 
-ÔËĞĞ£ºng serve ´ËÃüÁîĞèÒªÔÚÏîÄ¿¸ùÄ¿Â¼ÏÂÖ´ĞĞ£¨shift ÓÒ¼ü-->ÔÚ´Ë´¦ÔËĞĞcmd£©
+å¼•å…¥ç¬¬ä¸‰æ–¹JSç±»åº“
+1,åŒ…ä¸­å·²æœ‰*.d.tsåç¼€çš„ç±»å‹å®šä¹‰æ–‡ä»¶ï¼Œç›´æ¥ä½¿ç”¨npm i --save packageName
+2,æ²¡æœ‰.d.tsæ–‡ä»¶ï¼Œnpm i --save packageName=>npm i @types/packageName --save-dev(æ„æ€æ˜¯åœ¨@types/æœç´¢å®‰è£…ç±» å‹å®šä¹‰æ–‡ä»¶)
+3ï¼Œæ‰¾ä¸åˆ°ç±»å‹å®šä¹‰æ–‡ä»¶ï¼Œéœ€è¦æ‰‹åŠ¨æ·»åŠ ç±»å‹å®šä¹‰ï¼šsrc/typings.d.ts=>declare module 'packageName'=>ç»„ä»¶ä¸­  import * as friendName(åˆ«å) from 'packageName'=> friendName.method()
 
-0¡¢ÒıÓÃ
-#usernameRef ±íÊ¾ÒıÓÃ£¬ÕâÀïÒıÓÃµÄ¾ÍÊÇinputÕâ¸ö¶ÔÏó¡£
+0ã€å¼•ç”¨
+#usernameRef è¡¨ç¤ºå¼•ç”¨ï¼Œè¿™é‡Œå¼•ç”¨çš„å°±æ˜¯inputè¿™ä¸ªå¯¹è±¡ã€‚
 <div>
   <input #usernameRef type="text">
   <input #passwordRef type="password" name="pwd" id="pwd">
   <button (click)="onClick(usernameRef.value,passwordRef.value)">Login</button>
 </div> -->
 
+1ã€æ³¨å…¥å™¨é€šè¿‡æä¾›å•†æ–°å»ºä¾èµ–ï¼Œæä¾›å•†--äº¤ä»˜æœåŠ¡çš„é…æ–¹ï¼Œè¢«å…³è”åˆ°ä¸€ä¸ªä»¤ç‰Œï¼›
+åˆå§‹åŒ–æ³¨å…¥å™¨ï¼Œé€šå¸¸ç”¨ç»„ä»¶æˆ–è€…æ ¹å…ƒç´ ä¸­çš„providersæ•°ç»„è¿›è¡Œæ³¨å†Œã€‚
 
-1¡¢×¢ÈëÆ÷Í¨¹ıÌá¹©ÉÌĞÂ½¨ÒÀÀµ£¬Ìá¹©ÉÌ--½»¸¶·şÎñµÄÅä·½£¬±»¹ØÁªµ½Ò»¸öÁîÅÆ£»
-³õÊ¼»¯×¢ÈëÆ÷£¬Í¨³£ÓÃ×é¼ş»òÕß¸ùÔªËØÖĞµÄprovidersÊı×é½øĞĞ×¢²á¡£
-
-ÒÀÀµĞÔ×¢Èë£ºapp.module ÖĞÅäÖÃ providers: [{provide:'auth',useClass:AuthService}]£¬ĞèÒªÒıÈë(import)AuthService
-Ê¹ÓÃÊ±ÔÚ¹¹ÔìÖĞÉùÃ÷@Inject('auth') private service,ĞèÒªimport {Inject} from '@angular/core'
-ÈÎºÎÀà¶¼¿ÉÒÔÌá¹©×¢Èë£¬ÕâÊÇÒ»ÖÖ½âñî·½Ê½£¬Í¨¹ıprovidersÌá¹©£¬Í¨¹ı¹¹Ôì×¢Èë
+ä¾èµ–æ€§æ³¨å…¥ï¼šapp.module ä¸­é…ç½® providers: [{provide:'auth',useClass:AuthService}]ï¼Œéœ€è¦å¼•å…¥(import)AuthService
+ä½¿ç”¨æ—¶åœ¨æ„é€ ä¸­å£°æ˜@Inject('auth') private service,éœ€è¦import {Inject} from '@angular/core'
+ä»»ä½•ç±»éƒ½å¯ä»¥æä¾›æ³¨å…¥ï¼Œè¿™æ˜¯ä¸€ç§è§£è€¦æ–¹å¼ï¼Œé€šè¿‡providersæä¾›ï¼Œé€šè¿‡æ„é€ æ³¨å…¥
 @demo
 constructor( userService: UserService) { }
 
-Ìá¹©ÉÌproviders:[]Ìá¹©·şÎñµÄ¼¸ÖÖ·½Ê½
+æä¾›å•†providers:[]æä¾›æœåŠ¡çš„å‡ ç§æ–¹å¼
 
-(1)¡¢¼òµ¥µÄÀà
+(1)ã€ç®€å•çš„ç±»
 @demo
 providers:[AuthService,UserService]
 
-Ê¹ÓÃ£ºconstructor(private service:AuthService){}
+ä½¿ç”¨ï¼šconstructor(private service:AuthService){}
 
-(2)¡¢ÁîÅÆ
-@ÎÒÃÇÍ¨³£ÔÚ¹¹Ôìº¯ÊıÀïÃæ£¬Îª²ÎÊıÖ¸¶¨ÀàĞÍ£¬ÈÃ Angular À´´¦ÀíÒÀÀµ×¢Èë¡£¸Ã²ÎÊıÀàĞÍ¾ÍÊÇÒÀÀµ×¢ÈëÆ÷ËùĞèµÄÁîÅÆ¡£
+(2)ã€ä»¤ç‰Œ
+@æˆ‘ä»¬é€šå¸¸åœ¨æ„é€ å‡½æ•°é‡Œé¢ï¼Œä¸ºå‚æ•°æŒ‡å®šç±»å‹ï¼Œè®© Angular æ¥å¤„ç†ä¾èµ–æ³¨å…¥ã€‚è¯¥å‚æ•°ç±»å‹å°±æ˜¯ä¾èµ–æ³¨å…¥å™¨æ‰€éœ€çš„ä»¤ç‰Œã€‚
 
 providers: [ { provide: 'auth', useClass: AuthService }, { provide: 'user', useClass: UserService }, { provide: BASE_ URL, useValue: 'http:// localhost: 3000/ todos' }, AuthGuardService ]
 @tips
-providersÊÇÓÉprovide¶ÔÏó×é³ÉµÄÒ»¸öÊı×é£º
-{ provide: 'auth', useClass: AuthService }£¬¶ÔÓ¦Àà¹©Ó¦ÉÌ
-{ provide: BASE_ URL, useValue: 'http:// localhost: 3000/ todos' }£¬ÕâÖÖĞÎÊ½¶ÔÓ¦Öµ¹©Ó¦ÉÌ
-µÚÒ»¸öÊôĞÔ½ĞÁîÅÆ£¬µÚ¶ş¸öÊôĞÔ½Ğ¶¨Òå¶ÔÏó 
-AuthGuardService ÕâÊÇÒ»¸öÓï·¨ÌÇ£¬µÈ¼ÛÓÚ{provide:AuthGuardService,useClass:AuthGuardService}
+providersæ˜¯ç”±provideå¯¹è±¡ç»„æˆçš„ä¸€ä¸ªæ•°ç»„ï¼š
+{ provide: 'auth', useClass: AuthService }ï¼Œå¯¹åº”ç±»ä¾›åº”å•†
+{ provide: BASE_ URL, useValue: 'http:// localhost: 3000/ todos' }ï¼Œè¿™ç§å½¢å¼å¯¹åº”å€¼ä¾›åº”å•†
+ç¬¬ä¸€ä¸ªå±æ€§å«ä»¤ç‰Œï¼Œç¬¬äºŒä¸ªå±æ€§å«å®šä¹‰å¯¹è±¡ 
+AuthGuardService è¿™æ˜¯ä¸€ä¸ªè¯­æ³•ç³–ï¼Œç­‰ä»·äº{provide:AuthGuardService,useClass:AuthGuardService}
 
-(3)¡¢±ğÃûÌá¹©ÉÌ
+(3)ã€åˆ«åæä¾›å•†
 { provide: MinimalLogger, useExisting: LoggerService },
 
-(4)¡¢¹¤³§Ìá¹©ÉÌ£ºµ÷ÓÃ¹¤³§º¯ÊıĞÂ½¨Ò»¸öÒÀÀµ¶ÔÏó
+(4)ã€å·¥å‚æä¾›å•†ï¼šè°ƒç”¨å·¥å‚å‡½æ•°æ–°å»ºä¸€ä¸ªä¾èµ–å¯¹è±¡
 { provide: HELLO, useFactory: helloFactory( 2), deps: [Greeting, HelloService] } 
-@Ê¹ÓÃÕâÏî¼¼Êõ£¬¿ÉÒÔÓÃ°üº¬ÁËÒ»Ğ©ÒÀÀµ·şÎñºÍ±¾µØ×´Ì¬ÊäÈëµÄ¹¤³§º¯ÊıÀ´½¨Á¢Ò»¸öÒÀÀµ¶ÔÏó¡£
-helloFactory×ÔÉí²»ÊÇÌá¹©ÉÌ¹¤³§º¯Êı;
-ÕæÕıµÄÌá¹©ÉÌ¹¤³§º¯ÊıÊÇhelloFactory·µ»ØµÄº¯Êı£º
+@ä½¿ç”¨è¿™é¡¹æŠ€æœ¯ï¼Œå¯ä»¥ç”¨åŒ…å«äº†ä¸€äº›ä¾èµ–æœåŠ¡å’Œæœ¬åœ°çŠ¶æ€è¾“å…¥çš„å·¥å‚å‡½æ•°æ¥å»ºç«‹ä¸€ä¸ªä¾èµ–å¯¹è±¡ã€‚
+helloFactoryè‡ªèº«ä¸æ˜¯æä¾›å•†å·¥å‚å‡½æ•°;
+çœŸæ­£çš„æä¾›å•†å·¥å‚å‡½æ•°æ˜¯helloFactoryè¿”å›çš„å‡½æ•°ï¼š
 export function helloFactory( take: number) { return (greeting: Greeting, helloService: HelloService): string => { /* ... */ }; };
 
+DIå°±æ˜¯å°†å¯¹è±¡ï¼ŒæœåŠ¡æˆ–è€…å¸¸é‡é€šè¿‡providersæä¾›ï¼Œåœ¨æ„é€ ä¸­æ³¨å…¥ï¼›
+æ³¨å…¥æ–¹å¼æœ‰ä¸¤ç§ï¼š
+1ï¼Œå†…éƒ¨å¼•ç”¨å¯¹è±¡ï¼Œprovidersæä¾›ï¼Œæ„é€ ä¸­æ³¨å…¥
+import { AuthService };
+providers:[AuthService]
+constructor(private service:AuthService)
+2ï¼Œé€šè¿‡ä»¤ç‰Œæ–¹å¼ï¼Œåœ¨æ„é€ ä¸­æ³¨å…¥constructor(@Inject('auth') private service) { }
+ä»¤ç‰Œå£°æ˜/app.module.ts
+providers:[
+{provide: 'auth',userClass:AuthService},    { provide: BASE_URL,  useValue:   'http://localhost:3000/todos' },
+UserService]
+auth,BASE_URLå°±æ˜¯å£°æ˜çš„ä»¤ç‰Œ
+useClass å½¢å¼å«â€œç±»ä¾›åº”å•†â€
+userValue å½¢å¼å«â€œå€¼ä¾›åº”å•†â€
+*å€¼ä¾›åº”å•†ä¸€èˆ¬ç”¨æ¥è®¾ç½®è¿è¡ŒæœŸå¸¸é‡ï¼Œæ¯”å¦‚ç½‘ç«™çš„baseUrl,logoç­‰
 
-2¡¢Ë«ÏòÊı¾İ°ó¶¨»úÖÆ
 
-Ô­Àí£º×é¼şÖĞÌá¹©³ÉÔ±Êı¾İ±äÁ¿£¬È»ºóÄ£°åÖĞÒıÓÃÕâ¸öÊı¾İ±äÁ¿
+2ã€åŒå‘æ•°æ®ç»‘å®šæœºåˆ¶
 
-<!-- [{ngModel}],·½À¨ºÅµÄº¬ÒåÊÇ½«¡°=¡±ºóÃæµ±³É±í´ïÊ½À´½âÎö¶ø²»ÊÇ×Ö·û´®
-[]ÊÇµ¥Ïò°ó¶¨£¬ÎÒÃÇ ÔÚ ×é¼ş ÖĞ ¸ø model¸³ µÄ Öµ »á ÉèÖÃ µ½ HTML µÄ input ¿Ø ¼ş ÖĞ¡£
-[()]ÊÇË«Ïò°ó¶¨£¬ÒâË¼£¬ ¾ÍÊÇËµ HTML ¶ÔÓ¦ ¿Ø ¼ş µÄ ×´Ì¬ ¸Ä±ä »á ·´Éä ÉèÖÃ µ½ ×é¼ş µÄ model ÖĞ¡£
-ngModel ÊÇ FormModule ÖĞ Ìá¹© µÄ Ö¸Áî£¬ Ëü ¸ºÔğ ´Ó Domain Model£¨ ÕâÀï ¾ÍÊÇ username »ò password£¬ ÒÔºó ÎÒÃÇ ¿ÉÒÔ °ó ¶¨ ¸ü ¸´ÔÓ µÄ ¶ÔÏó£© ÖĞ ´´½¨ Ò»¸ö FormControl µÄ ÊµÀı£¬ ²¢½« Õâ¸ö ÊµÀı ºÍ ±íµ¥ µÄ ¿Ø ¼ş °ó ¶¨ ÆğÀ´¡£ -->
+åŸç†ï¼šç»„ä»¶ä¸­æä¾›æˆå‘˜æ•°æ®å˜é‡ï¼Œç„¶åæ¨¡æ¿ä¸­å¼•ç”¨è¿™ä¸ªæ•°æ®å˜é‡
+
+<!-- [{ngModel}],æ–¹æ‹¬å·çš„å«ä¹‰æ˜¯å°†â€œ=â€åé¢å½“æˆè¡¨è¾¾å¼æ¥è§£æè€Œä¸æ˜¯å­—ç¬¦ä¸²
+[]æ˜¯å•å‘ç»‘å®šï¼Œæˆ‘ä»¬ åœ¨ ç»„ä»¶ ä¸­ ç»™ modelèµ‹ çš„ å€¼ ä¼š è®¾ç½® åˆ° HTML çš„ input æ§ ä»¶ ä¸­ã€‚
+[()]æ˜¯åŒå‘ç»‘å®šï¼Œæ„æ€ï¼Œ å°±æ˜¯è¯´ HTML å¯¹åº” æ§ ä»¶ çš„ çŠ¶æ€ æ”¹å˜ ä¼š åå°„ è®¾ç½® åˆ° ç»„ä»¶ çš„ model ä¸­ã€‚
+ngModel æ˜¯ FormModule ä¸­ æä¾› çš„ æŒ‡ä»¤ï¼Œ å®ƒ è´Ÿè´£ ä» Domain Modelï¼ˆ è¿™é‡Œ å°±æ˜¯ username æˆ– passwordï¼Œ ä»¥å æˆ‘ä»¬ å¯ä»¥ ç»‘ å®š æ›´ å¤æ‚ çš„ å¯¹è±¡ï¼‰ ä¸­ åˆ›å»º ä¸€ä¸ª FormControl çš„ å®ä¾‹ï¼Œ å¹¶å°† è¿™ä¸ª å®ä¾‹ å’Œ è¡¨å• çš„ æ§ ä»¶ ç»‘ å®š èµ·æ¥ã€‚ -->
 
 
-*ngForÖ¸ÁîÓÃÓÚµü´úÒıÓÃÖ¸ÁîµÄÔªËØ
+*ngForæŒ‡ä»¤ç”¨äºè¿­ä»£å¼•ç”¨æŒ‡ä»¤çš„å…ƒç´ 
 For Example:
 <li *ngFor="let hero of heroes">
-heroes ÊÇÒ»¸öÔÚÄ£°å¶ÔÓ¦×é¼şÖĞ¶¨ÒåµÄÊı×é»òÕßList¼¯ºÏ£»
+heroes æ˜¯ä¸€ä¸ªåœ¨æ¨¡æ¿å¯¹åº”ç»„ä»¶ä¸­å®šä¹‰çš„æ•°ç»„æˆ–è€…Listé›†åˆï¼›
 
-*ngIfÖ¸Áî¸ù¾İÌõ¼ş¾ö¶¨ÊÇ·ñÏÔÊ¾Ä³ÔªËØ
+*ngIfæŒ‡ä»¤æ ¹æ®æ¡ä»¶å†³å®šæ˜¯å¦æ˜¾ç¤ºæŸå…ƒç´ 
 For Example:
 <div *ngIf="selectedHero"></div>
-µ±selectedHero ´æÔÚÊ±ÏÔÊ¾div,undefineÊ±²»ÏÔÊ¾div
-selectedHeroÊÇÔÚ×é¼şÖĞ¶¨ÒåµÄ¶ÔÏó¡£
+å½“selectedHero å­˜åœ¨æ—¶æ˜¾ç¤ºdiv,undefineæ—¶ä¸æ˜¾ç¤ºdiv
+selectedHeroæ˜¯åœ¨ç»„ä»¶ä¸­å®šä¹‰çš„å¯¹è±¡ã€‚
 
-[class.css-class]="some-condition" ÓÃÓÚÉè¶¨·ûºÏÄ³Ğ©Ìõ¼şÏÂÔªËØµÄÏÔÊ¾ÑùÊ½
+[class.css-class]="some-condition" ç”¨äºè®¾å®šç¬¦åˆæŸäº›æ¡ä»¶ä¸‹å…ƒç´ çš„æ˜¾ç¤ºæ ·å¼
 For Example:
 <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" ></li>
 CSS File:.selected{}
 
-º¯Êı¶¨Òå
+å‡½æ•°å®šä¹‰
 functionName(obj:Object):Object|Const{return Object|Const}
-functionName(²ÎÊı:²ÎÊıÀàĞÍ):·µ»ØÀàĞÍ{}
+functionName(å‚æ•°:å‚æ•°ç±»å‹):è¿”å›ç±»å‹{}
 
 
-cmd:ng g s serviceName  ´´½¨·şÎñ
-ÔÚÏò×é¼ş×¢Èë·şÎñÖ®Ç°£¬±ØĞèÏÈÔÚÒÀÀµ×¢ÈëÏµÍ³ÖĞ×¢²á´Ë·şÎñ
-·şÎñÌá¹©·½Ê½¿ÉÒÔÔÚUserComponent£¬AppComponent,AppModuleÖĞ½øĞĞ£¬Ã¿ÖÖ·½Ê½¶¼ÓĞ¸÷×ÔµÄÓÅÈ±µã¡£
-×Ô¶¯×¢²á£ºng g s serviceName --module=app ´´½¨·şÎñÊ±£¬¸½¼Ó--module=app ¿ÉÔÚAppModuleÖĞ×¢²á´Ë·şÎñ
-½¨ÒéÊÖ¶¯×¢²á£¬×Ô¶¯×¢²á¿ÉÄÜ»áÓĞÎÊÌâ
-ÊÖ¶¯×¢²á£ºapp.module.ts => providers:[serviceName1,serviceName2],
+cmd:ng g s serviceName  åˆ›å»ºæœåŠ¡
+åœ¨å‘ç»„ä»¶æ³¨å…¥æœåŠ¡ä¹‹å‰ï¼Œå¿…éœ€å…ˆåœ¨ä¾èµ–æ³¨å…¥ç³»ç»Ÿä¸­æ³¨å†Œæ­¤æœåŠ¡
+æœåŠ¡æä¾›æ–¹å¼å¯ä»¥åœ¨UserComponentï¼ŒAppComponent,AppModuleä¸­è¿›è¡Œï¼Œæ¯ç§æ–¹å¼éƒ½æœ‰å„è‡ªçš„ä¼˜ç¼ºç‚¹ã€‚
+è‡ªåŠ¨æ³¨å†Œï¼šng g s serviceName --module=app åˆ›å»ºæœåŠ¡æ—¶ï¼Œé™„åŠ --module=app å¯åœ¨AppModuleä¸­æ³¨å†Œæ­¤æœåŠ¡
+å»ºè®®æ‰‹åŠ¨æ³¨å†Œï¼Œè‡ªåŠ¨æ³¨å†Œå¯èƒ½ä¼šæœ‰é—®é¢˜
+æ‰‹åŠ¨æ³¨å†Œï¼šapp.module.ts => providers:[serviceName1,serviceName2],
 *The providers array tells Angular to create a single, shared instance of HeroService and inject into any class that asks for it.
 

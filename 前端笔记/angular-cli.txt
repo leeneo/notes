@@ -1,15 +1,11 @@
-
-ng new helloAngular -->cd helloangular
---> cnpm install --> ng serve -o | --open 
-ng set -g packageManager=cnpm --global
-@：ng serve 不带 -o 指令貌似打开速度更快一点
+安装 Cli:
+npm install -g --save-dev @angular/cli@latest
 
 更新 Angular CLI  
-全局：npm uninstall -g @angular/cli
-npm cache verify (避免使用 cache clean --force)
-本地Packages：
-rimraf|rd node_modules
-npm install -g --save-dev @angular/cli@latest
+全局：npm uninstall -g @angular/cli->
+npm cache verify (避免使用 cache clean --force)->
+清除本地Packages：
+rimraf|rd node_modules->npm install -g --save-dev @angular/cli@latest
 
 使用为aot预编译之前，安装npm依赖：
 cnpm install @angular/compiler-cli        @angular/platform-server --save
@@ -61,30 +57,3 @@ platformBrowserDynamic().bootstrapModule(AppModule);
  //  引导AppModuleNgFactory
 platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
 
-ng generate component name
-模板文件，样式文件，类文件分开放置
-
-简写：ng g c -it -is name
-等同于=>ng g c --inline-tempalte --inline-style
-模板代码和css代码入到ts类中。
-
-DI就是将对象，服务或者常量通过providers提供，在构造中注入；
-注入方式有两种：
-1，内部引用对象，providers提供，构造中注入
-import { AuthService };
-providers:[AuthService]
-constructor(private service:AuthService)
-2，通过令牌方式，在构造中注入constructor(@Inject('auth') private service) { }
-令牌声明/app.module.ts
-providers:[
-{provide: 'auth',userClass:AuthService},    { provide: BASE_URL,  useValue:   'http://localhost:3000/todos' },
-UserService]
-auth,BASE_URL就是声明的令牌
-useClass 形式叫“类供应商”
-userValue 形式叫“值供应商”
-*值供应商一般用来设置运行期常量，比如网站的baseUrl,logo等
-
-引入第三方JS类库
-1,包中已有*.d.ts后缀的类型定义文件，直接使用npm i --save packageName
-2,没有.d.ts文件，npm i --save packageName=>npm i @types/packageName --save-dev(意思是在@types/搜索安装类 型定义文件)
-3，找不到类型定义文件，需要手动添加类型定义：src/typings.d.ts=>declare module 'packageName'=>组件中  import * as friendName(别名) from 'packageName'=> friendName.method()
