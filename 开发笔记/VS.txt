@@ -9,15 +9,28 @@ ctrl+K+U|ctrl+e+c(自定义):取消注释
 Ctrl+J / Ctrl+K,L: 列出成员
 Shift+Alt+Enter: 切换全屏编辑
 alt+上下方向键，代码上移/下移
-ctrl+m+l:展开/折叠所有代码
+ctrl+w:选择当前字
+ctrl+m+a:折叠所有大纲显示
+ctrl+m+x:展开所有大纲显示
+ctrl+m+l:切换所有大纲显示（展开/折叠所有代码）
+ctrl+m+p:停止大纲显示
+ctrl+m+v:启动大纲显示
 ctrl+m+o:折叠到定义（方法头）
 ctrl+m+m:折叠/展开当前行
+ctrl+m+s:折叠当前区域
+ctrl+m+e:展开当前区域
 ctrl+m+t:折叠当前标记（只针对html代码）
+ctrl+m+h:隐藏选定内容
+ctrl+m+u:停止隐藏选定内容
+
+ctrl+e+w:切换自动换行
+
 ctrl+m+g:控制器/视图之间切换
 ctrl+K+D|ctrl+e+d(自定义):格式化文档
 ctrl+k+f|ctrl+e+f(自定义):格式化当前行
 ctrl+shift+f:在文件（解决方案）中查找
 ctrl+shift+l|ctrl+shift+d(自定义):删除当前行  *ctrl+x 也行，只不过会覆盖剪切板内容
+shift+enter:智能分割线
 
 C# Interactive(c# 交互)-vs->视图->其他窗口->c#->交互
 可以以脚本的方式执行自己开发的dll
