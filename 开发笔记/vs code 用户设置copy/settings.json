@@ -7,9 +7,12 @@
     "files.autoGuessEncoding": true,
     "typescript.check.npmIsInstalled": true,    
     "workbench.startupEditor": "none",
+    "workbench.sideBar.location": "right",
+    "search.location": "sidebar",
     "editor.wordWrap": "on",
     "workbench.iconTheme": "vscode-icons",    
     "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",  
+    "git.autofetch": true,
     "git.enableSmartCommit": true,
     "vsicons.projectDetection.autoReload": true,    
     "team.showWelcomeMessage": false
