@@ -14,6 +14,7 @@
     "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",  
     "git.autofetch": true,
     "git.enableSmartCommit": true,
+    "git.confirmSync": false,
     "vsicons.projectDetection.autoReload": true,    
     "team.showWelcomeMessage": false
 }
