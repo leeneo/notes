@@ -2,7 +2,6 @@
 /.vscode
 *.zip
 *.exe
-*.jpg
 *.rar
 node_modules
 
