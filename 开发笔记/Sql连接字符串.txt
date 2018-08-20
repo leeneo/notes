@@ -1,0 +1,5 @@
+SQL SSMS中直接连：
+server Name:ip地址,端口号
+例：2058z21e72.iask.in,16051 ‘，’前是花生壳域名指向一个ip,‘，’后是端口号，中间以‘，’号隔开
+VS web.config配置：
+<add key="DbHost" value="2c1l390294.iok.la,10774" />
