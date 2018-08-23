@@ -85,3 +85,11 @@ workspaceRoot:项目所在目录。
 1、命令行：dotnet run-->localhost:5000
 2、vs code f5 调试
 
+添加依赖包的方式：
+
+1、VS-工具-NuGet包管理器-PackageManager：
+Install-Package Microsoft.EntityFrameworkCore.SqlServer;
+Install-Package Microsoft.EntityFrameworkCore.Tools
+
+2、dotnet 命令行添加包：
+dotnet add package Microsoft.EntityFrameworkCore.Tools
