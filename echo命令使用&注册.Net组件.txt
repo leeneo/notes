@@ -1,0 +1,7 @@
+: 注释信息，不会显示在命令中
+: echo 显示消息，或者启用或关闭命令回显。
+: ECHO [ON | OFF]	on:启用命令回显；off:关闭命令回显
+: ECHO [message]	类似print，输出消息
+echo off
+cd C:\Windows\Microsoft.NET\Framework\v4.0.30319
+regasm G:\客户程序\港岛假日酒店\港岛假日酒店\hotel\CeChengPay.dll /tlb:CeChengPay.tlb /codebase
