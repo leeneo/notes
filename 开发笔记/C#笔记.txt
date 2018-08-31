@@ -66,7 +66,11 @@ C# 7.1(目前仅.net core 2.0 支持)：
 2,推断的元组名称。
 3,默认表达式。
 
-
+string.Compare(String strA, String strB, bool ignoreCase)：比较strA和strB的值是否相等；为真返回0，假返回-1；可以比较为null的值;ignoreCase为true时，忽略比较大小写；为false时，值相同但大小写不一致返回1；
+web.config:<add key="IsDebug" value="true" />
+string.Compare(ConfigurationManager.AppSettings["IsDebug"], "true", true) ;     ==>返回 0
+string.Compare(ConfigurationManager.AppSettings["IsDebug"], "false", true) ;    ==>返回-1
+string.Compare(ConfigurationManager.AppSettings["IsDebug"], "null", true) ;     ==>返回-1
 
 
 
