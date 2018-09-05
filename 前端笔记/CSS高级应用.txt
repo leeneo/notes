@@ -425,14 +425,6 @@ background-size:x:*px y:*px¶¨ÒåÍ¼Æ¬´óÐ¡£»x-¿í¶È£¬Y-¸ß¶È£»x:auto y:auto;ÉèÖÃÍ¼Æ¬×
 soft	ÔÚ±íµ¥Ìá½»Ê±£¬textarea ÖÐµÄÎÄ±¾²»»»ÐÐ¡£Ä¬ÈÏ¡£
 hard	ÔÚ±íµ¥Ìá½»Ê±£¬textarea ÖÐµÄÎÄ±¾»»ÐÐ£¨°üº¬»»ÐÐ·û£©¡£µ±Ê¹ÓÃ "hard" Ê±£¬±ØÐëÖ¸¶¨ cols ÊôÐÔ¡£
 
-nth-of-type:
-
-
-
-
-
-
-
-
-
-
+Li:nth-child(1)---> Ñ¡ÔñµÄÊÇ li ÔªËØ£¬²¢ÇÒÕâ¸ö liÔªËØÊÇËü¸¸ÔªËØÏÂµÚÒ»¸ö×ÓÔªËØ£¬·ñÔòÑ¡²»µ½ÔªËØ¡£
+Li:nth-of-type(1)---> Ñ¡ÔñµÄÈÔÈ»ÊÇ li ÔªËØ£¬µ«ÊÇÕâ¸öliÖ»ÒªÊÇËü¸¸ÔªËØÏÂËùÓÐliÖÐµÚÒ»¸ö li ¾Í¿ÉÒÔÁË¡£
+nth-of-type() ÊÊºÏÓÃÓÚ±êÇ©Ñ¡ÔñÆ÷£¬²»ÊÊºÏÓÃÓÚÀàÃûÑ¡ÔñÆ÷

@@ -72,6 +72,14 @@ string.Compare(ConfigurationManager.AppSettings["IsDebug"], "true", true) ;     
 string.Compare(ConfigurationManager.AppSettings["IsDebug"], "false", true) ;    ==>返回-1
 string.Compare(ConfigurationManager.AppSettings["IsDebug"], "null", true) ;     ==>返回-1
 
+空白字符判断，string.IsNullOrWhiteSpace VS string.IsNullOrEmpty
+string.IsNullOrEmpty 只对无空格“”空字符有效
+//update TicketDetail set Openid=' ' where AutoID='2'
+if (!string.IsNullOrWhiteSpace(td.OpenID)) 
+    return Json(new { success = false, msg = "这张套票已经被领取了~" });    //不会执行
+if (!string.IsNullOrEmpty(td.OpenID))
+    return Json(new { success = false, msg = "这张套票已经被领取了~" });    //会执行
+
 
 
 

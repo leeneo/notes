@@ -1,0 +1,338 @@
+*******************************************************************************************
+HTML DOM 对象
+*******************************************************************************************
+document.body 		 	是DOM中Document对象里的body节点
+document.documentElement 	是文档对象根节点(html)的引用，包含html中的内容。
+dom.addEventlisnter();
+
+声明变量同时赋初始值，以确定数据类型，后续程序调用不会出错。只是变量声明，会生成五大数据区域，有可能读不出正确的值。
+
+innerHTML与innerText的用法与区别
+
+<div id="test">
+   <span style="color:red">test1</span> test2
+</div>
+test.innerHTML:
+
+　　也就是从对象的起始位置到终止位置的全部内容,包括Html标签。
+
+　　上例中的test.innerHTML的值也就是“<span style="color:red">test1</span> test2 ”。
+
+test.innerText: 
+
+　　从起始位置到终止位置的内容, 但它去除Html标签 
+
+　　上例中的test.innerTest的值也就是“test1 test2”, 其中span标签去除了。
+
+test.outerHTML:
+
+　　除了包含innerHTML的全部内容外, 还包含对象标签本身。
+
+　　上例中的test.outerHTML的值也就是<div id="test"><span style="color:red">test1</span> test2</div>
+
+*******************************************************************************************
+JavaScript 语法
+*******************************************************************************************
+js搬家-入口函数
+<script>
+	window.onload = function(){	//页面加载完成的事件 入口函数
+		var box = document.getElementById('box');
+		box.onclick = function(){
+			//alert(box.innerHTML);	
+			alert(this.innerHTML);
+		}	
+	}
+
+</script>
+
+typeof():检测数据类型
+parseInt();将字符串转换为整数型
+window.alert();window.prompt();弹出；
+document.write();文档输出流；
+console.log();浏览器调试；
+
+采用DOM方法建立一个新元素节点
+
+var layer=document.createElement("div");
+layer.setAttribute("id","WndName");
+layer.innerHTML="盒子内容";
+//var txt=document.createTextNode("div里面放置的内容");
+//layer.appendChild(txt);
+document.body.appendChild(layer);
+
+JS数组的数据类型是object,可以存放任何一种数据；
+typeof(array)=typeof array=object;
+
+Math.random();生成0到1之间的小数；
+Math.random()*5;生成0到5之间的小数；
+parseInt(Math.random());去掉小数点，生成整数。
+parseInt(Math.random()*2);生成的值为：0，1；
+
+js变量声明提前
+console.log(n);	//undefined
+var n;
+===========================================================================================
+<script>
+/*for（1;2;3)语句的执行顺序是 先执行1，然后判断2，为真就执行内嵌语句，语句完成后执行3，然后开始下次循环。*/　 
+for(var i=0;i<3;i++){
+	alert("i:"+i+"\n");
+}
+</script>
+/*
+执行结果：
+i:0
+i:1
+i:2
+*/
+===========================================================================================
+document.body.clientHeight; //页面内容高度
+window.innerHeight;	//浏览器可视区域高度
+
+[html>body>div>span 同名事件会由子元素传递到父元素,即冒泡。
+在事件中加入e.stopPropagation();阻止事件传递。
+document.querySelector('selector').onclick=function(e){console.log('span');e.stopPropagation();}]
+
+confirm(string str)用法与alert(string str)一样，不同的是confirm弹出的是确认框，确定：true,取消：false
+
+*******************************************************************************************
+jQuery语法
+*******************************************************************************************
+入口函数
+$(document)不能加引号，元素标记需要加单引号:$('div'),；
+
+$(document).ready(function(){})可以简写为$(funtion(){});
+jq入口函数可以省略，省略后的脚本要写在操作的元素下方。
+
+js入口函数与jq入口函数区别：js入口函数（包括事件）写多个只执行最后一个;jq写多个依次顺序执行。
+{} 被称为json。
+
+语法体
+<script src="jq/jquery-1.11.1.min.js"></script>
+<script>
+<!--
+	$(function(){
+		$('#btnShow').click(function(){
+			$('#box1').hide();
+		})
+	})
+-->
+</script>
+
+eq()方法获取数组中的单个对象，css()方法设置或获取元素的css属性，attr('属性名','属性值')方法设置或访问html标记属性（src vlue ...），语法同css()方法；html()设置或获取标记里的内容；
+
+$('array').eq(n).click(funtion(){//n数组下标
+	$('div').css('width');	//获取单个属性
+	$('div').css('width','100px');//设置单个属性
+	$('div').css({'width':'100px','height':'40px'});//设置多个属性
+})
+
+基础选择器：
+$(',box>div')		子级
+$(',box+div')		同级第一个兄弟元素
+$('p~div') 		同级所有兄弟元素
+
+过滤选择器：
+$('div:first')
+:first   选中第一个
+:last    选中最后一个
+:not(:firts|last)   不要哪一个
+:even   偶数（显示效果是奇数）；针对下标，0也算偶数
+:odd    奇数（显示效果是偶数）
+:gt()   大于
+:lt()   小于
+:eq()   等于
+
+与.eq() 效果完全一样
+$('button:eq(0)')=$('button').eq(0)
+
+$('button:eq(this.index())')：错误，用this关键字引用时，不可以这样用，在''内时，eq()内只能是数组下标，。
+正确写法：$('button').eq(this.index())
+
+可以复合使用
+$('.box ul li:gt(2):not(:last)')//大于3且排除最后一个li
+
+父子选择器
+$(this).parent()
+$(this).children()
+兄弟选择器
+$(this).siblings()
+排他思想,经常用于banner图轮换
+
+小括号中可以缩小选择范围,可以是CSS是选择器。$(this)这代表jq中的事件源。
+如：$(this).parent('.div').html();
+$(this).parent().children().html();//只能获取到子级下第一个孩子,不建议连用
+
+模块化设计，避免重复类名
+$(this).next()；相邻下一个
+$(this).parent().prev()；父级上一个
+
+获得内容 - text()、html() 以及 val()
+三个简单实用的用于 DOM 操作的 jQuery 方法：
+text() - 设置或返回所选元素的文本内容
+html() - 设置或返回所选元素的内容（包括 HTML 标记）
+val() - 设置或返回表单字段（input:value）的值
+
+hover(function(){移入代码},function(){移出代码})
+jquery $()引用的鼠标事件去掉on,要不然会报错。
+
+.index() 获取在父元素中的排行
+.eq() 获取在所有同类元素中的排行
+
+控制标记类名
+addClass('classname')
+removeClass(‘cn’)
+hasClass('cn')判断是否有此类名
+toggleClass('cn')切换
+append(),prepend()添加子节点
+before(),after()添加兄弟节点
+remove()删除节点，empty()清空子节点
+
+回调函数：等动画执行完毕后，再执行的函数:callback(),complete()
+$(this).slideUp(500,function(){})//动画内的function就是一个回调函数
+
+on()给未来元素添加事件，$(document).on('事件类型','选择器',function(){})
+
+String.replace(/被替换的内容/g,“要替换成的内容”)，/ /之间不加引号，g全局匹配符
+清除字符串空格字符：' test t .| .'.replace(/ /g,'')=‘testt.|.’
+//replace(value|protop)可以替换掉字符串中的特定字符，match(value|protop)可以检索字符串中是否含有特定字符，并返回该特定字符。属性可以是特定字符，也可以是正则表达式
+
+jQurey动画
+淡入，淡出效果
+fadeOut(time)淡出，fadeIn(time),fadeToggle(time)
+此3种fade会设置display:none;使元素不占位隐藏。
+fadeTo(时间，透明度值)：改变透明度，如果设置fadeTo为0，只是可见度为0，盒子还占据原有的位置。
+CSS:opacity:0-1;控制透明度
+
+show();hide();toggle();
+slideUp();slideDown();slideToggle();
+
+stop().slideUp();	//在动画函数前加上stop()方法，可以阻止动画乱序（即上一个动画还未完成时，就加载下			一个动画效果）
+
+animate({'':''},time)，只能设置带数值的CSS属性
+如：$(this).animate({'width':'200px'},500);
+animate模拟slide动画，先设置div.css('height':'0');然后.animate({'height':'100px'},500);
+animate回调：
+$('div').animate({'left':'500px'},500,function(){
+	$('div').hide();
+})
+
+//json设置法，动画成对角线显示；
+$('div').animate({'left':'800px','top':'200px'},500).animate({'opacity':'.1'},500).animate({'opacity':'1'},500).animate({'left':'100px','top':'40px'},500);
+
+====================================================================================================
+this在谁的函数体内，指示的就是谁(但在一个集合中，this仅能获取第一个元素)：
+		$(document).on('click','ul li a',function(){
+//					alert($(this).html());		//在这里this指示的是<a>
+					$(this).parent().slideUp(500,function(){
+						//回调函数：等动画函数执行完毕后 再执行的函数
+//						$(this).remove();
+//						alert($(this).html());	//由于这是在li函数内部，所以在这里this指示是li本身
+					})
+		})
+====================================================================================================
+each 遍历函数，代替js for循环
+$('div').each(function(index,el){});index代表当次循环,选择器集合的索引值，el-element代表当次循环的那个元素，也可以使用$(this)代替；即$(el)=$(this)
+
+事件坐标：事件发生时，function(e)，e-event存储着x,y轴的信息
+e.pageX;e.pageY,用于获取元素坐标；
+
+鼠标移动事件：
+.mousemove(function(e){e.pageX;e.pageY})
+
+测试代码：
+console.log(‘要测试的代码’)，浏览器中测试代码
+
+页面滚动事件：
+$(window).scroll(function(){})
+$(window).scrollTop();   //获取用户滚动的垂直距离
+
+offset().top	//获取元素距离页面内容顶端的距离值，不是最顶端的浏览器
+offset().left	//获取元素距离页面内容左侧的距离值
+
+返回顶部
+$('body','html').stop().animate({'scrollTop':'0'},500);
+//这里的并集选择器，是兼容性的语法，必须这样写才是兼容代码。
+
+定时器对象：
+var timer=null;	//声明变量时，若不赋值，会生成五份变量区域
+timer=setTimeout(function(){},time) //设置单次定时器,time值一般最小30
+var intval=setInterval(function(){},time) //设置多次定时器
+clearTimeout(timer);		//清除单次，定时器变量不能加引号，要不然会出错
+clearInterval();		//清除多次
+
+定时器中的this指示的是window；定时器是window对象，所以在定时器内部使用this时，可以先在外部用变量把this存储起来。var _this=$(this)|this;
+
+时间对象：
+var day=new Date();
+day.getFullYear();
+(day.getMonth()+1)//获取的是从0-11的索引值;
+day.getDay()//获取周几，索引值;
+day.getDate()//获取日;
+day.getHours();day.getMinutes();day.getSeconds();
+
+banner轮播：
+UL>li*n>img，显示首个li的图片方法，ul添加overflow:hidden;
+img所在的li一定要加position:absolute;否则图片切换时会有闪烁；
+
+DOM对象
+document.getElementsByTagName('div');
+document.getElementsByClassName('cname');
+document.getElementsByName('name');
+document.getElementById('id');
+document.querySelector('.box');//参数是一个CSS选择器，获取第一个类名为box的元素
+document.querySelectorAll('.box');//获取所有类名为box的元素
+
+jQuery对象
+jquery('button');
+$('.bottom');
+
+DOM对象转换成jqurey对象
+var dv=document.getElemetsByTagName('div');
+$(dv);
+
+jqurey 对象转换成DOM对象
+$('div').get(0);
+
+
+e.pageX——相对整个页面的坐标
+e.layerX——相对当前坐标系的border左上角开始的坐标
+e.offsetX——相对当前坐标系的border左上角开始的坐标
+e.clientX——相对可视区域的坐标
+e.x——相对可视区域的坐标
+pageX指鼠标在页面上的位置，以页面左侧为参考点
+clientX指可视区域内离左侧的距离，以滚动条滚动到的位置为参考点。各个浏览器相同。
+即当有滚动条时clientX  小于  pageX
+console.log('eY'+e.pageY);	//距离页面最顶端
+console.log('cY'+e.clientY);	//距离可视区域（不含滚动区域）最顶端
+
+浏览器调试-source-watch-输入-ev|其他;可以监视某个属性
+
+$(window).height();	//获取当前窗口高度。
+$(document).height();	//获取当前文档高度。
+
+'~~' 运算符等同于ParseInt();只不过能把false,true,undefined转换成对应的0和1：
+~~"9.99"=9
+~~'false'=0
+~~'true'=1
+~~undefined=0
+~~!undefined=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
