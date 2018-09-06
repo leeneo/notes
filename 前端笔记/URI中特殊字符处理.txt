@@ -1,0 +1,108 @@
+URI中特殊字符处理
+
+一、问题阐述
+　　今天写 url 请求时，不管是get 请求还是 post 请求，如果参数中带有 + % # 等特殊符号，就无法正常获得参数
+
+　　具体现象就是 用URL传参数的时候，用&符号连接，如果某一个参数中含"#$ ^ & * + ="这些符号的时候，在另一个页面getParameter就会取不到传过来的参数。
+
+二、解决方法
+　　有些符号在URL中是不能直接传递的，如果要在URL中传递这些特殊符号，那么就要使用他们的编码了
+
+　　1）下面列出了一些URL特殊符号及编码十六进制值
+
+    +           URL中+号表示空格               %2B =>等价于‘%加上字符的十六进制编码’
+    空格        URL中的空格可以用+号或者编码    %20 
+    /           分隔目录和子目录                %2F　　　
+    ?           分隔实际的URL和参数             %3F 
+    %           指定特殊字符                    %25 
+    #           表示书签                        %23 
+    &URL        中指定的参数间的分隔符          %26 
+    =URL        中指定参数的值                  %3D
+ 
+
+ 　　2）java 实现
+
+　　　　如果代码采用java 来访问请求的话，可以采用 URLEncoder.encode(param,"utf-8") 将参数值编码，对应的解码方法为URLEncoder.decode()
+
+　　　　java.net.URLEncoder.encode(String s)和java.net.URLDecoder.decode(String s); 
+
+　　　　比如： 　　　　
+        String str = "http://localhost:8980/select?param=" + URLEncoder.encode("bcpuser$userid$1#3#4","utf-8") ; <br>//得到结果  http://localhost:8980/BCPClientServer/select?param=bcpuser%24userid%241%233%234
+　　　　得到url 可以直接在浏览器上访问，如果后台采用的java+ springMVC，可以直接得到预期的参数（无需再次解码的）
+
+ 
+
+　　3）C# 实现
+
+　　C#中编码的主要方法：HttpUtility.UrlEncode （不推荐）、Server.UrlEncode （不推荐）、Uri.EscapeUriString、Uri.EscapeDataString。
+
+String str = "http://localhost:8980/select?param=" + Uri.EscapeDataString("bcpuser$userid$1#3#4");
+//得到结果  http://localhost:8980/BCPClientServer/select?param=bcpuser%24userid%241%233%234
+
+　　C#中编码的主要方法：HttpUtility.UrlEncode、Server.UrlEncode、Uri.EscapeUriString、Uri.EscapeDataString。
+　　其中，Uri.EscapeUriString、Uri.EscapeDataString。是由System.Uri类提供，静态方法。对应的解码方法为Uri.UnescapeDataString；
+　　而Server.UrlEncode由HttpServerUtility(WebForm)类提供，在MVC中则由HttpServerUtilityBase提供。Server对象，其实WebForm开发者应该非常熟悉，既能够根据输入网址路径获取服务器的绝对路径，又能够对Uri进行编码解码等等一系列操作。对应的解码方法为Server.UrlDecode。
+　　HttpUtility.UrlEncode();　　是由HttpUtility类提供的，对应的解码方法为HttpUtility.UrlDncode();
+
+Server.UrlEncode && HttpUtility.UrlEncode:不推荐
+
+　　把这两个放到一起说是因为这两个方法在绝大多数情况下是一样的。它们的区别是HttpUtility.UrlEncode默认使用UTF8格式编码，而Server.UrlEncode是使用系统预设格式编码，Server.UrlEncode使用系統预设编码做为参数调用HttpUtility.UrlEncode编码，所以如果系统全局都用UTF8格式编码，这两个方法就是一样的。
+
+　　这两个方法是怎么编码的呢，我们来看个示例：
+
+string url1 = "http://www.cnblogs.com/a file with spaces.html?a=1&b=博客园#abc";
+Response.Write(HttpUtility.UrlEncode(url1) );
+
+//output
+http%3a%2f%2fwww.cnblogs.com%2fa+file+with+spaces.html%3fa%3d1%26b%3d%e5%8d%9a%e5%ae%a2%e5%9b%ad%23abc
+　　由上面的例子我们可以看出，HttpUtility.UrlEncode对冒号(:)和斜杠(/)进行了编码，所以不能用来对网址进行编码。
+
+　　那么能不能对参数进行编码呢，答案也是否定的。因为在参数中空格应该被编码为%20而不是被HttpUtility.UrlEncode编码为加号(+)，所以不推荐用这两个方法对URI进行编码。
+
+ 　　Uri.EscapeUriString:用于对网址编码(不包含参数)
+
+string url1 = "http://www.cnblogs.com/a file with spaces.html?a=1&b=博客园#abc";
+Response.Write( Uri.EscapeUriString(url1));
+//outputs:
+http://www.cnblogs.com/a%20file%20with%20spaces.html?a=1&b=%E5%8D%9A%E5%AE%A2%E5%9B%AD#abc
+　　可以看出，Uri.EscapeUriString对空格进行了编码，也对中文进行了编码，但对冒号(:)、斜杠(/)和井号(#)未编码，所以此方法可以用于网址进行编码，但不能对参数进行编码，作用类似JavaScript中的encodeURI方法。
+
+ 　　Uri.EscapeDataString:用于对网址参数进行编码
+
+string url1 = "http://www.cnblogs.com/a file with spaces.html?a=1&b=博客园#abc";
+Response.Write(Uri.EscapeDataString(url1));
+//outputs:
+http%3A%2F%2Fwww.cnblogs.com%2Fa%20file%20with%20spaces.html%3Fa%3D1%26b%3D%E5%8D%9A%E5%AE%A2%E5%9B%AD%23abc
+　　可以看出，Uri.EscapeDataString对冒号(:)、斜杠(/)、空格、中文、井号(#)都进行了编码，所以此方法不可以用于网址进行编码，但可以用于对参数进行编码，作用类似JavaScript中的encodeURIComponent方法。
+
+　　4） javascript 实现方法
+
+　　javascript中的编码有三种方法:escape （不推荐，对ASCII符号正确编码）、encodeURI、encodeURIComponent
+
+escape：不推荐使用。
+　　原因：eacape是BOM中的方法，只能对ASCII符号(英文)正确编码，而encodeURI、encodeURIComponent可以对所有的Unicode符号(中文)编码。ECMAScript v3 反对使用该方法，应用使用 decodeURI() 和 decodeURIComponent() 替代它。
+　　escape不编码字符有69个：*，+，-，.，/，@，_，0-9，a-z，A-Z
+
+　　encodeURI：用于对网址编码(不包含参数)
+　　　　encodeURI不编码字符有82个：!，#，$，&，'，(，)，*，+，,，-，.，/，:，;，=，?，@，_，~，0-9，a-z，A-Z
+　　　　encodeURI就是为这个而设计的。encodeURI不对URI中的特殊字符进行编码，如冒号(:)、斜杠(/)。下面看个示例：
+encodeURI("http://www.cnblogs.com/a file with spaces.html")
+// outputs http://www.cnblogs.com/a%20file%20with%20spaces.html
+　　　　可以看到仅仅把空格替换成了20%，所以此方法可用于对网址进行编码。
+
+　　　　由于encodeURI不对冒号(:)、斜杠(/)进行编码，所以如果参数(如把网址作为参数)中包含冒号(:)、斜杠(/)，就会解析出错，所以此方法不能对参数进行编码。
+ 
+
+ 　　encodeURIComponent:用于对网址参数进行编码
+　　　　encodeURIComponent不编码字符有71个：!， '，(，)，*，-，.，_，~，0-9，a-z，A-Z
+　　　　可以看到此方法对:/都进行了编码，所以不能用它来对网址进行编码。由于此方法对中文，空格，井号(#)，斜线(/)，冒号(:)都进行了编码，所以适合对URI中的参数进行编码。看下面的示例：
+
+var param="博客园";
+var url="http://www.cnblogs.com/?key="+encodeURIComponent(param)+"&page=1";
+console.log(url);//outputs http://www.cnblogs.com/?key=%E5%8D%9A%E5%AE%A2%E5%9B%AD&page=1
+ 
+
+ 三、总结
+　　这里我并没有写的很详细，只是达到了我的目的，故暂时记录这么多。
+
+　　因为问题出现传递的参数里包含特殊符号而导致参数获取错误，故这里在url 拼接参数的时候，将参数的值编码后传递即可（原理如此，不限语言）
