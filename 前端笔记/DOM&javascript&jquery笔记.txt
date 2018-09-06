@@ -193,7 +193,7 @@ $(this).slideUp(500,function(){})//动画内的function就是一个回调函数
 on()给未来元素添加事件，$(document).on('事件类型','选择器',function(){})
 
 String.replace(/被替换的内容/g,“要替换成的内容”)，/ /之间不加引号，g全局匹配符
-清除字符串空格字符：' test t .| .'.replace(/ /g,'')=‘testt.|.’
+清除字符串空格字符：var str=' test t .| .';str.replace(/ /g,'')=‘testt.|.’
 //replace(value|protop)可以替换掉字符串中的特定字符，match(value|protop)可以检索字符串中是否含有特定字符，并返回该特定字符。属性可以是特定字符，也可以是正则表达式
 
 jQurey动画
