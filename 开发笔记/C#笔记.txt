@@ -80,6 +80,16 @@ if (!string.IsNullOrWhiteSpace(td.OpenID))
 if (!string.IsNullOrEmpty(td.OpenID))
     return Json(new { success = false, msg = "这张套票已经被领取了~" });    //会执行
 
+匿名类&Json的结合使用
+语法：var obj=new{Name=value};
+
+//非控制器类内部使用
+return Newtonsoft.Json.JsonConvert.SerializeObject(new Results(-1, ex.InnerException.Message));
+return Newtonsoft.Json.JsonConvert.SerializeObject(new { code = -1, msg = ex.InnerException.Message });
+//控制器类内部使用
+JsonResult System.Web.Mvc.Json
+return Json(new Results(-1, as_bill_no));
+return Json(new { success = false, msg = "找不到此参数，请刷新后重试。" });
 
 
 
