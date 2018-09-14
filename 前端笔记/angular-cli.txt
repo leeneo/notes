@@ -37,7 +37,7 @@ JIT：运行期间编译，每次运行都会编译一次；
 -->rd /q /s @ngtools/webpack@x.x.x old版本
 
 即时（JiT）编译器动态引导，一般在进行开发调试时，默认采用这种方式
-//main.ts
+--main.ts
  import  './polyfills.ts';
 //  连同Angular编译器一起发布到浏览器
  import {  platformBrowserDynamic }  from  '@angular/platform-browser-dynamic';

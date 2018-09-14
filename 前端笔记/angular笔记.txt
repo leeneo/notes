@@ -25,21 +25,57 @@ ng set -g packageManager=cnpm --global
 简化:ng g c login -it -is
 2，ng generate component name
 模板文件，样式文件，类文件分开放置
+简化:ng g c login
+
+--引导过程
+Angular2通过在src/main.ts中引导AppModule来启动应用，src/index.html为app首页展示页，类似于一个母板，集合了根组件标签<app-root></app-root>；
+所有组件在app.module.ts根模块中进行注册，app.component 为app根组件，其他组件标签通过整合进根组件标签<app-root></app-root>，然后再由index.html中呈现出来；（自定义组件标签直接放进index.html中并不会起效果）
+这就形成了一个组件构成形式的单页面应用！
+
+app.module/bootstrap指明哪个组件为引导性组件（本案例中的AppComponent）。当Angular引导应用时，它会在DOM中渲染这个引导性组件，并把结果放进index.html的该组件的元素标签中（本案例中的app-root）。
+
+--引导模式，详见angular-cli.txt
+JiT:动态引导  //开发调试，默认方式，连同Angular编译器一起发布到浏览器
+AoT:静态引导  //生成更小、启动更快的应用，不把编译器发布到浏览器
+*修改main.ts 引用模块来改变引导模式
 
 引入第三方JS类库
 1,包中已有*.d.ts后缀的类型定义文件，直接使用npm i --save packageName
 2,没有.d.ts文件，npm i --save packageName=>npm i @types/packageName --save-dev(意思是在@types/搜索安装类 型定义文件)
 3，找不到类型定义文件，需要手动添加类型定义：src/typings.d.ts=>declare module 'packageName'=>组件中  import * as friendName(别名) from 'packageName'=> friendName.method()
 
+标签语法：
+*angular严格区分大小写：组件定义函数onClick()与标签引用函数(click)="onclick()" 大小写不一致就会报错！
+<!-- (click)="onClick()"，圆括号是说发生此事件时，调用等号后面的表达式或函数;等号后面的onClick()是我们自己定义在LoginComponent中的函数，这个名称你可以随便定成什么，不一定叫onClick() -->
+
 0、引用
-#usernameRef 表示引用，这里引用的就是input这个对象。
+<!-- #usernameRef，表示引用（reference），这里引用的是input这个对象，然后传递input的value给组件的onClick()函数，在组件中处理input的值，是不是有点像asp.net 的控制器 -->
 <div>
   <input #usernameRef type="text">
   <input #passwordRef type="password" name="pwd" id="pwd">
   <button (click)="onClick(usernameRef.value,passwordRef.value)">Login</button>
 </div> -->
 
-1、注入器通过提供商新建依赖，提供商--交付服务的配方，被关联到一个令牌；
+--login组件
+onClick(username, password) {
+  console.log('username:' + username + "\n"+"password:" + password);
+}
+
+0.1 服务
+新建服务：ng g s core/auth=>在src/app/core 目录下建立auth.service.ts
+
+//可以为方法指定参数类型和返回类型
+//boolean 返回类型；string 参数类型
+*类型约束，你在别处调用这个方法时，如果给出的参数类型或返回类型不正确，IDE就可以直接告诉你错了
+loginWithCredentials(username: string, password: string): boolean {
+  if (username === 'leeneo')
+    return true
+  return false
+}
+
+
+1、依赖性注入：DI (Dependency Injection)
+注入器通过提供商新建依赖，提供商--交付服务的配方，被关联到一个令牌；
 初始化注入器，通常用组件或者根元素中的providers数组进行注册。
 
 依赖性注入：app.module 中配置 providers: [{provide:'auth',useClass:AuthService}]，需要引入(import)AuthService
