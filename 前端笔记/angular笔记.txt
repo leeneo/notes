@@ -72,6 +72,10 @@ loginWithCredentials(username: string, password: string): boolean {
     return true
   return false
 }
+--app.module.ts 根模块中的providers是配置在模块中全局可用的service或参数的
+providers: [{provide: 'auth',  useClass: AuthService}]
+provide:服务名称，useClass:该服务对应的类
+
 
 
 1、依赖性注入：DI (Dependency Injection)
