@@ -91,6 +91,17 @@ JsonResult System.Web.Mvc.Json
 return Json(new Results(-1, as_bill_no));
 return Json(new { success = false, msg = "找不到此参数，请刷新后重试。" });
 
+// 加上此条件：where T : class ，下行代码会报类型错误：T必须是引用类型
+    var res = ApiClient.Get<bool>("/neworder/del/" + id);
+
+    public static T Get<T>(string url)
+    {
+            return default(T);
+    }
+    public static T Get<T>(string url) where T : class
+    {
+            return default(T);
+    }
 
 
 
