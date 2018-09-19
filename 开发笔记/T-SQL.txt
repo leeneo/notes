@@ -105,7 +105,7 @@ exec sp_addlinkedserver 'TestServer','','SQLOLEDB','120.76.41.xx'
 exec sp_addlinkedsrvlogin 'TestServer','false',null,'sa','pwd'
 exec sp_serveroption 'TestServer','rpc out','true' --这个允许调用链接服务器上的存储过程
 
---查询链接服务器
+--查询已有链接服务器
  select * from sys.servers
 
 --调用远程服务器存储过程：
