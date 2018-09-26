@@ -113,6 +113,7 @@ exec TestServer.数据库名.dbo.过程名 '参数'
 
 --demo:
 select * from TestServer.TestDB.dbo.regcard where s_print_no = '17376852911'
+select * from [120.76.42.118]].TestDB.dbo.regcard where s_print_no = '17376852911'
 
 declare @as_error varchar(200)
 exec TestServer.TestDB.dbo.Usp_Insert_cardaccount3 '', '11', '消费', @as_error output
