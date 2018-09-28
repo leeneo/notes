@@ -1,4 +1,10 @@
-open in browser
+open in browser	(TechER)	alt+shift+b
+Easy LESS
+ESLint
+HTML Snippets
+JavaScript(ES6)code Snippets
+minify
+
 color pick
 Quokka
 visual studio Code Format
@@ -9,14 +15,7 @@ Beautify
 C#
 C# FixFormat	ctrl+alt+i
 Debugger for Chrome
-Easy LESS
-ESLint
-HTML Snippets
-JavaScript(ES6)code Snippets
-minify
-open in browser		alt+shift+b
 Prettier-Js formatter
-minify
 auto close tag
 asp.net helper
 auto import

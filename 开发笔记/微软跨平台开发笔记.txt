@@ -499,6 +499,7 @@ ef-cli命令详见：https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/
 
 新建项目ASP.Net Core 2.0 WEB项目：添加新项目->.Net Core -> Asp.Net Core Web 应用程序->Web MVC
 注意事项：模板选择.Net Core -> Asp.Net Core 2.0;
+=================================================================================================================================
 
 依赖注入(DI):
 传统上来说，如果一个对象A想使用对象B的功能,需要在调用B的功能之前先创建对象B和调用对象B的方法。
@@ -507,6 +508,8 @@ ef-cli命令详见：https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/
 作用：有效的解耦程序架构。
 对象容器：Java 平台:Spring，.NET 平台:Spring .Net,Prism,Unity(不是游戏那个Unity);
 
+依赖注入类型的注册一般是在程序启动的入口中，如Startup.cs中的ConfigureServices中，该类的主要目的就是注册依赖注入的类型
+=================================================================================================================================
 VS中更改csproj文件的<Project>节点，可以转换项目类型
 .Net Core 类库项目csproj文件<Project Sdk="Microsoft.NET.Sdk">
 .Net Core Web:MVC项目csproj文件<Project Sdk="Microsoft.NET.Sdk.Web">
