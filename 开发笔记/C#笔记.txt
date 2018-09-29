@@ -115,7 +115,37 @@ return Json(new { success = false, msg = "找不到此参数，请刷新后重�
             return default(T);
     }
 
+执行动态SqlQuery查询语句，多次使用同一个SqlParameter（数组或集体就会报）时报“另一个 SqlParameterCollection 中已包含 SqlParameter”错误
+EN：The SqlParameter is already contained by another SqlParameterCollection
+{
+    string sql = "Usp_wx_binding_Card @as_WeChatId,@as_telno,@as_cardno,@as_password,@as_type,@as_error out";
+    string result = "";
+    
+    var param = new List<SqlParameter>();
+    param.Add(new SqlParameter("@as_WeChatId", request.as_WeChatId));
+    param.Add(new SqlParameter("@as_telno", request.as_telno));
+    param.Add(new SqlParameter("@as_cardno", request.as_cardno));
+    param.Add(new SqlParameter("@as_password", request.as_password));
+    param.Add(new SqlParameter("@as_type", request.as_type));
+    param.Add(new SqlParameter("@as_error", SqlDbType.NVarChar, 255) { Direction = ParameterDirection.Output, Value = request.as_error });
 
+    var results = context.Database.SqlQuery<ProcedureReturn>(sql, param.ToArray()).FirstOrDefault();
+    result = param[5].Value.ToString(); //得到OutPut类型值
 
+    解决方案（第二次执行使用clone语法）：
+    var results = db.Database.SqlQuery<ProcedureReturn>(sql, param.Select(x => ((ICloneable)x).Clone()).ToArray()).FirstOrDefault();
+    bResult = param[5].Value.ToString(); //得到OutPut类型值
+}
+
+=================================================================================================================================
+EntityState.Modified 再 SaveChanges 与直接SaveChanges 的区别
+
+1，会更新实体所有字段
+db.Entry(member).State = EntityState.Modified;
+db.SaveChanges();
+
+2，只更新修改的字段
+regcard.s_tel = bRegcard.s_tel;
+db.SaveChanges();
 
 
