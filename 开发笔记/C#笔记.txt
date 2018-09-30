@@ -147,5 +147,3 @@ db.SaveChanges();
 2，只更新修改的字段
 regcard.s_tel = bRegcard.s_tel;
 db.SaveChanges();
-
-
