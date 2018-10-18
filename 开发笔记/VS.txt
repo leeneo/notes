@@ -42,3 +42,37 @@ C# Interactive(c# 交互)-vs->视图->其他窗口->c#->交互
 项目属性->生成（输出）->勾选“为com互操作注册”->应用程序(程序集信息)->勾选“使程序集com可见”
 
 SQL Server Profiler 调试小技巧 --> 筛选ApplicationName为类似于[.Net SqlClient Data Provider]
+
+=================================================================================================================================
+C# 代码注释生成代码提示和帮助文档
+
+C#文档注释格式：
+/// <summary>
+/// function description
+/// </summary>
+/// <param name="para1"></param>
+/// <param name="para2"></param>
+/// ...
+/// <returns>return value</returns> 
+
+生成XML文档内容：
+<member name="M:ApiClient.Invoke``1(System.String,System.String,System.Object,System.Boolean)">
+    <summary>
+    调用远程接口。
+    </summary>
+    <param name="className">类名。</param>
+    <param name="methodName">方法名。</param>
+    <param name="data">调用时提交的数据。</param>
+    <param name="isJson">指示提交的数据是否为Json格式。</param>
+    <returns></returns>
+</member>
+
+1. C# 生成代码提示(hint)
+打开程序集信息：项目属性-->生成-->输出-->勾选xml文档文件（默认生成在bin目录下）。
+拷贝类库的时候，要连xml帮助文件一起拷贝。 
+
+2. C# 生成帮助文档(html/chm..)
+使用工具sandcastle：
+http://sandcastle.codeplex.com/
+
+=================================================================================================================================
