@@ -1,0 +1,17 @@
+报错处理
+*************************************************************************************
+
+1,  "/Home/Index.cshtml"处的视图必须派生自 WebViewPage 或 WebViewPage<TModel>
+解决方法：
+Views文件夹下缺少web.config，
+或者<namespaces><add namespace="CCWXWeb" /></namespaces>参数引用视图所在项目命名空间不准确，修改或者去掉此命名空间设置即可
+
+
+2,未能从程序集“System.ServiceModel, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089”中加载类型“System.ServiceModel.Activation.HttpModule”
+
+错误原因：根据MSDN的解释：如果安装了 .NET Framework 4，随后启用了 .NET Framework 3.5WCF HTTP 激活，则会发生此错误。
+
+解决办法：
+若要解决该问题，请在 Visual Studio 2010 命令提示符下运行下面的命令行：
+aspnet_regiis.exe -i -enable
+或在cmd中运行：C:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -i -enable
