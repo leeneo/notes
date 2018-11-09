@@ -31,7 +31,7 @@ ctrl+b:侧边栏
 选择从光标到行尾Shift+End
 选择从行首到光标处Shift+Home
 *删除光标右侧的所有字Ctrl+Delete（实用）
-*选择多处，一起修改：Alt+Click 依次点击，或者Ctrl+Alt+Down 或 Ctrl+Alt+Up（实用）
+*选择多处，一起修改：Alt+Click 依次点击，或者Ctrl+Shift+Alt+Down 或 Ctrl+Shift+Alt+Up（实用）
 *同时选中所有匹配的Ctrl+Shift+L（实用）
 选中下一个相同的匹配：Ctrl+Shift+K(原为Ctrl+D)
 删除当前行：Ctrl+D(自定义,原为Ctrl+Shift+K)

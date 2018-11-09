@@ -118,3 +118,43 @@ select * from [120.76.42.118]].TestDB.dbo.regcard where s_print_no = '1737685291
 declare @as_error varchar(200)
 exec TestServer.TestDB.dbo.Usp_Insert_cardaccount3 '', '11', '消费', @as_error output
 select @as_error
+
+=============================================================================================================
+/*SET QUOTED_IDENTIFIER ON 的作用*/
+
+distinct 为sql server 标识符，可以通过加双引号的方式作对象名使用，但在QUOTED_IDENTIFIER 为off时加双引号是不起作用的
+SET QUOTED_IDENTIFIER ON
+create table "distinct"(  
+ id int not  null constraint pk_1 primary   key,  
+ value varchar(255),  
+ flag int  
+)  
+
+SET QUOTED_IDENTIFIER ON
+drop table "distinct"
+--------------------- --------------------- --------------------- --------------------- 
+当 SET QUOTED_IDENTIFIER 为 ON 时
+
+标识符可以由双引号分隔，而文字必须由单引号分隔。
+由双引号分隔的所有字符串都被解释为对象标识符。因此，加引号的标识符不必遵守 Transact-SQL 标识符规则。它们可以是保留关键字，并且可以包含 Transact-SQL 标识符中通常不允许的字符。
+不能使用双引号分隔文字字符串表达式，而必须用单引号括住文字字符串。
+如果单引号 (‘) 是文字字符串的一部分，则可以由两个单引号 (”) 表示。
+当对数据库中的对象名使用保留关键字时，SET QUOTED_IDENTIFIER 必须为 ON。
+当 SET QUOTED_IDENTIFIER 为 OFF 时（默认值）
+
+标识符不可加引号，且必须遵守所有 Transact-SQL 标识符规则。有关更多信息，请参见使用标识符。
+表达式中的文字字符串可以由单引号或双引号分隔。
+如果文字字符串由双引号分隔，则可以在字符串中包含嵌入式单引号。
+当在计算列或索引视图上创建或操作索引时
+
+SET QUOTED_IDENTIFIER 必须为 ON。
+有关计算列上的索引视图和索引所必需的 SET 选项设置的更多信息，请参见 SET 中的”使用 SET 语句时的注意事项”
+
+=============================================================================================================
+/*SET ANSI_NULLS ON 的作用*/
+
+当 SET ANSI_NULLS 为 ON 时，即使 column_name 中包含空值，使用 WHERE column_name = NULL 的 SELECT 语句仍返回零行。 即使 column_name 中包含非空值，使用 WHERE column_name <> NULL 的 SELECT 语句仍返回零行。
+
+当 SET ANSI_NULLS 为 OFF 时，等于 (=) 和不等于 (<>) 比较运算符不遵守 ISO 标准。 使用 WHERE column_name = NULL 的 SELECT 语句返回 column_name 中包含空值的行。 使用 WHERE column_name <> NULL 的 SELECT 语句返回列中包含非空值的行。 此外，使用 WHERE column_name <> XYZ_value 的 SELECT 语句返回所有不为 XYZ_value 也不为 NULL 的行。
+
+当 SET ANSI_NULLS 为 ON 时，所有对 null 值的比较均取值为 UNKNOWN。 当 SET ANSI_NULLS 为 OFF 时，如果数据值为 NULL，则所有数据对空值的比较将取值为 TRUE。 如果未指定 SET ANSI_NULLS，则应用当前数据库的 ANSI_NULLS 选项设置。
