@@ -2,7 +2,6 @@ node.exe 所在路径-->path
 用户变量--path:d:\nodejs
 系统变量--NODE_PATH:d:\nodejs\node_modules
 
-
 D:\>node -v
 v0.6.2
 

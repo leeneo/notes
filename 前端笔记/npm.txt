@@ -1,0 +1,36 @@
+npm安装:安装nodejs
+npm config get cache  查看 cache 路径
+npm config get prefix   查看 prefix路径
+npm config set cache/prefix -g "f:npm-cache"/"f:npm"
+npm 默认模块安装路径在prefix:'C:\\Users\\Administrator\\AppData\\Roaming\\npm' 下的node_modules目录中。
+使用npm config ls， 或者npm prefix -g 查看 prefix 全局路径。
+npm config set prefix "f:/npm";
+修改prefix路径,安装模块会自动在f:/npm/目录下生成node_models目录。
+
+设置国内下载路径 
+npm  config set  registry https://registry.npm.taobao.org
+
+添加淘宝 cnpm：npm install -g cnpm --registry=https://registry.npm.taobao.org
+npm uni
+npm <cmd> -h     显示<cmd>  help
+npm -l           display full usage info
+npm help <cmd>  浏览器中查看cmd help
+npm help npm     浏览器中查看npm help
+npm cache clean --force
+npm cache verify --force
+
+*另nodejs安装目录下也有个node_modules这个是node的，默认只有npm一个模块。
+
+Windows下的Nodejs npm路径是appdata，很不爽，想改回来，但是在cmd下执行以下命令也无效
+
+npm config set cache "D:\nodejs\node_cache"
+npm config set prefix "D:\nodejs\node_global"
+最后在nodejs的安装目录中找到node_modules\npm\.npmrc文件
+修改如下即可：
+prefix = D:\nodejs\node_global
+cache = D:\nodejs\node_global
+
+快速删除 node_modules
+-->cd npm目录 
+-->cnpm install -g rimraf
+-->rimraf nodu_modules
