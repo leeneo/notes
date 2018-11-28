@@ -1,0 +1,26 @@
+EFCore执行Sql语句的方法：FromSql与ExecuteSqlCommand
+
+在EFCore中执行Sql语句的方法为：FromSql与ExecuteSqlCommand；在EF6中的为SqlQuery与ExecuteSqlCommand，而FromSql和SqlQuery有很大区别，FromSql返回值为IQueryable，因此为延迟加载的，可以与Linq扩展方法配合使用，但是有不少的坑(EFCore版本为1.1.0)，直接执行Sql语句的建议不要使用FromSql，但是EFCore中并没有提供SqlQuery方法，因此下面会贴出SqlQuery的实现代码供大家参考，以便在EFCore中能使用。
+
+*EF6 SqlQuery与ExecuteSqlCommand的用法：有返回结果集的查询等推荐使用SqlQuery，无返回结果集执行存储过程等推荐使用ExecuteSqlCommand
+
+ SqlParameter[] pr = {
+                            new SqlParameter("@as_bill_no", 'AAAAA'),            
+                            new SqlParameter("@as_err",System.Data.SqlDbType.NVarChar,255){Direction=System.Data.ParameterDirection.Output,Value=""},
+                        };
+
+SqlQuery用法：
+//SqlQuery如果不加泛型是无法使用FirstOrDefault()方法的
+var r = db.Database.SqlQuery("Usp_insert_Billb1_pay @as_bill_no,@as_err out", pr); //正常，不推荐
+var r = db.Database.SqlQuery("Usp_insert_Billb1_pay @as_bill_no,@as_err out", pr).FirstOrDefault(); //报错
+var r = db.Database.SqlQuery<ProcedureReturn>("Usp_insert_Billb1_pay @as_bill_no,@as_error out", pr).FirstOrDefault(); //正常，不推荐
+
+//返回查询SM_Pay_log表的结果集到对应实体，推荐方式
+var results = db.Database.SqlQuery<SM_Pay_log>("select * from sm_pay_log").ToList();
+
+ExecuteSqlCommand 用法：
+//ExecuteSqlCommand 返回受影响的结果集行数（n 行受影响），无法使用泛型
+int rows=db.Database.ExecuteSqlCommand("Usp_insert_Billb1_pay @as_bill_no,@as_err", pr);    //返回n，执行存储过程，推荐方式
+int rows = db.Database.ExecuteSqlCommand("select * from sm_pay_log");   //返回-1,查询语句，不推荐
+
+string result = pr[1].Value.ToString(); //得到OutPut类型值

@@ -1,3 +1,0 @@
-EFCore执行Sql语句的方法：FromSql与ExecuteSqlCommand
-
-在EFCore中执行Sql语句的方法为：FromSql与ExecuteSqlCommand；在EF6中的为SqlQuery与ExecuteSqlCommand，而FromSql和SqlQuery有很大区别，FromSql返回值为IQueryable，因此为延迟加载的，可以与Linq扩展方法配合使用，但是有不少的坑(EFCore版本为1.1.0)，直接执行Sql语句的建议不要使用FromSql，但是EFCore中并没有提供SqlQuery方法，因此下面会贴出SqlQuery的实现代码供大家参考，以便在EFCore中能使用。
