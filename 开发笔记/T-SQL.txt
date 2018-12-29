@@ -62,10 +62,21 @@ delete from tbname			--清空表内容，保留表结构，同truncate
 
 /*增加字段*/
 alter table card_type add IsShowInWeChat varchar(1) NOT NULL DEFAULT ('Y')
+/*增加默认值*/
+ALTER TABLE [dbo].[MemberInfo] ADD  DEFAULT ((0)) FOR [Points]
 /*修改字段长度*/
 alter table wxStoreOrders alter column paytype varchar(36)
 /*删除字段*/
 alter table wxStoreOrders drop column paytype varchar(36)
+
+/*判断是否表字段是否存在*/
+IF COL_LENGTH('MemberInfo', 'Points') IS NULL|IS NOT NULL
+begin
+	ALTER TABLE MemberInfo ADD Points int not null default 0
+PRINT 'ok'
+end
+ELSE
+PRINT '已有'
 
 /*视图*/
 
@@ -165,34 +176,34 @@ DECLARE 游标名称 CURSOR FOR SELECT 字段1,字段2,字段3,... FROM 表名 WHERE ...
 OPEN 游标名称
 FETCH NEXT FROM 游标名称 INTO 变量名1,变量名2,变量名3,...
 WHILE @@FETCH_STATUS=0
-??????? BEGIN
-????????????????? SQL语句执行过程... ...
-????????????????? FETCH NEXT FROM 游标名称 INTO 变量名1,变量名2,变量名3,...
-??????? END
+BEGIN
+	SQL语句执行过程... ...
+	FETCH NEXT FROM 游标名称 INTO 变量名1,变量名2,变量名3,...
+END
 CLOSE 游标名称
 DEALLOCATE 游标名称 (删除游标)
 --------------------- 
 demo:
- table1结构如下
-?id??? int
-?name? varchar(50)
+table1结构如下
+id int
+name varchar(50)
  
-?declare @id int
-?declare @name varchar(50)
-?declare cursor1 cursor for???????? --定义游标cursor1
-?select * from table1?????????????? --使用游标的对象(跟据需要填入select文)
-?open cursor1?????????????????????? --打开游标
+declare @id int
+declare @name varchar(50)
+declare cursor1 cursor for --定义游标cursor1
+select * from table1 --使用游标的对象(跟据需要填入select文)
+open cursor1 --打开游标
  
-?fetch next from cursor1 into @id,@name? --将游标向下移1行，获取的数据放入之前定义的变量@id,@name中
+fetch next from cursor1 into @id,@name --将游标向下移1行，获取的数据放入之前定义的变量@id,@name中
  
-?while @@fetch_status=0?????????? --判断是否成功获取数据   进入循环
-?begin
-?update table1 set name=name+'1'
-?where id=@id?????????????????????????? --进行相应处理(跟据需要填入SQL文)
+while @@fetch_status=0 --判断是否成功获取数据   进入循环
+begin
+update table1 set name=name+'1'
+where id=@id --进行相应处理(跟据需要填入SQL文)
  
-?fetch next from cursor1 into @id,@name? --将游标向下移1行  相当于for(int i;i<n;i++) 中的i+1
-?end
+fetch next from cursor1 into @id,@name? --将游标向下移1行  相当于for(int i;i<n;i++) 中的i+1
+end
  
-?close cursor1?????????????????? --关闭游标
-?deallocate cursor1
+close cursor1 --关闭游标
+deallocate cursor1
 --------------------- 

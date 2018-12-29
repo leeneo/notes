@@ -24,3 +24,19 @@ int rows=db.Database.ExecuteSqlCommand("Usp_insert_Billb1_pay @as_bill_no,@as_er
 int rows = db.Database.ExecuteSqlCommand("select * from sm_pay_log");   //返回-1,查询语句，不推荐
 
 string result = pr[1].Value.ToString(); //得到OutPut类型值
+
+
+/*CURD*/
+
+string json = Request["data"];
+ct_parametre value = JsonConvert.DeserializeObject<ct_parametre>(json);
+
+*增
+db.Entry<ct_parametre>(value).State = System.Data.Entity.EntityState.Added;
+if (db.SaveChanges() > 0)
+    return RetMsg.Success(value);
+
+*改
+db.ct_parametre.Add(value);
+if (db.SaveChanges() > 0)
+    return RetMsg.Success(value);
