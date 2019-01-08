@@ -207,3 +207,44 @@ end
 close cursor1 --关闭游标
 deallocate cursor1
 --------------------- 
+
+=============================================================================================================
+case when  then end用法
+
+case '字段' when 'value1' then 'value' when 'value2' then 'value' end
+
+declare @sex varchar(2)
+select @sex='女'
+select (case @sex when '男' then 'male' when '女' then 'female' end) as sex
+
+seLect ct.s_work_no,(case ct.s_work_no when 'sys' then '1' when '000' then ct.s_password end) as password,* from ct_operator ct 
+where ct.s_work_no='000'
+
+------------------------------------------------------------------------------------
+case when '判定式' then 'value' else 'value' end用法
+
+declare @sex varchar(10)
+select @sex='女'
+select @sex=case when '男'<>'男' then 'male' else 'female' end
+select @sex sex
+
+seLect ct.s_work_no,case when ct.s_work_no='sys' then '1' else ct.s_password end asPassword from ct_operator ct 
+where ct.s_work_no='0000' ==>等价
+seLect ct.s_work_no,asPassword=case when ct.s_work_no='sys' then '1' else ct.s_password end  from ct_operator ct 
+where ct.s_work_no='0000'
+
+=============================================================================================================
+Convert 函数用法 转换数据类型或日期
+
+select n_price,CONVERT(INT,SUM(n_price)) price from billb1 where s_account_no='2018091749'
+group by n_price
+
+select Convert(varchar(255),GETDATE(),110) asDate
+------------------------------------------------------------------------------------
+Round 函数用法	四舍五入
+ROUND(column_name,decimals)		decimals：精确到小数位数
+
+select round(n_price,0) from billb1 where s_account_no='2018091749'
+select ROUND(-1.23,2)==>-1.23
+select ROUND(-1.23,1)==>-1.20
+select ROUND(-1.23,0)==>-1.00
