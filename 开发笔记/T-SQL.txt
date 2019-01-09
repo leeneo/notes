@@ -241,10 +241,18 @@ group by n_price
 
 select Convert(varchar(255),GETDATE(),110) asDate
 ------------------------------------------------------------------------------------
-Round 函数用法	四舍五入
+四舍五入
+Round() 函数	保留指定小数位数
 ROUND(column_name,decimals)		decimals：精确到小数位数
 
 select round(n_price,0) from billb1 where s_account_no='2018091749'
-select ROUND(-1.23,2)==>-1.23
+select ROUND(-1.237,2)==>-1.24
+select ROUND(-1.232,2)==>-1.23
 select ROUND(-1.23,1)==>-1.20
 select ROUND(-1.23,0)==>-1.00
+
+floor()向下取整 
+floor(1.45)= 1,floor(1.55) = 1 ,floor(-1.45)= -2 ,floor(-1.55) = -2
+
+ceiling()向上取整
+ceiling(1.45) = 2,ceiling(1.55)=2,ceiling(-1.45) = -1,ceiling(-1.55)=-1
