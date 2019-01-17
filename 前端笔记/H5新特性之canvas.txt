@@ -1,0 +1,122 @@
+link:https://www.cnblogs.com/amiezhang/p/7885669.html
+
+H5新特性之canvas
+canvas无疑是H5之中最受欢迎的新特性了，它可以让浏览毫无费力的画出各种图案，动画。
+
+canvas的性能不会因为画布上的图案多少而改变，因此做动画用canvas性能也相当优秀。
+
+canvas最基本的概念是1.路径 2.描边 3.填充 4.变换 5.图片操作
+
+首先先获得canvas的操作借口集（这里先用2d为例）：
+
+let canvas = document.getElementById('canvas');
+// canvas的所有画图接口都集成在gd这里了
+let gd = canvas.getContext('2d');
+1.路径
+
+常见的路径操作有
+
+复制代码
+//清除之前的路径
+gd.beginPath();
+
+//移动点到x,y
+gd.moveTo(x,y);
+
+//线连到x,y
+gd.lineTo(x,y);
+
+//矩形“选区”(x,y为左上角的点，w,h分别为宽高)
+gd.rect(x,y,w,h);
+
+//圆弧“选区”
+gd.arc(x,y,r,startArg,endArg,是否逆时针);
+
+//闭合路径
+gd.closePath();
+复制代码
+2.描边
+
+常见的描边操作：
+
+复制代码
+// 先设置好描边的样式
+gd.strokeStyle = '任意CSS颜色';
+gd.lineWidth = 3; // 边宽3px
+// 把上面的路径描一次边
+gd.stroke();
+
+//直接描矩形
+gd.strokeRect(x,y,w,h);
+
+//写字 
+gd.font = '30px 宋体';
+gd.strokeText('内容~~',x,y);
+复制代码
+ 
+
+3.填充
+
+常见的填充操作：
+
+复制代码
+//设置填充样式
+gd.fillStyle = '任意css样式'；
+//把上面的路径自动闭合填充
+gd.fill();
+
+//直接填充矩形
+gd.fillRect(x,y,w,h);
+
+//填充字体
+gd.font = '30px 宋体';
+gd.fillText('内容',x,y);
+复制代码
+ 
+
+4.变换
+
+和CSS3的变换一样。canvas的变换也有scale、translate、rotate
+
+gd.translate(x,y) //图形相对原来的位置移动多少
+
+gd.rotate(Math.PI/2) //整个画布相对与左上角，逆时针转90°
+
+gd.scale(x轴放大倍数,y轴放大倍数); //整个画布左上角为原点，分别放大不同倍数
+而变换前后要有save和restore来还原画布的变换状态
+
+gd.save(); //先保存变换前画布状态
+//。。。。变换1
+//。。。。变换2
+//。。。。变换n
+gd.restore(); //还原变换后的画布状态
+ 
+
+5.图片操作
+
+复制代码
+//填充图片
+let img = new Image();
+img.src = 'url';
+img.onload = function(){
+    gd.drawImage(
+        img, //或者是get一个img dom又或者createElement('img')
+        sx,sy,sw,sh, //原图的定位，大小
+        dx,dy,dw,dh //在canvas的定位，大小
+    )
+}
+
+//操作图片像素
+
+let data = gd.getImageData(x1,y1,x2,y2); //获取从点1到点2之间的所有像素点的值，每个点都有r、g、b、a四个值，例如点1的值为data[0~3]
+
+//对data数组一波操作之后，把数据放回画布中
+gd.putImageData(data,x1,x2); //把数据从点1这里开始放数据
+复制代码
+ 
+
+ps:当然还有一个比较重要的操作
+
+gd.clearRect(0,0,canvas.width,canvas.height); //清除画布
+
+canvas.toDataURL(); //把canvas转化成base64
