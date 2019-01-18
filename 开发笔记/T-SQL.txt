@@ -256,3 +256,133 @@ floor(1.45)= 1,floor(1.55) = 1 ,floor(-1.45)= -2 ,floor(-1.55) = -2
 
 ceiling()向上取整
 ceiling(1.45) = 2,ceiling(1.55)=2,ceiling(-1.45) = -1,ceiling(-1.55)=-1
+
+=============================================================================================================
+SQL中的全局变量和局部变量（@@/@）
+
+局部变量：@varName	是用户自定义变量
+全局变量：@@varName	是系统预定义的，返回一些当前系统信息 
+
+常用全局变量：
+@@TRANCOUNT
+返回当前连接中处于激活状态的事务数目
+
+@@ERROR
+返回当前执行Transact-SQL 语句的错误代码，无错返回0；
+
+@@LANGID 
+返回当前所使用语言的本地语言标识符(ID)。 
+
+@@CONNECTIONS 
+返回自上次启动以来连接或试图连接的次数。 
+
+@@CURSOR_ROWS 
+返回连接上最后打开的游标中当前存在的合格行的数量(返回被打开的游标中还未被读取的有效数据行的行数)
+
+@@DATEFIRST 
+返回每周第一天的数字  
+
+@@FETCH_STATUS 
+返回被 FETCH 语句执行的最后游标的状态，而不是任何当前被连接打开的游标的状态。 
+
+@@IDENTITY 
+返回最后插入的标识值 
+
+@@LANGUAGE 
+返回当前使用的语言名。 
+
+@@LOCK_TIMEOUT 
+返回当前会话的当前锁超时设置，单位为毫秒。 
+
+@@PROCID 
+返回当前过程的存储过程标识符 (ID) 。 
+
+@@ROWCOUNT 
+返回受上一语句影响的行数。 
+
+@@SERVERNAME 
+返回运行 的本地服务器名称。 
+
+@@SPID 
+返回当前用户进程的服务器进程标识符 (ID)。 
+
+@@TRANCOUNT 
+返回当前连接的活动事务数。 
+
+@@VERSION 
+返回当前安装的日期、版本和处理器类型。
+
+@@CPU_BUSY
+返回自SQL Server 最近一次启动以来CPU 的工作时间其单位为毫秒
+
+@@DATEFIRST
+返回使用SET DATEFIRST 命令而被赋值的DATAFIRST 参数值SET DATEFIRST，命令用来指定每周的第一天是星期几
+
+@@DBTS
+返回当前数据库的时间戳值必须保证数据库中时间戳的值是惟一的
+
+@@FETCH_STATUS
+返回上一次FETCH 语句的状态值
+
+@@IDLE
+返回自SQL Server 最近一次启动以来CPU 处于空闭状态的时间长短单位为毫秒
+
+@@IO_BUSY
+返回自SQL Server 最近一次启动以来CPU 执行输入输出操作所花费的时间其单位为毫秒
+
+@@LANGID
+返回当前所使用的语言ID 值
+
+@@LANGUAGE
+返回当前使用的语言名称
+
+@@LOCK_TIMEOUT
+返回当前会话等待锁的时间长短其单位为毫秒
+
+@@MAX_CONNECTIONS
+返回允许连接到SQL Server 的最大连接数目
+
+@@MAX_PRECISION
+返回decimal 和numeric 数据类型的精确度
+
+@@NESTLEVEL
+返回当前执行的存储过程的嵌套级数初始值为0
+
+@@OPTIONS
+返回当前SET 选项的信息
+
+@@PACK_RECEIVED
+返回SQL Server 通过网络读取的输入包的数目
+
+@@PACK_SENT
+返回SQL Server 写给网络的输出包的数目
+
+@@PACKET_ERRORS
+返回网络包的错误数目
+
+@@PROCID
+返回当前存储过程的ID 值
+
+@@REMSERVER
+返回远程SQL Server 数据库服务器的名称
+
+@@SERVICENAME
+返回SQL Server 正运行于哪种服务状态之下如MSSQLServer MSDTC SQLServerAgent
+
+@@SPID
+返回当前用户处理的服务器处理ID 值
+
+@@TEXTSIZE
+返回SET 语句的TEXTSIZE 选项值SET 语句定义了SELECT 语句中text 或image数据类型的最大长度基本单位为字节
+
+@@TIMETICKS
+返回每一时钟的微秒数
+
+@@TOTAL_ERRORS
+返回磁盘读写错误数目
+
+@@TOTAL_READ
+返回磁盘读操作的数目
+
+@@TOTAL_WRITE
+返回磁盘写操作的数目
