@@ -1,0 +1,5 @@
+接收Get请求传过来URL参数用Request.Query
+var txtName = Request.Query["txtName"];
+
+接收Post请求传过来的参数用Request.Form
+var txtName2 = Request.Form["txtName"];
