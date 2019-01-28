@@ -25,6 +25,38 @@ int rows = db.Database.ExecuteSqlCommand("select * from sm_pay_log");   //查询成
 
 string result = pr[1].Value.ToString(); //得到OutPut类型值
 
+*EF Core中可以在使用关系数据库时下降到原始 SQL 查询，也就是FromSql
+原生 SQL 查询
+//通过 Entity Framework Core 可以在使用关系数据库时下降到原始 SQL 查询。 这在无法使用 LINQ 表达要执行的查询，或因使用 LINQ 查询导致低效的 SQL 被发送到数据库时非常有用。 原始 SQL 查询可返回实体类型
+//结果集中的列名必须与属性映射到的列名匹配。 请注意，这与 EF6 不同，EF6 中忽略了原始 SQL 查询时的属性/ 列映射关系，只需结果集列名与属性名相匹配即可
+
+1，基于原生 SQL 查询
+var blogs = context.Blogs
+    .FromSql("SELECT * FROM dbo.Blogs")
+    .ToList();
+
+2，也可用于执行存储过程
+var blogs = context.Blogs
+    .FromSql("EXECUTE dbo.GetMostPopularBlogs")
+    .ToList();
+
+3，带参数查询
+var user = "johndoe";
+var blogs = context.Blogs
+    .FromSql("EXECUTE dbo.GetMostPopularBlogsForUser {0}", user)
+    .ToList();
+var user = "johndoe";
+
+4，EF Core 2.0 及更高版本支持的字符串内插语法
+var blogs = context.Blogs
+    .FromSql($"EXECUTE dbo.GetMostPopularBlogsForUser {user}")
+    .ToList();
+
+5，还可以构造 DbParameter 并将其作为参数值提供
+var user = new SqlParameter("user", "johndoe");
+var blogs = context.Blogs
+    .FromSql("EXECUTE dbo.GetMostPopularBlogsForUser @user", user)
+    .ToList();
 
 /*CURD*/
 
