@@ -72,3 +72,6 @@ if (db.SaveChanges() > 0)
 db.ct_parametre.Add(value);
 if (db.SaveChanges() > 0)
     return RetMsg.Success(value);
+
+
+当IDENTITY_INSERT设置为OFF时，无法插入的标识列显式值'myTable的'
