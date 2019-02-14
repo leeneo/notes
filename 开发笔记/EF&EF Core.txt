@@ -20,7 +20,7 @@ var results = db.Database.SqlQuery<SM_Pay_log>("select * from sm_pay_log").ToLis
 
 ExecuteSqlCommand 用法：
 //ExecuteSqlCommand 返回受影响的结果集行数（n 行受影响），无法使用泛型
-int rows=db.Database.ExecuteSqlCommand("Usp_insert_Billb1_pay @as_bill_no,@as_err", pr);    //返回n，执行存储过程，推荐方式
+int rows=db.Database.ExecuteSqlCommand("Usp_insert_Billb1_pay @as_bill_no,@as_err", pr);    //返回n，执行proc或者update&insert，推荐方式
 int rows = db.Database.ExecuteSqlCommand("select * from sm_pay_log");   //查询成功，返回-1,查询语句，不推荐
 
 string result = pr[1].Value.ToString(); //得到OutPut类型值
@@ -74,4 +74,10 @@ if (db.SaveChanges() > 0)
     return RetMsg.Success(value);
 
 
-当IDENTITY_INSERT设置为OFF时，无法插入的标识列显式值'myTable的'
+当IDENTITY_INSERT设置为OFF时，无法为标识列插入显式值的处理办法
+主键字段上加上[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]，如：
+    public class PM_Project
+    {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public decimal ProjectID { get; set; }
+    }
