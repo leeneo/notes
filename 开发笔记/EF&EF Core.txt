@@ -81,3 +81,34 @@ if (db.SaveChanges() > 0)
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal ProjectID { get; set; }
     }
+
+#region 使用 BeginTransaction 和多个 DbContext 的执行策略和显式事务。
+//EF Core 具有两个重要功能，使其有别于 Dapper ，并且增加其性能开销。 第一个功能是从 LINQ 表达式转换为 SQL。 将缓存这些转换，但即便如此，首次执行它们时仍会产生开销。 第二个功能是对实体进行更改跟踪（以便生成高效的更新语句）。 通过使用 AsNotTracking 扩展，可对特定查询关闭此行为。 EF Core 还会生成通常非常高效的 SQL 查询，并且从性能角度上看，任何情况下都能完全接受，但如果需要执行对精确查询的精细化控制，也可使用 EF Core 传入自定义 SQL（或执行存储过程）。 在这种情况下，Dapper 的性能仍然优于 EF Core，但只有略微优势。
+////var strategy = _context.Database.CreateExecutionStrategy();
+//await strategy.ExecuteAsync(async () =>
+//{
+//    // Achieving atomicity between original Catalog database operation and the
+//    // IntegrationEventLog thanks to a local transaction
+//    using (var transaction = _context.Database.BeginTransaction())
+//    {
+//        _context.PM_Contact.Update(contact);
+//        await _context.SaveChangesAsync();
+
+//        // Save to EventLog only if product price changed
+//        //if (raiseProductPriceChangedEvent)
+//        //    await _integrationEventLogService.SaveEventAsync(priceChangedEvent);
+//        transaction.Commit();
+//    }
+//});
+#endregion
+#region Linq 带条件查询
+//var customers = _context.PM_Customer.Select(x => x.IsActive == "Y");
+//var customers2 = _context.PM_Customer.Select(b => new PM_Customer
+//{
+//    Customerid = b.Customerid, //此处定义的字段名要与PM_Customer中定义的名字、个数一致，否则自动填充为null或default value
+//    CustomerName = b.CustomerName,
+//    IsActive = b.IsActive,
+//    //Validdate=b.Validdate,
+//    status = b.status
+//});
+#endregion

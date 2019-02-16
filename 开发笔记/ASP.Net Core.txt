@@ -1,0 +1,18 @@
+ASP.NET Core 项目和.NET Core 项目部署需要在本机上安装对应版本的ASP.NET Core/.NET Core: Runtime & Hosting Bundle（.NET Core 托管捆绑包）
+下载地址：https://dotnet.microsoft.com/download/archives
+如开发版本是.net core 2.1,发布版本也是.net core 2.1,那么就下载.net core 2.1版本
+
+.NET Core捆绑包可安装 .NET Core 运行时、.NET Core 库和 ASP.NET Core 模块。 该模块允许 ASP.NET Core 应用在 IIS 后面运行。 
+Tips:如果在 IIS 之前安装了托管捆绑包，则必须修复捆绑包安装。 在安装 IIS 后再次运行托管捆绑包安装程序。
+
+同时正常运行.NET Core 运行时还有个前提条件，那就是Microsoft Visual C++ 2015 Redistributable。
+下载地址：https://www.microsoft.com/zh-CN/download/details.aspx?id=53840
+
+*********************************************************************************************************************************
+在IIS 上部署 ASP.NET Core项目
+与部署ASP.NET项目一样，项目发布出来，在IIS上建个网站，只是把网站应用程序池>.Net Framwork版本>改为无托管代码即可；
+
+如果网站运行报Http Error 502.5错误，或者在网站根目录执行cmd命令：dotnet app.dll(app为发布出来的网站主程序名称，也可双击app.exe)，
+报缺少api-ms-win-crt-runtime-*.dll,那就下载Microsoft Visual C++ 2015 Redistributable(vc_redist.x64/x86.exe)装上即可；
+
+tips:VS发布core项目时选择文件夹方式就行，最简单直接，占用资源最少，实际的应用程序是app.dll这个文件；
