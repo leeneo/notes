@@ -173,3 +173,5 @@ cmd:ng g s serviceName  创建服务
 手动注册：app.module.ts => providers:[serviceName1,serviceName2],
 *The providers array tells Angular to create a single, shared instance of HeroService and inject into any class that asks for it.
 
+<input type="text" name='username' [(ngModel)]="username" #usernameRef='ngModel' required minlength="3" placeholder="请输入用户名" (focus)="onFocus(usernameRef)"/>
+#usernameRef 表示在ts文件中引用<input>标记，#usernameRef='ngModel'表示可以在当前模板文件中引用该标记,此时在ts文件中对该标记的引用：username.valueAccessor._elementRef.nativeElement。
