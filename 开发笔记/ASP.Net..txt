@@ -1,0 +1,58 @@
+浏览器端发起的请求参数
+GET方式存储在web端的Request.QueryString，Post方式存储在web端的Request.Form中
+Web端转发到API端，Dictionary参数，经过WebClient.UploadData发起的，存储在Request.Form中
+Web端：
+    public class RoomlistController : Controller
+    {
+        public ActionResult Roomlist()
+        {
+            var sid = Request["SID"];                  //22
+            var sid2 = Request.Form["SID"];            //null
+            var sid3 = Request.QueryString["SID"];     //有值，同Request["SID"]
+            
+            //设置cookie
+            HttpCookie SID = new HttpCookie("SID")
+            {
+                Value = sid,
+                Expires = DateTime.Now.AddMinutes(30)
+            };            
+            Response.SetCookie(SID);
+            //Request.Cookies.Add(SID); //设置cookie无效
+
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict["as_date"] = DateTime.Now.Date;
+            dict["as_roomtype"] = "";
+            dict["SID"] = sid;
+            var res = ApiClient.Post<List<RoomType>>("Roomresv/GetRoomTypes", dict);
+            if (res.success)
+                return View(res.data);
+            else
+                return View();
+        }
+    }
+
+API端：
+    public class RoomResvController : BaseController
+    {
+
+        public string GetRoomTypes()
+        {
+            db = new Db();
+            //Request["SID"]=Request.Form["SID"],有值；Request.QueryString["SID"]==null
+            if (Request["SID"] != null || Request.Form["SID"] != null || Request.QueryString["SID"] != null)
+            {
+                var sid = Convert.ToInt32(Request["SID"]);
+                switch (sid)
+                {
+                    case (int)ConectSid.Sauna:
+                        db.Database.Connection.ConnectionString = ConectStr.SaunaStr;
+                        break;
+                    case (int)ConectSid.Ccspa:
+                        db.Database.Connection.ConnectionString = ConectStr.CcspaStr;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
