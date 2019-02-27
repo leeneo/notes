@@ -1,0 +1,16 @@
+Url 传送Json 数据方式：
+Json:{"data":"ouwVNxJ8eotTTcK90X1_XTwx3kxI","Sid":"24"}
+http://localhost:9005/SqlQuery/Execute?className=DCard&methodName=GetMemberCard&data={"data":"ouwVNxJ8eotTTcK90X1_XTwx3kxI","Sid":"24"}==》
+http://localhost:9005/SqlQuery/Execute?className=DCard&methodName=GetMemberCard&data={%22data%22:%22ouwVNxJ8eotTTcK90X1_XTwx3kxI%22,%22Sid%22:%2224%22}
+
+
+服务端获取该Json：
+                var jsonData = JsonConvert.DeserializeObject<SidData>(Request["data"]);
+                str = jsonData.Data;
+                sid = jsonData.Sid;
+SidData类：
+                public class SidData
+                {
+                    public string Data { get; set; }
+                    public string Sid { get; set; }
+                }
