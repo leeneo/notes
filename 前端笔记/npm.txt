@@ -16,7 +16,7 @@ npm <cmd> -h     显示<cmd>  help
 npm -l           display full usage info
 npm help <cmd>  浏览器中查看cmd help
 npm help npm     浏览器中查看npm help
-npm cache clean --force
+--npm cache clean --force==>
 npm cache verify --force
 
 *另nodejs安装目录下也有个node_modules这个是node的，默认只有npm一个模块。
@@ -34,3 +34,17 @@ cache = D:\nodejs\node_global
 -->cd npm目录 
 -->cnpm install -g rimraf
 -->rimraf nodu_modules
+
+**************************************************************************************************************************************************************************
+
+npm install --save 与npm install --save-dev 的区别
+
+npm install <packageName>  --save：发布安装
+---项目发布上线之后还会依赖用到的插件，没有这些插件，项目不能运行
+---自动更改package.json  写入dependencies 节点
+---没有package.json 还怎么开开心心的 clone呢
+
+npm install --save-dev：本地开发安装，有时会产生package-lock.json(锁定各依赖包版本)
+---安装到开发依赖中，项目上线之后不会用到的插件，例如'babel-loader',项目解析完发布
+---自动更改package.json  写入devDependencies 节点
+
