@@ -239,7 +239,19 @@ Convert 函数用法 转换数据类型或日期
 select n_price,CONVERT(INT,SUM(n_price)) price from billb1 where s_account_no='2018091749'
 group by n_price
 
-select Convert(varchar(255),GETDATE(),110) asDate
+select Convert(varchar(10),GETDATE(),110) asDate	=>03-07-2019
+select Convert(varchar(10),GETDATE(),23) asDate		=>2019-03-07
+
+declare @nowDay nvarchar(10)
+set @nowDay=CONVERT(nvarchar(10),GETDATE(),23)		=>2019-03-07
+Exec Usp_Generate_Miss_Resvn @nowDay
+set @nowDay=CONVERT(nvarchar(10),GETDATE()+1,23)	=>2019-03-08
+Exec Usp_Generate_Miss_Resvn @nowDay
+set @nowDay=CONVERT(nvarchar(10),GETDATE()+2,23)	=>2019-03-09
+Exec Usp_Generate_Miss_Resvn @nowDay
+set @nowDay=CONVERT(nvarchar(10),GETDATE()+3,23)	=>2019-03-10
+Exec Usp_Generate_Miss_Resvn @nowDay
+
 ------------------------------------------------------------------------------------
 四舍五入
 Round() 函数	保留指定小数位数
