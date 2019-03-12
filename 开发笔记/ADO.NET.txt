@@ -33,4 +33,53 @@ static void Main(string[] args)
             Console.WriteLine("打开数据库了");
 	}
 
+===============================================================================================================================================================
+*利用Newtonsoft.Json将DataTable转实体Entity
+        public static List<T> GetDT<T>(DataTable dt)
+        {
+            try
+            {
+                var res = JsonConvert.SerializeObject(dt);
+                var mt = JsonConvert.DeserializeObject<List<T>>(res);
+                if (mt.Count > 0)
+                    return mt;
+                return default(List<T>);
+            }
+            catch (Exception e)
+            {
+                e = e.GetBaseException();
+                LogHelper.LogError("BaseDb", e.Message);
+                return default(List<T>);
+            }
+        }
+		public static T GetOD<T>(DataTable dt)
+        {
+            try
+            {
+                var res = JsonConvert.SerializeObject(dt);
+                var mt = JsonConvert.DeserializeObject<List<T>>(res);
+                if (mt.Count == 1)
+                    return mt[0];
+                return default(T);
+            }
+            catch (Exception e)
+            {
+                e = e.GetBaseException();
+                LogHelper.LogError("BaseDb", e.Message);
+                return default(T);
+            }
+        }
+        public MsgTemplate GetTemplate<T>(string tempNo)
+        {
+            string sql = @"SELECT	m.ID,
+                                    m.TempNo,
+		                            m.Signs,
+		                            m.Template		                         
+                            FROM	MsgTemplate m WHERE TempNo=@TempNo";
 
+            SqlParameter[] parms = { new SqlParameter("@TempNo", tempNo) };
+
+            DataTable dt = SQLHelper.ExecutDataSet(sql, parms).Tables[0];
+            var obj = GetOD<MsgTemplate>(dt);
+            return obj;
+        }
