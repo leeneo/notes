@@ -101,6 +101,7 @@ if (db.SaveChanges() > 0)
 //    }
 //});
 #endregion
+
 #region Linq 带条件查询
 //var customers = _context.PM_Customer.Select(x => x.IsActive == "Y");
 //var customers2 = _context.PM_Customer.Select(b => new PM_Customer
@@ -111,4 +112,12 @@ if (db.SaveChanges() > 0)
 //    //Validdate=b.Validdate,
 //    status = b.status
 //});
+#endregion
+
+#region Linq 排序查询
+var res = from a in db.wxIndexMenu orderby a.OrderID descending         //查询中排序，descending 降序
+            //where a.IsActive == "Y"                      
+            select a;
+//return res.OrderByDescending(x => x.OrderID).ToList();                //结果中排序，OrderByDescending() 降序
+return res.ToList();
 #endregion
