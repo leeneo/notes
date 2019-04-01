@@ -83,3 +83,17 @@ static void Main(string[] args)
             var obj = GetOD<MsgTemplate>(dt);
             return obj;
         }
+===============================================================================================================================================================
+
+DataTable 用法
+
+1，取某个单元格的值
+            string sql = @"SELECT p.d_date FROM	Parametre p";
+            var strJson = dt.Rows[0].ItemArray[0].ToString();   ==>"2018-10-24"
+            //var strJson2 = dt.Rows[0][0].ToString();          ==>"2018-10-24"
+            //var strJson3 = dt.Rows[0]["d_date"].ToString();   ==>"2018-10-24"
+
+            string sql = @"SELECT p.user_name,p.d_date FROM	Parametre p";
+            var strJson = dt.Rows[0].ItemArray[0].ToString();   ==>"user_name的值"
+            //var strJson2 = dt.Rows[0][0].ToString();          ==>"user_name的值"
+            //var strJson3 = dt.Rows[0]["d_date"].ToString();   ==>"2018-10-24"     --正确方式！
