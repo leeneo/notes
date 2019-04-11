@@ -1,21 +1,22 @@
 概述：
 
 Angular 是由 Typescript写成的，一组特定功能的NgModule集合。
-Angular 应用架构：模块（module），组件（component）（模板，指令和数据绑定），服务与依赖注入，路由（Router）。
+Angular 应用架构：模块（module），组件（component，包括模板、指令和数据绑定），服务与依赖注入，路由（Router）。
 
 模块：
 应用的基本构造块NgModule（为组件提供编译的上下文环境）。
 一个 NgModule 就是一个容器，用于存放一些内聚的代码块，这些代码块专注于某个应用领域、某个工作流或一组紧密相关的功能。
-每个Angular应用至少有一个用于引导应用的根模块。
+每个Angular应用至少有一个用于引导应用的根模块，根模块总会有一个根组件，并在引导期间创建它。
 使用 @NgModule() 装饰器声明模块。
 @NgModule() 装饰器是一个函数，它接受一个元数据对象（一个Json{}对象），该对象的属性用来描述这个模块
 @NgModule({
-  imports:      [ BrowserModule ],  --imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
-  providers:    [ Logger ],         --providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（也可以在组件级别指定服务提供商，这通常是首选方式。）
-  declarations: [ AppComponent ],   --declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道
+  imports:      [ BrowserModule ],   --imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
+  providers:    [ Logger ],          --providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（也可以在组件级别指定服务提供商，这通常是首选方式。）
+  declarations: [ AppComponent ],    --declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道
   exports:      [ TodoComponent ],   --exports（导出表） —— 那些能在其它模块的组件模板中使用的可声明对象的子集。
-  bootstrap:    [ AppComponent ]    --bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。只有根模块才应该设置这个 bootstrap 属性。
+  bootstrap:    [ AppComponent ]     --bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。只有根模块才应该设置这个 bootstrap 属性。
 })
+
 
 组件：
 定义视图，每个应用都至少有一个根组件。
@@ -31,12 +32,63 @@ Angular 应用架构：模块（module），组件（component）（模板，指
 数据绑定：
 事件绑定，可以通过更新应用的数据来响应目标环境下的用户输入。
 属性绑定，将从应用数据中计算出来的值插入到 HTML 中。
+Angular 在每个 JavaScript 事件循环中处理所有的数据绑定，它会从组件树的根部开始，递归处理全部子组件。
+数据绑定在模板及其组件之间的通讯中扮演了非常重要的角色，它对于父组件和子组件之间的通讯也同样重要。
+
+四种绑定形式：
+{{value}}:                component --> Dom
+[property]="value":       component --> Dom   把父组件value的值传到子组件的value属性中
+(event)="handler":        Dom --> component
+[(ng-model)]="property":  Dom <--> component
+
+管道
+Angular 的管道可以让你在模板中声明显示值的转换逻辑。 带有 @Pipe 装饰器的类中会定义一个转换函数，用来把输入值转换成供视图显示用的输出值。
+Angular 自带了很多管道，比如 date 管道和 currency 管道，也可以自己定义新管道。
+使用管道操作符 (|) 在 HTML 模板中指定值的转换方式。
+{{interpolated_value | pipe_name}}
+
+Demo:
+<!-- Default format: output 'Jun 15, 2015'-->
+<p>Today is {{today | date}}</p>
+
+<!-- fullDate format: output 'Monday, June 15, 2015'-->
+<p>The date is {{today | date:'fullDate'}}</p>
+
+<!-- shortTime format: output '9:43 AM'-->
+<p>The time is {{today | date:'shortTime'}}</p>
+
+指令-Directives
+Angular 的模板是动态的。当 Angular 渲染它们的时候，会根据指令给出的指示对 DOM 进行转换。 指令就是一个带有 @Directive() 装饰器的类。
+组件从技术角度上说就是一个指令，但是由于组件对 Angular 应用来说非常独特、非常重要，因此 Angular 专门定义了 @Component() 装饰器，它使用一些面向模板的特性扩展了 @Directive() 装饰器。
+除组件外，还有两种指令：结构型指令和属性型指令。 Angular 本身定义了一系列这两种类型的指令，也可以使用 @Directive() 装饰器来定义自己的指令。
+
+结构型指令
+结构型指令通过添加、移除或替换 DOM 元素来修改布局。 这个范例模板使用了两个内置的结构型指令来为要渲染的视图添加程序逻辑：
+
+DEMO:
+<li *ngFor="let hero of heroes"></li>
+<app-hero-detail *ngIf="selectedHero"></app-hero-detail>
+
+*ngFor 是一个迭代器，它要求 Angular 为 heroes 列表中的每个英雄渲染出一个 <li>。
+*ngIf 是个条件语句，只有当选中的英雄存在时，它才会包含 HeroDetail 组件。
+
+属性型指令
+属性型指令会修改现有元素的外观或行为。 在模板中，它们看起来就像普通的 HTML 属性一样，因此得名“属性型指令”。
+
+DEMO:
+<input [(ngModel)]="hero.name">
+
+[(ngModel)] 指令就是属性型指令的一个例子，它实现了双向数据绑定。 ngModel 修改现有元素（一般是 <input>）的行为：设置其显示属性值，并响应 change 事件。
+
+Angular 还有很多预定义指令既不修改布局结构（比如 ngSwitch），也不修改 DOM 元素和组件的样子（比如 ngStyle 和 ngClass）。
+
 
 服务：
 对于与特定视图无关并希望跨组件共享的数据或逻辑，可以创建服务类。
 使用“@Injectable()” 装饰器定义服务类，该装饰器提供的元数据可以让你的服务作为依赖被注入到客户组件中。
 服务类的元数据提供了一些信息，Angular 要用这些信息来让组件可以通过依赖注入（DI）使用该服务。
 依赖注入（或 DI）让你可以保持组件类的精简和高效。有了 DI，组件就不用从服务器获取数据、验证用户输入或直接把日志写到控制台，而是会把这些任务委托给服务。
+
 
 路由：
 应用的组件通常会定义很多视图。 Angular 提供了 Router 服务来实现不同视图之间的切换(基于视图层次结构，定义导航路径)。 路由器提供了先进的浏览器内导航功能。
@@ -51,6 +103,10 @@ Tips:
 依赖注入器会为组件提供一些服务，比如路由器服务就能让你定义如何在视图之间导航。
 Angular的NgModule 系统与 JavaScript（ES2015）用来管理 JavaScript 对象的模块系统不同，而且也没有直接关联。 这两种模块系统不同但互补。可以使用它们来共同编写你的应用。
 JavaScript 中，每个文件是一个模块，文件中定义的所有对象都从属于那个模块。 通过 export 关键字，模块可以把它的某些对象声明为公共的。 其它 JavaScript 模块可以使用import 语句来访问这些公共对象。
+Angular 会作为一组 JavaScript 模块进行加载，可以看成库模块。每个 Angular 库的名称都带有 @angular 前缀。 使用 npm 包管理器安装 Angular 的库，并使用 JavaScript 的 import 语句导入其中的各个部分
+比如：import { BrowserModule } from '@angular/platform-browser';
+使用时，把它加入 @NgModule 元数据的 imports 中
+比如：imports:      [ BrowserModule ]
 
 每个应用都有一个根模块(AppModule)
 每个组件都有component.ts,component.html,component.css 三个文件；每个component都有一个装饰器函数（@Component）

@@ -1,3 +1,80 @@
+===========================================================================================================================
+
+C#修饰符之类修饰符：public、internal、 partial、abstract、sealed、static
+
+C#修饰符之成员修饰符：public、protected、private、internal、sealed、abstract、virtual、override、readonly、const
+public 任何地方都可以调用
+internal 同一应用程序集内部
+private 只能在当前类中调用，私有的
+protected 可以被子类调用
+protected internal 可以被子类及同一程序集的其他类调用
+
+访问级别修饰符：public、internal、 protected、private、protected internal
+外部类访问级别只能声明为public或internal,内部类可以声明为private 
+
+默认访问级别：
+类             internal    class A==>internal class A
+成员和嵌套类    private     funA()==>private funA()
+构造函数        private
+析构函数        private     不能显示使用访问修饰符
+
+嵌套类访问
+static成员与非static成员的访问：与普通类static or non-static成员的访问方法是一致的。
+关于访问限制：内部类可以访问外部类的任何访问级别的成员（public, internal）；而外部类只能访问内部类的public 或者internal级别的成员，不能访问内部类protected和private级别的成员。
+
+可通过类名.类名，访问某个嵌套类，需注意访问级别限制，嵌套类不加修饰默认为private
+public A{
+    public C{}
+}
+public B{
+    Main(){
+        var c=new A.C();
+    }
+}
+
+
+*析构函数:
+与构造函数相反，用于实例的回收
+析构函数的名字由符号“～”加类名组成
+class First                     
+{
+    ~First()                    // 析构函数
+    {
+        Console.WriteLine("~First()析构函数");
+    }
+}
+
+基类的可访问级别不能低于子类,重写基类的成员（virtual,abstract）时，访问级别需与基类保持一致
+用base调用基类的构造函数时，必需保证基类的构造对子类可见（public,protected,internal）
+
+Sealed：修饰类时表示该类不能够被继承，修饰属性或方法时需与override连用，表示该方法在当前子类中仅能重写一次，不能进一步被该子类的派生类重写。
+
+结构是隐式密封的；因此它们不能被继承
+
+===========================================================================================================================
+类&接口&继承&多态(virtual,abstract,override)
+注：多态不能用于静态，静态不能实例化，因而没有多态特性
+
+virtual:virtual只能用于修饰方法或属性，必需有默认的方法体，方法体内可以什么都不写，virtual可以被子类重写。
+
+abstract:abstract关键字可以修饰方法，属性或类，抽象方法或属性不能有方法体（get,set访问器不能有方法体）。abstract成员必须被子类重写。
+如果类的属性或方法是抽象的，那么该类也必然是抽象的。
+abstract类只能被继承,不能够被实例化
+
+tips:
+接口和抽象类最本质的区别：抽象类是一个不完全的类，是对对象的抽象，而接口是一种行为规范。
+如果要重写基类中的方法，则基类中的方法必需用virtual或abstract修饰
+虚拟成员或抽象成员不能是私有的，即：abstract,virtual前面不能加private，sealed修改符，或不加访问修饰符
+
+base 关键字用于从派生类中访问基类的成员：
+调用基类上已被其他方法重写的方法(不能是抽象方法)==>：
+B继承A,override B.Hello(){base.Hello();}
+指定创建派生类实例时应调用的基类构造函数==>
+public B():base()
+基类访问只能在构造函数、实例方法或实例属性访问器中进行
+
+===========================================================================================================================
+
 msdn中文API： https://docs.microsoft.com/zh-cn/
 
 例：class Microsoft.Extensions.DependencyInjection.ServiceCollection

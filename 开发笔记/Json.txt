@@ -14,3 +14,6 @@ SidData类：
                     public string Data { get; set; }
                     public string Sid { get; set; }
                 }
+
+序列化时日期格式化
+string str = JsonConvert.SerializeObject(order, new Newtonsoft.Json.Converters.IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd HH:mm" });

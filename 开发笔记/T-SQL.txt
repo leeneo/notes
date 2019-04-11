@@ -421,4 +421,30 @@ create table MsgTemplate(
 	--Constraint uniTemp Unique(TempNo)
 );
 
+=============================================================================================================
+Group By 用法
 
+select * from missbespeak	-->
+ID	begintime
+1	2019-04-09 15:00:00.000
+2	2019-04-10 09:00:00.000
+3	2019-04-10 10:00:00.000
+4	2019-04-10 10:00:00.000
+
+select count(begintime) as [count],begintime from missbespeak group by begintime	-->计算重复项
+count	begintime
+1		2019-04-09 15:00:00.000
+1		2019-04-10 09:00:00.000
+2		2019-04-10 10:00:00.000
+
+select begintime from missbespeak group by begintime having count(*)=2	-->查找重复条数等于2的数据
+begintime
+2019-04-10 10:00:00.000
+
+SELECT	distinct d.begintime,countb.count FROM	missbespeak d
+left join (select count(begintime) as [count],begintime from missbespeak group by begintime) countb
+on d.begintime=countb.begintime WHERE d.WeChatId='o-4S_jjslMSlHp7wPDSTxhear0WA' AND d.s_register='N'	-->查找重复条的数据集并显示重复条数
+begintime					count
+2019-04-09 15:00:00.000		1
+2019-04-10 09:00:00.000		1
+2019-04-10 10:00:00.000		2
