@@ -17,3 +17,7 @@ SidData类：
 
 序列化时日期格式化
 string str = JsonConvert.SerializeObject(order, new Newtonsoft.Json.Converters.IsoDateTimeConverter() { DateTimeFormat = "yyyy-MM-dd HH:mm" });
+
+
+可以手动序列化不是Json类型的字符串：{"Body":{"button":[{"key":"value"},{"key":"value"}]}}
+string postString = "{\"button\":" + JsonConvert.SerializeObject(data)+"}";   //WxMenus根节点如果不加Body: 这里需要手动序列化
