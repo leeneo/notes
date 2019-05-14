@@ -1,6 +1,6 @@
 参考文档：https://ionicframework.com/docs/installation/cli
 
-1,npm install -g ionic cordova
+1,npm install -g ionic
 2,环境配置：安装java jdk,android sdk(adt套件);配置JAVA_HOME;CLASSPATH;ANDROID_HOME;安装android studio;
 3,配置GRADLE_HOME;PATH添加%配置GRADLE_HOME%\bin;(路径在android studio\gradle目录下)
 

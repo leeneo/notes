@@ -1,5 +1,5 @@
 安装 Cli:
-npm install -g --save-dev @angular/cli@latest
+npm install -g --save-dev @angular/cli
 
 更新 Angular CLI  
 全局：npm uninstall -g @angular/cli->
