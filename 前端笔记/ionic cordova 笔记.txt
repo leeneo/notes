@@ -13,8 +13,13 @@ START PROJECT:
 ionic 是基于 angularjs 的扩展框架；
 cordova 是一套处理javascript 与原生移动设备通信的接口api;
 
-ionic start appname template --ex:=>ionic start helloApp tabs --cordova
-*ionic start --list 查看可供使用的模板
+创建app：ionic start appname template -
+>ionic start --list 查看可供使用的模板
+>ionic start helloApp tabs --cordova
+
+运行app:
+>cd myApp
+>ionic serve
 
 cd helloApp =>ionic serve 在浏览器中运行当前项目
 
