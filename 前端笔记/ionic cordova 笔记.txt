@@ -1,12 +1,19 @@
+参考文档：https://ionicframework.com/docs/installation/cli
+
 1,npm install -g ionic cordova
 2,环境配置：安装java jdk,android sdk(adt套件);配置JAVA_HOME;CLASSPATH;ANDROID_HOME;安装android studio;
 3,配置GRADLE_HOME;PATH添加%配置GRADLE_HOME%\bin;(路径在android studio\gradle目录下)
+
+安装cli报错处理：
+npm i -g express
+npm i -g ionic
+npm i -g cordova
 
 START PROJECT:
 ionic 是基于 angularjs 的扩展框架；
 cordova 是一套处理javascript 与原生移动设备通信的接口api;
 
-ionic start appname template --command=>ex:ionic start helloApp tabs --cordova
+ionic start appname template --ex:=>ionic start helloApp tabs --cordova
 *ionic start --list 查看可供使用的模板
 
 cd helloApp =>ionic serve 在浏览器中运行当前项目
