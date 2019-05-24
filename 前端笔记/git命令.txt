@@ -95,3 +95,38 @@ vim模式
 按esc回到命令模式，键入：wq 保存并退出；键入:w 保存不退出，:q 退出。
 放弃修改并退出：:q!
 放弃修改不退出：:e!
+
+查看当前仓状态（commit/rebase/conflict...），相当有用
+*git status
+
+撤回提交/版本回退
+
+git log==>最新提交排在首位
+
+commit 2b40594ba8a4cbd96780d9c5d672271cca923b5c (HEAD -> master, origin/master)
+Author: leeneo@xingzhihen.com <leeneo@xingzhihen.com>
+Date:   Fri May 24 15:31:11 2019 +0800
+
+    1
+
+commit 4f05c697a5aa0dcb47b02a4988fef14ca85932c4
+Author: leeneo@xingzhihen.com <leeneo@xingzhihen.com>
+Date:   Fri May 24 15:26:44 2019 +0800
+
+    1
+commit 01c918c96748ce6558fd1ef9ada722daa1b79d78
+Author: leeneo@xingzhihen.com <leeneo@xingzhihen.com>
+Date:   Fri May 24 12:26:44 2019 +0800
+
+    1
+假设摊销上一次提交：
+git reset --hard 4f05c697a5aa0dcb47b02a4988fef14ca85932c4
+  
+git push origin HEAD --force
+
+删除中间的某个commit,如删除4f05c697a5aa0dcb47b02a4988fef14ca85932c4
+
+git rebase -i 01c918c96748ce6558fd1ef9ada722daa1b79d78
+pick 4f05c6==>drop 4f05c6
+:wq
+git push origin HEAD --force
