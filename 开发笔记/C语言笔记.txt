@@ -2,7 +2,7 @@
 
 使用MinGw GNU套件安装gcc
 (确保gcc.exe路径在系统环境内)
-gcc --h|help
+gcc --h
 gcc -v
 
 编译-->gcc test.c -o test

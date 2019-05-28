@@ -1,0 +1,75 @@
+栈(Stack) && 堆(Heap)
+
+栈和堆都是内存中一块特定区域
+堆栈，先进后出 (FILO—First-In/Last-Out)
+指令队列，先进先出（FIFO—first in first out）
+
+1，栈的属性&特点
+    快速访问
+    存储临时变量，值类型的值
+    内存自动分配管理（变量自动创建和释放）
+    被CPU管理和充分利用，内存不会变成碎片
+    栈变量只在函数运行时存在（局部变量）
+    受限于栈大小
+    变量不能调整大小
+
+    声明function()=>产生变量=>推到栈中
+    退出function()=>释放变量=>栈提供给其他变量
+
+Demo:
+#include <stdio.h>
+double multiplyByTwo (double input) {
+    double twice = input * 2.0;
+    return twice;
+}
+int main(int argc, const char * argv[]) {
+    int age = 30;
+    double salary = 12345.67;
+    double myList[3] = {1.2,2.3,3.4};
+   printf("double your salary is %.3f\n",multiplyByTwo(salary));
+    return 0;
+}
+
+2，堆的属性&特点
+    自由的内存区块
+    变更可以被全局访问
+    没有内存大小限制，除了物理空间
+    读取和写入相对栈较慢
+    必需手动分配和管理
+    如果不手动销毁，变量会一直存在，这被称为“内存泄露”
+    创建堆变量：C:malloc()/calloc()
+    释放堆变量：C:free()
+    调整变量大小：C:realloc()
+
+Demo:
+#include <stdio.h>
+#include <stdlib.h>
+  
+double *multiplyByTwo (double *input) {
+    double *twice = malloc(sizeof(double));
+    *twice = *input *2.0;
+    return twice;
+}
+int main(int argc, const char * argv[]) {
+    int *age = malloc(sizeof(int));
+    *age = 30;
+    double *salary = malloc(sizeof(double));
+    *salary = 12345.67;
+    double *myList = malloc(3 * sizeof(double));
+    myList[0] = 1.2;
+    myList[1] = 3.4;
+    myList[2] = 4.5;
+    double *twiceSalary = multiplyByTwo(salary);
+    
+    printf("double your salary is %.3f\n",*twiceSalary);
+    
+    free(age);
+    free(salary);
+    free(myList);
+    free(twiceSalary);
+    
+    return 0;
+}
+
+3，什么时候使用堆
+     我们应该什么时候使用堆和栈呢？如果我们需要分配一大块内存（例如一个很大的数组或者一个很大的结构体），而且我们需要保持这个变量很长时间（例如全局变量）。我们应该分配堆内存。如果你处理的很小的变量，而且只要再函数使用的时候存活，那么你应该使用栈，它比较方便而且快捷。如果你需要类似与数组或者结构体的变量，而且能够动态改变大小（例如一个数组可以根据需要添加数据或者删除数据），那么你可以用malloc(),realloc（)给他们分配堆内存，用free()手动的管理内存。当我们讨论完指针，我们将会讨论动态分配数据结构体。
