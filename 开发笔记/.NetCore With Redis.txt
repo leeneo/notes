@@ -1,0 +1,31 @@
+*Redis 内存中的数据库（所有数据存储在内存中，可以迁移至其他DB），有数据持久化机制，但不适合当做固化数据的DB使用。只适合用作快速的数据读取中间件。不用深学。
+
+.net core使用redis  
+https://blog.csdn.net/e62ces0iem/article/details/73477182
+
+Redis On Windows 下载地址：https://github.com/MicrosoftArchive/redis/releases
+如果下载msi版本，则免去配置
+
+本地启动redis控制台 && 安装redis服务（用于调试）
+1.下载最新版redis，选择.zip则是免安装的版本
+2.解压到指定目录，并运行cmd命令
+3.在该文件夹下运行命令以启动服务：redis-server.exe redis.windows.conf 
+    看到Running in 界面，则表示启动成功；如果关闭该窗口，服务也就停止了。
+4.将redis安装成服务
+    在该文件夹下运行命令：redis-server.exe --service-install redis.windows.conf
+    Successfully installed a service 表示安装成功。
+5，启动Redis客户端
+    Redis 安装目录下：redis-cli.exe -h 127.0.0.1 -p 6379
+    127.0.0.1:6379> 启动OK
+6，数据读写测试
+    set User leeneo.cn>
+        ok
+    get User>
+        "leeneo.cn"
+    set person [leeneo,28]>
+        ok
+    get person >
+        "[leeneo,28]"
+
+
+Redis 桌面管理工具：Redis Desktop Manager

@@ -1,0 +1,10 @@
+Postman 
+
+Postman 4.1.2 下载地址: http://files.cnblogs.com/files/mafly/postman-4.1.2.rar
+https://www.cnblogs.com/mafly/p/postman.html
+
+Chrome 浏览器扩展应用：模拟GET/POST请求，API调试，Http请求
+
+国内不翻墙无法直接添加此扩展，间接添加Chrome扩展方法如下：
+chrome 扩展程序-->打开开发者模式-->加载已解压的扩展程序-->postman解压目录，添加，启用，OK!
+使用时开始菜单/Cortana搜索postman。
