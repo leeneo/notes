@@ -1,0 +1,58 @@
+参考：https://docs.microsoft.com/zh-cn/virtualization/hyper-v-on-windows/about/
+
+Hyper-V
+
+特点：
+每个虚拟机都在虚拟硬件上运行。 Hyper-V 允许你创建虚拟硬盘驱动器、虚拟交换机以及许多其他虚拟设备
+
+功能：
+运行需要早期版本的 Windows 操作系统或非 Windows 操作系统的软件。
+实验其他操作系统。 通过 Hyper-V，可轻松创建和删除不同的操作系统。
+使用多个虚拟机在多个操作系统上测试软件。 通过 Hyper-V，可以在一部台式机或便携式计算机上运行所有内容。 可以将这些虚拟机导出并随后导入到任何其他 Hyper-V 系统中，包括 Azure。
+
+系统要求：
+Windows 10 专业版、企业版和教育版内置 hyper-v。 win10家庭版不可用。
+*虚拟中的操作系统仍然需要有效的许可证
+
+硬件要求：
+具有二级地址转换 (SLAT) 的 64 位处理器。
+CPU 支持 VM 监视器模式扩展（Intel CPU 上的 VT-c）。
+最少 4 GB 内存。 由于虚拟机与 Hyper-V 主机共享内存，因此将需要提供足够的内存来处理预期虚拟工作负荷
+
+BIOS 启用：
+虚拟化技术 - 可能具有不同标记，具体取决于主板制造商。
+硬件强制实施的数据执行保护。
+
+验证硬件兼容性
+若要验证兼容性，请打开 PowerShell 或命令提示符 (cmd.exe)，然后键入 systeminfo。
+如果列出的所有 Hyper-V 要求都具有值 Yes，则你的系统可以运行 Hyper-V 角色。 如果任一项返回No，请查看本文档中列出的要求并进行调整（如果可能）。
+
+Hyper-V 要求:     虚拟机监视器模式扩展: 是
+                  固件中已启用虚拟化: 是
+                  二级地址转换: 是
+                  数据执行保护可用: 是
+
+在现有 Hyper-V 主机上运行 systeminfo 时，Hyper-V 要求部分读取如下内容：
+Hyper-V Requirements: A hypervisor has been detected. Features required for Hyper-V will not be displayed.
+
+
+Hyper-V on Windows VS Hyper-V on Windows Server：
+
+仅在 Windows Server 中可用的 Hyper-V 功能：
+将虚拟机从一台主机实时迁移到另一台主机
+Hyper-V 副本
+虚拟光纤通道
+SR-IOV 网络
+共享的 .VHDX
+
+仅在 Windows 10 中可用的 Hyper-V 功能：
+快速创建和 VM 库
+默认网络（NAT 交换机）
+
+对于 Windows 上的 Hyper-V，内存管理模块不同。 在服务器上，通过假设只有虚拟机在该服务器上运行来管理 Hyper-V 内存。 在 Windows 上的 Hyper-V 中，通过大多数客户端计算机都在运行主机上的软件以及运行虚拟机的预期来管理内存。
+
+
+限制
+依赖于特定硬件的程序不能在虚拟机中良好运行。 例如，需要使用 GPU 进行处理的游戏或应用程序可能无法良好运行。 依赖于子 10 毫秒计时器的应用程序（如实时音乐混合应用程序或高精度时间）在虚拟机中运行时也可能会出问题。
+
+此外，如果已启用了 Hyper-V，这些易受延迟影响的高精度应用程序在主机中运行时可能也会出问题。 这是因为在启用了虚拟化后，主机操作系统也会在 Hyper-V 虚拟化层的顶部运行，就如来宾操作系统那样。 但是，与来宾操作系统不同，主机操作系统在这点上很特殊，它是直接访问所有硬件，这意味着具有特殊硬件要求的应用程序仍然可以在主机操作系统中运行，而不会出问题。
