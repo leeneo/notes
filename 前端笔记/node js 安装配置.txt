@@ -1,6 +1,6 @@
-node.exe ËùÔÚÂ·¾¶-->path
-ÓÃ»§±äÁ¿--path:d:\nodejs
-ÏµÍ³±äÁ¿--NODE_PATH:d:\nodejs\node_modules
+node.exe æ‰€åœ¨è·¯å¾„-->path
+ç”¨æˆ·å˜é‡--path:d:\nodejs
+ç³»ç»Ÿå˜é‡--NODE_PATH:d:\nodejs\node_modules
 
 D:\>node -v
 v0.6.2
@@ -11,9 +11,9 @@ D:\>npm -v
 D:\>express -v
 2.5.1
 
-D:\>express hello //´´½¨exrpessÏîÄ¿
+D:\>express hello //åˆ›å»ºexrpessé¡¹ç›®
 D:\>cd hello
-D:\hello>node app.js //Æô¶¯
+D:\hello>node app.js //å¯åŠ¨
 
--g 	È«¾Ö
-²»¼Ó-g  ±¾µØ
+-g 	å…¨å±€
+ä¸åŠ -g  æœ¬åœ°
