@@ -45,7 +45,28 @@ cache = D:\nodejs\node_global
 -->rimraf nodu_modules
 
 **************************************************************************************************************************************************************************
+npm install moduleName 命令
+1. 安装模块到项目node_modules目录下。
+2. 不会将模块依赖写入devDependencies或dependencies 节点。
+3. 运行 npm install 初始化项目时不会下载模块。
 
+npm install -g moduleName 命令
+1. 安装模块到全局，不会在项目node_modules目录中保存模块包。
+2. 不会将模块依赖写入devDependencies或dependencies 节点。
+3. 运行 npm install 初始化项目时不会下载模块。
+
+npm install -save moduleName 命令
+1. 安装模块到项目node_modules目录下。
+2. 会将模块依赖写入dependencies 节点。
+3. 运行 npm install 初始化项目时，会将模块下载到项目目录下。
+4. 运行npm install --production或者注明NODE_ENV变量值为production时，会自动下载模块到node_modules目录中。
+
+npm install -save-dev moduleName 命令
+1. 安装模块到项目node_modules目录下。
+2. 会将模块依赖写入devDependencies 节点。
+3. 运行 npm install 初始化项目时，会将模块下载到项目目录下。
+4. 运行npm install --production或者注明NODE_ENV变量值为production时，不会自动下载模块到node_modules目录中。
+============================================================================================================
 npm install --save 与npm install --save-dev 的区别
 
 npm install <packageName>  --save：发布安装
@@ -56,4 +77,7 @@ npm install <packageName>  --save：发布安装
 npm install --save-dev：本地开发安装，有时会产生package-lock.json(锁定各依赖包版本)
 ---安装到开发依赖中，项目上线之后不会用到的插件，例如'babel-loader',项目解析完发布
 ---自动更改package.json  写入devDependencies 节点
+
+总结
+devDependencies 节点下的模块是我们在开发时需要用的，比如项目中使用的 gulp ，压缩css、js的模块。这些模块在我们的项目部署后是不需要的，所以我们可以使用 -save-dev 的形式安装。像 express 这些模块是项目运行必备的，应该安装在 dependencies 节点下，所以我们应该使用 -save 的形式安装。
 
