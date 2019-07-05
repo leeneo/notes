@@ -1,0 +1,13 @@
+解除端口号占用
+
+查看本地端口号使用情况
+netstat -ano
+
+查看具体端口号
+netstat -aon|findstr 2264>
+ TCP    127.0.0.1:2264         0.0.0.0:0              LISTENING       5176(进程PID)
+ 
+tasklist|findstr 5176
+dotnet.exe                   5176 Console                    2     33,544 K
+
+taskkill /pid 5176 /f 
