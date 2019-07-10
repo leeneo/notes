@@ -54,9 +54,17 @@ Usage:
   dbcontext   Commands to manage DbContext types.
   migrations  Commands to manage the Migrations.
 
-创建数据库:
-dotnet ef migrations add Initail	将数据模型映射成表
+查询 某个命令帮助
+dotnet ef -h migrations
+dotnet ef migrations list -c dbcontext :  Lists available migrations.
+
+模型映射成数据库镜像:
+dotnet ef migrations add Initail	将数据模型映射成Migrations
 dotnet ef database update		更新数据库并生成表
+
+根据指定  --context DBContext *项目中提示有多个DbContext的情况下
+dotnet ef migrations add Initial2 -c DBContext	将数据模型映射成表
+dotnet ef database update -c DBContext		      更新数据库并生成表
 
 DOTNET-EF-数据库
 Usage: dotnet ef database [options] [command]
