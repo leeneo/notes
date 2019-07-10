@@ -32,6 +32,8 @@ apk 签名：keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -validi
 您将首先被提示为密钥库创建密码。然后，回答其他好的工具问题，当完成所有工作时，应该在当前目录中创建一个名为my-release-key.jks的文件。
 注意：确保将此文件保存在安全的地方，如果您丢失了文件，您将无法将更新提交到您的应用程序
 
+*如果当前电脑没有keytool，请先安装一个java jdk
+
 要签署未签名的APK，请运行也包含在JDK中的jarsigner工具:
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks android-release-unsigned.apk my-alias
 
