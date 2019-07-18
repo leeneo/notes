@@ -48,7 +48,7 @@ PM > Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted
 迁移注意事项：
 如项目数据结构发生改变，需要重新生成迁移(migrations add)和(database update)操作
 并用需要删除旧的数据库和migrations
-
+database update这步操作其实就是根据之前生成的【20190xxxxxxxx_initial.cs】来建立数据库和表的操作
 
 dotnet ef 命令：
 *该命令仅在添加引用的项目目录下有效。
