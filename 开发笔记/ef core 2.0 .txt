@@ -45,6 +45,10 @@ PM > Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted
 *通过将-Tables参数添加到上面的命令中，您可以指定要为其生成实体的表。例如-Tables Blog,Post;
 *PM默认项目要选择对应的构建模型的项目，且解决方案不能有错误，否则build failed;
 
+迁移注意事项：
+如项目数据结构发生改变，需要重新生成迁移(migrations add)和(database update)操作
+并用需要删除旧的数据库和migrations
+
 
 dotnet ef 命令：
 *该命令仅在添加引用的项目目录下有效。
@@ -66,7 +70,8 @@ dotnet ef database update		更新数据库并生成表
 dotnet ef migrations add Initial2 -c DBContext	将数据模型映射成表
 dotnet ef database update -c DBContext		      更新数据库并生成表
 
-DOTNET-EF-数据库
+
+DOTNET-EF-database
 Usage: dotnet ef database [options] [command]
 
 Options:
@@ -90,7 +95,7 @@ Commands:
   list      Lists available DbContext types.
   scaffold  Scaffolds a DbContext and entity types for a databas
 
-DOTNET-EF-迁移
+DOTNET-EF-migrations
 Usage: dotnet ef migrations [options] [command]
 
 Options:
