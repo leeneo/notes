@@ -1,3 +1,14 @@
-OData是一种按照Restful Api模式设计的接口协议。
+简介
+
+OData，即Open Data Protocol，是由微软在2007年推出的一款开放协议，旨在通过简单、标准的方式创建和使用查询式及交互式RESTful API。
+OData是一种按照RESTful Api模式设计的接口协议。
 用于暴露统一的公工接口，给第三方调用。
 *建议仅暴露可供第三方使用的接口。
+
+实践
+
+项目添加OData类库
+dotnet add package Microsoft.AspNetCore.OData
+
+OData使用EDM，即Entity Data Model来描述数据的结构。在Startup文件中添加创建方法。
+*EDM 一种类似Ling to sql 的ORM（对象关系映射-Object Relational Mapping）规范
