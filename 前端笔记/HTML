@@ -1,0 +1,10 @@
+<form> -- 属性
+enctype：application/x-www-form-urlencoded | multipart/form-data | none
+
+post 时：
+application/x-www-form-urlencoded:	不指定时默认方式， key1=value1&key2=value2
+multipart/form-data:	一般用于表单需要文件上传
+
+get 时：
+application/x-www-form-urlencoded	 key1=value1&key2=value2
+none	不指定时默认方式，getContentType() 返回null
