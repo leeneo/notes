@@ -99,7 +99,7 @@ vim模式
 查看当前仓状态（commit/rebase/conflict...），相当有用
 *git status
 
-撤回提交/版本回退
+撤回提交/版本回退|git 删除commit
 
 git log==>最新提交排在首位
 
