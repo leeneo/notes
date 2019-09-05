@@ -1,0 +1,65 @@
+pg_ctl 数据库服务管理工具
+pg_ctl -D C:\user\local\pgsql\data initdb 初始化服务器，该操作会创建一个db cluster,效果同
+==>psql安装目录下的initdb.exe -D C:\user\local\pgsql\data initdb.exe -D C:\user\local\pgsql\data
+
+--查询服务器（db cluster）开启状态
+@echo off
+pg_ctl status -D c:\user\local\pgsql\data
+pause
+
+--开启本地服务器
+@echo off
+pg_ctl start -D c:\user\local\pgsql\data
+pause
+
+--停止本地服务
+@echo off
+pg_ctl stop -D c:\user\local\pgsql\data
+pause
+
+
+命令行工具：
+psql
+
+--服务开启后，可以数据库连接
+;本地简化连接
+@echo off
+psql dbname
+pause
+
+;远程连接方式
+@echo off
+psql -h 192.168.1.1 -p 5432 -d TestDb -U postgres
+pause
+
+;基础命令
+\l 数据库列表
+\d 表格列表
+\d "table name" 列出表结构
+\dv 列出视图
+\c dbname 切换数据库
+
+注意事项：psql对大小写不敏感
+查询中表名和字段名默认为小写，当表名，字段名为大写时，查询形式如下：
+select "Id","Name",* from "User" where "Name"='leeneo'
+
+
+客户端管理工具 
+
+pgadmin 
+图形化管理工具，安装即可
+
+pgweb
+
+;远程
+@echo off
+pgweb /url postgres://user:pwd@192.168.1.1:8000/DBName?sslmode=disable
+pause
+
+;本地
+@echo off
+pgweb /db:postgres2 /user leeneo
+pause
+
+Referer: http://localhost:8081/
+浏览器打开http://localhost:8081/

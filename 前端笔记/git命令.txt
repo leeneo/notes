@@ -124,9 +124,14 @@ git reset --hard 4f05c697a5aa0dcb47b02a4988fef14ca85932c4
   
 git push origin HEAD --force
 
-删除中间的某个commit,如删除4f05c697a5aa0dcb47b02a4988fef14ca85932c4
+删除中间的某个commit,如删除 4f05c697a5aa0dcb47b02a4988fef14ca85932c4
 
-git rebase -i 01c918c96748ce6558fd1ef9ada722daa1b79d78
-pick 4f05c6==>drop 4f05c6
-:wq
-git push origin HEAD --force
+git rebase -i 01c918c96748ce6558fd1ef9ada722daa1b79d78  --要删除的commit 前一个commit记录
+pick 4f05c6==>drop 4f05c6                               --pick 改成 drop
+:wq                                                     --保存并退出
+git push origin HEAD --force                            --远程更新到github
+
+*注 此处 -i 01c918...的commit 记录号，是要删除的commit 前一个commit记录
+*然后找到要删除的commit号，pick改成drop，退出并保存就行了，不会影响别的文件或记录
+*如果该文件关联的commit有多条，要优先删除最近的commit，然后可以逐步追踪到create 该文件的commit
+*vim模式 按<Insert> 进入编辑模式；:wq -- 保存并退出；:q -- 直接退出；esc 切换到命令模式
