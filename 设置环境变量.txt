@@ -9,4 +9,3 @@ set path=%path%;C:\files\bin;	原变量的基础上，追加C:\files\bin
 setx PATH "%PATH%;C:\BIN"	原变量的基础上，追加设置
 
 setx mypath "%PATH%;C:\BIN"	设置一个变量名为"mypath"的用户环境变量
-111
