@@ -101,19 +101,63 @@ confirm(string str)用法与alert(string str)一样，不同的是confirm弹出�
 ===========================================================================================
 截取字符串方法 slice,substring,substr的区别
 
-slice(start,end?) 截取一个新的数组, 如果end不指定默认到数组结尾。
-返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。不改变原有的数组。
+substr(start,length?) 方法可在字符串中抽取从 start 下标开始的指定数目的字符。
+start	起始下标。如果是负数，那么该参数声明从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。
+length	可选。子串中的字符数。如果省略了该参数，那么返回从 stringObject 的开始位置到结尾的字串。
+返回一个包含从 start（包括 start 所指的字符） 处开始的 length 个字符。如果没有指定 length，那么返回的字符串包含从 start 到结尾的字符。
+*：ECMAscript 没有对该方法进行标准化，因此反对使用它。
+*：在 IE 4 中，参数 start 的值无效。在这个 BUG 中，start 规定的是第 0 个字符的位置。在之后的版本中，此 BUG 已被修正。
 
+substring(start,stop?) 方法用于提取字符串中介于两个指定下标之间的字符。
+start	必需。一个非负的整数，规定要提取的子串的第一个字符在 stringObject 中的位置。
+stop	可选。一个非负的整数，比要提取的子串的最后一个字符在 stringObject 中的位置多 1。省略，表示到字符串结尾。
+返回一个包含从 start 处到 stop-1 处的所有字符，其长度为 stop 减 start。
+*substring() 方法返回的子串包括 start 处的字符，但不包括 stop 处的字符。
+*如果 start 与 stop 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。如果 start 比 stop 大，那么该方法在提取子串之前会先交换这两个参数。
+
+slice(start,end?) 方法可提取字符串的某个部分，并以新的字符串返回被提取的部分
+start  起始下标。如果是负数，那么它规定从字符串尾部开始算起的位置。也就是说，-1 指最后一个字符，-2 指倒数第二个字符，以此类推。
+end    结尾下标，未指定，表示到字符串结尾
+返回一个新的字符串，包含从 start 到 end （不包括该元素）的所有字符。不改变原有的字符串。
+*与Array.slice()方法用法一样，只不过截取数组返回数组，截取字符串返回字符串
+
+var str="Hello!"
+document.write(str.slice(0,2))
+//'He'
+
+*String 对象的方法 slice()、substring() 和 substr() （不建议使用）都可返回字符串的指定部分。slice() 比 substring() 要灵活一些，因为它允许使用负数作为参数。slice() 与 substr() 有所不同，因为它用两个字符的位置来指定子串，而 substr() 则用字符位置和长度来指定子串。
+
+//共同的特性：都是从指定开始位置到指定结束（未指定表示到结尾）位置
 var arr = [1,2,3,4,5,6,7],
-    str = "helloworld!";  //防止空格干扰，不用带空格的，注意这里有个！号也算一位
- 
+    str = "helloworld!";  //防止空格干扰，不用带空格的，注意这里有个！号也算一位 
+//1. 都使用一个参数：
 console.log(str.slice(1));  //elloworld!  
 console.log(str.substring(1)); //elloworld! 
 console.log(str.substr(1));  //elloworld! 
-			
-console.log(arr.slice(1));  //[2,3,4,5,6,7]
-console.log(arr.substr(1));  //TypeError: arr.substr is not a function
-console.log(arr.substring(1));  //TypeError: arr.substring is not a function
+//2. 都使用两个正数参数（第一个小于第二个）：
+console.log(str.slice(1,4));  //ell
+console.log(str.substring(1,4));  //ell
+console.log(str.substr(1,4)); //ello  不一致了！！！
+//3. 都使用两个正数参数（第一个大于第二个）：
+console.log(str.slice(5,1));  //""
+console.log(str.substring(5,1));  //ello
+console.log(str.substr(5,1));  //"w"
+//4. 使用一正一负两个参数（第一正，第二负）
+console.log(str.slice(1,-2)); //elloworl
+console.log(str.substr(1,-2));  //""
+console.log(str.substring(1,-2));  //h
+//5. 使用一正一负两个参数（第一负，第二正）
+console.log(str.slice(-3,1))  //""
+console.log(str.substr(-3,1))  //l
+console.log(str.substring(-3,1))  //h
+//6. 全负数（两种情况合一）
+console.log(str.slice(-1,-5));
+console.log(str.substr(-1,-5));
+console.log(str.substring(-1,-5));
+//上面的结果全是空		
+console.log(str.slice(-5,-1)); //orld
+console.log(str.substr(-5,-1)); //""
+console.log(str.substring(-5,-1)); //""
 
 ===========================================================================================
 数组常用操作方法 以及slice & splice 的区别
@@ -146,7 +190,88 @@ shift() 方法用于删除并返回数组的第一个元素。//类似于堆的�
 返回从数组中移除的元素，并使数组长度减1。
 
 push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
-把指定的值添加到数组后的新长度。
+返回添加后数组的新长度。
+unshift() 方法可向数组的开头添加一个或多个元素，并返回新的长度。
+返回添加后数组的新长度。
+
+reverse() 方法用于颠倒数组中元素的顺序。
+返回颠倒元素后的原数组。
+
+sort(sortby?) 方法用于对数组的元素进行排序。
+
+*sortby ————排序函数
+sortby函数应该具有两个参数 a 和 b，其返回值如下：
+若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+若 a 等于 b，则返回 0。
+若 a 大于 b，则返回一个大于 0 的值。
+
+如果未指定sortby函数，将按照字符编码的顺序进行排序。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。
+//按默认字符编码排序
+var arr = new Array(6)
+arr[0] = "George"
+arr[1] = "John"
+arr[2] = "Thomas"
+arr[3] = "James"
+arr[4] = "Adrew"
+arr[5] = "Martin"
+document.write(arr + "<br />")
+document.write(arr.sort())
+
+//按指定排序函数排序
+function sortNumber(a,b)
+{
+	return a - b
+}
+var arr = new Array(6)
+arr[0] = "10"
+arr[1] = "5"
+arr[2] = "40"
+arr[3] = "25"
+arr[4] = "1000"
+arr[5] = "1"
+document.write(arr + "<br />")
+document.write(arr.sort(sortNumber))
+
+toString() 方法可把数组转换为字符串，并返回结果。
+返回值与没有参数的 join() 方法返回的字符串相同（以‘,’隔开）
+
+toLocaleString() 把数组转换为本地字符串。
+arrayObject 的本地字符串表示。
+
+slice(start,end?) 从已有的数组中截取一个新的数组。
+start 规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1 指最后一个元素，-2 指倒数第二个元素，以此类推。
+end   未指定表示到数组结尾。
+返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。不改变原有的数组。
+*不改变原数组
+
+splice(index,delNum,item1?,item2?,item...?) 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+index	必需。整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置。
+delNum	必需。要删除的项目数量。如果设置为 0，则不会删除项目。
+item1?, item...? 可选。向数组添加的新项目。
+返回包含被删除项目的新数组，如果有的话。
+*会改变原数组。
+
+var arr = new Array(6)
+arr[0] = "George"
+arr[1] = "John"
+arr[2] = "Thomas"
+arr[3] = "James"
+arr[4] = "Adrew"
+arr[5] = "Martin"
+arr.splice(2,0,"William")
+document.write(arr + "<br />")
+//George,John,William,Thomas,James,Adrew,Martin
+//在指定索引处插入或删除，用来替换的元素会填充到指定索引处
+*******************************************************************************************
+ delete 删除数组或对象中的指定元素
+ var arr = [1, 2, 3, 4];
+ delete arr[0];
+ console.log(arr);   //[undefined, 2, 3, 4]
+ //delete删除之后数组长度不变，只是被删除元素被置为undefined了
+ 
+ var obj={id:1,name:'na',value:'va'};
+ delete obj.name;
+ console.log(obj) //{id:1,value:'va'}
 
 
 *******************************************************************************************
