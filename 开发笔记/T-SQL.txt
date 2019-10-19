@@ -1,27 +1,27 @@
-/*SQL ÃüÁî´óÈ«*/
---´ú±í×¢ÊÍ
+/*SQL å‘½ä»¤å¤§å…¨*/
+--ä»£è¡¨æ³¨é‡Š
 
-/*¼ÆËã×Ö·û´®×Ö½Ú³¤¶È*/
+/*è®¡ç®—å­—ç¬¦ä¸²å­—èŠ‚é•¿åº¦*/
 select LEN('00000002201803291912093015984')
-select LEN('ºº×Ö') //=2 £¬ºº×ÖÒ»°ãÕ¼Á½¸ö×Ö½Ú¡£
+select LEN('æ±‰å­—') //=2 ï¼Œæ±‰å­—ä¸€èˆ¬å ä¸¤ä¸ªå­—èŠ‚ã€‚
 
-insert into MemberInfo (RegisterTime) values(GETDATE()) --GETDATE()== µ±Ç°Ê±¼ä£¬¾«È·µ½ºÁÃë
+insert into MemberInfo (RegisterTime) values(GETDATE()) --GETDATE()== å½“å‰æ—¶é—´ï¼Œç²¾ç¡®åˆ°æ¯«ç§’
 
-/*·ÖÀë¸½¼Ó*/
+/*åˆ†ç¦»é™„åŠ */
 
---·ÖÀëÊı¾İ¿â 
+--åˆ†ç¦»æ•°æ®åº“ 
 
 use master
 sp_detach_db 'database_name'   
 
---¸½¼ÓÊı¾İ¿â
+--é™„åŠ æ•°æ®åº“
 
 --1,
 use master
 EXEC sp_attach_db @dbname = N'pubs', 
 @filename1 = N'c:\Program Files\Microsoft SQL Server\MSSQL\Data\pubs.mdf', 
 @filename2 = N'c:\Program Files\Microsoft SQL Server\MSSQL\Data\pubs_log.ldf' 
-´Ë¹¦ÄÜ½«ÔÚÎ´À´°æ±¾µÄMicrosoft SQL ServerÖĞÉ¾³ı¡£±ÜÃâÔÚĞÂµÄ¿ª·¢¹¤×÷ÖĞÊ¹ÓÃ´Ë¹¦ÄÜ£¬²¢¼Æ»®ĞŞ¸Äµ±Ç°Ê¹ÓÃ´Ë¹¦ÄÜµÄÓ¦ÓÃ³ÌĞò¡£ÎÒÃÇ½¨ÒéÄúÊ¹ÓÃCREATE DATABASE database_name FOR ATTACHÀ´´úÌæ
+æ­¤åŠŸèƒ½å°†åœ¨æœªæ¥ç‰ˆæœ¬çš„Microsoft SQL Serverä¸­åˆ é™¤ã€‚é¿å…åœ¨æ–°çš„å¼€å‘å·¥ä½œä¸­ä½¿ç”¨æ­¤åŠŸèƒ½ï¼Œå¹¶è®¡åˆ’ä¿®æ”¹å½“å‰ä½¿ç”¨æ­¤åŠŸèƒ½çš„åº”ç”¨ç¨‹åºã€‚æˆ‘ä»¬å»ºè®®æ‚¨ä½¿ç”¨CREATE DATABASE database_name FOR ATTACHæ¥ä»£æ›¿
 
 --2,
 use master
@@ -31,7 +31,7 @@ FOR ATTACH
 GO
 
 
-/*dbÃüÁî*/
+/*dbå‘½ä»¤*/
 sp_helpdb 
 sp_helpdb master
 use master
@@ -40,9 +40,9 @@ sp_renamedb 'TestDB','MyLocalDb'
 sp_helpdb MyLocalDb
 
 
-/*tableÃüÁî*/
+/*tableå‘½ä»¤*/
 use MyLocalDb
-sp_help	/*²éÑ¯µ±Ç°Êı¾İ¿âÖĞ¶ÔÏó(±í£¬ÊÓÍ¼µÈ)*/
+sp_help	/*æŸ¥è¯¢å½“å‰æ•°æ®åº“ä¸­å¯¹è±¡(è¡¨ï¼Œè§†å›¾ç­‰)*/
 
 create table People(
 	FirstName nvarchar(6),
@@ -52,56 +52,56 @@ create table People(
 	Primary key (ID)
 );
 
-sp_help people;				--²éÑ¯Ö¸¶¨±í½á¹¹
+sp_help people;				--æŸ¥è¯¢æŒ‡å®šè¡¨ç»“æ„
 
 drop table People
 
-truncate table tbname		--É¾³ı±íÄÚÈİ£¬ÊÍ·Å±í¿Õ¼ä£¬²»É¾³ı±í½á¹¹£¨¶¨Òå£©
+truncate table tbname		--åˆ é™¤è¡¨å†…å®¹ï¼Œé‡Šæ”¾è¡¨ç©ºé—´ï¼Œä¸åˆ é™¤è¡¨ç»“æ„ï¼ˆå®šä¹‰ï¼‰
 
-delete from tbname			--Çå¿Õ±íÄÚÈİ£¬±£Áô±í½á¹¹£¬Í¬truncate
+delete from tbname			--æ¸…ç©ºè¡¨å†…å®¹ï¼Œä¿ç•™è¡¨ç»“æ„ï¼ŒåŒtruncate
 
-/*Ôö¼Ó×Ö¶Î*/
+/*å¢åŠ å­—æ®µ*/
 alter table card_type add IsShowInWeChat varchar(1) NOT NULL DEFAULT ('Y')
-/*Ôö¼ÓÄ¬ÈÏÖµ*/
+/*å¢åŠ é»˜è®¤å€¼*/
 ALTER TABLE [dbo].[MemberInfo] ADD  DEFAULT ((0)) FOR [Points]
-/*ĞŞ¸Ä×Ö¶Î³¤¶È*/
+/*ä¿®æ”¹å­—æ®µé•¿åº¦*/
 alter table wxStoreOrders alter column paytype varchar(36)
-/*É¾³ı×Ö¶Î*/
+/*åˆ é™¤å­—æ®µ*/
 alter table wxStoreOrders drop column paytype varchar(36)
 
-/*ÅĞ¶ÏÊÇ·ñ±í×Ö¶ÎÊÇ·ñ´æÔÚ*/
+/*åˆ¤æ–­æ˜¯å¦è¡¨å­—æ®µæ˜¯å¦å­˜åœ¨*/
 IF COL_LENGTH('MemberInfo', 'Points') IS NULL|IS NOT NULL
 begin
 	ALTER TABLE MemberInfo ADD Points int not null default 0
 PRINT 'ok'
 end
 ELSE
-PRINT 'ÒÑÓĞ'
+PRINT 'å·²æœ‰'
 
-/*ÊÓÍ¼*/
+/*è§†å›¾*/
 
 CREATE VIEW [dbo].[v_wx_NewOrders]
 AS
 select * from someTable1
 union select * from someTable2
 
-/*½á¹û¼¯ÃüÁî*/
+/*ç»“æœé›†å‘½ä»¤*/
 
-insert into People (LastName,FirstName,Age) values(N'ÕÅ',N'Èı','29');
-insert into People (LastName,FirstName,Age) values(N'Àî',N'·É','29');
-insert into People (LastName,FirstName,Age) values('ÕÅ1','Èı2','29');		--²»¹ÜÊÇvarchar»¹ÊÇnvarchar½á¹¹±í£¬ÕâÑù²åÈëÖĞÎÄ ÏÔÊ¾ÂÒÂë
---N'ÕÅ'Óë'ÕÅ' ×Ö½Ú³¤¶ÈÊÇÒ»ÑùµÄ
+insert into People (LastName,FirstName,Age) values(N'å¼ ',N'ä¸‰','29');
+insert into People (LastName,FirstName,Age) values(N'æ',N'é£','29');
+insert into People (LastName,FirstName,Age) values('å¼ 1','ä¸‰2','29');		--ä¸ç®¡æ˜¯varcharè¿˜æ˜¯nvarcharç»“æ„è¡¨ï¼Œè¿™æ ·æ’å…¥ä¸­æ–‡ æ˜¾ç¤ºä¹±ç 
+--N'å¼ 'ä¸'å¼ ' å­—èŠ‚é•¿åº¦æ˜¯ä¸€æ ·çš„
 
 select distinct FirstName from People
 
-select * from people where id between 2 and 5;		--·µ»Ø½á¹û¼¯ÖĞid<=5&>=2µÄ¼ÇÂ¼
+select * from people where id between 2 and 5;		--è¿”å›ç»“æœé›†ä¸­id<=5&>=2çš„è®°å½•
 
-delete from MemberInfo where MemberName is null		--É¾³ıÎª¿ÕÊı¾İ is null
+delete from MemberInfo where MemberName is null		--åˆ é™¤ä¸ºç©ºæ•°æ® is null
 
 
-/*´æ´¢¹ı³Ì*/
+/*å­˜å‚¨è¿‡ç¨‹*/
 
---ÉùÃ÷±äÁ¿²¢¸³Öµ
+--å£°æ˜å˜é‡å¹¶èµ‹å€¼
 declare @Bdate varchar(20),@Edate varchar(20)
 set 
 @Bdate='2017-10-01'
@@ -111,29 +111,29 @@ set
 SELECT * from table where SYS_DATE >= @Bdate AND SYS_DATE <= @Edate group by REGCARD.S_CARD_TYPE,s_describe ORDER BY REGCARD.S_CARD_TYPE ASC
 
 
---´´½¨Á´½Ó·şÎñÆ÷£¬Ô¶³ÌÖ´ĞĞÊı¾İ¿âµÄ´æ´¢¹ı³Ì
+--åˆ›å»ºé“¾æ¥æœåŠ¡å™¨ï¼Œè¿œç¨‹æ‰§è¡Œæ•°æ®åº“çš„å­˜å‚¨è¿‡ç¨‹
 exec sp_addlinkedserver 'TestServer','','SQLOLEDB','120.76.41.xx'
 exec sp_addlinkedsrvlogin 'TestServer','false',null,'sa','pwd'
-exec sp_serveroption 'TestServer','rpc out','true' --Õâ¸öÔÊĞíµ÷ÓÃÁ´½Ó·şÎñÆ÷ÉÏµÄ´æ´¢¹ı³Ì
+exec sp_serveroption 'TestServer','rpc out','true' --è¿™ä¸ªå…è®¸è°ƒç”¨é“¾æ¥æœåŠ¡å™¨ä¸Šçš„å­˜å‚¨è¿‡ç¨‹
 
---²éÑ¯ÒÑÓĞÁ´½Ó·şÎñÆ÷
+--æŸ¥è¯¢å·²æœ‰é“¾æ¥æœåŠ¡å™¨
  select * from sys.servers
 
---µ÷ÓÃÔ¶³Ì·şÎñÆ÷´æ´¢¹ı³Ì£º
-exec TestServer.Êı¾İ¿âÃû.dbo.¹ı³ÌÃû '²ÎÊı'
+--è°ƒç”¨è¿œç¨‹æœåŠ¡å™¨å­˜å‚¨è¿‡ç¨‹ï¼š
+exec TestServer.æ•°æ®åº“å.dbo.è¿‡ç¨‹å 'å‚æ•°'
 
 --demo:
 select * from TestServer.TestDB.dbo.regcard where s_print_no = '17376852911'
 select * from [120.76.42.118]].TestDB.dbo.regcard where s_print_no = '17376852911'
 
 declare @as_error varchar(200)
-exec TestServer.TestDB.dbo.Usp_Insert_cardaccount3 '', '11', 'Ïû·Ñ', @as_error output
+exec TestServer.TestDB.dbo.Usp_Insert_cardaccount3 '', '11', 'æ¶ˆè´¹', @as_error output
 select @as_error
 
 =============================================================================================================
-/*SET QUOTED_IDENTIFIER ON µÄ×÷ÓÃ*/
+/*SET QUOTED_IDENTIFIER ON çš„ä½œç”¨*/
 
-distinct Îªsql server ±êÊ¶·û£¬¿ÉÒÔÍ¨¹ı¼ÓË«ÒıºÅµÄ·½Ê½×÷¶ÔÏóÃûÊ¹ÓÃ£¬µ«ÔÚQUOTED_IDENTIFIER ÎªoffÊ±¼ÓË«ÒıºÅÊÇ²»Æğ×÷ÓÃµÄ
+distinct ä¸ºsql server æ ‡è¯†ç¬¦ï¼Œå¯ä»¥é€šè¿‡åŠ åŒå¼•å·çš„æ–¹å¼ä½œå¯¹è±¡åä½¿ç”¨ï¼Œä½†åœ¨QUOTED_IDENTIFIER ä¸ºoffæ—¶åŠ åŒå¼•å·æ˜¯ä¸èµ·ä½œç”¨çš„
 SET QUOTED_IDENTIFIER ON
 create table "distinct"(  
  id int not  null constraint pk_1 primary   key,  
@@ -144,97 +144,97 @@ create table "distinct"(
 SET QUOTED_IDENTIFIER ON
 drop table "distinct"
 --------------------- --------------------- --------------------- --------------------- 
-µ± SET QUOTED_IDENTIFIER Îª ON Ê±
+å½“ SET QUOTED_IDENTIFIER ä¸º ON æ—¶
 
-±êÊ¶·û¿ÉÒÔÓÉË«ÒıºÅ·Ö¸ô£¬¶øÎÄ×Ö±ØĞëÓÉµ¥ÒıºÅ·Ö¸ô¡£
-ÓÉË«ÒıºÅ·Ö¸ôµÄËùÓĞ×Ö·û´®¶¼±»½âÊÍÎª¶ÔÏó±êÊ¶·û¡£Òò´Ë£¬¼ÓÒıºÅµÄ±êÊ¶·û²»±Ø×ñÊØ Transact-SQL ±êÊ¶·û¹æÔò¡£ËüÃÇ¿ÉÒÔÊÇ±£Áô¹Ø¼ü×Ö£¬²¢ÇÒ¿ÉÒÔ°üº¬ Transact-SQL ±êÊ¶·ûÖĞÍ¨³£²»ÔÊĞíµÄ×Ö·û¡£
-²»ÄÜÊ¹ÓÃË«ÒıºÅ·Ö¸ôÎÄ×Ö×Ö·û´®±í´ïÊ½£¬¶ø±ØĞëÓÃµ¥ÒıºÅÀ¨×¡ÎÄ×Ö×Ö·û´®¡£
-Èç¹ûµ¥ÒıºÅ (¡®) ÊÇÎÄ×Ö×Ö·û´®µÄÒ»²¿·Ö£¬Ôò¿ÉÒÔÓÉÁ½¸öµ¥ÒıºÅ (¡±) ±íÊ¾¡£
-µ±¶ÔÊı¾İ¿âÖĞµÄ¶ÔÏóÃûÊ¹ÓÃ±£Áô¹Ø¼ü×ÖÊ±£¬SET QUOTED_IDENTIFIER ±ØĞëÎª ON¡£
-µ± SET QUOTED_IDENTIFIER Îª OFF Ê±£¨Ä¬ÈÏÖµ£©
+æ ‡è¯†ç¬¦å¯ä»¥ç”±åŒå¼•å·åˆ†éš”ï¼Œè€Œæ–‡å­—å¿…é¡»ç”±å•å¼•å·åˆ†éš”ã€‚
+ç”±åŒå¼•å·åˆ†éš”çš„æ‰€æœ‰å­—ç¬¦ä¸²éƒ½è¢«è§£é‡Šä¸ºå¯¹è±¡æ ‡è¯†ç¬¦ã€‚å› æ­¤ï¼ŒåŠ å¼•å·çš„æ ‡è¯†ç¬¦ä¸å¿…éµå®ˆ Transact-SQL æ ‡è¯†ç¬¦è§„åˆ™ã€‚å®ƒä»¬å¯ä»¥æ˜¯ä¿ç•™å…³é”®å­—ï¼Œå¹¶ä¸”å¯ä»¥åŒ…å« Transact-SQL æ ‡è¯†ç¬¦ä¸­é€šå¸¸ä¸å…è®¸çš„å­—ç¬¦ã€‚
+ä¸èƒ½ä½¿ç”¨åŒå¼•å·åˆ†éš”æ–‡å­—å­—ç¬¦ä¸²è¡¨è¾¾å¼ï¼Œè€Œå¿…é¡»ç”¨å•å¼•å·æ‹¬ä½æ–‡å­—å­—ç¬¦ä¸²ã€‚
+å¦‚æœå•å¼•å· (â€˜) æ˜¯æ–‡å­—å­—ç¬¦ä¸²çš„ä¸€éƒ¨åˆ†ï¼Œåˆ™å¯ä»¥ç”±ä¸¤ä¸ªå•å¼•å· (â€) è¡¨ç¤ºã€‚
+å½“å¯¹æ•°æ®åº“ä¸­çš„å¯¹è±¡åä½¿ç”¨ä¿ç•™å…³é”®å­—æ—¶ï¼ŒSET QUOTED_IDENTIFIER å¿…é¡»ä¸º ONã€‚
+å½“ SET QUOTED_IDENTIFIER ä¸º OFF æ—¶ï¼ˆé»˜è®¤å€¼ï¼‰
 
-±êÊ¶·û²»¿É¼ÓÒıºÅ£¬ÇÒ±ØĞë×ñÊØËùÓĞ Transact-SQL ±êÊ¶·û¹æÔò¡£ÓĞ¹Ø¸ü¶àĞÅÏ¢£¬Çë²Î¼ûÊ¹ÓÃ±êÊ¶·û¡£
-±í´ïÊ½ÖĞµÄÎÄ×Ö×Ö·û´®¿ÉÒÔÓÉµ¥ÒıºÅ»òË«ÒıºÅ·Ö¸ô¡£
-Èç¹ûÎÄ×Ö×Ö·û´®ÓÉË«ÒıºÅ·Ö¸ô£¬Ôò¿ÉÒÔÔÚ×Ö·û´®ÖĞ°üº¬Ç¶ÈëÊ½µ¥ÒıºÅ¡£
-µ±ÔÚ¼ÆËãÁĞ»òË÷ÒıÊÓÍ¼ÉÏ´´½¨»ò²Ù×÷Ë÷ÒıÊ±
+æ ‡è¯†ç¬¦ä¸å¯åŠ å¼•å·ï¼Œä¸”å¿…é¡»éµå®ˆæ‰€æœ‰ Transact-SQL æ ‡è¯†ç¬¦è§„åˆ™ã€‚æœ‰å…³æ›´å¤šä¿¡æ¯ï¼Œè¯·å‚è§ä½¿ç”¨æ ‡è¯†ç¬¦ã€‚
+è¡¨è¾¾å¼ä¸­çš„æ–‡å­—å­—ç¬¦ä¸²å¯ä»¥ç”±å•å¼•å·æˆ–åŒå¼•å·åˆ†éš”ã€‚
+å¦‚æœæ–‡å­—å­—ç¬¦ä¸²ç”±åŒå¼•å·åˆ†éš”ï¼Œåˆ™å¯ä»¥åœ¨å­—ç¬¦ä¸²ä¸­åŒ…å«åµŒå…¥å¼å•å¼•å·ã€‚
+å½“åœ¨è®¡ç®—åˆ—æˆ–ç´¢å¼•è§†å›¾ä¸Šåˆ›å»ºæˆ–æ“ä½œç´¢å¼•æ—¶
 
-SET QUOTED_IDENTIFIER ±ØĞëÎª ON¡£
-ÓĞ¹Ø¼ÆËãÁĞÉÏµÄË÷ÒıÊÓÍ¼ºÍË÷ÒıËù±ØĞèµÄ SET Ñ¡ÏîÉèÖÃµÄ¸ü¶àĞÅÏ¢£¬Çë²Î¼û SET ÖĞµÄ¡±Ê¹ÓÃ SET Óï¾äÊ±µÄ×¢ÒâÊÂÏî¡±
-
-=============================================================================================================
-/*SET ANSI_NULLS ON µÄ×÷ÓÃ*/
-
-µ± SET ANSI_NULLS Îª ON Ê±£¬¼´Ê¹ column_name ÖĞ°üº¬¿ÕÖµ£¬Ê¹ÓÃ WHERE column_name = NULL µÄ SELECT Óï¾äÈÔ·µ»ØÁãĞĞ¡£ ¼´Ê¹ column_name ÖĞ°üº¬·Ç¿ÕÖµ£¬Ê¹ÓÃ WHERE column_name <> NULL µÄ SELECT Óï¾äÈÔ·µ»ØÁãĞĞ¡£
-
-µ± SET ANSI_NULLS Îª OFF Ê±£¬µÈÓÚ (=) ºÍ²»µÈÓÚ (<>) ±È½ÏÔËËã·û²»×ñÊØ ISO ±ê×¼¡£ Ê¹ÓÃ WHERE column_name = NULL µÄ SELECT Óï¾ä·µ»Ø column_name ÖĞ°üº¬¿ÕÖµµÄĞĞ¡£ Ê¹ÓÃ WHERE column_name <> NULL µÄ SELECT Óï¾ä·µ»ØÁĞÖĞ°üº¬·Ç¿ÕÖµµÄĞĞ¡£ ´ËÍâ£¬Ê¹ÓÃ WHERE column_name <> XYZ_value µÄ SELECT Óï¾ä·µ»ØËùÓĞ²»Îª XYZ_value Ò²²»Îª NULL µÄĞĞ¡£
-
-µ± SET ANSI_NULLS Îª ON Ê±£¬ËùÓĞ¶Ô null ÖµµÄ±È½Ï¾ùÈ¡ÖµÎª UNKNOWN¡£ µ± SET ANSI_NULLS Îª OFF Ê±£¬Èç¹ûÊı¾İÖµÎª NULL£¬ÔòËùÓĞÊı¾İ¶Ô¿ÕÖµµÄ±È½Ï½«È¡ÖµÎª TRUE¡£ Èç¹ûÎ´Ö¸¶¨ SET ANSI_NULLS£¬ÔòÓ¦ÓÃµ±Ç°Êı¾İ¿âµÄ ANSI_NULLS Ñ¡ÏîÉèÖÃ¡£
+SET QUOTED_IDENTIFIER å¿…é¡»ä¸º ONã€‚
+æœ‰å…³è®¡ç®—åˆ—ä¸Šçš„ç´¢å¼•è§†å›¾å’Œç´¢å¼•æ‰€å¿…éœ€çš„ SET é€‰é¡¹è®¾ç½®çš„æ›´å¤šä¿¡æ¯ï¼Œè¯·å‚è§ SET ä¸­çš„â€ä½¿ç”¨ SET è¯­å¥æ—¶çš„æ³¨æ„äº‹é¡¹â€
 
 =============================================================================================================
-ÓÎ±êÒ»°ã¸ñÊ½£º
-DECLARE ÓÎ±êÃû³Æ CURSOR FOR SELECT ×Ö¶Î1,×Ö¶Î2,×Ö¶Î3,... FROM ±íÃû WHERE ...
-OPEN ÓÎ±êÃû³Æ
-FETCH NEXT FROM ÓÎ±êÃû³Æ INTO ±äÁ¿Ãû1,±äÁ¿Ãû2,±äÁ¿Ãû3,...
+/*SET ANSI_NULLS ON çš„ä½œç”¨*/
+
+å½“ SET ANSI_NULLS ä¸º ON æ—¶ï¼Œå³ä½¿ column_name ä¸­åŒ…å«ç©ºå€¼ï¼Œä½¿ç”¨ WHERE column_name = NULL çš„ SELECT è¯­å¥ä»è¿”å›é›¶è¡Œã€‚ å³ä½¿ column_name ä¸­åŒ…å«éç©ºå€¼ï¼Œä½¿ç”¨ WHERE column_name <> NULL çš„ SELECT è¯­å¥ä»è¿”å›é›¶è¡Œã€‚
+
+å½“ SET ANSI_NULLS ä¸º OFF æ—¶ï¼Œç­‰äº (=) å’Œä¸ç­‰äº (<>) æ¯”è¾ƒè¿ç®—ç¬¦ä¸éµå®ˆ ISO æ ‡å‡†ã€‚ ä½¿ç”¨ WHERE column_name = NULL çš„ SELECT è¯­å¥è¿”å› column_name ä¸­åŒ…å«ç©ºå€¼çš„è¡Œã€‚ ä½¿ç”¨ WHERE column_name <> NULL çš„ SELECT è¯­å¥è¿”å›åˆ—ä¸­åŒ…å«éç©ºå€¼çš„è¡Œã€‚ æ­¤å¤–ï¼Œä½¿ç”¨ WHERE column_name <> XYZ_value çš„ SELECT è¯­å¥è¿”å›æ‰€æœ‰ä¸ä¸º XYZ_value ä¹Ÿä¸ä¸º NULL çš„è¡Œã€‚
+
+å½“ SET ANSI_NULLS ä¸º ON æ—¶ï¼Œæ‰€æœ‰å¯¹ null å€¼çš„æ¯”è¾ƒå‡å–å€¼ä¸º UNKNOWNã€‚ å½“ SET ANSI_NULLS ä¸º OFF æ—¶ï¼Œå¦‚æœæ•°æ®å€¼ä¸º NULLï¼Œåˆ™æ‰€æœ‰æ•°æ®å¯¹ç©ºå€¼çš„æ¯”è¾ƒå°†å–å€¼ä¸º TRUEã€‚ å¦‚æœæœªæŒ‡å®š SET ANSI_NULLSï¼Œåˆ™åº”ç”¨å½“å‰æ•°æ®åº“çš„ ANSI_NULLS é€‰é¡¹è®¾ç½®ã€‚
+
+=============================================================================================================
+æ¸¸æ ‡ä¸€èˆ¬æ ¼å¼ï¼š
+DECLARE æ¸¸æ ‡åç§° CURSOR FOR SELECT å­—æ®µ1,å­—æ®µ2,å­—æ®µ3,... FROM è¡¨å WHERE ...
+OPEN æ¸¸æ ‡åç§°
+FETCH NEXT FROM æ¸¸æ ‡åç§° INTO å˜é‡å1,å˜é‡å2,å˜é‡å3,...
 WHILE @@FETCH_STATUS=0
 BEGIN
-	SQLÓï¾äÖ´ĞĞ¹ı³Ì... ...
-	FETCH NEXT FROM ÓÎ±êÃû³Æ INTO ±äÁ¿Ãû1,±äÁ¿Ãû2,±äÁ¿Ãû3,...
+	SQLè¯­å¥æ‰§è¡Œè¿‡ç¨‹... ...
+	FETCH NEXT FROM æ¸¸æ ‡åç§° INTO å˜é‡å1,å˜é‡å2,å˜é‡å3,...
 END
-CLOSE ÓÎ±êÃû³Æ
-DEALLOCATE ÓÎ±êÃû³Æ (É¾³ıÓÎ±ê)
+CLOSE æ¸¸æ ‡åç§°
+DEALLOCATE æ¸¸æ ‡åç§° (åˆ é™¤æ¸¸æ ‡)
 --------------------- 
 demo:
-table1½á¹¹ÈçÏÂ
+table1ç»“æ„å¦‚ä¸‹
 id int
 name varchar(50)
  
 declare @id int
 declare @name varchar(50)
-declare cursor1 cursor for --¶¨ÒåÓÎ±êcursor1
-select * from table1 --Ê¹ÓÃÓÎ±êµÄ¶ÔÏó(¸ú¾İĞèÒªÌîÈëselectÎÄ)
-open cursor1 --´ò¿ªÓÎ±ê
+declare cursor1 cursor for --å®šä¹‰æ¸¸æ ‡cursor1
+select * from table1 --ä½¿ç”¨æ¸¸æ ‡çš„å¯¹è±¡(è·Ÿæ®éœ€è¦å¡«å…¥selectæ–‡)
+open cursor1 --æ‰“å¼€æ¸¸æ ‡
  
-fetch next from cursor1 into @id,@name --½«ÓÎ±êÏòÏÂÒÆ1ĞĞ£¬»ñÈ¡µÄÊı¾İ·ÅÈëÖ®Ç°¶¨ÒåµÄ±äÁ¿@id,@nameÖĞ
+fetch next from cursor1 into @id,@name --å°†æ¸¸æ ‡å‘ä¸‹ç§»1è¡Œï¼Œè·å–çš„æ•°æ®æ”¾å…¥ä¹‹å‰å®šä¹‰çš„å˜é‡@id,@nameä¸­
  
-while @@fetch_status=0 --ÅĞ¶ÏÊÇ·ñ³É¹¦»ñÈ¡Êı¾İ   ½øÈëÑ­»·
+while @@fetch_status=0 --åˆ¤æ–­æ˜¯å¦æˆåŠŸè·å–æ•°æ®   è¿›å…¥å¾ªç¯
 begin
 update table1 set name=name+'1'
-where id=@id --½øĞĞÏàÓ¦´¦Àí(¸ú¾İĞèÒªÌîÈëSQLÎÄ)
+where id=@id --è¿›è¡Œç›¸åº”å¤„ç†(è·Ÿæ®éœ€è¦å¡«å…¥SQLæ–‡)
  
-fetch next from cursor1 into @id,@name? --½«ÓÎ±êÏòÏÂÒÆ1ĞĞ  Ïàµ±ÓÚfor(int i;i<n;i++) ÖĞµÄi+1
+fetch next from cursor1 into @id,@name? --å°†æ¸¸æ ‡å‘ä¸‹ç§»1è¡Œ  ç›¸å½“äºfor(int i;i<n;i++) ä¸­çš„i+1
 end
  
-close cursor1 --¹Ø±ÕÓÎ±ê
+close cursor1 --å…³é—­æ¸¸æ ‡
 deallocate cursor1
 --------------------- 
 
 =============================================================================================================
-case when  then endÓÃ·¨
+case when  then endç”¨æ³•
 
-case '×Ö¶Î' when 'value1' then 'value' when 'value2' then 'value' end
+case 'å­—æ®µ' when 'value1' then 'value' when 'value2' then 'value' end
 
 declare @sex varchar(2)
-select @sex='Å®'
-select (case @sex when 'ÄĞ' then 'male' when 'Å®' then 'female' end) as sex
+select @sex='å¥³'
+select (case @sex when 'ç”·' then 'male' when 'å¥³' then 'female' end) as sex
 
 seLect ct.s_work_no,(case ct.s_work_no when 'sys' then '1' when '000' then ct.s_password end) as password,* from ct_operator ct 
 where ct.s_work_no='000'
 
 ------------------------------------------------------------------------------------
-case when 'ÅĞ¶¨Ê½' then 'value' else 'value' endÓÃ·¨
+case when 'åˆ¤å®šå¼' then 'value' else 'value' endç”¨æ³•
 
 declare @sex varchar(10)
-select @sex='Å®'
-select @sex=case when 'ÄĞ'<>'ÄĞ' then 'male' else 'female' end
+select @sex='å¥³'
+select @sex=case when 'ç”·'<>'ç”·' then 'male' else 'female' end
 select @sex sex
 
 seLect ct.s_work_no,case when ct.s_work_no='sys' then '1' else ct.s_password end asPassword from ct_operator ct 
-where ct.s_work_no='0000' ==>µÈ¼Û
+where ct.s_work_no='0000' ==>ç­‰ä»·
 seLect ct.s_work_no,asPassword=case when ct.s_work_no='sys' then '1' else ct.s_password end  from ct_operator ct 
 where ct.s_work_no='0000'
 
 =============================================================================================================
-Convert º¯ÊıÓÃ·¨ ×ª»»Êı¾İÀàĞÍ»òÈÕÆÚ
+Convert å‡½æ•°ç”¨æ³• è½¬æ¢æ•°æ®ç±»å‹æˆ–æ—¥æœŸ
 
 select n_price,CONVERT(INT,SUM(n_price)) price from billb1 where s_account_no='2018091749'
 group by n_price
@@ -253,9 +253,9 @@ set @nowDay=CONVERT(nvarchar(10),GETDATE()+3,23)	=>2019-03-10
 Exec Usp_Generate_Miss_Resvn @nowDay
 
 ------------------------------------------------------------------------------------
-ËÄÉáÎåÈë
-Round() º¯Êı	±£ÁôÖ¸¶¨Ğ¡ÊıÎ»Êı
-ROUND(column_name,decimals)		decimals£º¾«È·µ½Ğ¡ÊıÎ»Êı
+å››èˆäº”å…¥
+Round() å‡½æ•°	ä¿ç•™æŒ‡å®šå°æ•°ä½æ•°
+ROUND(column_name,decimals)		decimalsï¼šç²¾ç¡®åˆ°å°æ•°ä½æ•°
 
 select round(n_price,0) from billb1 where s_account_no='2018091749'
 select ROUND(-1.237,2)==>-1.24
@@ -263,153 +263,153 @@ select ROUND(-1.232,2)==>-1.23
 select ROUND(-1.23,1)==>-1.20
 select ROUND(-1.23,0)==>-1.00
 
-floor()ÏòÏÂÈ¡Õû 
+floor()å‘ä¸‹å–æ•´ 
 floor(1.45)= 1,floor(1.55) = 1 ,floor(-1.45)= -2 ,floor(-1.55) = -2
 
-ceiling()ÏòÉÏÈ¡Õû
+ceiling()å‘ä¸Šå–æ•´
 ceiling(1.45) = 2,ceiling(1.55)=2,ceiling(-1.45) = -1,ceiling(-1.55)=-1
 
 =============================================================================================================
-SQLÖĞµÄÈ«¾Ö±äÁ¿ºÍ¾Ö²¿±äÁ¿£¨@@/@£©
+SQLä¸­çš„å…¨å±€å˜é‡å’Œå±€éƒ¨å˜é‡ï¼ˆ@@/@ï¼‰
 
-¾Ö²¿±äÁ¿£º@varName	ÊÇÓÃ»§×Ô¶¨Òå±äÁ¿
-È«¾Ö±äÁ¿£º@@varName	ÊÇÏµÍ³Ô¤¶¨ÒåµÄ£¬·µ»ØÒ»Ğ©µ±Ç°ÏµÍ³ĞÅÏ¢ 
+å±€éƒ¨å˜é‡ï¼š@varName	æ˜¯ç”¨æˆ·è‡ªå®šä¹‰å˜é‡
+å…¨å±€å˜é‡ï¼š@@varName	æ˜¯ç³»ç»Ÿé¢„å®šä¹‰çš„ï¼Œè¿”å›ä¸€äº›å½“å‰ç³»ç»Ÿä¿¡æ¯ 
 
-³£ÓÃÈ«¾Ö±äÁ¿£º
+å¸¸ç”¨å…¨å±€å˜é‡ï¼š
 @@TRANCOUNT
-·µ»Øµ±Ç°Á¬½ÓÖĞ´¦ÓÚ¼¤»î×´Ì¬µÄÊÂÎñÊıÄ¿
+è¿”å›å½“å‰è¿æ¥ä¸­å¤„äºæ¿€æ´»çŠ¶æ€çš„äº‹åŠ¡æ•°ç›®
 
 @@ERROR
-·µ»Øµ±Ç°Ö´ĞĞTransact-SQL Óï¾äµÄ´íÎó´úÂë£¬ÎŞ´í·µ»Ø0£»
+è¿”å›å½“å‰æ‰§è¡ŒTransact-SQL è¯­å¥çš„é”™è¯¯ä»£ç ï¼Œæ— é”™è¿”å›0ï¼›
 
 @@LANGID 
-·µ»Øµ±Ç°ËùÊ¹ÓÃÓïÑÔµÄ±¾µØÓïÑÔ±êÊ¶·û(ID)¡£ 
+è¿”å›å½“å‰æ‰€ä½¿ç”¨è¯­è¨€çš„æœ¬åœ°è¯­è¨€æ ‡è¯†ç¬¦(ID)ã€‚ 
 
 @@CONNECTIONS 
-·µ»Ø×ÔÉÏ´ÎÆô¶¯ÒÔÀ´Á¬½Ó»òÊÔÍ¼Á¬½ÓµÄ´ÎÊı¡£ 
+è¿”å›è‡ªä¸Šæ¬¡å¯åŠ¨ä»¥æ¥è¿æ¥æˆ–è¯•å›¾è¿æ¥çš„æ¬¡æ•°ã€‚ 
 
 @@CURSOR_ROWS 
-·µ»ØÁ¬½ÓÉÏ×îºó´ò¿ªµÄÓÎ±êÖĞµ±Ç°´æÔÚµÄºÏ¸ñĞĞµÄÊıÁ¿(·µ»Ø±»´ò¿ªµÄÓÎ±êÖĞ»¹Î´±»¶ÁÈ¡µÄÓĞĞ§Êı¾İĞĞµÄĞĞÊı)
+è¿”å›è¿æ¥ä¸Šæœ€åæ‰“å¼€çš„æ¸¸æ ‡ä¸­å½“å‰å­˜åœ¨çš„åˆæ ¼è¡Œçš„æ•°é‡(è¿”å›è¢«æ‰“å¼€çš„æ¸¸æ ‡ä¸­è¿˜æœªè¢«è¯»å–çš„æœ‰æ•ˆæ•°æ®è¡Œçš„è¡Œæ•°)
 
 @@DATEFIRST 
-·µ»ØÃ¿ÖÜµÚÒ»ÌìµÄÊı×Ö  
+è¿”å›æ¯å‘¨ç¬¬ä¸€å¤©çš„æ•°å­—  
 
 @@FETCH_STATUS 
-·µ»Ø±» FETCH Óï¾äÖ´ĞĞµÄ×îºóÓÎ±êµÄ×´Ì¬£¬¶ø²»ÊÇÈÎºÎµ±Ç°±»Á¬½Ó´ò¿ªµÄÓÎ±êµÄ×´Ì¬¡£ 
+è¿”å›è¢« FETCH è¯­å¥æ‰§è¡Œçš„æœ€åæ¸¸æ ‡çš„çŠ¶æ€ï¼Œè€Œä¸æ˜¯ä»»ä½•å½“å‰è¢«è¿æ¥æ‰“å¼€çš„æ¸¸æ ‡çš„çŠ¶æ€ã€‚ 
 
 @@IDENTITY 
-·µ»Ø×îºó²åÈëµÄ±êÊ¶Öµ 
+è¿”å›æœ€åæ’å…¥çš„æ ‡è¯†å€¼ 
 
 @@LANGUAGE 
-·µ»Øµ±Ç°Ê¹ÓÃµÄÓïÑÔÃû¡£ 
+è¿”å›å½“å‰ä½¿ç”¨çš„è¯­è¨€åã€‚ 
 
 @@LOCK_TIMEOUT 
-·µ»Øµ±Ç°»á»°µÄµ±Ç°Ëø³¬Ê±ÉèÖÃ£¬µ¥Î»ÎªºÁÃë¡£ 
+è¿”å›å½“å‰ä¼šè¯çš„å½“å‰é”è¶…æ—¶è®¾ç½®ï¼Œå•ä½ä¸ºæ¯«ç§’ã€‚ 
 
 @@PROCID 
-·µ»Øµ±Ç°¹ı³ÌµÄ´æ´¢¹ı³Ì±êÊ¶·û (ID) ¡£ 
+è¿”å›å½“å‰è¿‡ç¨‹çš„å­˜å‚¨è¿‡ç¨‹æ ‡è¯†ç¬¦ (ID) ã€‚ 
 
 @@ROWCOUNT 
-·µ»ØÊÜÉÏÒ»Óï¾äÓ°ÏìµÄĞĞÊı¡£ 
+è¿”å›å—ä¸Šä¸€è¯­å¥å½±å“çš„è¡Œæ•°ã€‚ 
 
 @@SERVERNAME 
-·µ»ØÔËĞĞ µÄ±¾µØ·şÎñÆ÷Ãû³Æ¡£ 
+è¿”å›è¿è¡Œ çš„æœ¬åœ°æœåŠ¡å™¨åç§°ã€‚ 
 
 @@SPID 
-·µ»Øµ±Ç°ÓÃ»§½ø³ÌµÄ·şÎñÆ÷½ø³Ì±êÊ¶·û (ID)¡£ 
+è¿”å›å½“å‰ç”¨æˆ·è¿›ç¨‹çš„æœåŠ¡å™¨è¿›ç¨‹æ ‡è¯†ç¬¦ (ID)ã€‚ 
 
 @@TRANCOUNT 
-·µ»Øµ±Ç°Á¬½ÓµÄ»î¶¯ÊÂÎñÊı¡£ 
+è¿”å›å½“å‰è¿æ¥çš„æ´»åŠ¨äº‹åŠ¡æ•°ã€‚ 
 
 @@VERSION 
-·µ»Øµ±Ç°°²×°µÄÈÕÆÚ¡¢°æ±¾ºÍ´¦ÀíÆ÷ÀàĞÍ¡£
+è¿”å›å½“å‰å®‰è£…çš„æ—¥æœŸã€ç‰ˆæœ¬å’Œå¤„ç†å™¨ç±»å‹ã€‚
 
 @@CPU_BUSY
-·µ»Ø×ÔSQL Server ×î½üÒ»´ÎÆô¶¯ÒÔÀ´CPU µÄ¹¤×÷Ê±¼äÆäµ¥Î»ÎªºÁÃë
+è¿”å›è‡ªSQL Server æœ€è¿‘ä¸€æ¬¡å¯åŠ¨ä»¥æ¥CPU çš„å·¥ä½œæ—¶é—´å…¶å•ä½ä¸ºæ¯«ç§’
 
 @@DATEFIRST
-·µ»ØÊ¹ÓÃSET DATEFIRST ÃüÁî¶ø±»¸³ÖµµÄDATAFIRST ²ÎÊıÖµSET DATEFIRST£¬ÃüÁîÓÃÀ´Ö¸¶¨Ã¿ÖÜµÄµÚÒ»ÌìÊÇĞÇÆÚ¼¸
+è¿”å›ä½¿ç”¨SET DATEFIRST å‘½ä»¤è€Œè¢«èµ‹å€¼çš„DATAFIRST å‚æ•°å€¼SET DATEFIRSTï¼Œå‘½ä»¤ç”¨æ¥æŒ‡å®šæ¯å‘¨çš„ç¬¬ä¸€å¤©æ˜¯æ˜ŸæœŸå‡ 
 
 @@DBTS
-·µ»Øµ±Ç°Êı¾İ¿âµÄÊ±¼ä´ÁÖµ±ØĞë±£Ö¤Êı¾İ¿âÖĞÊ±¼ä´ÁµÄÖµÊÇÎ©Ò»µÄ
+è¿”å›å½“å‰æ•°æ®åº“çš„æ—¶é—´æˆ³å€¼å¿…é¡»ä¿è¯æ•°æ®åº“ä¸­æ—¶é—´æˆ³çš„å€¼æ˜¯æƒŸä¸€çš„
 
 @@FETCH_STATUS
-·µ»ØÉÏÒ»´ÎFETCH Óï¾äµÄ×´Ì¬Öµ
+è¿”å›ä¸Šä¸€æ¬¡FETCH è¯­å¥çš„çŠ¶æ€å€¼
 
 @@IDLE
-·µ»Ø×ÔSQL Server ×î½üÒ»´ÎÆô¶¯ÒÔÀ´CPU ´¦ÓÚ¿Õ±Õ×´Ì¬µÄÊ±¼ä³¤¶Ìµ¥Î»ÎªºÁÃë
+è¿”å›è‡ªSQL Server æœ€è¿‘ä¸€æ¬¡å¯åŠ¨ä»¥æ¥CPU å¤„äºç©ºé—­çŠ¶æ€çš„æ—¶é—´é•¿çŸ­å•ä½ä¸ºæ¯«ç§’
 
 @@IO_BUSY
-·µ»Ø×ÔSQL Server ×î½üÒ»´ÎÆô¶¯ÒÔÀ´CPU Ö´ĞĞÊäÈëÊä³ö²Ù×÷Ëù»¨·ÑµÄÊ±¼äÆäµ¥Î»ÎªºÁÃë
+è¿”å›è‡ªSQL Server æœ€è¿‘ä¸€æ¬¡å¯åŠ¨ä»¥æ¥CPU æ‰§è¡Œè¾“å…¥è¾“å‡ºæ“ä½œæ‰€èŠ±è´¹çš„æ—¶é—´å…¶å•ä½ä¸ºæ¯«ç§’
 
 @@LANGID
-·µ»Øµ±Ç°ËùÊ¹ÓÃµÄÓïÑÔID Öµ
+è¿”å›å½“å‰æ‰€ä½¿ç”¨çš„è¯­è¨€ID å€¼
 
 @@LANGUAGE
-·µ»Øµ±Ç°Ê¹ÓÃµÄÓïÑÔÃû³Æ
+è¿”å›å½“å‰ä½¿ç”¨çš„è¯­è¨€åç§°
 
 @@LOCK_TIMEOUT
-·µ»Øµ±Ç°»á»°µÈ´ıËøµÄÊ±¼ä³¤¶ÌÆäµ¥Î»ÎªºÁÃë
+è¿”å›å½“å‰ä¼šè¯ç­‰å¾…é”çš„æ—¶é—´é•¿çŸ­å…¶å•ä½ä¸ºæ¯«ç§’
 
 @@MAX_CONNECTIONS
-·µ»ØÔÊĞíÁ¬½Óµ½SQL Server µÄ×î´óÁ¬½ÓÊıÄ¿
+è¿”å›å…è®¸è¿æ¥åˆ°SQL Server çš„æœ€å¤§è¿æ¥æ•°ç›®
 
 @@MAX_PRECISION
-·µ»Ødecimal ºÍnumeric Êı¾İÀàĞÍµÄ¾«È·¶È
+è¿”å›decimal å’Œnumeric æ•°æ®ç±»å‹çš„ç²¾ç¡®åº¦
 
 @@NESTLEVEL
-·µ»Øµ±Ç°Ö´ĞĞµÄ´æ´¢¹ı³ÌµÄÇ¶Ì×¼¶Êı³õÊ¼ÖµÎª0
+è¿”å›å½“å‰æ‰§è¡Œçš„å­˜å‚¨è¿‡ç¨‹çš„åµŒå¥—çº§æ•°åˆå§‹å€¼ä¸º0
 
 @@OPTIONS
-·µ»Øµ±Ç°SET Ñ¡ÏîµÄĞÅÏ¢
+è¿”å›å½“å‰SET é€‰é¡¹çš„ä¿¡æ¯
 
 @@PACK_RECEIVED
-·µ»ØSQL Server Í¨¹ıÍøÂç¶ÁÈ¡µÄÊäÈë°üµÄÊıÄ¿
+è¿”å›SQL Server é€šè¿‡ç½‘ç»œè¯»å–çš„è¾“å…¥åŒ…çš„æ•°ç›®
 
 @@PACK_SENT
-·µ»ØSQL Server Ğ´¸øÍøÂçµÄÊä³ö°üµÄÊıÄ¿
+è¿”å›SQL Server å†™ç»™ç½‘ç»œçš„è¾“å‡ºåŒ…çš„æ•°ç›®
 
 @@PACKET_ERRORS
-·µ»ØÍøÂç°üµÄ´íÎóÊıÄ¿
+è¿”å›ç½‘ç»œåŒ…çš„é”™è¯¯æ•°ç›®
 
 @@PROCID
-·µ»Øµ±Ç°´æ´¢¹ı³ÌµÄID Öµ
+è¿”å›å½“å‰å­˜å‚¨è¿‡ç¨‹çš„ID å€¼
 
 @@REMSERVER
-·µ»ØÔ¶³ÌSQL Server Êı¾İ¿â·şÎñÆ÷µÄÃû³Æ
+è¿”å›è¿œç¨‹SQL Server æ•°æ®åº“æœåŠ¡å™¨çš„åç§°
 
 @@SERVICENAME
-·µ»ØSQL Server ÕıÔËĞĞÓÚÄÄÖÖ·şÎñ×´Ì¬Ö®ÏÂÈçMSSQLServer MSDTC SQLServerAgent
+è¿”å›SQL Server æ­£è¿è¡Œäºå“ªç§æœåŠ¡çŠ¶æ€ä¹‹ä¸‹å¦‚MSSQLServer MSDTC SQLServerAgent
 
 @@SPID
-·µ»Øµ±Ç°ÓÃ»§´¦ÀíµÄ·şÎñÆ÷´¦ÀíID Öµ
+è¿”å›å½“å‰ç”¨æˆ·å¤„ç†çš„æœåŠ¡å™¨å¤„ç†ID å€¼
 
 @@TEXTSIZE
-·µ»ØSET Óï¾äµÄTEXTSIZE Ñ¡ÏîÖµSET Óï¾ä¶¨ÒåÁËSELECT Óï¾äÖĞtext »òimageÊı¾İÀàĞÍµÄ×î´ó³¤¶È»ù±¾µ¥Î»Îª×Ö½Ú
+è¿”å›SET è¯­å¥çš„TEXTSIZE é€‰é¡¹å€¼SET è¯­å¥å®šä¹‰äº†SELECT è¯­å¥ä¸­text æˆ–imageæ•°æ®ç±»å‹çš„æœ€å¤§é•¿åº¦åŸºæœ¬å•ä½ä¸ºå­—èŠ‚
 
 @@TIMETICKS
-·µ»ØÃ¿Ò»Ê±ÖÓµÄÎ¢ÃëÊı
+è¿”å›æ¯ä¸€æ—¶é’Ÿçš„å¾®ç§’æ•°
 
 @@TOTAL_ERRORS
-·µ»Ø´ÅÅÌ¶ÁĞ´´íÎóÊıÄ¿
+è¿”å›ç£ç›˜è¯»å†™é”™è¯¯æ•°ç›®
 
 @@TOTAL_READ
-·µ»Ø´ÅÅÌ¶Á²Ù×÷µÄÊıÄ¿
+è¿”å›ç£ç›˜è¯»æ“ä½œçš„æ•°ç›®
 
 @@TOTAL_WRITE
-·µ»Ø´ÅÅÌĞ´²Ù×÷µÄÊıÄ¿
+è¿”å›ç£ç›˜å†™æ“ä½œçš„æ•°ç›®
 
 =============================================================================================================
-dbo.Fun_GetPY£ºÆ´Òô¼òÂëº¯Êı
-select * from Customers where dbo.Fun_GetPY(Name) like '%xm%' or Name like '%Ğ¡Ã÷%'		--xm:Ğ¡Ã÷Æ´ÒôÊ××ÖÄ¸
+dbo.Fun_GetPYï¼šæ‹¼éŸ³ç®€ç å‡½æ•°
+select * from Customers where dbo.Fun_GetPY(Name) like '%xm%' or Name like '%å°æ˜%'		--xm:å°æ˜æ‹¼éŸ³é¦–å­—æ¯
 
 
 =============================================================================================================
-Ô¼Êø
+çº¦æŸ
 
---Î¨Ò»ĞÔÔ¼Êø
-1£¬ÁĞÃûÉÏ¼Ó unique
-2£¬Constraint ×Ô¶¨ÒåÔ¼ÊøÃû Unique('×Ö¶ÎÃû')
+--å”¯ä¸€æ€§çº¦æŸ
+1ï¼Œåˆ—åä¸ŠåŠ  unique
+2ï¼ŒConstraint è‡ªå®šä¹‰çº¦æŸå Unique('å­—æ®µå')
 
 create table MsgTemplate(					
 	ID int identity (1,1),
@@ -422,7 +422,7 @@ create table MsgTemplate(
 );
 
 =============================================================================================================
-Group By ÓÃ·¨
+Group By ç”¨æ³•
 
 select * from missbespeak	-->
 ID	begintime
@@ -431,20 +431,32 @@ ID	begintime
 3	2019-04-10 10:00:00.000
 4	2019-04-10 10:00:00.000
 
-select count(begintime) as [count],begintime from missbespeak group by begintime	-->¼ÆËãÖØ¸´Ïî
+select count(begintime) as [count],begintime from missbespeak group by begintime	-->è®¡ç®—é‡å¤é¡¹
 count	begintime
 1		2019-04-09 15:00:00.000
 1		2019-04-10 09:00:00.000
 2		2019-04-10 10:00:00.000
 
-select begintime from missbespeak group by begintime having count(*)=2	-->²éÕÒÖØ¸´ÌõÊıµÈÓÚ2µÄÊı¾İ
+select begintime from missbespeak group by begintime having count(*)=2	-->æŸ¥æ‰¾é‡å¤æ¡æ•°ç­‰äº2çš„æ•°æ®
 begintime
 2019-04-10 10:00:00.000
 
 SELECT	distinct d.begintime,countb.count FROM	missbespeak d
 left join (select count(begintime) as [count],begintime from missbespeak group by begintime) countb
-on d.begintime=countb.begintime WHERE d.WeChatId='o-4S_jjslMSlHp7wPDSTxhear0WA' AND d.s_register='N'	-->²éÕÒÖØ¸´ÌõµÄÊı¾İ¼¯²¢ÏÔÊ¾ÖØ¸´ÌõÊı
+on d.begintime=countb.begintime WHERE d.WeChatId='o-4S_jjslMSlHp7wPDSTxhear0WA' AND d.s_register='N'	-->æŸ¥æ‰¾é‡å¤æ¡çš„æ•°æ®é›†å¹¶æ˜¾ç¤ºé‡å¤æ¡æ•°
 begintime					count
 2019-04-09 15:00:00.000		1
 2019-04-10 09:00:00.000		1
 2019-04-10 10:00:00.000		2
+
+=============================================================================================================
+ä¸åŒçš„åº“åŒç»“æ„è¡¨ï¼Œå¤åˆ¶ä¸€è¡Œæ•°æ®
+insert into åº“B.dbo.AA
+select * from åº“A.dbo.AA
+where åº“A.dbo.AA.C = ''
+
+åŒå¼ è¡¨å¤åˆ¶æ•°æ®ï¼Œä¸èƒ½åŒ…å«ä¸»é”®Id
+insert into è¡¨ï¼ˆæœˆä»½,å­—æ®µ2,å­—æ®µ3,å­—æ®µ4...)
+select '201007',å­—æ®µ2,å­—æ®µ3,å­—æ®µ4...
+from è¡¨
+where è¡¨.æœˆä»½='201006'
