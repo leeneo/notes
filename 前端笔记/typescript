@@ -1,0 +1,2 @@
+编译 ts文件命令：tsc
+实时编译：tsc --watch
