@@ -1,2 +1,68 @@
+=================================================================================================================================================================================
+
+实际开发中的经验总结：
+
 绑定数组中元素的值：$data
 绑定数组中元素的索引：$index()
+=================================================================================================================================================================================
+
+参考资料：
+
+汤姆大叔的博客（这人是大牛）: https://www.cnblogs.com/TomXu/ 
+
+Knockout应用开发指南 第七章：Mapping插件
+https://www.cnblogs.com/TomXu/archive/2011/11/29/2257054.html
+=================================================================================================================================================================================
+
+高级语法：
+
+//这里这样写也是一样效果：DataList: KnockoutObservable<any> = ko.observable([])
+//但还是建议数组用这种：ko.observableArray([])，对象用这种：ko.observable({})
+DataList: KnockoutObservableArray<any> = ko.observableArray([          
+    {
+        text: ko.observable("Sourc2-Algeria 1111"),
+        value: ko.observable(0)
+    },
+    {
+        text: ko.observable("Sourc2-Argentina 2222"),
+        value: ko.observable(1)
+    }
+]);
+DataList2: any = ko.mapping.fromJS([
+    {
+        text: "Sourc2-Algeria 1111",
+        value: 0
+    },
+    {
+        text: "Sourc2-Argentina 2222",
+        value: 1
+    }
+]);
+DataList3 = ko.observable({
+    text: ko.observable("Sourc2-Algeria 1111"),
+    value: ko.observable(0)
+});
+DataList4: any = ko.mapping.fromJS({
+    text: "Sourc2-Algeria 1111",
+    value: 0
+});
+
+this.DataList().forEach((item:any)=>{
+    console.log('DataList: '+item.text());
+});
+this.DataList2().forEach((item:any)=>{
+    console.log('DataList2: '+item.text());
+});
+
+
+console.log(this.DataList());   //[{text:f(),value:f()},{text:f(),value:f()}]
+console.log(this.DataList2()); //[{text:f(),value:f()},{text:f(),value:f()}]
+console.log(this.DataList3().text())
+console.log(this.DataList4.text())
+
+*ko.observableArray(data) vs ko.mapping.fromJS(data)   还有是区别的
+
+ko.observable/observableArray   会将data f()化（observable--也是就是双向绑定），但是不会将data中的对象属性f()化；
+ko.mapping.fromJS(data)         会将data和data中的对象全部f() 化；
+console.log(ko.observableArray(data)) ==>//输出
+
