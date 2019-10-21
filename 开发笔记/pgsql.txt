@@ -49,7 +49,8 @@ select "Id","Name",* from "User" where "Name"='leeneo'
 pgadmin 
 图形化管理工具，安装即可
 
-pgweb
+pgweb     一个采用 Go 语言开发的基于 Web 的 PostgreSQL 管理系统
+github:   https://github.com/sosedoff/pgweb
 
 ;远程
 @echo off
