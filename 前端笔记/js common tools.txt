@@ -1,0 +1,5 @@
+<div class='radio-group'>
+<input type='radio' name='rName'>
+<input type='radio' name='rName'>
+<div>
+取一组radio选中状态的值  var val = $('input:radio[name="' + name + '"]:checked').val() as string;
