@@ -27,6 +27,11 @@ changeEditor(param1: any,param2:any,obj: any, event: any)
 </div>
 myFunction(data, event)
 即使绑定定义中函数不带任何参数，data和event两个参数总会被缺省传递，data指当前的viewModel对象，event为事件对象。
+
+
+页面bool类型运算，双向的变量名后要加()
+<span data-bind="visible:Id()>0">true</span>
+<span data-bind="visible:!Id()>0">false</span>
 =================================================================================================================================================================================
 
 参考资料：
