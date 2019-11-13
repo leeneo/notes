@@ -224,3 +224,25 @@ db.SaveChanges();
 2，只更新修改的字段
 regcard.s_tel = bRegcard.s_tel;
 db.SaveChanges();
+
+=================================================================================================================================
+global::System  别名
+global 是 C# 2.0 中新增的关键字，理论上说，如果代码写得好的话，根本不需要用到它。
+假设你现在写了一个类，名字叫 System。那么当你再在代码里写 System 的时候，编译器就不知道你是要指你写的 System 类还是系统的 System 命名空间，而 System 命名空间已经是根命名空间了，无法再通过完全限名来指定。在以前的 C# 版本中，这就是一个无法解决的问题。现在，可以通过
+global::System
+来表示 System 根命名空间，而用你自己的
+MyNamespace.System
+来表示自己的类。
+当然，这种情况不应该出现，你不应该写一个名为 System 的类。
+
+=================================================================================================================================
+var ids=[0001,0002,0003,0004];
+var stus=students.Where(x=>ids.Contains(x.Id)).ToList();
+var x=new List<Test>();
+List<IGrouping<int,Test>> x2=x.GroupBy(x=>x.Type).Where(y=>y.Count()>0).ToList();
+x2.ForEach(x=>{
+    var type=x.Key;
+    var groupStudents=x.OrderBy(x=>x.Name).ToList();
+})
+
+
