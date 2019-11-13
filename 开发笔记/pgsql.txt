@@ -51,6 +51,7 @@ pgadmin
 
 pgweb     一个采用 Go 语言开发的基于 Web 的 PostgreSQL 管理系统
 github:   https://github.com/sosedoff/pgweb
+Install:   https://github.com/sosedoff/pgweb/releases
 
 ;远程
 @echo off
