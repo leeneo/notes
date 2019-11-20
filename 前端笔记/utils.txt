@@ -1,0 +1,73 @@
+    /**
+     * 返回当前日期的pgsql日期格式
+     * @date 日期字符串 能用new Date()转换的字符串形式
+     * */
+    static GetGreenDate(date?: string) {
+        let currDate: any
+        if (date) {
+            currDate = new Date(date);
+        } else {
+            currDate = new Date();
+        }
+        let year = currDate.getFullYear();  //获取年
+        let month: number | string = currDate.getMonth() + 1;  //获取月
+        month = month < 10 ? '0' + month : month;  //判断月是否大于10
+        let day: number | string = currDate.getDate();  //获取日
+        day = day < 10 ? ('0' + day) : day;  //判断日期是否大10
+        let hours: number | string = currDate.getHours();
+        hours = hours < 10 ? ('0' + hours) : hours;
+        let minutes: number | string = currDate.getMinutes();
+        minutes = minutes < 10 ? ('0' + minutes) : minutes;
+        let seconds: number | string = currDate.getSeconds();
+        seconds = seconds < 10 ? ('0' + seconds) : seconds;
+        let milliseconds: number | string = currDate.getMilliseconds();
+        if (milliseconds < 10) {
+            milliseconds = `00${milliseconds}`;
+        } else if (milliseconds < 100) {
+            milliseconds = `0${milliseconds}`;
+        }
+
+        var arr = currDate.toString().split("GMT");
+        var end = arr[arr.length - 1]
+        let header = end.substring(0, 3);
+        let foot = end.substring(3, 5);
+        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}${header}:${foot}`;
+    }
+
+    /**
+     * 处理服务端返回的PgSQL日期格式
+     * @param dateStr 要处理的日期字符串
+     * @return dateFormatStr 处理好的格式化日期字符串：yyyy-MM-dd HH:MM:SS
+     */
+    static DateFormat(dateStr: string): string {
+        if (dateStr)
+            return dateStr.split('T')[0] + ' ' + dateStr.split('T')[1].substring(0, 8);
+        else
+            return '';
+    }
+
+    /**
+     * 将日期时间转换为长日期字符串：年-月-日：时:分:秒
+     * 
+     * @param dateTime 日期时间
+     */
+    static ToLongDateTimeString(dateTime: any): string {
+        var date = new Date(dateTime);
+        let second = date.getSeconds().toString();
+        if (second.length == 1) {
+            second = "0" + second;
+        }
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " "
+            + date.getHours() + ":" + date.getMinutes() + ":" + second;
+    }
+
+    /**
+     * 将日期时间转换为短日期字符串：年-月-日
+     * 
+     * @param dateTime 日期时间
+     */
+    static ToShortDateString(dateTime: any): string {
+        var date = new Date(dateTime);
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    }
+
