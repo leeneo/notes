@@ -270,6 +270,13 @@ arr.splice(2,0,"William")
 document.write(arr + "<br />")
 //George,John,William,Thomas,James,Adrew,Martin
 //在指定索引处插入或删除，用来替换的元素会填充到指定索引处
+
+*Array.map()
+var arr=['male','female'];var arr2=arr.map((x,index,cur)=>{x=x=='male'?'男':'女';return x;});arr2//['男','女'];
+
+*Array.filter()
+var arr=[{id:2,value:'2'},{id:2,value:'3'},{id:6,value:'6'}];var arr2=arr.filter(x=>x.id==2);arr2//[{id:2,value:'2'},{id:2,value:'3'}]
+
 *******************************************************************************************
  delete 删除数组或对象中的指定元素
  var arr = [1, 2, 3, 4];
