@@ -1,59 +1,59 @@
-�޸Ŀ�ݼ���
-����-ѡ��-����-����
-��ݼ����䷽ʽ��ȫ�ֺ����
+修改快捷键：
+工具-选项-环境-键盘
+快捷键分配方式有全局和子项。
 
-alt+shift+f10:�Զ�����ȱʧ�������ռ�
-ctrl+j:���� �Զ���ȫ
-ctrl+K+C|ctrl+e+z(�Զ���):ע��ѡ����
-ctrl+K+U|ctrl+e+c(�Զ���):ȡ��ע��
-Ctrl+J / Ctrl+K,L: �г���Ա
-Shift+Alt+Enter: �л�ȫ���༭
-alt+���·��������������/����
-ctrl+w:ѡ��ǰ��
-ctrl+m+a:�۵����д����ʾ
-ctrl+m+x:չ�����д����ʾ
-ctrl+m+l:�л����д����ʾ��չ��/�۵����д��룩
-ctrl+m+p:ֹͣ�����ʾ
-ctrl+m+v:���������ʾ
-ctrl+m+o:�۵������壨����ͷ��
-ctrl+m+m:�۵�/չ����ǰ��
-ctrl+m+s:�۵���ǰ����
-ctrl+m+e:չ����ǰ����
-ctrl+m+t:�۵���ǰ��ǣ�ֻ���html���룩
-ctrl+m+h:����ѡ������
-ctrl+m+u:ֹͣ����ѡ������
+alt+shift+f10:自动引入缺失类命名空间
+ctrl+j:代码 自动补全
+ctrl+K+C|ctrl+e+z(自定义):注释选中行
+ctrl+K+U|ctrl+e+c(自定义):取消注释
+Ctrl+J / Ctrl+K,L: 列出成员
+Shift+Alt+Enter: 切换全屏编辑
+alt+上下方向键，代码上移/下移
+ctrl+w:选择当前字
+ctrl+m+a:折叠所有大纲显示
+ctrl+m+x:展开所有大纲显示
+ctrl+m+l:切换所有大纲显示（展开/折叠所有代码）
+ctrl+m+p:停止大纲显示
+ctrl+m+v:启动大纲显示
+ctrl+m+o:折叠到定义（方法头）
+ctrl+m+m:折叠/展开当前行
+ctrl+m+s:折叠当前区域
+ctrl+m+e:展开当前区域
+ctrl+m+t:折叠当前标记（只针对html代码）
+ctrl+m+h:隐藏选定内容
+ctrl+m+u:停止隐藏选定内容
 
-ctrl+e+w:�л��Զ�����
+ctrl+e+w:切换自动换行
 
-ctrl+m+g:������/��ͼ֮���л�
-ctrl+K+D|ctrl+e+d(�Զ���):��ʽ���ĵ�
-ctrl+k+f|ctrl+e+f(�Զ���):��ʽ����ǰ��
-ctrl+shift+f:���ļ�������������в���
-ctrl+shift+l|ctrl+shift+d(�Զ���):ɾ����ǰ��  *ctrl+x Ҳ�У�ֻ�����Ḳ�Ǽ��а�����
-shift+enter:���ָܷ���
+ctrl+m+g:控制器/视图之间切换
+ctrl+K+D|ctrl+e+d(自定义):格式化文档
+ctrl+k+f|ctrl+e+f(自定义):格式化当前行
+ctrl+shift+f:在文件（解决方案）中查找
+ctrl+shift+l|ctrl+shift+d(自定义):删除当前行  *ctrl+x 也行，只不过会覆盖剪切板内容
+shift+enter:智能分割线
 
 =================================================================================================================================
-VS ����
+VS 设置
 
-C# Interactive(c# ����)-vs->��ͼ->��������->c#->����
-�����Խű��ķ�ʽִ���Լ�������dll
-���#r "dll Path" enter
+C# Interactive(c# 交互)-vs->视图->其他窗口->c#->交互
+可以以脚本的方式执行自己开发的dll
+命令：#r "dll Path" enter
 
-����ģ�黯���½�D:\*.csx=>#r "D:\*.dll"=>#load "D:\*.csx" 
+代码模块化：新建D:\*.csx=>#r "D:\*.dll"=>#load "D:\*.csx" 
 
-���Ϊ�ⲿ����dll����PB���ⲿ�������
-��Ŀ����->���ɣ������->��ѡ��Ϊcom������ע�ᡱ->Ӧ�ó���(������Ϣ)->��ѡ��ʹ����com�ɼ���
+打包为外部可用dll，代PB等外部程序调用
+项目属性->生成（输出）->勾选“为com互操作注册”->应用程序(程序集信息)->勾选“使程序集com可见”
 
-SQL Server Profiler ����С���� --> ɸѡApplicationNameΪ������[.Net SqlClient Data Provider]
+SQL Server Profiler 调试小技巧 --> 筛选ApplicationName为类似于[.Net SqlClient Data Provider]
 
-���õ���ʱ���Բ鿴Core��Դ���룺
-1������=>ѡ��=>����=>����=>ȥ��>�����ҵĴ��롱
-2������=>ѡ��=>����=>����=>��>�����ŷ�������
-�ڡ�C:\Users\Administrator\AppData\Local\Temp\�� Ŀ¼�´���VSSymbolCacheĿ¼����˼�ǽ�������pdb�ļ�����ڴ�Ŀ¼�£��������ʱ���ã�
+设置调试时可以查看Core开源代码：
+1，工具=>选项=>调试=>常规=>去勾>“仅我的代码”
+2，工具=>选项=>调试=>符号=>打勾>“符号服务器”
+在“C:\Users\Administrator\AppData\Local\Temp\” 目录下创建VSSymbolCache目录，意思是将开发用pdb文件存放在此目录下，方便调试时调用；
 =================================================================================================================================
-C# ����ע�����ɴ�����ʾ�Ͱ����ĵ�
+C# 代码注释生成代码提示和帮助文档
 
-C#�ĵ�ע�͸�ʽ��
+C#文档注释格式：
 /// <summary>
 /// function description
 /// </summary>
@@ -62,31 +62,38 @@ C#�ĵ�ע�͸�ʽ��
 /// ...
 /// <returns>return value</returns> 
 
-����XML�ĵ����ݣ�
+生成XML文档内容：
 <member name="M:ApiClient.Invoke``1(System.String,System.String,System.Object,System.Boolean)">
     <summary>
-    ����Զ�̽ӿڡ�
+    调用远程接口。
     </summary>
-    <param name="className">������</param>
-    <param name="methodName">��������</param>
-    <param name="data">����ʱ�ύ�����ݡ�</param>
-    <param name="isJson">ָʾ�ύ�������Ƿ�ΪJson��ʽ��</param>
+    <param name="className">类名。</param>
+    <param name="methodName">方法名。</param>
+    <param name="data">调用时提交的数据。</param>
+    <param name="isJson">指示提交的数据是否为Json格式。</param>
     <returns></returns>
 </member>
 
-1. C# ���ɴ�����ʾ(hint)
-�򿪳�����Ϣ����Ŀ����-->����-->���-->��ѡxml�ĵ��ļ���Ĭ��������binĿ¼�£���
-��������ʱ��Ҫ��xml�����ļ�һ�𿽱��� 
+1. C# 生成代码提示(hint)
+打开程序集信息：项目属性-->生成-->输出-->勾选xml文档文件（默认生成在bin目录下）。
+拷贝类库的时候，要连xml帮助文件一起拷贝。 
 
-2. C# ���ɰ����ĵ�(html/chm..)
-ʹ�ù���sandcastle��
+2. C# 生成帮助文档(html/chm..)
+使用工具sandcastle：
 http://sandcastle.codeplex.com/
 
 =================================================================================================================================
-vs&Code C#���������﷨�����
-���ԣ�prop
-������sim|svm
+vs&Code C#快速生成语法块代码
+属性：prop
+方法：sim|svm
 
 =================================================================================================================================
-pdb�ļ������˱�������ָ��Դ�����λ����Ϣ�����ڵ��Ե�ʱ��λ��Դ���룬��Ҫ������������Եġ�
-�ڳ��򷢲�Ϊreleaseģʽʱ�����齫 pdb�ļ�ɾ���� ͬʱ�����ⷢ����ʱ��Ҳ�� pdbɾ���������ڱ�������
+pdb文件包含了编译后程序指向源代码的位置信息，用于调试的时候定位到源代码，主要是用来方便调试的。
+在程序发布为release模式时，建议将 pdb文件删除， 同时，对外发布的时候，也把 pdb删除，有利于保护程序。
+
+
+=================================================================================================================================
+VS调试
+ctrl alt i : 打开即时窗口，类似chrome console窗口的用法，实时查看变量
+
+Model.edmx EF实体对象模型查看器窗口，右键模型浏览器，打开关系图，可以很方便的切换各个模块，和定位具体的模型表
