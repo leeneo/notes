@@ -1,8 +1,8 @@
     /**
-     * 返回当前日期的pgsql日期格式
+     * 返回当前日期的pgsql timestamp日期格式
      * @date 日期字符串 能用new Date()转换的字符串形式
      * */
-    static GetGreenDate(date?: string) {
+    static GetPgDate(date?: string) {
         let currDate: any
         if (date) {
             currDate = new Date(date);
@@ -39,7 +39,7 @@
      * @param dateStr 要处理的日期字符串
      * @return dateFormatStr 处理好的格式化日期字符串：yyyy-MM-dd HH:MM:SS
      */
-    static DateFormat(dateStr: string): string {
+    static DateFormatPgDate(dateStr: string): string {
         if (dateStr)
             return dateStr.split('T')[0] + ' ' + dateStr.split('T')[1].substring(0, 8);
         else
@@ -71,3 +71,101 @@
         return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
     }
 
+    /**
+     * 将普通字符串换为JSON'字符串   aa,bb'==>['aa','bb']     * 
+     * @param str:string
+     */
+    static TurnStringToJson(str: string): string {
+        if (str) {
+            let arr: string[] = str.split(',');
+            return JSON.stringify(arr);
+        } else
+            return "";
+    }
+
+    /**
+     * 将JSON字符串转为普通字符串  ['aa','bb']==>'aa,bb'     * 
+     * @param JSONStr
+     */
+    static TurnJsonStrToString(jstr: string): string {
+        if (jstr) {
+            let str = JSON.parse(jstr);
+            return str.toString();
+        } else
+            return "";
+    }
+    
+    
+    /**
+     * 计算以','分隔的字符串数量
+     * @param posStr 字符串
+     * @returns 返回数量
+     */
+    static SetPositionNum(posStr: string): number {
+        if (posStr) {
+            posStr = posStr.replace(/，/ig, ',');
+            let posArr = posStr.split(',');
+            for (let i in posArr) {
+                let item = posArr[i];
+                let exitflag = false;
+                for (let j in posArr) {
+                    let item2 = posArr[j];
+                    if (i === j) {
+                        continue;
+                    }
+                    if (item === item2) {
+                        toastr.warning('字符串不允许重复');
+                        exitflag = true;
+                        break;
+                    }
+                }
+                if (exitflag) break;
+            }
+            for (let i = 0; i < posArr.length; i++) {
+                if (!(posArr[i].trim().length > 0)) {
+                    posArr.splice(posArr.indexOf(posArr[i].trim()), 1);
+                    i--;
+                };
+            }
+            let qty = posArr.length;
+            return qty;
+        }
+        return 0;
+    }
+
+    /**
+     * 返回flag
+     * @param posStr 字符串
+     * @returns 如果存在重复字符串时返回true
+     */
+    static CheckRepeatPosition(posStr: string): boolean {
+        if (posStr) {
+            posStr = posStr.replace(/，/ig, ',');
+            let posArr = posStr.split(',');
+            for (let i in posArr) {
+                let item = posArr[i];
+                for (let j in posArr) {
+                    let item2 = posArr[j];
+                    if (i === j) {
+                        continue;
+                    }
+                    if (item === item2) {
+                        toastr.warning('字符串重复!');                        
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 获取一组单选按钮，选中项的值
+     * @param name radio name
+     */
+    static GetSelecteRadioValue(name: string): string {
+        var val = $('input:radio[name="' + name + '"]:checked').val() as string;
+        if (val)
+            return val;
+        return '';
+    }
