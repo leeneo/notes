@@ -134,8 +134,8 @@
     }
 
     /**
-     * 返回flag
-     * @param posStr 字符串
+     * 检测一个字符串数组中是否有重复字符串 ['12','23','12'] | '12,23,12'
+     * @param posStr: string | Array.toString()
      * @returns 如果存在重复字符串时返回true
      */
     static CheckRepeatPosition(posStr: string): boolean {
