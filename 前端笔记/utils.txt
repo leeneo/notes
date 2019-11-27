@@ -77,7 +77,17 @@
      */
     static TurnStringToJson(str: string): string {
         if (str) {
+            //替换中英文全半角','
+            str = str.replace(/，/ig, ',');
             let arr: string[] = str.split(',');
+            //去除空字符串元素
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                if (!item) {
+                    arr.splice(arr.indexOf(item), 1);
+                    i--;
+                }
+            }
             return JSON.stringify(arr);
         } else
             return "";
@@ -144,6 +154,11 @@
             let posArr = posStr.split(',');
             for (let i in posArr) {
                 let item = posArr[i];
+                if (!item) {
+                    toastr.warning('字符串不允许为空');
+                    return true;
+                }
+                
                 for (let j in posArr) {
                     let item2 = posArr[j];
                     if (i === j) {
