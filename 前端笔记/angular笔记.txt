@@ -283,3 +283,13 @@ cmd:ng g s serviceName  创建服务
 #usernameRef 表示在ts文件中引用<input>标记，#usernameRef='ngModel'表示可以在当前模板文件中引用该标记,此时在ts文件中对该标记的引用：username.valueAccessor._elementRef.nativeElement。
 
 Angular 把组件的模板看做从属于该组件的。 组件和它的模板默认会相互信任。也就是组件模板可以绑定组件的任意属性。想要绑定其他组件的属性时需要用 @Input将该属性设置为公共的，否则angular拒绝绑定；
+
+[(ngModel)]双向绑定指令不被识别的错误解决方法：
+在app.module.ts的imports中引入FormsModule
+
+
+ngForm 声明form是ngForm类型
+ <form #formRef='ngForm' (ngSubmit)='onSubmit(formRef)'></form>
+   onSubmit(value:NgForm) {
+    console.log(typeof value);==>Object;
+  }

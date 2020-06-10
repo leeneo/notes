@@ -1,11 +1,41 @@
 安装 Cli:
 npm install -g --save-dev @angular/cli
+npm i -g @angular/cli @angular/core
 
 更新 Angular CLI  
-全局：npm uninstall -g @angular/cli->
+全局：npm uninstall -global @angular/cli | npm un -g  @angular/cli @angular/core->
 npm cache verify (避免使用 cache clean --force)->
 清除本地Packages：
 rimraf|rd node_modules->npm install -g --save-dev @angular/cli@latest
+
+应用编译模式之AOT&JIT
+JIT - Just-In-Time  - 即时编译
+AOT - Ahead-Of-Time - 预先编译
+
+Just-in-Time 编译模式开发流程
+　　1、使用 TypeScript 开发 Angular 应用
+　　2、运行 tsc 编译 TypeScript 代码
+　　3、使用 Webpack 或 Gulp 等其他工具构建项目，如代码压缩、合并等
+　　4、部署应用
+应用部署后，当用户通过浏览器访问我们应用的时候，她将经历以下步骤(非严格 CSP)：
+　　1、下载应用相关的资源，如 JavaScript 文件、图片、样式资源
+　　2、Angular 启动
+　　3、Angular 进入 JiT 编译模式，开始编译我们应用中的指令或组件，生成相应的 JavaScript 代码
+　　4、应用完成渲染
+
+Ahead-Of-Time 编译模式开发流程
+　　1、使用 TypeScript 开发 Angular 应用
+　　2、运行 ngc 编译应用程序
+　　　　2.1、使用 Angular Compiler 编译模板，一般输出 TypeScript 代码
+　　　　2.2、运行 tsc 编译 TypeScript 代码
+　　3、使用 Webpack 或 Gulp 等其他工具构建项目，如代码压缩、合并等
+　　4、部署应用
+应用部署后，相比于 JIT 编译模式，在 AOT 模式下用户访问我们的应用，只需经历以下步骤：
+　　1、下载应用相关的资源，如 JavaScript 文件、图片、样式资源
+　　2、Angular 启动  
+　　3、应用完成渲染
+
+Angular应用中包含的组件、HTML模板（比如：@Directive、@Component、@NgModule、@Pipe）很多都是浏览器无法解析的，所以在浏览器渲染应用之前，组件和模板必须要被Angular编译器转换为可以执行的JavaScript。
 
 使用为aot预编译之前，安装npm依赖：
 cnpm install @angular/compiler-cli        @angular/platform-server --save
@@ -56,4 +86,22 @@ platformBrowserDynamic().bootstrapModule(AppModule);
  import {  AppModuleNgFactory }  from  './app.module.ngfactory';
  //  引导AppModuleNgFactory
 platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+
+
+JIT vs AOT　　
+
+AOT优势
+　　1、渲染得更快
+　　2、需要的异步请求更少
+　　3、需要下载的Angular框架体积更小
+　　4、提早检测模板错误
+　　5、更安全
+
+JIT优势
+　　编译时间短，除非确实有动态组件的需求，否则jit唯一的优势就是能用来做在线 Demo和开发调试。
+
+运行应用
+项目根目录下执行
+ng serve    快速启动应用
+ng serve -o 启动应用并在浏览器打开（默认url:http://localhost:4200/）
 

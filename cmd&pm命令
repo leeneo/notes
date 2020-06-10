@@ -11,3 +11,21 @@ tasklist|findstr 5176
 dotnet.exe                   5176 Console                    2     33,544 K
 
 taskkill /pid 5176 /f 
+
+
+
+PowserShell
+
+*无脚本执行权限：无法加载文件 F:\npm\ng.ps1，因为在此系统上禁止运行脚本。 ps1后缀文件是PowserShell可执行的命令文件
+
+解决方案：
+以管理员身份启动PowerShell
+下载命令提示 get-help about_signing
+查看命令执行权限 get-executionpolicy        Restricted  ：（受限的）不允许执行脚本
+查看设置命令执行权限帮助 get-help set-executionpolicy       ：<Unrestricted> | <RemoteSigned> | <AllSigned> | <Restricted> | <Default> | <Bypass> | <Undefined>
+修改策略为 set-executionpolicy RemoteSigned|Unrestricted
+
+Restricted——默认的设置， 不允许任何script运行
+AllSigned——只能运行经过数字证书签名的script
+RemoteSigned——运行本地的script不需要数字签名，但是运行从网络上下载的script就必须要有数字签名
+Unrestricted——允许所有的script运行

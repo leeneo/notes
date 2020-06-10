@@ -1,0 +1,7 @@
+翻译的本质：源语言与目标语言的映射（对位关系）
+翻译软件的核心：语言固有的模型结构（语序）
+
+A: Do you have a family => 你有小孩儿吗
+B: Yes，I'm married. | NO. I'm single.
+
+
