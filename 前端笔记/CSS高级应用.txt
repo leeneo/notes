@@ -438,3 +438,44 @@ nth-of-type() 适合用于标签选择器，不适合用于类名选择器
 清橙：#fba
 清紫：#baf
 清黄绿：#bfa
+
+
+===============================================================================================
+content 用法：
+content 属性与 :before 及 :after 伪元素配合使用，来插入生成内容。
+attr(prop)：用来获取当前标签中属性的值
+
+<style type="text/css">
+	a.testa:after
+		{content: " (" attr(href) ")"
+	}
+	a.testb:after
+		{content: " (" attr(class) ")"
+	}
+    p.testc:after
+		{content: " (" attr(class) ")"
+	}
+</style>
+<body>
+	<p><a href="http://www.w3school.com.cn" class='testa'>W3School</a></p>
+	<p><a href="http://www.w3school.com.cn" class='testb'>W3School</a></p>
+	<p class='testc'>W3School</p>
+</body>
+
+===============================================================================================
+content url使用注意事项：
+url中SVG的颜色值不支持RGB(#rgb)形式，rgb(66, 232, 204) 或者 hsl(170, 78%, 58%) 都可以
+错误：
+.todo-list li .toggle:after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135">
+  <circle cx="50" cy="50" r="50" fill="none" stroke="#40e7cc" stroke-width="3"/></svg>');
+}
+正确：
+.todo-list li .toggle:after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135">
+  <circle cx="50" cy="50" r="50" fill="none" stroke="green" stroke-width="3"/></svg>');
+}
+.todo-list li .toggle:after {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135">
+  <circle cx="50" cy="50" r="50" fill="none" stroke="rgb(66, 232, 204)" stroke-width="3"/></svg>');
+}

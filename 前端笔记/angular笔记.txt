@@ -1,45 +1,32 @@
-概述：
-
-Angular 是由 Typescript写成的，一组特定功能的NgModule集合。
-Angular 应用架构：模块（module），组件（component，包括模板、指令和数据绑定），服务与依赖注入，路由（Router）。
-
-模块：
-应用的基本构造块NgModule（为组件提供编译的上下文环境）。
-一个 NgModule 就是一个容器，用于存放一些内聚的代码块，这些代码块专注于某个应用领域、某个工作流或一组紧密相关的功能。
-每个Angular应用至少有一个用于引导应用的根模块，根模块总会有一个根组件，并在引导期间创建它。
-使用 @NgModule() 装饰器声明模块。
-@NgModule() 装饰器是一个函数，它接受一个元数据对象（一个Json{}对象），该对象的属性用来描述这个模块
-@NgModule({
-  imports:      [ BrowserModule ],   --imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
-  providers:    [ Logger ],          --providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（也可以在组件级别指定服务提供商，这通常是首选方式。）
-  declarations: [ AppComponent ],    --declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道
-  exports:      [ TodoComponent ],   --exports（导出表） —— 那些能在其它模块的组件模板中使用的可声明对象的子集。
-  bootstrap:    [ AppComponent ]     --bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。只有根模块才应该设置这个 bootstrap 属性。
-})
-
-
-组件：
-定义视图，每个应用都至少有一个根组件。
-每个组件都会定义一个类，封装应用的数据和逻辑，并和一个HTML模板关联起来。
-可以使用服务，服务提供商可以作为依赖被注入到组件中。
-组件和服务都是简单的类，使用装饰器来标出它们的类型。
-使用@Component() 装饰器声明组件类。
-
-模板&指令：
-模板把普通的 HTML 和 Angular 指令与绑定标记（markup）组合起来，这样 Angular 就可以在呈现 HTML 之前先修改这些 HTML。
-模板中的指令提供程序逻辑，绑定标记把应用中的数据和DOM连接在一起。
-
-数据绑定：
-事件绑定，可以通过更新应用的数据来响应目标环境下的用户输入。
-属性绑定，将从应用数据中计算出来的值插入到 HTML 中。
-Angular 在每个 JavaScript 事件循环中处理所有的数据绑定，它会从组件树的根部开始，递归处理全部子组件。
-数据绑定在模板及其组件之间的通讯中扮演了非常重要的角色，它对于父组件和子组件之间的通讯也同样重要。
+===============================================================================================
+技巧
+===============================================================================================
 
 四种绑定形式：
 {{value}}:                component --> Dom
-[property]="value":       component --> Dom   把父组件value的值传到子组件的value属性中
+[property]="variable":    component --> Dom   把父组件variable的值传到子组件的variable变量中，子组件通过使用@Input()声明variable：@Input() variable:类型
 (event)="handler":        Dom --> component
 [(ng-model)]="property":  Dom <--> component
+
+子父组件传值
+@Input()修饰符
+@Output()修饰符
+===============================================================================================
+
+0、引用
+<!-- #usernameRef，表示引用（reference），这里引用的是input这个对象，然后传递input的value给组件的onClick()函数，在组件中处理input的值，是不是有点像asp.net 的控制器 -->
+<div>
+  <input #usernameRef type="text">
+  <input #passwordRef type="password" name="pwd" id="pwd">
+  <button (click)="onClick(usernameRef.value,passwordRef.value)">Login</button>
+</div> -->
+
+--login组件
+onClick(username, password) {
+  console.log('username:' + username + "\n"+"password:" + password);
+}
+
+===============================================================================================
 
 管道
 Angular 的管道可以让你在模板中声明显示值的转换逻辑。 带有 @Pipe 装饰器的类中会定义一个转换函数，用来把输入值转换成供视图显示用的输出值。
@@ -56,6 +43,7 @@ Demo:
 
 <!-- shortTime format: output '9:43 AM'-->
 <p>The time is {{today | date:'shortTime'}}</p>
+===============================================================================================
 
 指令-Directives
 Angular 的模板是动态的。当 Angular 渲染它们的时候，会根据指令给出的指示对 DOM 进行转换。 指令就是一个带有 @Directive() 装饰器的类。
@@ -82,6 +70,48 @@ DEMO:
 
 Angular 还有很多预定义指令既不修改布局结构（比如 ngSwitch），也不修改 DOM 元素和组件的样子（比如 ngStyle 和 ngClass）。
 
+===============================================================================================
+概念
+===============================================================================================
+
+概述：
+
+Angular 是由 Typescript写成的，一组特定功能的NgModule集合。
+Angular 应用架构：模块（module），组件（component，包括模板、指令和数据绑定），服务与依赖注入，路由（Router）。
+===============================================================================================
+
+模块：
+应用的基本构造块NgModule（为组件提供编译的上下文环境）。
+一个 NgModule 就是一个容器，用于存放一些内聚的代码块，这些代码块专注于某个应用领域、某个工作流或一组紧密相关的功能。
+每个Angular应用至少有一个用于引导应用的根模块，根模块总会有一个根组件，并在引导期间创建它。
+使用 @NgModule() 装饰器声明模块。
+@NgModule() 装饰器是一个函数，它接受一个元数据对象（一个Json{}对象），该对象的属性用来描述这个模块
+@NgModule({
+  imports:      [ BrowserModule ],   --imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
+  providers:    [ Logger ],          --providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（也可以在组件级别指定服务提供商，这通常是首选方式。）
+  declarations: [ AppComponent ],    --declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道
+  exports:      [ TodoComponent ],   --exports（导出表） —— 那些能在其它模块的组件模板中使用的可声明对象的子集。
+  bootstrap:    [ AppComponent ]     --bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。只有根模块才应该设置这个 bootstrap 属性。
+})
+
+===============================================================================================
+
+组件：
+定义视图，每个应用都至少有一个根组件。
+每个组件都会定义一个类，封装应用的数据和逻辑，并和一个HTML模板关联起来。
+可以使用服务，服务提供商可以作为依赖被注入到组件中。
+组件和服务都是简单的类，使用装饰器来标出它们的类型。
+使用@Component() 装饰器声明组件类。
+
+模板&指令：
+模板把普通的 HTML 和 Angular 指令与绑定标记（markup）组合起来，这样 Angular 就可以在呈现 HTML 之前先修改这些 HTML。
+模板中的指令提供程序逻辑，绑定标记把应用中的数据和DOM连接在一起。
+
+数据绑定：
+事件绑定，可以通过更新应用的数据来响应目标环境下的用户输入。
+属性绑定，将从应用数据中计算出来的值插入到 HTML 中。
+Angular 在每个 JavaScript 事件循环中处理所有的数据绑定，它会从组件树的根部开始，递归处理全部子组件。
+数据绑定在模板及其组件之间的通讯中扮演了非常重要的角色，它对于父组件和子组件之间的通讯也同样重要。
 
 服务：
 对于与特定视图无关并希望跨组件共享的数据或逻辑，可以创建服务类。
@@ -112,77 +142,7 @@ Angular 会作为一组 JavaScript 模块进行加载，可以看成库模块。
 每个组件都有component.ts,component.html,component.css 三个文件；每个component都有一个装饰器函数（@Component）
 每个模块或组件文件都会export一个类，可以被其他模块或组件import，ts文件就是类的导出和引入文件；
 组件的装饰器函数（@Componet）定义自身标记（selector），templateUrl,styleUrls三部分。
-
-
-ng命令操作
-
-ng help
-ng v 版本
-
-新建项目：ng new helloAngular -->cd helloangular
---> cnpm install --> ng serve -o | --open 
-ng set -g packageManager=cnpm --global
-@：ng serve 不带 -o 指令貌似打开速度更快一点
-运行：ng serve 此命令需要在项目根目录下执行（shift 右键-->在此处运行cmd）
-
-新建组件：
-1，ng generate component login --inline-template --inline-style	-->
-模板，样式，组件在一个文件里
-简化:ng g c login -it -is
-2，ng generate component name
-模板文件，样式文件，类文件分开放置
-简化:ng g c login
-
---引导过程
-Angular2通过在src/main.ts中引导AppModule来启动应用，src/index.html为app首页展示页，类似于一个母板，集合了根组件标签<app-root></app-root>；
-所有组件在app.module.ts根模块中进行注册，app.component 为app根组件，其他组件标签通过整合进根组件标签<app-root></app-root>，然后再由index.html中呈现出来；（自定义组件标签直接放进index.html中并不会起效果）
-这就形成了一个组件构成形式的单页面应用！
-
-app.module/bootstrap指明哪个组件为引导性组件（本案例中的AppComponent）。当Angular引导应用时，它会在DOM中渲染这个引导性组件，并把结果放进index.html的该组件的元素标签中（本案例中的app-root）。
-
---引导模式，详见angular-cli.txt
-JiT:动态引导  //开发调试，默认方式，连同Angular编译器一起发布到浏览器
-AoT:静态引导  //生成更小、启动更快的应用，不把编译器发布到浏览器
-*修改main.ts 引用模块来改变引导模式
-
-引入第三方JS类库
-1,包中已有*.d.ts后缀的类型定义文件，直接使用npm i --save packageName
-2,没有.d.ts文件，npm i --save packageName=>npm i @types/packageName --save-dev(意思是在@types/搜索安装类 型定义文件)
-3，找不到类型定义文件，需要手动添加类型定义：src/typings.d.ts=>declare module 'packageName'=>组件中  import * as friendName(别名) from 'packageName'=> friendName.method()
-
-标签语法：
-*angular严格区分大小写：组件定义函数onClick()与标签引用函数(click)="onclick()" 大小写不一致就会报错！
-<!-- (click)="onClick()"，圆括号是说发生此事件时，调用等号后面的表达式或函数;等号后面的onClick()是我们自己定义在LoginComponent中的函数，这个名称你可以随便定成什么，不一定叫onClick() -->
-
-0、引用
-<!-- #usernameRef，表示引用（reference），这里引用的是input这个对象，然后传递input的value给组件的onClick()函数，在组件中处理input的值，是不是有点像asp.net 的控制器 -->
-<div>
-  <input #usernameRef type="text">
-  <input #passwordRef type="password" name="pwd" id="pwd">
-  <button (click)="onClick(usernameRef.value,passwordRef.value)">Login</button>
-</div> -->
-
---login组件
-onClick(username, password) {
-  console.log('username:' + username + "\n"+"password:" + password);
-}
-
-0.1 服务
-新建服务：ng g s core/auth=>在src/app/core 目录下建立auth.service.ts
-
-//可以为方法指定参数类型和返回类型
-//boolean 返回类型；string 参数类型
-*类型约束，你在别处调用这个方法时，如果给出的参数类型或返回类型不正确，IDE就可以直接告诉你错了
-loginWithCredentials(username: string, password: string): boolean {
-  if (username === 'leeneo')
-    return true
-  return false
-}
---app.module.ts 根模块中的providers是配置在模块中全局可用的service或参数的
-providers: [{provide: 'auth',  useClass: AuthService}]
-provide:服务名称，useClass:该服务对应的类
-
-
+===============================================================================================
 
 1、依赖性注入：DI (Dependency Injection)
 注入器通过提供商新建依赖，提供商--交付服务的配方，被关联到一个令牌；
@@ -239,8 +199,9 @@ useClass 形式叫“类供应商”
 userValue 形式叫“值供应商”
 *值供应商一般用来设置运行期常量，比如网站的baseUrl,logo等
 
+===============================================================================================
 
-2、双向数据绑定机制
+双向数据绑定机制
 
 原理：组件中提供成员数据变量，然后模板中引用这个数据变量
 
@@ -265,11 +226,11 @@ selectedHero是在组件中定义的对象。
 For Example:
 <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" ></li>
 CSS File:.selected{}
+===============================================================================================
 
 函数定义
 functionName(obj:Object):Object|Const{return Object|Const}
 functionName(参数:参数类型):返回类型{}
-
 
 cmd:ng g s serviceName  创建服务
 在向组件注入服务之前，必需先在依赖注入系统中注册此服务
@@ -287,9 +248,91 @@ Angular 把组件的模板看做从属于该组件的。 组件和它的模板�
 [(ngModel)]双向绑定指令不被识别的错误解决方法：
 在app.module.ts的imports中引入FormsModule
 
-
 ngForm 声明form是ngForm类型
  <form #formRef='ngForm' (ngSubmit)='onSubmit(formRef)'></form>
    onSubmit(value:NgForm) {
     console.log(typeof value);==>Object;
   }
+
+//克隆一个对象到一个新对象，返回新对象
+let updatedTodo = Object.assign({}, todo, { completed: !todo.completed });
+
+虚拟内存API
+npm install --save angular-in-memory-web-api@0.5.4
+*此项操作必须安装0.6.0以下，超过此版本会出现数据无法读取等问题(404等路由问题）
+
+service中需引入import 'rxjs/add/operator/toPromise';
+可能需要npm i rxjs;npm i rxjs-compat;
+
+===============================================================================================
+
+导入 BrowserModule 会让该模块公开的所有组件、指令和管道在 AppModule 下的任何组件模板中直接可用，而不需要额外的繁琐步骤。
+CommonModule 提供了很多应用程序中常用的指令，包括 NgIf 和 NgFor 等。BrowserModule 导入了 CommonModule 并且 重新导出 了它。 
+最终的效果是：只要导入 BrowserModule 就自动获得了 CommonModule 中的指令。
+
+几乎所有要在浏览器中使用的应用的 根模块 （ AppModule ）都应该从 @angular/platform-browser 中导入 BrowserModule 。
+在其它任何模块中都 不要导入 BrowserModule，应该改成导入 CommonModule 。 它们需要通用的指令。它们不需要重新初始化全应用级的提供商
+
+===============================================================================================
+命令
+===============================================================================================
+
+ng命令操作
+
+ng help
+ng v 版本
+
+新建项目：ng new helloAngular -->cd helloangular
+--> cnpm install --> ng serve -o | --open 
+ng set -g packageManager=cnpm --global
+@：ng serve 不带 -o 指令貌似打开速度更快一点
+运行：ng serve 此命令需要在项目根目录下执行（shift 右键-->在此处运行cmd）
+
+新建组件：
+1，ng generate component login --inline-template --inline-style	-->
+模板，样式，组件在一个文件里
+简化:ng g c login -it -is
+2，ng generate component name
+模板文件，样式文件，类文件分开放置
+简化:ng g c login
+===============================================================================================
+
+--引导过程
+Angular2通过在src/main.ts中引导AppModule来启动应用，src/index.html为app首页展示页，类似于一个母板，集合了根组件标签<app-root></app-root>；
+所有组件在app.module.ts根模块中进行注册，app.component 为app根组件，其他组件标签通过整合进根组件标签<app-root></app-root>，然后再由index.html中呈现出来；（自定义组件标签直接放进index.html中并不会起效果）
+这就形成了一个组件构成形式的单页面应用！
+
+app.module/bootstrap指明哪个组件为引导性组件（本案例中的AppComponent）。当Angular引导应用时，它会在DOM中渲染这个引导性组件，并把结果放进index.html的该组件的元素标签中（本案例中的app-root）。
+
+--引导模式，详见angular-cli.txt
+JiT:动态引导  //开发调试，默认方式，连同Angular编译器一起发布到浏览器
+AoT:静态引导  //生成更小、启动更快的应用，不把编译器发布到浏览器
+*修改main.ts 引用模块来改变引导模式
+===============================================================================================
+
+引入第三方JS类库
+1,包中已有*.d.ts后缀的类型定义文件，直接使用npm i --save packageName
+2,没有.d.ts文件，npm i --save packageName=>npm i @types/packageName --save-dev(意思是在@types/搜索安装类 型定义文件)
+3，找不到类型定义文件，需要手动添加类型定义：src/typings.d.ts=>declare module 'packageName'=>组件中  import * as friendName(别名) from 'packageName'=> friendName.method()
+
+标签语法：
+*angular严格区分大小写：组件定义函数onClick()与标签引用函数(click)="onclick()" 大小写不一致就会报错！
+<!-- (click)="onClick()"，圆括号是说发生此事件时，调用等号后面的表达式或函数;等号后面的onClick()是我们自己定义在LoginComponent中的函数，这个名称你可以随便定成什么，不一定叫onClick() -->
+===============================================================================================
+
+服务
+新建服务：ng g s core/auth=>在src/app/core 目录下建立auth.service.ts
+
+//可以为方法指定参数类型和返回类型
+//boolean 返回类型；string 参数类型
+*类型约束，你在别处调用这个方法时，如果给出的参数类型或返回类型不正确，IDE就可以直接告诉你错了
+loginWithCredentials(username: string, password: string): boolean {
+  if (username === 'leeneo')
+    return true
+  return false
+}
+--app.module.ts 根模块中的providers是配置在模块中全局可用的service或参数的
+providers: [{provide: 'auth',  useClass: AuthService}]
+provide:服务名称，useClass:该服务对应的类
+
+===============================================================================================

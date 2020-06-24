@@ -1,0 +1,217 @@
+===========================================================================================================================
+安装docker
+===========================================================================================================================
+Docker 分为 CE 和 EE 两大版本。 CE 即社区版（免费，支持周期 7 个月）， EE 即企业版，强调安全，付费使用，支持周期 24 个月
+===========================================================================================================================
+官方安装文档：https://docs.docker.com/engine/install/centos/
+===========================================================================================================================
+卸载旧的docker
+
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+
+===========================================================================================================================               
+yum安装docker
+
+安装依赖包           sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+加入阿里云镜像       sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+或者使用官方镜像     sudo yum-config-manager \    --add-repo \    https://download.docker.com/linux/centos/docker-ce.repo
+安装docker ce       sudo yum install docker-ce
+启动docker          service docker start
+
+===========================================================================================================================
+Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令
+sudo yum install docker
+
+===========================================================================================================================
+测试或开发环境 简化安装
+
+curl -fsSL get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo systemctl daemon-reload    --重新加载服务配置
+systemctl restart docker
+docker version
+
+===========================================================================================================================
+Docker进程管理
+===========================================================================================================================
+运行Docker
+systemctl start docker
+
+停止Docker
+systemctl stop docker
+
+重启Docker
+systemctl restart docker
+
+设置开机自启动 Docker
+systemctl enable docker
+===========================================================================================================================
+Docker  部署应用
+===========================================================================================================================
+镜像管理
+
+docker pull [httpd]     拉取镜像
+docker images           查看已有镜像
+docker rmi [centos]     删除镜像
+===========================================================================================================================
+容器管理
+
+docker run -it -d -p 80:80 --name datahttpd -v /data/:/var/www/httpd/ httpd     创建一个容器并运行
+参数说明如下：
+
+-i：以交互模式运行容器，通常与-t同时使用。
+-t：为容器重新分配一个伪输入终端，通常与-i同时使用。
+-d：后台运行容器，并返回容器ID。
+-p：端口映射，格式为“宿主机端口:容器端口”。
+--name：为容器指定一个名称。
+-v：把宿主机上的一个目录挂载到镜像里，格式为“宿主机目录:镜像内挂载的路径”，必须为绝对路径
+
+docker ps -a                        查看容器启动情况
+docker exec -it mycore /bin/bash    进入容器
+
+在浏览器输入弹性云服务器所绑定的弹性公网IP，访问测试容器运行情况
+===========================================================================================================================
+镜像制作
+
+通过Dockerfile定制一个简单的Nginx镜像。
+
+1.创建一个名为Dockerfile的文件。
+
+mkdir mynginx
+cd mynginx
+touch Dockerfile
+
+2.编辑Dockerfile
+
+vim Dockerfile
+增加文件内容如下：
+FROM nginx
+RUN echo '<h1>Hello, Docker!</h1>' > /usr/share/nginx/html/index.html
+
+Dockerfile指令介绍如下。以下仅介绍简单指令，如需了解更多，请参见官方网站https://hub.docker.com/。
+FROM语句：表示使用nginx镜像作为基础镜像，一个Dockerfile中FROM是必备的指令，并且必须是第一条指令。
+RUN语句：格式为RUN <命令>，表示执行echo命令，在显示器中显示一段“Hello, Docker!”的文字。
+
+3.构建镜像
+
+docker build -t nginx:v3 .
+-t nginx:v3：指定镜像的名称和版本。
+.：指定上下文路径，镜像构建命令将该路径下所有的内容打包给Docker引擎帮助构建镜像。
+
+4.查看部署的nginx镜像，版本为v3
+
+docker images
+
+REPOSITORY          TAG             IMAGE ID              CREATED               SIZE
+nginx               v3              09422e465d96          10 seconds ago        109 MB
+
+===========================================================================================================================
+Docker  部署Asp.net core web应用程序
+===========================================================================================================================
+1.拉取aspnetcore最新镜像
+docker pull microsoft/aspnetcore                
+
+如果我们想拉取指定的aspnetcore版本，可使用如下命令：
+docker pull microsoft/aspnetcore:2.0
+
+2.创建容器
+docker run -it c4ca78cf9dca     
+exit--退出容器
+
+3.制作应用镜像
+创建Dockerfile文件
+
+cd /tmp
+vi Dockerfile：                     --编辑 Dockerfile
+FROM docker.io/microsoft/aspnetcore
+WORKDIR /app
+COPY ./songlou .
+EXPOSE 8080
+CMD ["dotnet", "SongLou.Web.dll"]
+
+Dockerfile 说明：
+FROM表示新镜像所依赖的基础镜像。
+WORKDIR表示你的asp.net core web应用放在容器的哪个目录，这里是/app目录，没有会自动创建
+COPY表示拷贝当前系统下的哪个目录，这里是songlou目录。
+EXPOSE表示暴露出来的端口号，和容器的端口号对应。这里默认是80。
+CMD表示执行的命令，即运行我们自己的asp.net core web程序。
+
+4.创建镜像
+docker build -t mycore .
+
+5.运行容器
+docker run -d --name mycore -p 8080:80 -d mycore
+
+6.执行curl命令访问网站
+curl http://localhost:8080
+
+===========================================================================================================================
+安装VIM
+===========================================================================================================================
+安装需要的环境，docker默认没有vim编译器–yum install vim
+安装nginx–yum install nginx
+窗口文件夹用于存放web项目–mkdir /var/webapps/html
+修改nginx的nginx.config配置文件路径，改为项目的/var/webapps/html/dist
+启动nginx–命令容器内：nginx。启动后外部可通过宿主机的ip：8888[上面设置的]访问了。
+
+===========================================================================================================================
+Docker基本命令
+===========================================================================================================================
+3.1、设置docker开机自启动–命令：sudo systemctl enable docker
+
+3.2、docker重启动–命令：docker restart docker容器名
+
+3.2、查看运行的容器–命令：docker ps 【正在运行的docker容器】
+
+3.3、查看所有的容器–命令：docker ps -a【包含已经停止的容器】
+
+3.4、指定容器启动–命令：docker start -i docker容器名
+
+3.5、删除docker容器–命令：docker rm docker容器名
+
+3.6、创建并启动docker容器–命令：docker run -p 0.0.0.0::8888:80 -it --name=sx centos /bin/bash
+
+此处说明：设置docker容器端口映射四种方式：
+
+3.6.1、docker run -p 80 -i -t centos /bin/bash 【该方式指定容器端口-宿主机端口随机】
+
+3.6.2、docker run -p 8080:80 -i -t centos /bin/bash【该方式指定宿主机端口：容器端口】
+
+3.6.3、docker run -p 0.0.0.0:80 -i -t centos /bin/bash 【该方式指定宿主机IP：容器端口】
+
+3.6.4、docker run -p 0.0.0.0:8888:80 -i -t centos /bin/bash 【该方式指定宿主机IP：端口：容器端口】常用这种方式
+
+通过3.6.4命令创建好容器后，外部可以通过访问宿主机IP：8080端口映射到docker容器的80端口。
+
+3.7、守护式容器快捷退出键：CTRL+Q CTRL+P【此快捷键退出后，程序后台正常运行】
+
+3.8、docker利用iptables防火墙技术实现用户IP权限访问。
+
+3.9、查看docker信息–命令：docker inspect docker容器名
+
+3.10、进入运行的docker容器–命令：docker attach docker容器
+
+3.11、Linux与docker之间的文件传输–命令：
+
+3.11.1:–宿主机Linux文件复制到容器docker中的命令：docker cp 要拷贝的文件路径 容器名：要拷贝到容器里面对应的路径
+
+示例：docker cp /opt/test.js testtomcat：/usr/local/tomcat/webapps/test/js
+
+3.11.2–docker容器复制到宿主机Linux中的命令：docker cp 容器名：要拷贝的文件在容器里面的路径 要拷贝到宿主机的相应路径
+
+示例：docker cp testtomcat：/usr/local/tomcat/webapps/test/js/test.js /opt
+
+3.12、查看所有TCP端口–命令：netstat -ntlp
+
+4、docker容器部署vue前端web项目
+
+4.1、进入docker容器：docker attach sx【docker容器名】
+
+====================================================================================================================================
