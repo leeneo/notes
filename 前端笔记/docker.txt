@@ -7,17 +7,23 @@ Docker 分为 CE 和 EE 两大版本。 CE 即社区版（免费，支持周期 
 ===========================================================================================================================
 卸载旧的docker
 
-sudo yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
+sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
+
+===========================================================================================================================
+测试或开发环境 简化安装
+
+curl -fsSL get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo systemctl daemon-reload                重新加载服务配置
+systemctl restart docker
+docker version                              查看是否安装成功
+
+===========================================================================================================================
+Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令
+sudo yum install docker
 
 ===========================================================================================================================               
-yum安装docker
+yum 安装docker
 
 安装依赖包           sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 加入阿里云镜像       sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
@@ -26,17 +32,23 @@ yum安装docker
 启动docker          service docker start
 
 ===========================================================================================================================
-Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令
-sudo yum install docker
+docker 镜像加速
 
-===========================================================================================================================
-测试或开发环境 简化安装
+网易镜像源：http://hub-mirror.c.163.com
+阿里云镜像源：https://ypybd1i5.mirror.aliyuncs.com
 
-curl -fsSL get.docker.com -o get-docker.sh
-sh get-docker.sh
-sudo systemctl daemon-reload    --重新加载服务配置
-systemctl restart docker
-docker version
+配置镜像加速器
+针对Docker客户端版本大于 1.10.0 的用户
+
+通过修改daemon配置文件/etc/docker/daemon.json来使用加速器
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://ypybd1i5.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
 ===========================================================================================================================
 Docker进程管理
@@ -52,31 +64,9 @@ systemctl restart docker
 
 设置开机自启动 Docker
 systemctl enable docker
+
 ===========================================================================================================================
-Docker  部署应用
-===========================================================================================================================
-镜像管理
-
-docker pull [httpd]     拉取镜像
-docker images           查看已有镜像
-docker rmi [centos]     删除镜像
-===========================================================================================================================
-容器管理
-
-docker run -it -d -p 80:80 --name datahttpd -v /data/:/var/www/httpd/ httpd     创建一个容器并运行
-参数说明如下：
-
--i：以交互模式运行容器，通常与-t同时使用。
--t：为容器重新分配一个伪输入终端，通常与-i同时使用。
--d：后台运行容器，并返回容器ID。
--p：端口映射，格式为“宿主机端口:容器端口”。
---name：为容器指定一个名称。
--v：把宿主机上的一个目录挂载到镜像里，格式为“宿主机目录:镜像内挂载的路径”，必须为绝对路径
-
-docker ps -a                        查看容器启动情况
-docker exec -it mycore /bin/bash    进入容器
-
-在浏览器输入弹性云服务器所绑定的弹性公网IP，访问测试容器运行情况
+Docker  核心概念【镜像】【容器】【仓库】
 ===========================================================================================================================
 镜像制作
 
@@ -112,6 +102,32 @@ docker images
 REPOSITORY          TAG             IMAGE ID              CREATED               SIZE
 nginx               v3              09422e465d96          10 seconds ago        109 MB
 
+5.上传自己的镜像到Docker Hub
+docker tag imageName  {userName}/imageName
+docker push {userName}imageName
+
+===========================================================================================================================
+镜像管理
+
+docker pull [httpd]         拉取镜像
+docker images               查看已有镜像
+docker rmi [80db826108c5]   删除镜像
+
+===========================================================================================================================
+容器管理
+
+docker run -d -p 80:80 --name containerName imageName     创建一个容器并运行
+参数说明如下：
+-d：后台运行容器，并返回容器ID。
+-p：端口映射，格式为“宿主机端口:容器端口”。
+--name：为容器指定一个名称。
+
+docker ps -a                        查看容器启动情况
+docker exec -it mycore /bin/bash    进入容器
+docker rm 65db826108c9              删除容器
+
+在浏览器输入弹性云服务器所绑定的弹性公网IP，访问测试容器运行情况
+
 ===========================================================================================================================
 Docker  部署Asp.net core web应用程序
 ===========================================================================================================================
@@ -132,9 +148,9 @@ cd /tmp
 vi Dockerfile：                     --编辑 Dockerfile
 FROM docker.io/microsoft/aspnetcore
 WORKDIR /app
-COPY ./songlou .
+COPY . ./app
 EXPOSE 8080
-CMD ["dotnet", "SongLou.Web.dll"]
+CMD ["dotnet", "leeneo.Web.dll"]
 
 Dockerfile 说明：
 FROM表示新镜像所依赖的基础镜像。
@@ -147,7 +163,7 @@ CMD表示执行的命令，即运行我们自己的asp.net core web程序。
 docker build -t mycore .
 
 5.运行容器
-docker run -d --name mycore -p 8080:80 -d mycore
+docker run -d -p 8080:80 --name mycoreContainer mycore
 
 6.执行curl命令访问网站
 curl http://localhost:8080
@@ -213,5 +229,16 @@ Docker基本命令
 4、docker容器部署vue前端web项目
 
 4.1、进入docker容器：docker attach sx【docker容器名】
+
+====================================================================================================================================
+docker run 
+====================================================================================================================================
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+命令的默认 COMMAND 为 /bin/bash，因此用户的输入是基于 bash shell 执行的
+
+–detach	        -d	在后台运行容器，并且打印容器id。
+–interactive	-i	在容器上打开一个标准的输入接口，一般与 -t 连用。
+–tty	        -t	创建一个伪tty终端，连接容器的标准输入接口，一般与 -i 连用。
 
 ====================================================================================================================================
