@@ -1,54 +1,79 @@
 ===========================================================================================================================
+Docker  运行原理
+===========================================================================================================================
+Docker 是一个Client-Server结构的系统，Docker的守护进程（Docker Daemon）运行在主机上,然后通过Socket连接从客户端访问，守护进程从客户端
+接受命令并管理运行在主机上的容器。容器是一个包含镜像实例的运行时环境。
+
+===========================================================================================================================
 安装docker
 ===========================================================================================================================
 Docker 分为 CE 和 EE 两大版本。 CE 即社区版（免费，支持周期 7 个月）， EE 即企业版，强调安全，付费使用，支持周期 24 个月
 ===========================================================================================================================
-官方安装文档：https://docs.docker.com/engine/install/centos/
-===========================================================================================================================
-卸载旧的docker
-
-sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine
-
-===========================================================================================================================
-测试或开发环境 简化安装
-
-curl -fsSL get.docker.com -o get-docker.sh
-sh get-docker.sh
-sudo systemctl daemon-reload                重新加载服务配置
-systemctl restart docker
-docker version                              查看是否安装成功
-
-===========================================================================================================================
-Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令
-sudo yum install docker
-
-===========================================================================================================================               
-yum 安装docker
-
-安装依赖包           sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-加入阿里云镜像       sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-或者使用官方镜像     sudo yum-config-manager \    --add-repo \    https://download.docker.com/linux/centos/docker-ce.repo
-安装docker ce       sudo yum install docker-ce
-启动docker          service docker start
+centos7 安装Docker    官方安装文档：https://docs.docker.com/engine/install/centos/
+===========================================================================================================================   
+1.卸载旧的docker(如果没有安装过，跳过此步)  
+    sudo yum remove docker \
+                    docker-client \
+                    docker-client-latest \
+                    docker-common \
+                    docker-latest \
+                    docker-latest-logrotate \
+                    docker-logrotate \
+                    docker-engine
+2.安装依赖包          sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+3.加入阿里云镜像      sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+  或者使用官方镜像    sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+4.安装docker ce      sudo yum install docker-ce docker-ce-cli containerd.io
+5.启动docker         systemctl start docker
+6.设置开机自启动      systemctl enable docker
+7.查看是否安装成功    docker run hello-world
 
 ===========================================================================================================================
-docker 镜像加速
+Centos 解除安装 Uninstall Docker Engine
+===========================================================================================================================
+1.Uninstall the Docker Engine, CLI, and Containerd packages:
+$ sudo yum remove docker-ce docker-ce-cli containerd.io
 
+2.Images, containers, volumes, or customized configuration files on your host are not automatically removed. To delete all images, containers, and volumes:
+$ sudo rm -rf /var/lib/docker
+
+===========================================================================================================================
+Docker 镜像加速   参考阿里云操作文档：https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+===========================================================================================================================
 网易镜像源：http://hub-mirror.c.163.com
 阿里云镜像源：https://ypybd1i5.mirror.aliyuncs.com
+===========================================================================================================================
+Centos7 配置镜像加速器
 
-配置镜像加速器
 针对Docker客户端版本大于 1.10.0 的用户
 
 通过修改daemon配置文件/etc/docker/daemon.json来使用加速器
-sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json <<-'EOF'
+
+vim /etc/docker/daemon.json:
 {
   "registry-mirrors": ["https://ypybd1i5.mirror.aliyuncs.com"]
 }
-EOF
+
+创建或修改完毕：
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+
+docker info 查看Registry Mirrors 字符串
+
+===========================================================================================================================
+Windows10 win10 配置镜像加速器
+
+在系统右下角Docker托盘图标内右键菜单选择 Settings，打开配置窗口后左侧导航菜单选择 Docker Engine。编辑窗口内的JSON串，填写下方加速器地址：
+{
+  "registry-mirrors": ["https://ypybd1i5.mirror.aliyuncs.com"]
+}
+编辑完成后点击 Apply 保存按钮，等待Docker重启并应用配置的镜像加速器。
+
+Docker for Windows 有两种运行模式，一种运行Windows相关容器，一种运行传统的Linux容器。同一时间只能选择一种模式运行。
+
+win10 以下版本  使用Docker Toolbox安装Docker，配置方法与Docker for Windows不同，详见文档。
+
+docker info 查看Registry Mirrors 字符串
 
 ===========================================================================================================================
 Docker进程管理
@@ -67,6 +92,15 @@ systemctl enable docker
 
 ===========================================================================================================================
 Docker  核心概念【镜像】【容器】【仓库】
+===========================================================================================================================
+镜像管理
+镜像可以看做一个只读的应用模版，可以创建不同的容器。
+一个镜像可以有不同的tag。
+
+docker pull [httpd]         拉取镜像
+docker images               查看已有镜像
+docker rmi [80db826108c5]   删除镜像
+
 ===========================================================================================================================
 镜像制作
 
@@ -107,14 +141,10 @@ docker tag imageName  {userName}/imageName
 docker push {userName}imageName
 
 ===========================================================================================================================
-镜像管理
-
-docker pull [httpd]         拉取镜像
-docker images               查看已有镜像
-docker rmi [80db826108c5]   删除镜像
-
-===========================================================================================================================
 容器管理
+
+容器（container）是独立运行的一个或一组应用，容器是镜像的运行实例；一个镜像可以有不同的容器；可以看做是一个极简的Linux运行环境。
+容器可以看做一层层的堆叠，只有最上面一层可以修改；
 
 docker run -d -p 80:80 --name containerName imageName     创建一个容器并运行
 参数说明如下：
@@ -127,6 +157,14 @@ docker exec -it mycore /bin/bash    进入容器
 docker rm 65db826108c9              删除容器
 
 在浏览器输入弹性云服务器所绑定的弹性公网IP，访问测试容器运行情况
+
+===========================================================================================================================
+仓库（Repository）  
+
+集中存放镜像文件的场所，类似github Repository,分为公共仓和私有仓
+最大的公共仓库  www.hub.docker.com
+
+仓库注册服务器（Registry）：存放着多个仓库的服务器
 
 ===========================================================================================================================
 Docker  部署Asp.net core web应用程序
@@ -178,7 +216,95 @@ curl http://localhost:8080
 启动nginx–命令容器内：nginx。启动后外部可通过宿主机的ip：8888[上面设置的]访问了。
 
 ===========================================================================================================================
-Docker基本命令
+Docker 系统命令 --help
+===========================================================================================================================
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\neo\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\neo\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\neo\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\neo\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  deploy      Deploy a new stack or update an existing stack
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+===========================================================================================================================
+Docker 基本命令
 ===========================================================================================================================
 3.1、设置docker开机自启动–命令：sudo systemctl enable docker
 
