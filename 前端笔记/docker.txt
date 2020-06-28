@@ -146,15 +146,26 @@ docker push {userName}imageName
 容器（container）是独立运行的一个或一组应用，容器是镜像的运行实例；一个镜像可以有不同的容器；可以看做是一个极简的Linux运行环境。
 容器可以看做一层层的堆叠，只有最上面一层可以修改；
 
-docker run -d -p 80:80 --name containerName imageName     创建一个容器并运行
+docker run --name containerName -it -d -p 80:80 imageName     创建一个指定容器并运行
+docker run -it imageName /bin/bash                            创建并进入容器（此时第一次使用exit退出会导致容器关闭）
+docker run -d  imageName                                      创建容器并以后台进程运行
+
 参数说明如下：
 -d：后台运行容器，并返回容器ID。
 -p：端口映射，格式为“宿主机端口:容器端口”。
 --name：为容器指定一个名称。
 
-docker ps -a                        查看容器启动情况
-docker exec -it mycore /bin/bash    进入容器
-docker rm 65db826108c9              删除容器
+docker ps -a                       查看容器启动情况
+docker exec -it mycore /bin/bash   进入容器
+docker rm       name/Id            删除容器
+docker start    name/Id            启动容器
+docker restart  name/Id            重启动容器
+docker stop     name/Id            关闭容器
+docker kill     name/Id            强制关闭容器
+
+ttY:
+ctrl+p+q                           退出docker tty，不关闭容器        
+exit(ctrl+p+q)                     退出docker tty，并关闭容器
 
 在浏览器输入弹性云服务器所绑定的弹性公网IP，访问测试容器运行情况
 
@@ -162,7 +173,7 @@ docker rm 65db826108c9              删除容器
 仓库（Repository）  
 
 集中存放镜像文件的场所，类似github Repository,分为公共仓和私有仓
-最大的公共仓库  www.hub.docker.com
+最大的公共仓库  https://hub.docker.com
 
 仓库注册服务器（Registry）：存放着多个仓库的服务器
 
@@ -355,16 +366,226 @@ Docker 基本命令
 4、docker容器部署vue前端web项目
 
 4.1、进入docker容器：docker attach sx【docker容器名】
+====================================================================================================================================
+docker images --help
+====================================================================================================================================
+Usage:  docker images [OPTIONS] [REPOSITORY[:TAG]]
+
+显示本机镜像
+
+Options:
+  -a, --all             显示本机所有的镜像
+  -q, --quiet           只显示镜像ID  
+      --digests         Show digests
+      --no-trunc        Don't truncate output  
 
 ====================================================================================================================================
-docker run 
+docker ps --help
+====================================================================================================================================
+Usage:  docker ps [OPTIONS]
+
+显示本地容器
+
+Options:
+  -a, --all             Show all containers (default shows just running)
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print containers using a Go template
+  -n, --last int        Show n last created containers (includes all states) (default -1)
+  -l, --latest          Show the latest created container (includes all states)
+      --no-trunc        Don't truncate output
+  -q, --quiet           Only display numeric IDs
+  -s, --size            Display total file sizes
+
+====================================================================================================================================
+docker run --help
 ====================================================================================================================================
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 命令的默认 COMMAND 为 /bin/bash，因此用户的输入是基于 bash shell 执行的
 
-–detach	        -d	在后台运行容器，并且打印容器id。
-–interactive	-i	在容器上打开一个标准的输入接口，一般与 -t 连用。
-–tty	        -t	创建一个伪tty终端，连接容器的标准输入接口，一般与 -i 连用。
+--name string                    为容器指定一个名称
+-d, -–detach	                   在后台运行容器，并且打印容器id。
+-i, -–interactive	               在容器上打开一个标准的输入接口，一般与 -t 连用。
+-t, -–tty	                       创建一个伪tty终端，连接容器的标准输入接口，一般与 -i 连用。
+-P, --publish-all                随机端口映射，易受攻击
+-p, --publish list               主机端口映射：Publish a container's port(s) to the host
+    端口映射形式如下：
+    hostPort:containerPort  (主要形式)
+    ip:hostPort:containerPort
+    ip::containerPort
+    containerPort
+
+====================================================================================================================================
+docker search --help
+====================================================================================================================================
+Usage:  docker search [OPTIONS] TERM
+
+在Docker Hub 上搜索镜像
+
+Options:
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print search using a Go template
+      --limit int       Max number of search results (default 25)
+      --no-trunc        显示完整的镜像描述（Description）
+
+demo:
+docker search --filter='stars=30' angular           搜索hub上stars>=30的镜像
+docker search --filter=is-automated=true  nginx     搜索hub上automate build(自动构建)的镜像
+====================================================================================================================================
+docker rmi --help
+====================================================================================================================================
+Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]
+
+删除一个或多个镜像
+
+Options:
+  -f, --force      Force removal of the image
+      --no-prune   Do not delete untagged parents
+
+删除多个：
+ docker rmi -f image1 image2 image3...
+
+组合images命令删除全部镜像：
+ docker rmi -f  $(docker images -qa)
+
+docker images -qa：查出全部的镜像ID
+
+====================================================================================================================================
+docker rm --help
+====================================================================================================================================
+Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+删除一个或多个容器
+
+Options:
+  -f, --force     Force the removal of a running container (uses SIGKILL)
+  -l, --link      Remove the specified link
+  -v, --volumes   Remove anonymous volumes associated with the container
+
+删除多个：
+ docker rm -f con1 con2 con3...
+
+组合ps命令删除全部镜像：
+ docker rm -f  $(docker ps -aq)
+
+docker ps -aq：查出全部的容器ID
+
+====================================================================================================================================
+docker commit --help
+====================================================================================================================================
+Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+
+Create a new image from a container's changes
+
+Options:
+  -a, --author string    Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+  -c, --change list      Apply Dockerfile instruction to the created image
+  -m, --message string   Commit message
+  -p, --pause            Pause container during commit (default true)
+
+====================================================================================================================================
+docker push --help
+====================================================================================================================================
+Usage:  docker push [OPTIONS] NAME[:TAG]
+
+Push an image or a repository to a registry
+
+Options:
+      --disable-content-trust   Skip image signing (default true)
+
+====================================================================================================================================
+docker logs --help
+====================================================================================================================================
+Usage:  docker logs [OPTIONS] CONTAINER
+
+Fetch the logs of a container
+
+Options:
+      --details        Show extra details provided to logs
+  -f, --follow         Follow log output
+      --since string   Show logs since timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+      --tail string    Number of lines to show from the end of the logs (default "all")
+  -t, --timestamps     Show timestamps
+      --until string   Show logs before a timestamp (e.g. 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes)
+
+demo:
+docker run --name nginxc -d nginx /bin/sh -c "while true;do echo wfw;sleep 2;done"
+docker logs -t -f --tail 3 nginxc
+
+====================================================================================================================================
+docker top --help
+====================================================================================================================================
+Usage:  docker top CONTAINER [ps OPTIONS]
+
+Display the running processes of a container
+====================================================================================================================================
+docker inspect --help
+====================================================================================================================================
+Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID...]
+
+检查容器内部细节  | Return low-level information on Docker objects
+
+Options:
+  -f, --format string   Format the output using the given Go template
+  -s, --size            Display total file sizes if the type is container
+      --type string     Return JSON for specified type
+
+====================================================================================================================================
+docker exec --help
+====================================================================================================================================
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+在容器中打开新的命令终端，可以直接在容器外执行容器内命令
+Run a command in a running container
+
+Options:
+  -d, --detach               Detached mode: run command in the background
+      --detach-keys string   Override the key sequence for detaching a container
+  -e, --env list             Set environment variables
+  -i, --interactive          Keep STDIN open even if not attached
+      --privileged           Give extended privileges to the command
+  -t, --tty                  Allocate a pseudo-TTY
+  -u, --user string          Username or UID (format: <name|uid>[:<group|gid>])
+  -w, --workdir string       Working directory inside the container
+
+demo:
+docker exec -t 6a9ded24fc93 ls -l
+
+====================================================================================================================================
+docker attach --help
+====================================================================================================================================
+Usage:  docker attach [OPTIONS] CONTAINER
+
+必需是已经存在的命令终端  
+Attach local standard input, output, and error streams to a running container
+
+Options:
+      --detach-keys string   Override the key sequence for detaching a container
+      --no-stdin             Do not attach STDIN
+      --sig-proxy            Proxy all received signals to the process (default true)
+demo:
+docker run --name nginxc -it nginx /bin/bash =>(ctrl+P+Q)
+docker attach nginxc|id
+
+====================================================================================================================================
+ docker cp --help
+
+Usage:  docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
+        docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+
+容器与宿主机之间复制文件或目录
+Copy files/folders between a container and the local filesystem
+
+Use '-' as the source to read a tar archive from stdin
+and extract it to a directory destination in a container.
+Use '-' as the destination to stream a tar archive of a
+container source to stdout.
+
+Options:
+  -a, --archive       Archive mode (copy all uid/gid information)
+  -L, --follow-link   Always follow symbol link in SRC_PATH
+
+  demo:
+docker cp nginxc2:/./docker-entrypoint.sh /tmp
 
 ====================================================================================================================================
