@@ -91,9 +91,27 @@ systemctl restart docker
 systemctl enable docker
 
 ===========================================================================================================================
+Docker 核心架构、原理 (文件系统, 层, 容器)
+===========================================================================================================================
+Docker的文件系统分为两层:bootfs和rootfs;
+
+bootfs包含了bootloader和Kernel（linux内核），内核启动之后，bootfs会被卸载掉。
+
+rootfs则包含了一般系统上的常见目录结构，类似于/dev, /proc, /bin等等以及一些基本的文件和命令，实际上就是各种不同的Linux系统发行版。
+
+Docker镜像用到的技术UnionFS。
+UnionFS(联合文件系统)：一种分层、轻量级、并且高性能的文件系统。支持对文件系统的修改作为一次提交来一层层叠加，同时可以将不同的目录挂载到
+同一个虚拟文件系统目录下，类似归档。
+
+Docker容器实现隔离和资源限制用到的技术Linux namespace 、Linux CGroups。
+
+Docker 镜像都是只读的，当容器启动时，一个新的可写层被加载到镜像的顶部，这一层通常被称为容器层，容器层之下的都叫镜像层。
+===========================================================================================================================
 Docker  核心概念【镜像】【容器】【仓库】
 ===========================================================================================================================
 镜像管理
+
+镜像是一种轻量级、可执行的独立应用包，封装了应用运行时环境、代码和配置文件。
 镜像可以看做一个只读的应用模版，可以创建不同的容器。
 一个镜像可以有不同的tag。
 
@@ -146,7 +164,7 @@ docker push {userName}imageName
 容器（container）是独立运行的一个或一组应用，容器是镜像的运行实例；一个镜像可以有不同的容器；可以看做是一个极简的Linux运行环境。
 容器可以看做一层层的堆叠，只有最上面一层可以修改；
 
-docker run --name containerName -it -d -p 80:80 imageName     创建一个指定容器并运行
+docker run --name containerName -it -p 80:80 imageName        创建一个指定容器并运行
 docker run -it imageName /bin/bash                            创建并进入容器（此时第一次使用exit退出会导致容器关闭）
 docker run -d  imageName                                      创建容器并以后台进程运行
 
@@ -568,8 +586,8 @@ docker run --name nginxc -it nginx /bin/bash =>(ctrl+P+Q)
 docker attach nginxc|id
 
 ====================================================================================================================================
- docker cp --help
-
+docker cp --help
+====================================================================================================================================
 Usage:  docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
         docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
 
@@ -585,7 +603,47 @@ Options:
   -a, --archive       Archive mode (copy all uid/gid information)
   -L, --follow-link   Always follow symbol link in SRC_PATH
 
-  demo:
+demo:
 docker cp nginxc2:/./docker-entrypoint.sh /tmp
+
+====================================================================================================================================
+docker pause --help
+====================================================================================================================================
+Usage:  docker pause CONTAINER [CONTAINER...]
+
+Pause all processes within one or more containers
+
+====================================================================================================================================
+docker unpause --help
+====================================================================================================================================
+Usage:  docker unpause CONTAINER [CONTAINER...]
+
+Unpause all processes within one or more containers
+
+====================================================================================================================================
+docker commit --help
+====================================================================================================================================
+Usage:  docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+
+Create a new image from a container's changes
+
+Options:
+  -a, --author string    Author (e.g., "John Hannibal Smith <hannibal@a-team.com>")
+  -c, --change list      Apply Dockerfile instruction to the created image
+  -m, --message string   Commit message
+  -p, --pause            Pause container during commit (default true)
+
+demo:
+docker commit -a='leeneo' -m='test' a4fb84d31a52 learngingFromDocker/tomcat:0.1
+
+====================================================================================================================================
+docker push --help
+====================================================================================================================================
+Usage:  docker push [OPTIONS] NAME[:TAG]
+
+Push an image or a repository to a registry
+
+Options:
+      --disable-content-trust   Skip image signing (default true)
 
 ====================================================================================================================================
