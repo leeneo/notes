@@ -1,95 +1,132 @@
-开发项目流程
+=================================================================================================================================
+创建项目 dotnet new
+=================================================================================================================================
+新建项目目录，然后项目根目录下执行 dotnet 命令：
 
-cmd-->md coreApp
-cd-->coreApp-->dotnet new web|mvc|angular-->dotnet restore-->dotnet run
+1, dotnet new web|mvc|angular   构建项目骨架
+2, dotnet restore               还原项目依赖包
+3, dotnet build                 编译项目（将源代码编译为dll,pdb等）
+4, dotnet run                   运行或执行项目输出
 
-dotnet new ‘模板名称’
-
+=================================================================================================================================
+新建项目 常用项目模板
+=================================================================================================================================
 *创建项目需要在项目根目录下， 模板名后不跟项目名
 
 以下模板会部分匹配输入。请具体指出模板名称和/或语言。
 
-模板                                                短名称              语言
-        标记
-----------------------------------------------------------------------------
---------------------
-ASP.NET Core Empty                                web              [C#], F#
- Web/Empty
-ASP.NET Core Web App (Model-View-Controller)      mvc              [C#], F#
- Web/MVC
-ASP.NET Core Web App                              razor            [C#]
- Web/MVC/Razor Pages
-ASP.NET Core with Angular                         angular          [C#]
- Web/MVC/SPA
-ASP.NET Core with React.js                        react            [C#]
- Web/MVC/SPA
-ASP.NET Core with React.js and Redux              reactredux       [C#]
- Web/MVC/SPA
-ASP.NET Core Web API                              webapi           [C#], F#
- Web/WebAPI
-Razor Page                                        page
- Web/ASP.NET
-MVC ViewImports                                   viewimports
- Web/ASP.NET
-MVC ViewStart                                     viewstart
- Web/ASP.NET
+模板                                              短名称                     语言                 标记      
+---------------------------------------------------------------------------------------------------------------------
+ASP.NET Core Empty                                web                      [C#], F#          Web/Empty
+ASP.NET Core Web App (Model-View-Controller)      mvc                      [C#], F#          Web/MVC
+ASP.NET Core Web App                              webapp                   [C#]              Web/MVC/Razor Pages
+ASP.NET Core with Angular                         angular                  [C#]              Web/MVC/SPA
+ASP.NET Core with React.js                        react                    [C#]              Web/MVC/SPA
+ASP.NET Core with React.js and Redux              reactredux               [C#]              Web/MVC/SPA
+ASP.NET Core Web API                              webapi                   [C#], F#          Web/WebAPI
+Razor Page                                        page                     [C#]              Web/ASP.NET
+Console Application                               console                  [C#], F#, VB      Common/Console
+Class library                                     classlib                 [C#], F#, VB      Common/Library
+WPF Application                                   wpf                      [C#]              Common/WPF
+Windows Forms (WinForms) Application              winforms                 [C#]              Common/WinForms
+global.json file                                  globaljson                                 Config
+dotnet gitignore file                             gitignore                                  Config
+Web Config                                        webconfig                                  Config
+Solution File                                     sln                                        Solution
 
-dotnet restore 命令 通过 读取. NET Core 项目 中 project. json 配置文件 中的 内容， 通过 NuGet 工具 下载 和 配置 当前. NET Core 项目 的 依赖 库 和 项目。
-为了 让 NuGet 能够 下载 项目 需要 的 依赖 库， 需要 为 NuGet 工具 指定 下载 源。 下载 源 通常 保存 在 nuget. config 文件 中， 在 线 的 nuget. org 源 作为 默认 源 已经 保存 在 配置文件 中。 开发 人员 也可以 根据 需要 使用- source 参数 指定 自己的 NuGet 下载 源。- packages 参数 用来 指定 依赖 库 的 物理 位置， 如果 没有 指定- packages 参数， 那么 就会 使用. NET Core 全局 缓存 位置。 如果 用 户名 是 user1， 默认 情况下 这个 位置 在 Linux 和 OS X 操作系统 的/ home/ user1 路径 下， Windows 操作系统 的C：\ Users\ user1 路径 下。
+=================================================================================================================================
+运行 或者 调试 项目应用
+=================================================================================================================================
+   直接在项目根目录下使用 dotnet 命令
 
-dotnet run 命令 首先 会 编译 源 代码， 生成 输出 程序， 然后 运行 这个 程序。 dotnet- run 依赖. NET Core 的 构建 功能 来 编译 源 代码， 编译 的 输出 结果 会 保存 在当 前 目录 中的 bin 子 文件夹 内。 在 一个 部署 有 多个. NET 运行时 的 计算 机上， dotnet 会 首选. NET Core 作为 运行时。 如果 需要 使用 其他. NET 框架， 那么 就要 使用 -framework 参数 来 指定。
-dotnet run 命令 需要 在当 前项 目上 下文 环境 中 执行， 也就 是在 项目 所在 文件夹 路径 下 执行。 如果 需要 运行 一个 程序 集， 那么 需要 直接 使用 dotnet 而 不是 dotnet run， 如 dotnet my. dll。
-
-}
-
-dotnet build 负责 编译 项目 源 代码 和 项目 依赖 项 目的 源 代码。 编译 结果是 包含 有 中间 语言 代码 的 二进制 DLL 文件。 同时. NET Core 的 编译 功能 也会 生成 deps 文件， 用来 描述 主机 需要 什么样 的 环境 来 运行 这个 项目。 在编 译 开始 之前，. NET Core 构建 功能 将对 项目 进行 增量 安全检查。 如果 所有 的 检查 都 通过了， 那么 就 执行 增量 编译 操作。 这种 编译 只 针对 上次 编译 后 修改 的 部分 进行 编译， 编译 速度 较快。 如果 增量 检查 没有 通过， 那么 就 执行 全 量 编译。
-对于 当前 项目 依赖 的 其他 需要 编译 的 项目， 必须 通过 下面 的 安全检查， 以便 确保 编译 过程 是 增量 编译： （1） 没有 使用 编译 前/ 编译 后脚 本； （2） 没有 从 PATH 指定 的 路径 中 加载 编译 工具； （3） 只 使用 已知 的 编译器 比如 C#、 VB、 FSharp 等 编译器。 如果 编译 的 是 一个 可执行 的 项目， 需要 在 项目 的 配置文件 project. json 中 包含 以下 内容，
-{
-	"compilerOptions":{
-		"emitEntryPoint":true
-	}
-}
-
-dotnet publish 命令 用来 把 当前 项目 中 需要 发布 或者 可执行 的 部分 以及 相关 的 依赖 项 打包， 使之 成为 可以 发布 的 状态。
-dotnet publish 命令 执行 发布 动作 时， 首先 会 编译 当前 项目 并从 project. json 文件 中 读取 相关 的 依赖 项， 最后 将 全部 需要 发布 的 部分 存放 在 项目 的 bin/ publish 文件夹 内。
-
-其他 命令 的 详细 描述 请 参考： https:// docs. microsoft. com/ en- us/ dotnet/ articles/ core/ tools/ index。
+   使用：
+        dotnet build
+        dotnet run 
+   如果不行，先执行：
+        dotnet restore
+   再执行：
+        dotnet build
+        dotnet run 
 
 
-新版的vs code 输入 dotnet new web-->回车后会自动执行 dotnet restore;
-dotnet new web:dotnet run -->浏览器访问localhost:5000;出现hello world！    该语句是'在项目下startup.cs中生成的'
-dotnet new mvc:会在项目下分别生成   Controllers,Models,Views三个目录，和系列json配置文件（此模板默认会有个view样式，资源在Views目录中）
+   *vs code f5 调试
 
-
-launch.json配置
-"program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/core app.dll",
-
-如果项目移动了，要修改此参数；
-workspaceRoot:项目所在目录。
-
-同时还要修改tasks.json-->tasks参数，args的值到对应目录；
-"tasks": [
-        {
-            "taskName": "build",
-            "args": [
-                "${workspaceRoot}/C#app.csproj"
-            ],
-            "isBuildCommand": true,
-            "problemMatcher": "$msCompile"
-        }
-    ]
-
-
-运行/调试项目
-
-1、命令行：dotnet run-->localhost:5000
-2、vs code f5 调试
-
-添加依赖包的方式：
-
+=================================================================================================================================
+添加依赖包
+=================================================================================================================================
 1、VS-工具-NuGet包管理器-PackageManager：
 Install-Package Microsoft.EntityFrameworkCore.SqlServer;
 Install-Package Microsoft.EntityFrameworkCore.Tools
 
 2、dotnet 命令行添加包：
 dotnet add package Microsoft.EntityFrameworkCore.Tools
+
+=================================================================================================================================
+官方命令详解
+=================================================================================================================================
+dotnet restore
+=================================================================================================================================
+dotnet restore 命令通过读取.NET Core项目中 project.json配置文件中的内容，通过 NuGet工具下载和配置当前 .NETCore项目的依赖库和项目。
+为了让NuGet能够下载项目需要的依赖库，需要为 NuGet工具指定下载源。
+下载源通常保存在 nuget.config文件中，在线的 nuget.org源作为默认源已经保存在配置文件中。
+开发人员也可以根据需要使用 -source参数指定自己的NuGet下载源。
+-packages 参数用来指定依赖库的物理位置，如果没有指定 -packages参数，那么就会使用. NETCore全局缓存位置。
+如果用户名是 user1，默认情况下这个位置在 Linux和 OS X(MacOS 苹果系统)操作系统的 /home/user1路径下， Windows操作系统的 C：\Users\user1路径下。
+
+================================================================================================================================
+dotnet build
+================================================================================================================================
+dotnet build 负责编译项目源代码和项目依赖项目的源代码。
+编译结果是包含有中间语言代码的二进制DLL文件。
+同时 .NETCore的编译功能也会生成 deps文件，用来描述主机需要什么样的环境来运行这个项目。
+在编译开始之前，.NETCore构建功能将对项目进行增量安全检查。
+如果所有的检查都通过了，那么就执行增量编译操作。
+这种编译只针对上次编译后修改的部分进行编译，编译速度较快。
+如果增量检查没有通过，那么就执行全量编译。
+对于当前项目依赖的其他需要编译的项目，必须通过下面的安全检查，以便确保编译过程是增量编译：
+（1）没有使用编译前/编译后脚本；
+（2）没有从PATH指定的路径中加载编译工具；
+（3）只使用已知的编译器比如C#、VB、FSharp等编译器。
+如果编译的是一个可执行的项目，需要在项目的配置文件project.json中包含以下内容，
+{
+    "compilerOptions":{
+        "emitEntryPoint":true
+    }
+}
+
+=================================================================================================================================
+dotnet run
+=================================================================================================================================
+dotnet run 命令首先会编译源代码，生成输出程序，然后运行这个程序。
+dotnet-run 依赖 .NETCore的构建功能来编译源代码，编译的输出结果会保存在当前目录中的bin子文件夹内。
+在一个部署有多个 .NET运行时的计算机上，dotnet会首选 .NETCore作为运行时。
+如果需要使用其他 .NET框架，那么就要使用 -framework参数来指定。
+dotnetrun 命令需要在当前项目上下文环境中执行，也就是在项目所在文件夹路径下执行。
+如果需要运行一个程序集，那么需要直接使用dotnet而不是 dotnetrun，如dotnetmy.dll。
+
+=================================================================================================================================
+dotnet publish
+=================================================================================================================================
+dotnet publish 命令用来把当前项目中需要发布或者可执行的部分以及相关的依赖项打包，使之成为可以发布的状态。
+dotnet publish 命令执行发布动作时，首先会编译当前项目并从project.json文件中读取相关的依赖项，最后将全部需要发布的部分存放在项目的bin/publish文件夹内。
+
+其他命令的详细描述请参考：https://docs.microsoft.com/en-us/dotnet/articles/core/tools/index。
+
+=================================================================================================================================
+vs code部署的网站会有一个默认样式（localhost:5000/home/Index.cshtml）
+此文件目录在Views--Home。
+
+vs code 部署解释：
+Microsoft.AspNetCore.Server.Kestrel包封装了一个名叫Kestrel的轻量Http Server，使Web应用程序可以脱离IIS进行部署运行。
+
+=================================================================================================================================
+其他
+=================================================================================================================================
+vs code 特性：
+
+dotnet new web                      -->回车后会自动执行 dotnet restore;
+dotnet new web-->dotnet run         -->浏览器访问localhost:5000;出现hello world！该语句是'在项目下startup.cs中生成的'。
+dotnet new mvc                      -->会在项目下分别生成 Controllers, Models, Views三个目录，和系列json配置文件（此模板默认会有个view样式，资源在Views目录中）
+
+=================================================================================================================================
+
