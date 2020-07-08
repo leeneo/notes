@@ -1,0 +1,117 @@
+=================================================================================================================================
+调试/编译   C#代码
+=================================================================================================================================
+task.json 配置
+
+task.json:
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": ".net core build",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                // Ask dotnet build to generate full paths for file names.
+                "/property:GenerateFullPaths=true",
+                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
+
+=================================================================================================================================
+launch.json 配置
+
+launch.json:
+{
+   // Use IntelliSense to find out which attributes exist for C# debugging
+   // Use hover for the description of the existing attributes
+   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+   "version": "0.2.0",
+   "configurations": [
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": ".net core build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/CSharp.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            // "console": "internalConsole",           //输出到控制台调试，不方便
+            // "console": "integratedTerminal",        //输出到其他命令行终端调试，可以输入，方便
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
+
+注意：preLaunchTask 配置项要与task.json: tasks.label 的名称相匹配
+
+如果项目移动了，要修改此参数："program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/core app.dll"
+
+${workspaceRoot}:项目所在目录。
+
+=================================================================================================================================
+调试/编译 C/C++ 代码
+=================================================================================================================================
+task.json 配置
+
+菜单-->终端-->配置任务
+编辑根目录下.vscode\task.json
+task.json:
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "gcc.exe build active file",
+            "command": "E:\\tools\\MinGW\\bin\\gcc.exe",
+            "args": [
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "E:\\tools\\MinGW\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+  }
+
+编译（需要安装C/C++扩展）：ctrl+shift+b
+
+=================================================================================================================================
+安装c++ Intellisense 插件 或者 C/C++ GNU Global
+=================================================================================================================================
+配置c_cpp_properties.json:
+
+    "includePath": [
+        "/usr/include",
+        "/usr/local/include",
+        "C:\\Program Files\\mingw-w64\\i686-7.2.0-posix-dwarf-rt_v5-rev1\\mingw32\\i686-w64-mingw32\\include",
+        "${workspaceRoot}"
+    ],
