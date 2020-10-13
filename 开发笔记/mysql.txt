@@ -1,3 +1,49 @@
+===========================================================================================================================
+下载安装&使用
+===========================================================================================================================
+mysql官方下载地址 https://dev.mysql.com/downloads/
+
+1,下载完成后解压，将bin目录添加环境变量，创建data目录，bin同级创建my.ini
+    my.ini:
+    [mysql]
+    # 命令终端beep声
+    no-beep
+    # 默认字符集
+    default-character-set=utf8
+    [mysqld]
+    # 端口
+    port=3306
+    # 安装目录
+    basedir=H:\\Program Files\\mysql
+    datadir=F:\\data
+    # 允许最大连接数
+    max_connections=200
+    # server端默认字符集  
+    character-set-server=utf8
+    # 建时默认存储引擎  
+    default-storage-engine=INNODB
+
+2,初始化：cmd:bin\mysqld --initialize-insecure
+3,指定默认文件(my.ini)：cmd:bin\mysqld --defaults-file='H:\Program Files\mysql\my.ini' --initialize
+4,注册mysql服务（如果已存在服务，那么移除=>mysqld  --remove）：cmd:bin\mysqld --install
+5,启动mysql：cmd:bin\mysqld --console
+
+登录终端：cmd:bin\mysql -uroot -p
+空密码时，设置新密码，进入mysql终端后： mysql> set password='123';
+已有密码时，修改密码：mysql> alter user 'root'@'localhost' identified by '123';
+已有密码时，置空密码：mysql> update user set authentication_string='' where user='root';mysql> alter user 'root'@'%' identified by '';
+创建用户：mysql> create user 'sea'@'localhost' identified by '123';
+
+用户授权：mysql> grant all on *.* to 'sea'@'localhost';
+all 代表所有操作，常见操作有select，insert，update 等，on指定数据库或者数据表；
+如果你要给某个用户它mydatabase这个数据库中mytable这个表的insert权限：grant insert on mydatabases.mytable to 'xx'@'xxx';
+
+*进入终端后的命令操作结尾要加';'==>mysql> show databases;
+===========================================================================================================================
+常用命令
+===========================================================================================================================
 show databases|tables|columns							-- show 
 select FirstName,LastName from people LIMIT	 5;			--返回结果集中从6开始的记录
 select FirstName,LastName from people LIMIT	 5,2;		--返回结果集中从6开始的两条记录
+
+===========================================================================================================================
