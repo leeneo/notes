@@ -1,5 +1,6 @@
-open in browser	(TechER)	alt+shift+b
+open in browser	(TechER)	     使用：alt+shift+b
 Easy LESS
+Easy Compile                     使用：命令面板--easy compile
 ESLint
 HTML Snippets
 JavaScript(ES6)code Snippets
@@ -7,19 +8,21 @@ minify
 
 color pick
 Quokka
-visual studio Code Format
-visual studio Team Services
+Visual Studio IntelliCode
 vscode-icons
-Angular2+Snippets-...
+Angular2 Snippets
 Beautify
 C#
-C# FixFormat	ctrl+alt+i
+C# FixFormat	                使用：ctrl+alt+i
+# Kite AI Code AutoComplete
 Debugger for Chrome
 Prettier-Js formatter
 auto close tag
-asp.net helper
-auto import
 auto rename tag
+asp.net helper
+Essential ASP.NET Core 3 Snippets
+vue-helper
+auto import
 c/c++
 python
 pyton for vscode
