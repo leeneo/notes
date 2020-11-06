@@ -1,0 +1,86 @@
+项目根目录新建：.jshintrc 
+>>> 示例
+{
+    "curly": true,
+    "strict": true,
+    "esversion": 6,
+    "indent": 2,
+    "quotemark": "single"
+}
+
+>>> 配置项说明
+
+  /**
+   * 是否要求 for/while/if 等循环和条件语句中总是使用花括号
+   *
+   *
+   */
+  "curly": true,
+
+  /**
+   * 是否强制使用严格等号
+   *
+   * 有时候需要判断 null，所以默认不严格要求
+   */
+  "eqeqeq": true,
+
+   /**
+   * 选择ES版本，3,5,6
+   */
+  "esversion": 6,
+
+  /**
+   * 当使用JS保留字时，显示警告
+   */
+  "futurehostile": true,
+
+   /**
+   * 要求变量在使用前声明，
+   */
+  "latedef": true,
+
+  /**
+   * 是要求否以 strict 模式检查
+   *
+   * 该选项要求文件有 "use strict;"不全局要求，需要的模块自行开启
+   */
+  "strict": false,
+
+   /**
+   * 提示未定义的变量
+   *
+   * 未定义的变量会容易造成全局变量，该项开启
+   */
+  "undef": true,
+
+  /**
+  * 提示未使用的变量
+  * vars - to only check for variables, not function parameters
+  * strict - to check all variables and parameters.
+  * 默认开启
+  */
+  "unused": true,
+
+   /**
+   * 是否禁止使用var
+   * Use `let` or `const` instead.
+   */
+  "varstmt": false,
+
+  /**
+   * 全局不显示缺少分号警告
+   */
+  "asi": false,  
+
+  /**
+   * 不显示缺少分号警告
+   * 只针对在只有一行的代码块的最后一行，如果缺失分号缺省会报警告信息
+   */
+  "lastsemic": false,
+
+  /**
+   *   要求所有函数遵循ECMAScript 5的严格模式。
+   *   严格模式消除了一些javascript易混淆的痛点，修复了一些阻碍javascript引擎进行优化的错误
+   *   严格模式只在函数作用域生效，禁止全局范围的严格模式，因为会破坏第三方依赖的代码
+   */
+  "strict": false,
