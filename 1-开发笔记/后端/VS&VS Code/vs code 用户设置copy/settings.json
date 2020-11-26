@@ -16,5 +16,15 @@
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "vsicons.projectDetection.autoReload": true,    
-    "team.showWelcomeMessage": false
+    "team.showWelcomeMessage": false,
+    "easycompile.compile": {
+          
+        "minifyJsOnSave": false,
+        "minifyCssOnSave": true
+      },
+    "easycompile.sass": {
+        "outDir":"./",
+        "outExt":".min.css",
+        "compress": true
+    }
 }
