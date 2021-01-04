@@ -4,7 +4,8 @@
 
 四种绑定形式：
 {{value}}:                component --> Dom
-[property]="variable":    component --> Dom   把父组件variable的值传到子组件的variable变量中，子组件通过使用@Input()声明variable：@Input() variable:类型
+[property]="variable":    component --> Dom   把父组件variable的值传到子组件的variable变量中，
+                                              子组件通过使用@Input()声明variable：@Input() variable:类型
 (event)="handler":        Dom --> component
 [(ng-model)]="property":  Dom <--> component
 
@@ -14,7 +15,8 @@
 ===============================================================================================
 
 0、引用
-<!-- #usernameRef，表示引用（reference），这里引用的是input这个对象，然后传递input的value给组件的onClick()函数，在组件中处理input的值，是不是有点像asp.net 的控制器 -->
+<!-- #usernameRef，表示引用（reference），这里引用的是input这个对象，然后传递input的value给组件的onClick()函数，
+    在组件中处理input的值，是不是有点像asp.net 的控制器 -->
 <div>
   <input #usernameRef type="text">
   <input #passwordRef type="password" name="pwd" id="pwd">
@@ -47,7 +49,8 @@ Demo:
 
 指令-Directives
 Angular 的模板是动态的。当 Angular 渲染它们的时候，会根据指令给出的指示对 DOM 进行转换。 指令就是一个带有 @Directive() 装饰器的类。
-组件从技术角度上说就是一个指令，但是由于组件对 Angular 应用来说非常独特、非常重要，因此 Angular 专门定义了 @Component() 装饰器，它使用一些面向模板的特性扩展了 @Directive() 装饰器。
+组件从技术角度上说就是一个指令，但是由于组件对 Angular 应用来说非常独特、非常重要，因此 Angular 专门定义了 @Component() 装饰器，
+它使用一些面向模板的特性扩展了 @Directive() 装饰器。
 除组件外，还有两种指令：结构型指令和属性型指令。 Angular 本身定义了一系列这两种类型的指令，也可以使用 @Directive() 装饰器来定义自己的指令。
 
 结构型指令
@@ -66,7 +69,8 @@ DEMO:
 DEMO:
 <input [(ngModel)]="hero.name">
 
-[(ngModel)] 指令就是属性型指令的一个例子，它实现了双向数据绑定。 ngModel 修改现有元素（一般是 <input>）的行为：设置其显示属性值，并响应 change 事件。
+[(ngModel)] 指令就是属性型指令的一个例子，它实现了双向数据绑定。 ngModel 修改现有元素（一般是 <input>）的行为：设置其显示属性值，
+并响应 change 事件。
 
 Angular 还有很多预定义指令既不修改布局结构（比如 ngSwitch），也不修改 DOM 元素和组件的样子（比如 ngStyle 和 ngClass）。
 
@@ -88,10 +92,12 @@ Angular 应用架构：模块（module），组件（component，包括模板、
 @NgModule() 装饰器是一个函数，它接受一个元数据对象（一个Json{}对象），该对象的属性用来描述这个模块
 @NgModule({
   imports:      [ BrowserModule ],   --imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
-  providers:    [ Logger ],          --providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（也可以在组件级别指定服务提供商，这通常是首选方式。）
+  providers:    [ Logger ],          --providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。
+                                                  （也可以在组件级别指定服务提供商，这通常是首选方式。）
   declarations: [ AppComponent ],    --declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道
   exports:      [ TodoComponent ],   --exports（导出表） —— 那些能在其它模块的组件模板中使用的可声明对象的子集。
-  bootstrap:    [ AppComponent ]     --bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。只有根模块才应该设置这个 bootstrap 属性。
+  bootstrap:    [ AppComponent ]     --bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。
+                                                    只有根模块才应该设置这个 bootstrap 属性。
 })
 
 ===============================================================================================
@@ -117,11 +123,13 @@ Angular 在每个 JavaScript 事件循环中处理所有的数据绑定，它会
 对于与特定视图无关并希望跨组件共享的数据或逻辑，可以创建服务类。
 使用“@Injectable()” 装饰器定义服务类，该装饰器提供的元数据可以让你的服务作为依赖被注入到客户组件中。
 服务类的元数据提供了一些信息，Angular 要用这些信息来让组件可以通过依赖注入（DI）使用该服务。
-依赖注入（或 DI）让你可以保持组件类的精简和高效。有了 DI，组件就不用从服务器获取数据、验证用户输入或直接把日志写到控制台，而是会把这些任务委托给服务。
+依赖注入（或 DI）让你可以保持组件类的精简和高效。有了 DI，组件就不用从服务器获取数据、验证用户输入或直接把日志写到控制台，
+而是会把这些任务委托给服务。
 
 
 路由：
-应用的组件通常会定义很多视图。 Angular 提供了 Router 服务来实现不同视图之间的切换(基于视图层次结构，定义导航路径)。 路由器提供了先进的浏览器内导航功能。
+应用的组件通常会定义很多视图。 Angular 提供了 Router 服务来实现不同视图之间的切换(基于视图层次结构，定义导航路径)。 
+路由器提供了先进的浏览器内导航功能。
 路由器会根据你应用中的导航规则和数据状态来拦截 URL，并跳转到导航规则中的视图。
 导航路径（path）使用类似 URL 的语法来和程序数据整合在一起。
 如果路由器认为当前的应用状态需要某些特定的功能，而定义此功能的模块尚未加载，路由器就会按需惰性加载此模块。
@@ -131,9 +139,12 @@ Tips:
 组件类上的装饰器为其添加了元数据，其中包括指向相关模板的指针。
 组件模板中的指令和绑定标记会根据程序数据和程序逻辑修改这些视图。
 依赖注入器会为组件提供一些服务，比如路由器服务就能让你定义如何在视图之间导航。
-Angular的NgModule 系统与 JavaScript（ES2015）用来管理 JavaScript 对象的模块系统不同，而且也没有直接关联。 这两种模块系统不同但互补。可以使用它们来共同编写你的应用。
-JavaScript 中，每个文件是一个模块，文件中定义的所有对象都从属于那个模块。 通过 export 关键字，模块可以把它的某些对象声明为公共的。 其它 JavaScript 模块可以使用import 语句来访问这些公共对象。
-Angular 会作为一组 JavaScript 模块进行加载，可以看成库模块。每个 Angular 库的名称都带有 @angular 前缀。 使用 npm 包管理器安装 Angular 的库，并使用 JavaScript 的 import 语句导入其中的各个部分
+Angular的NgModule 系统与 JavaScript（ES2015）用来管理 JavaScript 对象的模块系统不同，而且也没有直接关联。 这两种模块系统不同但互补。
+可以使用它们来共同编写你的应用。
+JavaScript 中，每个文件是一个模块，文件中定义的所有对象都从属于那个模块。 通过 export 关键字，模块可以把它的某些对象声明为公共的。 
+其它 JavaScript 模块可以使用import 语句来访问这些公共对象。
+Angular 会作为一组 JavaScript 模块进行加载，可以看成库模块。每个 Angular 库的名称都带有 @angular 前缀。 
+使用 npm 包管理器安装 Angular 的库，并使用 JavaScript 的 import 语句导入其中的各个部分
 比如：import { BrowserModule } from '@angular/platform-browser';
 使用时，把它加入 @NgModule 元数据的 imports 中
 比如：imports:      [ BrowserModule ]
@@ -165,7 +176,8 @@ providers:[AuthService,UserService]
 (2)、令牌
 @我们通常在构造函数里面，为参数指定类型，让 Angular 来处理依赖注入。该参数类型就是依赖注入器所需的令牌。
 
-providers: [ { provide: 'auth', useClass: AuthService }, { provide: 'user', useClass: UserService }, { provide: BASE_ URL, useValue: 'http:// localhost: 3000/ todos' }, AuthGuardService ]
+providers: [ { provide: 'auth', useClass: AuthService }, { provide: 'user', useClass: UserService }, 
+             { provide: BASE_ URL, useValue: 'http:// localhost: 3000/ todos' }, AuthGuardService ]
 @tips
 providers是由provide对象组成的一个数组：
 { provide: 'auth', useClass: AuthService }，对应类供应商
@@ -208,7 +220,8 @@ userValue 形式叫“值供应商”
 <!-- [{ngModel}],方括号的含义是将“=”后面当成表达式来解析而不是字符串
 []是单向绑定，我们 在 组件 中 给 model赋 的 值 会 设置 到 HTML 的 input 控 件 中。
 [()]是双向绑定，意思， 就是说 HTML 对应 控 件 的 状态 改变 会 反射 设置 到 组件 的 model 中。
-ngModel 是 FormModule 中 提供 的 指令， 它 负责 从 Domain Model（ 这里 就是 username 或 password， 以后 我们 可以 绑 定 更 复杂 的 对象） 中 创建 一个 FormControl 的 实例， 并将 这个 实例 和 表单 的 控 件 绑 定 起来。 -->
+ngModel 是 FormModule 中 提供 的 指令， 它 负责 从 Domain Model（这里就是 username 或 password，以后我们可以绑定更复杂的对象）
+中创建一个 FormControl 的 实例， 并将 这个 实例 和 表单 的 控 件 绑 定 起来。 -->
 
 
 *ngFor指令用于迭代引用指令的元素
@@ -240,10 +253,13 @@ cmd:ng g s serviceName  创建服务
 手动注册：app.module.ts => providers:[serviceName1,serviceName2],
 *The providers array tells Angular to create a single, shared instance of HeroService and inject into any class that asks for it.
 
-<input type="text" name='username' [(ngModel)]="username" #usernameRef='ngModel' required minlength="3" placeholder="请输入用户名" (focus)="onFocus(usernameRef)"/>
-#usernameRef 表示在ts文件中引用<input>标记，#usernameRef='ngModel'表示可以在当前模板文件中引用该标记,此时在ts文件中对该标记的引用：username.valueAccessor._elementRef.nativeElement。
+<input type="text" name='username' [(ngModel)]="username" #usernameRef='ngModel' required minlength="3" placeholder="请输入用户名" 
+(focus)="onFocus(usernameRef)"/>
+#usernameRef 表示在ts文件中引用<input>标记，#usernameRef='ngModel'表示可以在当前模板文件中引用该标记,
+此时在ts文件中对该标记的引用：username.valueAccessor._elementRef.nativeElement。
 
-Angular 把组件的模板看做从属于该组件的。 组件和它的模板默认会相互信任。也就是组件模板可以绑定组件的任意属性。想要绑定其他组件的属性时需要用 @Input将该属性设置为公共的，否则angular拒绝绑定；
+Angular 把组件的模板看做从属于该组件的。 组件和它的模板默认会相互信任。也就是组件模板可以绑定组件的任意属性。
+想要绑定其他组件的属性时需要用 @Input将该属性设置为公共的，否则angular拒绝绑定；
 
 [(ngModel)]双向绑定指令不被识别的错误解决方法：
 在app.module.ts的imports中引入FormsModule
@@ -298,11 +314,14 @@ ng set -g packageManager=cnpm --global
 ===============================================================================================
 
 --引导过程
-Angular2通过在src/main.ts中引导AppModule来启动应用，src/index.html为app首页展示页，类似于一个母板，集合了根组件标签<app-root></app-root>；
-所有组件在app.module.ts根模块中进行注册，app.component 为app根组件，其他组件标签通过整合进根组件标签<app-root></app-root>，然后再由index.html中呈现出来；（自定义组件标签直接放进index.html中并不会起效果）
+Angular2通过在src/main.ts中引导AppModule来启动应用，src/index.html为app首页展示页，类似于一个母板，
+集合了根组件标签<app-root></app-root>；
+所有组件在app.module.ts根模块中进行注册，app.component 为app根组件，其他组件标签通过整合进根组件标签<app-root></app-root>，
+然后再由index.html中呈现出来；（自定义组件标签直接放进index.html中并不会起效果）
 这就形成了一个组件构成形式的单页面应用！
 
-app.module/bootstrap指明哪个组件为引导性组件（本案例中的AppComponent）。当Angular引导应用时，它会在DOM中渲染这个引导性组件，并把结果放进index.html的该组件的元素标签中（本案例中的app-root）。
+app.module/bootstrap指明哪个组件为引导性组件（本案例中的AppComponent）。当Angular引导应用时，它会在DOM中渲染这个引导性组件，
+并把结果放进index.html的该组件的元素标签中（本案例中的app-root）。
 
 --引导模式，详见angular-cli.txt
 JiT:动态引导  //开发调试，默认方式，连同Angular编译器一起发布到浏览器
@@ -313,11 +332,13 @@ AoT:静态引导  //生成更小、启动更快的应用，不把编译器发布
 引入第三方JS类库
 1,包中已有*.d.ts后缀的类型定义文件，直接使用npm i --save packageName
 2,没有.d.ts文件，npm i --save packageName=>npm i @types/packageName --save-dev(意思是在@types/搜索安装类 型定义文件)
-3，找不到类型定义文件，需要手动添加类型定义：src/typings.d.ts=>declare module 'packageName'=>组件中  import * as friendName(别名) from 'packageName'=> friendName.method()
+3，找不到类型定义文件，需要手动添加类型定义：src/typings.d.ts=>declare module 'packageName'=>组件中 
+ import * as friendName(别名) from 'packageName'=> friendName.method()
 
 标签语法：
 *angular严格区分大小写：组件定义函数onClick()与标签引用函数(click)="onclick()" 大小写不一致就会报错！
-<!-- (click)="onClick()"，圆括号是说发生此事件时，调用等号后面的表达式或函数;等号后面的onClick()是我们自己定义在LoginComponent中的函数，这个名称你可以随便定成什么，不一定叫onClick() -->
+<!-- (click)="onClick()"，圆括号是说发生此事件时，调用等号后面的表达式或函数;等号后面的onClick()是我们自己定义在LoginComponent中的函数，
+这个名称你可以随便定成什么，不一定叫onClick() -->
 ===============================================================================================
 
 服务

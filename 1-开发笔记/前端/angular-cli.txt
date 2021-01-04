@@ -35,7 +35,8 @@ Ahead-Of-Time 编译模式开发流程
 　　2、Angular 启动  
 　　3、应用完成渲染
 
-Angular应用中包含的组件、HTML模板（比如：@Directive、@Component、@NgModule、@Pipe）很多都是浏览器无法解析的，所以在浏览器渲染应用之前，组件和模板必须要被Angular编译器转换为可以执行的JavaScript。
+Angular应用中包含的组件、HTML模板（比如：@Directive、@Component、@NgModule、@Pipe）很多都是浏览器无法解析的，
+所以在浏览器渲染应用之前，组件和模板必须要被Angular编译器转换为可以执行的JavaScript。
 
 使用为aot预编译之前，安装npm依赖：
 cnpm install @angular/compiler-cli        @angular/platform-server --save
