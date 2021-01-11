@@ -1,0 +1,3 @@
+net help start --打开 net start 命令相关帮助
+net start --列出正在运行的服务
+net start [service] --启动指定的 service 服务，多个单词用“”，如 net start “DHCP Client”

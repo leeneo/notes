@@ -20,7 +20,8 @@ protected internal 可以被子类及同一程序集的其他类调用
 
 嵌套类访问
 static成员与非static成员的访问：与普通类static or non-static成员的访问方法是一致的。
-关于访问限制：内部类可以访问外部类的任何访问级别的成员（public, internal）；而外部类只能访问内部类的public 或者internal级别的成员，不能访问内部类protected和private级别的成员。
+关于访问限制：内部类可以访问外部类的任何访问级别的成员（public, internal）；
+而外部类只能访问内部类的public 或者internal级别的成员，不能访问内部类protected和private级别的成员。
 
 可通过类名.类名，访问某个嵌套类，需注意访问级别限制，嵌套类不加修饰默认为private
 public A{
@@ -64,7 +65,7 @@ abstract类只能被继承,不能够被实例化
 tips:
 接口和抽象类最本质的区别：抽象类是一个不完全的类，是对对象的抽象，而接口是一种行为规范。
 如果要重写基类中的方法，则基类中的方法必需用virtual或abstract修饰
-虚拟成员或抽象成员不能是私有的，即：abstract,virtual前面不能加private，sealed修改符，或不加访问修饰符
+虚拟成员或抽象成员不能是私有的，即：abstract,virtual 前面不能加private，sealed修饰符，或不加访问修饰符（类成员不加修饰符默认为private）
 
 base 关键字用于从派生类中访问基类的成员：
 调用基类上已被其他方法重写的方法(不能是抽象方法)==>：
@@ -206,7 +207,10 @@ EN：The SqlParameter is already contained by another SqlParameterCollection
     param.Add(new SqlParameter("@as_type", request.as_type));
     param.Add(new SqlParameter("@as_error", SqlDbType.NVarChar, 255) { Direction = ParameterDirection.Output, Value = request.as_error });
 
-    var results = context.Database.SqlQuery<ProcedureReturn>(sql, param.ToArray()).FirstOrDefault();
+    var results = context.Database.
+    
+    
+    <ProcedureReturn>(sql, param.ToArray()).FirstOrDefault();
     result = param[5].Value.ToString(); //得到OutPut类型值
 
     解决方案（第二次执行使用clone语法）：
