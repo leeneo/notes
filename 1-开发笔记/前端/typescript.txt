@@ -9,12 +9,35 @@ npm install -g typescript
 安装完成后就可以使用 tsc 编译 ts文件（前提是环境变量Path中已经添加npm路径）
 
 编译 ts文件命令：tsc
+tsc demo.ts 直接编译ts文件为js文件
+tsc .\greeter.ts --outDir ../dist 将ts文件为js文件，并输出到上级dist目录
 
-实时编译：tsc --watch
+tsc -w|--watch    --Watch input files, 实时编译：
 
 为了更方便的调试 typescript 文件，可以安装 ts-node
 npm install -g ts-node
 
 编译：ts-node demo.ts 可以实时查看控制台打印结果
+
+===========================================================================================================================================
+配置 tsconfig.json 
+===========================================================================================================================================
+通过 “tsc --init ” 命令创建一个带模板的 tsconfig.json 文件。
+tsconfig.json：
+{
+    "compilerOptions": {},  // 常用的编译配置
+    "files": [],            // 待编译的ts文件
+    "include": [],          // 编译时需要包含的批量文件
+    "exclude": []           // 编译时需要排队的批量文件
+}
+
+*注意
+当用webpack进行打包并暴露出bundle文件的时候会和tsconfig产生冲突，因为他俩都是编译/打包出来的文件，
+因此要在tsconfig.json中添加exclude到webpack打包出的指定路径
+
+*tips:
+include可以和file联用
+exclude只对include有效，对files无效
+如果 files 和 include 都未设置，那么除了 exclude 排除的文件，编译器会默认包含路径下的所有 TS 文件
 
 ===========================================================================================================================================
