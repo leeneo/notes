@@ -72,14 +72,16 @@ all 代表所有操作，常见操作有select，insert，update 等，on指定数据库或者数据表；
 ===========================================================================================================================
 连接mysql
 ===========================================================================================================================
-mysql command line client ==>连接mysql
+mysql -h localhost -P 3306 -u root -p dbname
+-h后面是数据库地址
+-P端口号 
+-u后面是用户名  
+-p后面是密码
+最后是跟上数据库名   
 
-mysql -h bdm-004.hichina.com -u bdm004032 —default-character-set=utf8 -p password  bdm0040320_db < d:\bdm0040320_db.sql 
-
--h后面是数据库地址 -u后面是用户名 —default-character-set= 后面指定字符集，当初备份的时候用的什么字符集这里就还用什么   
--p后面是密码    最后是跟上数据库名    d:\bdm0040320_db.sql 是数据库备份文件路径；
-
-PHP数据库连接例程说明:
+===========================================================================================================================
+PHP数据库连接例程说明
+===========================================================================================================================
 $dbh = mysql_connect(' localhost','数据库用户名','数据库密码');
 mysql_select_db('数据库名');
 $query = "insert into requests(date, request, email, priority,status) values (NOW(),'$description', '$email', '$priority', 'NEW')";
@@ -94,8 +96,9 @@ $row = mysql_fetch_row($res);
 echo "未来您使用的号码为: ".$row[0];
 ?>
 
-
-Linux云虚拟主机通过pdo链接mysql数据库
+===========================================================================================================================
+Linux 云虚拟主机通过 pdo 链接 mysql 数据库
+===========================================================================================================================
 更新时间：2017-06-07 13:26:11   分享：   
 PDO(PHP Data Object) 是PHP5中新加入的模块，是PHP5新加入的一个重大功能，使用非常方便，php3/4没法使用，链接实例可以参考如下代码：
 
@@ -118,9 +121,9 @@ PDO::lastInsertId() 返回上次插入操作，主键列类型是自增的最后的自增ID。
 PDOStatement::fetch() 是用来获取一条记录。 
 PDOStatement::fetchAll() 是获取所有记录集到一个中。
 
-
+===========================================================================================================================
 asp.net连接实例
-
+===========================================================================================================================
 using MySql.Data.MySqlClient;
 
 namespace ConnectMySql
@@ -145,7 +148,6 @@ namespace ConnectMySql
 
 3-2、在web.config中配置连接字符串完成对MySQL数据库的连接（推荐，替代方法3-1）
 
-复制代码
  <connectionStrings>
     <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-Sanlogic.MSTWebsite-20140219093639;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-Sanlogic.MSTWebsite-20140219093639.mdf" providerName="System.Data.SqlClient" />
 
