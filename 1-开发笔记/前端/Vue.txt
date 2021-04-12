@@ -15,4 +15,163 @@ beforeUpdate()
 updated()
 beforeDestroy
 destroyed
+
+************************************************************************************************************************************
+使用 vue  cli3 以上创建的项目，如果需要添加自定义配置，在项目根目录下手动添加一个 vue.config.js 文件：
+module.exports={}
+************************************************************************************************************************************
+Vue.use(); 安装插件 //Vue.use(VueRouter)
+
+************************************************************************************************************************************
+路由的使用
+************************************************************************************************************************************
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+
+// 通过Vue.use(VueRouter) 安装VueRouter
+Vue.use(VueRouter)
+
+// 创建路由表：配置路由和组件间的映射关系
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  }
+]
+
+// 创建 VueRouter 对象
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
+
+// 导出 VueRouter 对象
+export default router
+
+最后通过在App.vue中使用 <router-link/>(设置跳转) 和<router-view/>(设置组件显示位置) 来使用路由
+************************************************************************************************************************************
+<router-link/> 的标签属性
+
+tag: 设置渲染成的标签元素button/div等，默认是<a>标签
+replace: 设置history的state 为replaceState,使浏览器返回按钮失效
+active-class:可修改激活元素的属性标志，只针对该标记有效，若要统一修改可在 vue-router 中添加 linkActiveClass 项
+
+*可利用 <router-link> 激活元素的 router-link-active 属性设置激活元素的样式 
+************************************************************************************************************************************
+this.$router vs this.$route 
+
+this.$router: new 出来的 VueRouter 对象，包含一系列的配置，以及一个 routes（路由表） 集合
+this.$route: 表示当前激活的路由对象，routes 对象中的一个，即当前url显示的那个路由
+************************************************************************************************************************************
+动态路由
+一种模式下的动态匹配，类似/user/foo，/user/bbb，都将匹配同一个user路由
+{
+    path: '/user/:id',
+    name: 'User',
+    component: () => import('../views/User.vue')
+},
+
+************************************************************************************************************************************
+懒加载（一个路由对应一个组件，一个组件封装一个JS，只有当该组件的路由被访问时，才加载对应的JS）
+
+把不同的组件分割成独立的代码块，当某个路由被访问时，才加载这个组件。
+避免加载首页时全部加载所有文件，以实现更好的用户体验。
+
+vue 路由懒加载的写法：component: () => import('../views/User.vue')
+************************************************************************************************************************************
+router 路由传参的几种方式
+
+1.布尔模式，在组件中使用$route.params，这种方式会使组件与对应路由形成高耦合，使用props 解耦
+const User = {
+  template: '<div>User {{ $route.params.id }}</div>'
+}
+
+*使用props 解耦，如果 props 被设置为 true，route.params 将会被设置为组件属性。
+const User = {
+  props: ['id'],
+  template: '<div>User {{ id }}</div>'
+}
+const router = new VueRouter({
+  routes: [
+    { path: '/user/:id', component: User, props: true }
+  ]
+})
+
+2，query，通过url query 传参, $route.query 取参
+<router-link :to="{path:'/profile',query:{name:'leeneo',age:'28',id:'111'}}" replace>Profile</router-link>
+const Profile = {
+  template: '        
+        <ul>
+            <li>{{$route.query.name}}</li>
+            <li>{{$route.query.age}}</li>
+        </ul>
+}
+
+3，对象模式，如果 props 是一个对象，它会被按原样设置为组件属性。当 props 是静态的时候有用。
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/promotion/from-newsletter',
+      component: Promotion,
+      props: { newsletterPopup: false }
+    }
+  ]
+})
+
+4.函数模式，创建一个函数返回 props
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/search',
+      component: SearchUser,
+      props: route => ({ query: route.query.q })
+    }
+  ]
+})
+
+*此外还可以通过组件内自定义函数的方式修改路由并传参
+const User = {
+    methods: {
+      userClick() {
+          this.$router.replace("/user/" + this.id);
+        },
+        profileClick() {
+          this.$router.replace({
+            path: "/profile",
+            query: {
+              name:'leeneo',
+              age:28
+            },
+          });
+        }
+    }
+}
+  
+
+************************************************************************************************************************************
+$router $route 的定义：
+Object.defineProperty(Vue.prototype,'$router',{get(){return new VueRouter(){}}});
+Object.defineProperty(obj.prototype,'aaa',{}) 等效于 obj.prototype.aaa={};
+************************************************************************************************************************************
+keep-alive: 缓存页面状态
+
+正常情况下，从一个路由跳到另一个路由，上一个组件的生命周期即结束，重新回到之前的路由会重新开始一个新的生命周期，
+如果要缓存之前页面的状态，避免重复创建组件，可以使用 keep-alive：
+    <keep-alive>
+      <router-view />
+    </keep-alive>
+
+    或者组件元数据中：keepAlive:true
+
+include - 字符串或正则表达式。只有名称匹配的组件会被缓存。
+exclude - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。
+
+*keepAlive 为true时，生命周期内可以使用 activated() deactivated() 两个生命周期函数。
 ************************************************************************************************************************************

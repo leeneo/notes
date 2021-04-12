@@ -1,5 +1,23 @@
+****************************************************************************************************************************
 接收Get请求传过来URL参数用Request.Query
 var txtName = Request.Query["txtName"];
 
 接收Post请求传过来的参数用Request.Form
 var txtName2 = Request.Form["txtName"];
+
+****************************************************************************************************************************
+.NetCore 3.1 连接MySql
+****************************************************************************************************************************
+需要 EntityFrameworkCore 大于3.1.8<5.0.0
+需要 EntityFrameworkCore.Relational 大于3.1.8<5.0.0
+需要 Pomelo.EntityFrameworkCore.MySql 3.xx
+
+连接字符串&示例：
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+
+    // 连接 MySql 实例，不支持“.”
+    //optionsBuilder.UseMySql(@"Data Source=localhost;Port=3306;Initial Catalog=TestDb;User Id=root;Password=123;sslMode=None;Allow User Variables=True;");
+    optionsBuilder.UseMySql(@"Server=localhost;Port=3306;Database=testdb;Uid=root;Pwd=123;charset=utf8;sslMode=None;Allow User Variables=True;");
+
+}
