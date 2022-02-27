@@ -23,7 +23,7 @@ module.exports={}
 Vue.use(); 安装插件 //Vue.use(VueRouter)
 
 ************************************************************************************************************************************
-路由的使用
+router 路由的使用
 ************************************************************************************************************************************
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -212,7 +212,40 @@ vuex  特性：响应式
 
 安装 npm install vuex --save
 
+使用 vuex (主要是使用 vuex 中的 store 对象)：
+1.新建store/index.js:   //把需要在组件间共享的变量定义在 soter 中
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+export default new Vuex.Store({
+  state: {
+    counter: 0
+  }
+});
 
+2.main.js:
+import store from './store' //引入并在 vue 实例中配置 store 对象。
+new Vue({
+  el: '#app',
+  store,
+  router,
+  render: h => h(App)
+})
+************************************************************************************************************************************
+vuex 状态管理流程
+
+Vuex 状态相关：Actions,Mutaions,State
+Actions(commit)-->Mutations(mutate-突变)-->State(render)-->Vue components(dispatch-发送)-->Actions(异步时使用)/Mutations
+Backend API 通过 Actions 与 Vuex 进行交互
+DevTools 通过 Mutations 与 Vuex 进行交互
+Vue components 通过 Actions（异步时使用）、Mutations 修改 State 与 Vuex 进行交互
+*Vue components 也可以直接修改State，但这样的操作 DevTools 跟踪不到，所以官方不建议这样做。
+************************************************************************************************************************************
+vuex 核心概念
+
+State,Getters,Mutation,Action,Module
+
+************************************************************************************************************************************
 
 
 ************************************************************************************************************************************
