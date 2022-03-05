@@ -1,0 +1,203 @@
+JavaScript 精华一页纸
+
+
+JS 自身操作部分
+
+1、数据类型 | 变量定义
+动态语言，不需要指定参数的数据类型，也就是说可以任意赋值
+数字 | 布尔 | 字符串 | 数组 | 对象
+
+未定义的变量 undefined
+
+undefined 和 null 的区别：undefined 值为 null，类型为 undefined，表明未定义；null值为null，类型为 object，表明为空。
+
+字符串和Java类似；数字类型都是 64位，不区分具体类型。
+类型转换
+数字 - > 字符串
+toString | String()
+字符串 -> 数字
+parseInt/parseFloat -- 和Java 略有区别的是，如果数字和字母混合，则会截取一段转换
+进制转换
+toString(2/8/16) - 精度
+
+类型检测 - typeOf 类似 instanceof
+如果判断一个对象是什么类型 一般 可以使用 constructor 属性来判断
+
+eval -- 计算并执行 string 里面的语句；尽量避免使用，防止恶意代码；
+escape -- 对特殊字符进行编码
+
+2、对象
+三种定义方式，最常用的还是{}方式
+var obj = {id:1,name:"aa",fun:function(){}};
+
+可以动态的给对象增加新的属性和函数；如果需要给已经存在的对象增加函数（比如系统类库添加方法）
+-- 任何类都有prototype属性，所以添加类方法，只需要给 prototype 增加方法即可
+
+补充阅读：原型链
+
+对象 this - 在不同位置，代表不同意思，一般是指调用 该函数时的对象
+
+函数对象
+和Java一样值传递，可以修改 外部的对象参数值
+函数并不检查隐式参数的任何情况，可以使用 arguments 实现很多功能；调用时，如果参数个数少于函数定义，则其他的都是undefined
+
+function定义对象
+Function(para1,para2){
+this.para1 = para1;
+
+this.func = function(){
+}
+}
+function myFunction(a,b){ }
+
+call vs apply - 有点像java的反射调用
+myFunction.call(obj,a,b); -- 这里 函数也当成了一个对象，通过对象来调用函数，如果是对象的方法，传入对象，如果是全局，可以传入null
+myFunction.apply(obj,[a,b]);
+
+数字对象
+isNaN - 是否数字 | toFixed() 精度
+
+String对象
+indexOf()/charAt/toLowerCase/toUpperCase/length
+
+日期对象 类似于 Java.util.Date
+new Date(参数可选 日期|毫秒|年月日等等)
+setFullYear / setDate
+
+数组对象
+concat 合并两个 | filter 过滤 | join 把数组转换成字符串 | [last]indexOf 索引 | map 处理数组的每个元素返回新数组 | push/pop 向尾部增加或者取出 | reverse 反转| shift 返回第一个并删除 | slice 选取一部分数组 | some 是否有符合条件的数据 | sort 排序 | splice 添加 | unshift 向数组头部插入元素 | valueOf 返回数组对象值
+-- 这些函数的提供，非常符合函数化特征，在 scala里面也大量使用了类似的功能。
+
+正则表达式
+new RegExp | /表达式/gim
+提供 test exec（返回匹配的字符串） 来进行匹配判断；另外，字符串替换,match 都采用了正则表达式对象
+
+Math 对象
+PI/round/floor/ceil/ranodm/min/max
+
+对象与json的互转
+json.parse
+json.stringify
+
+3、逻辑控制
+判断 | 循环 和 java类似(for in 循环java 也支持
+运算符 | 表达式 都和 java类似
+
+补充阅读：for in 循环如果使用在数组中,而数组扩展了prototype原型方法,循环迭代时,有可能迭代到原型方法
+
+4、异常处理
+try{
+
+}catch(err){
+-- 因为没有类型定义，所以只有一个 catch
+}
+throw
+
+5、提升 （变量和函数）
+前面的代码 可以使用后面声明的变量|函数；不建议使用，违反正常阅读习惯
+
+6、严格模式
+
+7、自调用函数和闭包
+(function(){
+var para = aa;
+return {
+para:para,
+func:function
+}
+})();
+首先 是自调用，保证了代码的执行；其次通过闭包封装；并返回了一个对象，这样对模块进行了封装；实现了类似class的功能。
+
+HTML DOM 操作
+
+8、元素操作 - document
+获取元素 getElementById/ getElementByTagName / getElementByClassName
+父子|兄弟关系 firstChild/lastChild/nextSibling/parentNode /childNodes
+属性 getAttribute/ attributes
+可以直接指定属性操作 element.src = xxx
+新增元素 createElement/ createTextNode/ createAttribute / appendChild / insertBefore
+删除/更新元素 replaceChild / removeChild/ setAtrribute
+
+元素属性 nodeName | nodeValue | nodeType
+文本节点有 value没有name | 普通节点有name 没有value | 1元素|2属性|3文本|8注释|9文档
+
+这里有一点和 XML 解析是类似的，就是每个元素节点之间都有 空白文本子节点，就是元素之间的空白?????
+
+9、样式操作
+http://element.style.xxx = value;
+element.className =
+
+10、事件
+I、事件类型
+a、文档加载相关（系统框架事件)
+onload | onunload | onbort | onerror | onpageshow | onresize | onscroll
+b、鼠标事件
+onclick | ondbclick | onmouseover | onmouseout | onmousedown | onmouseup | onmouseenter| onmouseleave
+c、键盘事件
+onkeydown | onkeypress | onkeyup
+d、表单事件
+onchange | onfocus | onblur | onfocusin | onfocusout | oninput | onreset | onsearch | onselect | onsubmit
+e、剪贴板 & 打印 & 拖动 & 动画 & 多媒体 & 过渡 & 其他等等
+
+II、事件模型
+a、DOM level 0 的属性绑定事件
+b、DOM level 2的事件注册派发模型
+addEventListener / attachEventListener / removeEventListener
+window.addEventListener("resize", function(){
+document.getElementById("demo").innerHTML = sometext;
+}, 冒泡or捕获)
+事件传递有两种方式：冒泡与捕获。
+事件传递定义了元素事件触发的顺序。 如果你将 <p> 元素插入到 <div> 元素中，用户点击 <p> 元素, 哪个元素的 "click" 事件先被触发呢
+在 冒泡 中，内部元素的事件会先被触发，然后再触发外部元素，即： <p> 元素的点击事件先触发，然后会触发 <div> 元素的点击事件。
+在 捕获 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即： <div> 元素的点击事件先触发 ，然后再触发 <p> 元素的点击事件
+
+III、事件对象
+属性
+bubbles 是否冒泡类型 | currentTarget -- 触发事件的元素 | target -- 触发事件的元素 | type - 事件类型
+
+方法
+preventDefault -- 通知浏览器不执行动作（阻止事件冒泡） | stopPropagation -- 不再派发事件
+
+如果是键盘/鼠标事件对象，还能获取 坐标、位置、键盘字母等等
+clientX/Y
+screenX/Y
+
+target 和 currentTarget的区别？
+如果只是 DOM level 0 很简单，监听对象很明确，就是 绑定属性的这个元素。两者相同
+但如果 使用 addEventListener 时，就会存在 父子容器的情况，如果是 子容器的点击事件；父容器在监听 - 冒泡；或者反过来，捕获，父容器事件，子容器在点击
+target 对应 真实点击事件的 元素对象
+currentTarget 对应 监听事件的 元素对象
+
+javascript:void(0) 代表的是什么意思呢？
+void 是 JavaScript 中非常重要的关键字，该操作符指定要计算一个表达式但是不返回值。一般可以用在链接转菜单|导航时，点击不跳转只有其他效果
+
+<a href="javascript:void(0)">单击此处什么也不会发生</a>
+<a href="javascript:void(alert('Warning!!!'))">点我!</a>
+
+href="#"与href="javascript:void(0)"的区别
+# 包含了一个位置信息，默认的锚是#top 也就是网页的上端。
+而javascript:void(0), 仅仅表示一个死链接。
+在页面很长的时候会使用 # 来定位页面的具体位置，格式为：# + id。
+如果你要定义一个死链接请使用 javascript:void(0) 。
+
+浏览器相关
+
+11、window 对象
+window对象 是默认的，所有对象和方法都在 window对象中
+Window 对象拥有的属性
+screen 屏幕对象 | location 访问的url | history 浏览历史 | navigator 浏览器 | document 文档对象
+
+方法
+setTimout / setInterval / clearTimeout / clearInterval / setScroll / ...
+
+事件
+onlaod or ready
+一般 把函数引用 和 HTML的联结 都放在 window.onload 事件中，否则操作的dom 元素可能还未存在
+都是加载完毕。ready 只包括html文档，但图片等可能还未加载完；onload是所有的都加载完
+
+12、弹出框
+alert | confirm | prompt
+
+13、cookie
+document.cookie
+不同浏览器不能共享 cookie； 判断浏览器是否支持 cookie -- navigator.cookieEnable

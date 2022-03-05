@@ -1,0 +1,19 @@
+<img src="XXXX1" id="img1"  onclick="dis();"/>(这是图标)<h2>XXXXXXX(标题)</h2>(字体自己设置下)
+<div id="test1" style="display:none"> (开始设置为隐藏)
+XXXXXXX(内容)
+</div>
+<script>
+function dis()
+{
+if (document.getelementbyid('test1').display == "none")  //展开
+{
+document.getelementbyid('img1').src = "XXXX2";(改变图标)
+document.getelementbyid('test1').display = ""; (展开)
+}
+else   //隐藏
+{
+document.getelementbyid('img1').src = "XXXX1";(改变图标)
+document.getelementbyid('test1').display = "none"; (隐藏)
+}
+}
+</script>
