@@ -1,0 +1,41 @@
+多语言切换 Alt+Shift
+例如：搜狗中文输入法 和 Google日文输入法 之间切换
+同一语言下输入法切换 Ctrl+Shift
+例如：搜狗中文输入法 和 百度中文输入法 之间切换
+同一语言下输入法切换热键还原 Ctrl+space
+例如：搜狗中文输入法 和 无输入法状态 之间切换
+
+
+Google日语输入法
+Google日语输入法快捷键（和微软日语输入法大体相同，当然也可以自己设置）
+
+快捷键 Alt + ~　日英文切换 英文：图标（A）-- Direct Input 
+快捷键 Alt +CapsLock 切换到片假名　Katakana（图标ア）模式
+快捷键 Ctrl/Shift + CapsLock 切换到平假名　Hiragana（图标あ）模式
+
+一些特殊音的打法：
+
+注意 r行：らりるれろ
+发音是： la li lu le lo
+输入则是：ra ri ru re ro 
+
+s行：し
+し：ci si
+
+t行：ち
+ち：ti chi 
+
+z行：ざじずぜぞ
+发音：za ji zu ze zo
+输入：じ ji zi 都可
+
+d行：だぢづでど
+发音：da ji zu de do
+输入：ぢ di、 づ du
+
+w行：を wo
+
+拨音：ん　  双击 n 
+促音：あっ  双击辅音键位
+长音：ー    减号
+
