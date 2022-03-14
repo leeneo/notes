@@ -67,7 +67,12 @@ npm install -save-dev moduleName 命令
 3. 运行 npm install 初始化项目时，会将模块下载到项目目录下。
 4. 运行npm install --production或者注明NODE_ENV变量值为production时，不会自动下载模块到node_modules目录中。
 ============================================================================================================
-npm install --save 与npm install --save-dev 的区别
+npm install --save|-S 与npm install --save-dev|-D 的区别
+
+-S就是--save 的简写，局部安装，生产时依赖，模块写入到 dependencies对象dependencies对象，
+                            这个与devDependencies不同，是需要发布到生产环境中的。
+-D就是--save-dev 局部安装，开发时依赖，模块写入到 devDependencies 对
+-g就是--global 全局安装
 
 npm install <packageName>  --save：发布安装
 ---项目发布上线之后还会依赖用到的插件，没有这些插件，项目不能运行
