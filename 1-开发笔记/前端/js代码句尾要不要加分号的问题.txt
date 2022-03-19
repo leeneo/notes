@@ -1,0 +1,59 @@
+
+js 有自动填充机制
+《javascript权威指南》：一条语句如果 “(”、“[”、“/”、“+”、或“-”开始，那么它极有可能和前一条语句合在一起解释。”
+例如：
+语句1：a=b
+语句2：(function(){})
+js 会解释成：a=b(function(){})()
+
+*return后换行会自动插入分号，但这个缺陷与加不加分号无关
+如果在return、break、continue、throw等关键字后面换行，javascript会在换行处填补分号。如：
+return
+{
+    a: 1
+}
+
+会解释成：
+return;
+{
+    a: 1
+}
+
+
+尤雨溪：https://www.zhihu.com/question/20298345/answer/49551142
+
+至于说 “很难总结什么时候加不加”，其实真的很简单。
+真正会导致上下行解析出问题的 token 有 5 个：括号，方括号，正则开头的斜杠，加号，减号。
+我还从没见过实际代码中用正则、加号、减号作为行首的情况，
+所以总结下来就是一句话：一行开头是括号或者方括号的时候加上分号就可以了，其他时候全部不需要。
+其实即使是这两种情况，在实际代码中也颇为少见。
+
+
+贺师俊：https://www.zhihu.com/question/20298345/answer/14670020
+
+ASI：JavaScript 中的“自动分号插入”机制
+
+在asi选项说明里，jshint的文档是这样写的：
+There is a lot of FUD(fear, uncertainty and doubt) spread about semicolon  spreaded by quite a few people                 
+in the community. The common myths are that semicolons  are required all the time (they are not) 
+and that they are unreliable.  JavaScript has rules about semicolons which are                
+followed by all browsers so it is up to you to decide whether you                 
+should or should not use semicolons in your code.
+
+翻译如下：关于分号有大量的FUD，且是由社区里的一小撮人【你知道是指谁】散布的。
+一个常见的流言是必须写分号，不写分号不可靠【流言的意思是不写分号会导致代码行为不确定】。
+实际上JS有明确的分号规则，并且所有浏览器【居然】都忠实遵守了规则。
+所以是否应该在你的代码里使用分号，完全可以由你自己决定【而不是由一小撮流言散布者或二逼工具强加于你】。
+所以对于可不可以不加分号这个问题，社区是有结论的。
+
+
+
+总结：加不加分号应该由你自己的代码书写风格而定，是喜欢不喜欢加的问题，而不是要不要加的问题。
+
+
+*参数里面不能加分号，将某个函数作为参数传递给另一个函数的时候，如果函数加了分号，类似这样的：somFn(fn();)，就会报错。
+如：function sum(n1,n2){return n1+n2};
+console.log(sum(6,9);) //error
+console.log(sum(6,9)) //right
+
+*另 eslint 规范里面默认强制不加分号，如果加了会报一个 extra semicolon error 给你，当然你可以修改该规则。

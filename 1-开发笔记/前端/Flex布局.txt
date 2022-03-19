@@ -76,6 +76,7 @@ flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。
 3.4 justify-content属性
 
 justify-content属性定义了项目在主轴上的对齐方式。
+*flex-direction 为 column 时，justify-content 无效
 
 它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。
 
@@ -89,10 +90,10 @@ space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一
   justify-content: flex-start | flex-end | center | space-between | space-around;
 }
 
-
 3.5 align-items属性
 
 align-items属性定义项目在交叉轴上如何对齐。
+*flex-direction 为 row 时，align-items 无效
 
 .box {
   align-items: flex-start | flex-end | center | baseline | stretch;
@@ -130,6 +131,7 @@ flex-shrink
 flex-basis
 flex
 align-self
+justify-content   用于item内的文本对齐
 
 4.1 order属性
 order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
