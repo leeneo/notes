@@ -59,4 +59,50 @@ SSR，服务器渲染。简单来说就是，服务器将每个要展示的页�
 
 那什么对搜索引擎和爬虫友好的哪？答案就是静态页，而非浏览器渲染，这就需要服务器直接渲染，也就 SSR(Server Side Render)。
 
+Flutter: Flutter是谷歌的一款移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面，使用 Dart 语言开发，跨平台
+Weex ：一个使用现代 Web 技术构建高性能移动应用程序的框架。阿里的，目前weex@github已停止更新。
+RN: React Native
+Coffeescript: 一门编译到 JavaScript 的小巧语言，类似 Typescript 出现时机也是对 javascript 的改良。随着ES6普及，逐渐淡出。
+gulp：自动化构建工具，可以进行js，htm，css，img的压缩打包。使用 task 管理流程，区别于 webpack 的模块化。
+grunt：也是一个自动化构建工具，压缩代码，只不过多了一些自动化测试之类的功能
+rollup：是一个使用 ES6 标准对 JavaScript 代码进行模块打包的工具，可以将小块代码编译成大块复杂的代码，
+Webpack 是模块化打包工具，可以通过扩展 loader，插件，拥有一些丰富的功能。
+gulp/grunt 定位于 构建工具，webpack 定位于 模块化打包。
 
+webpack 和 rollup 对比：
+webpack：代码拆分， 按需加载；方便处理静态资源。利于处理 CommonJS 模块代码。
+rollup：资源放在同一个地方，一次性加载。利用 tree-shake 精简代码。方便处理基于 ES6 的代码。        
+结论：对于应用使用 webpack，对于类库使用 Rollup。React 已经将构建工具从 Webpack 换成了 Rollup。
+
+
+HightCharts：国外的，收费。可视化图表工具，基于 SVN。动态增删节点，不需要重新绘图。适合带有大型渲染区域的应用（如谷歌地图）。
+Echarts：    百度的，免费。可视化图表工具，基于 Canvas。动态增删节点，需要重新绘图。适合图像密集型的游戏，3D绘图等。
+
+OpenGL：开放式图形库，用于渲染2D、3D矢量图形的跨语言、跨平台的应用程序编程接口（API），或者说规范。
+WebGL: 一种3D绘图协议。
+        把 JavaScript 和 OpenGL ES 结合在一起，通过 HTML5 的 Canvas 来和 DOM 打交道，为HTML5 Canvas 提供硬件 3D 加速渲染。
+        HTML5提供了一套基于该协议的API,通过 Html5的canvas来实现。
+WebGL 1.0 基于OpenGL ES 2.0，WebGL 2.0 基于OpenGL ES 3.0，
+
+PWA(Progressive Web App)： 渐进式 Web APP（网页App，类似“快应用”之类的），
+                            目的是通过各种 Web 技术实现与原生 App 相近的用户体验或者说性能。
+
+Redux：JavaScript 状态容器，提供可预测化的状态管理。除了和 React 一起用外，还支持其它界面库。
+RxJS： 是使用 Observables 的响应式编程的库，JavaScript 的 Reactive 扩展。主要用于处理异步数据，它使编写异步或基于回调的代码更容易。
+NgRx:  是一个基于Rxjs的状态管理框架，用于在 Angular 中构建反应式应用程序，管理全局和本地状态等等。
+        保存了Redux的核心概念，并使用RxJs扩展的Redux实现。
+Vuex:  是一个专为 Vue.js 应用程序开发的状态管理模式 + 库 
+
+Redux/NgRx/Vuex: 都是一种应用内状态管理模式。vuex 借鉴了redux，ngrx是redux的另一种实现，区别只在于 vuex 只能结合vue使用。
+
+
+WebAssembly/wasm： 一个可移植、体积小、加载快并且兼容 Web 的全新格式。
+                   一种使用非 JavaScript 语言编写代码，并且能在浏览器中运行的技术方案。以便解决大型应用中js的性能以及其他一些问题。
+                   流程：C/C++ 转译为 IR中间语言，IR 经过 wasm 转化为二进制。                   
+几张图让你看懂WebAssembly：https://www.jianshu.com/p/bff8aa23fe4d    
+
+asm.js是由Mozilla提出的一种提升js执行效率的解决方案，动态类型转换为静态和取消了垃圾回收机制。
+
+To B是企业客户
+To C是一般用户
+To G是政府客户

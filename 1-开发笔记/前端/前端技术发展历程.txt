@@ -1,0 +1,6 @@
+2015 年的技术背景：
+当时 ReactNative 开源不到半年，Flutter 还没正式露面(2017)，小程序还没出现(2017)，ES6 刚刚定稿，
+Node.js 还是 4.x (现在 16.x)，Vue.js 是 1.x (现在 3.0)，React 是 0.14 (现在 17.x)，
+很少有人在用 Webpack 和 Babel，Gulp 和 Grunt 是主流，前端圈最热的话题是有没有必要用前端框架，反对多于支持。
+
+https://zhuanlan.zhihu.com/p/373582962
