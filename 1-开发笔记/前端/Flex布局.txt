@@ -131,7 +131,6 @@ flex-shrink
 flex-basis
 flex
 align-self
-justify-content   用于item内的文本对齐
 
 4.1 order属性
 order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
