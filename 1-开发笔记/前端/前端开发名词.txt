@@ -68,6 +68,7 @@ grunt：也是一个自动化构建工具，压缩代码，只不过多了一些
 rollup：是一个使用 ES6 标准对 JavaScript 代码进行模块打包的工具，可以将小块代码编译成大块复杂的代码，
 Webpack 是模块化打包工具，可以通过扩展 loader，插件，拥有一些丰富的功能。
 gulp/grunt 定位于 构建工具，webpack 定位于 模块化打包。
+flow: A static type checker for javascript. 一款 FaceBook 发布的开源Javascript静态类型检查器。功能类似 Typescript.
 
 webpack 和 rollup 对比：
 webpack：代码拆分， 按需加载；方便处理静态资源。利于处理 CommonJS 模块代码。

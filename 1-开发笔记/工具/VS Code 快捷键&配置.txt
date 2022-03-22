@@ -34,9 +34,9 @@ ctrl+b:侧边栏
 
 折叠/展开 除所选区域之外的代码    Ctrl + K + -	Ctrl + k + = 除当前光标所在行外的所有 “{}” 都会被折叠或展开
        
-折叠/展开 当前代码块            Ctrl+Shift+[  Ctrl+Shift+] 只有当前光标所在行的 "{}" 会被折叠或展开
+折叠/展开 当前代码块             Ctrl+Shift+[  Ctrl+Shift+] 只有当前光标所在行的 "{}" 会被折叠或展开
 
-代码行缩进                   Ctrl+[    Ctrl+]
+代码行缩进                      Ctrl+[    Ctrl+]
 
 如果不选中，默认复制或剪切一整行	Ctrl+C Ctrl+X Ctrl+V
 代码格式化：Shift+Alt+F，或Ctrl+Shift+P后输入format code
@@ -52,7 +52,8 @@ ctrl+b:侧边栏
 选中当前行Ctrl+i（双击）
 选择从光标处到行首Shift+Home
 选择从光标处到行尾Shift+End
-*删除光标右侧的所有字Ctrl+Delete（实用）
+*删除光标左侧的单个词 Ctrl+Backspace
+*删除光标右侧的单个词 Ctrl+Delete
 *选择多处，一起修改：Alt+Click 依次点击，或者Ctrl+Shift+Alt+Down 或 Ctrl+Shift+Alt+Up（实用）
 *同时选中所有匹配的Ctrl+Shift+L（实用）
 选中下一个相同的匹配：Ctrl+D
