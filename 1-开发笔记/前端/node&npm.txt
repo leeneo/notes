@@ -1,8 +1,9 @@
 npm安装:安装nodejs
 
 npm config ls 查看参数
-npm get cache  查看 cache 路径
-npm get prefix 查看 prefix路径
+npm get cache     查看 cache 路径
+npm get prefix    查看 prefix路径
+npm get registry  查看 registry 镜像地址
 npm config set cache -g "C:\\Users\\Administrator\\AppData\\Roaming\\npm"
 npm config set prefix -g "f:npm"
 
