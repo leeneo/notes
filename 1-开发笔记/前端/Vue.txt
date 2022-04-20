@@ -278,3 +278,10 @@ web 安全问题
 
 https://blog.csdn.net/java_tang_shi_wen/article/details/115027687
 ************************************************************************************************************************************
+vue 开发
+
+vscode 在.vue 文件中开启 Html Snippets 扩展功能
+
+settings.json中配置files.associations对象
+添加 "*.vue":"html" 键值对
+
