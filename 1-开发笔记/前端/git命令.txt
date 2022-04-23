@@ -32,7 +32,13 @@ md repos-->cd repos
 git init 初始化
 git add 1.txt/. 添加指定或者所有文件到预仓库
 git commit -m "test" 将预仓文件，提进仓库
-git remote add origin ssh_url|https
+
+设置远程github库的地址： git remote add origin https|ssh_url
+改变远程github库的地址： git remote set-url origin https|ssh_url
+git remote -v 查看本地已连接至远程仓的url
+* https://github.com/leeneo/aaa.git 这种是https_url产生的
+* https://github.com/:leeneo/aaa.git 这种是ssh_url产生的
+
 git push origin master
 #有时需要输入账户用户名，密码
 [rejected]错误解决方法(当git仓中已有代码时，从其它本地分支推送就会报此错误)：
@@ -142,3 +148,8 @@ git push origin HEAD --force                            --远程更新到github
 *然后找到要删除的commit号，pick改成drop，退出并保存就行了，不会影响别的文件或记录
 *如果该文件关联的commit有多条，要优先删除最近的commit，然后可以逐步追踪到create 该文件的commit
 *vim模式 按<Insert> 进入编辑模式；:wq -- 保存并退出；:q -- 直接退出；esc 切换到命令模式
+
+
+更新本地git bash
+windows: git update-git-for-windows
+Linux/Unix: git update
