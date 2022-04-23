@@ -113,8 +113,30 @@ apt-get是ubuntu下的一个软件安装方式，它是基于debain。
 ===========================================================================================================================
 centos 7搭建网站
 ===========================================================================================================================
-安装 httpd 
-yum install -y httpd
+1，apache 方式 建网站
+
+安装 httpd：yum install -y httpd
 httpd -v 查看80端口
 安装完成后，启动httpd 服务 ：service httpd start
 网站默认目录 /var/www/html
+
+2，nginx 方式建网站
+安装 nginx：  yum install -y nginx
+systemctl start nginx.service 开启 nginx 服务
+systemctl enable nginx.service 开机自启 nginx 服务
+systemctl disable nginx.service 关闭开机自启 nginx 服务
+
+nginx 配置文件目录：etc/nginx/nginx.conf
+**修改配置之后的restart
+systemctl restart nginx.service  重启nginx
+
+httpd 与 nginx 默认占用80端口，两者有其一的情况下，想安装另一种，需要先将已经安装好的,先stop 再disable，然后再安装新的。
+systemctl stop httpd
+systemctl disable httpd
+yum install -y xxx
+
+===========================================================================================================================
+常用的SSH连接工具：winscp, Xshell,PuTTY,Mobaxterm
+最好用的：Mac系统自带的SSH终端模拟器
+最简单的：PuTTY
+免费好用的：Mobaxterm
