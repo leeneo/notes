@@ -24,7 +24,7 @@ settings-->生成ssh key-->title:id_rsa.pub,
 content: 执行 cat ~/.ssh/id_rsa.pub命令，复制输出内容到content 即可(需要本地已经生成id_rsa.pub文件，如无，
 先执行 ssh-keygen -t rsa 命令，
 再执行 cat ~/.ssh/id_rsa.pub 命令
-最后     ssh -T git@github.com 确认结果)。
+最后   ssh -T git@github.com (确认结果)。
 cd ~/.ssh
 $ ls 查看是否有id_rsa（私钥）和id_rsa.pub（公钥）两个文件
 
@@ -37,10 +37,32 @@ git commit -m "test" 将预仓文件，提进仓库
 改变远程github库的地址： git remote set-url origin https|ssh_url
 git remote -v 查看本地已连接至远程仓的url
 * https://github.com/leeneo/aaa.git 这种是https_url产生的
-* https://github.com/:leeneo/aaa.git 这种是ssh_url产生的
+* git@github.com:leeneo/aaa.git   这种是ssh_url产生的
+* 如果向远程推送分支一直失败，可能是使用了https_url产生的，不妨改成ssh_url试试
 
-git push origin master
+#如果都不行，试试下面的方法：
+1，首先，重新生成ssh_公钥，本地的和github端的都要重新生成，尽量不要使用代理，github ping不通的情况下，试着修改本地hosts文件，建立能直接访问到github真实iP的映射
+2，更新本地 git bash 客户端
+3，cd到本地仓，执行git remote -v
+如果提示 unsafe repository，To add an exception for this directory, call 等等
+那就执行 git config --global --add safe.directory F:/本地项目目录/aaa
+然后再次执行 git remote -v ，查看origin url 是https 还是ssh,
+如果是https 从github远程仓页面复制该仓的 ssh_url
+然后使用 git remote set-url origin ssh_url ，修改成ssh形式的
+最后执行 git remote -v ，查看是否修改成功，注意 origin 的名字不要拼错
+4，执行 git push -u origin master 或者 git push origin master
+
+初次推送远程使用：git push -u origin master
+后续代码提交使用：git push origin master
 #有时需要输入账户用户名，密码
+
+有个命令可以将ssh协议转换为https协议：git config --global url."https://".insteadOf git://
+这个命令不能反过来，如果要转换https到ssh，照上面的方式，使用remote set-url。
+
+*git config --list 查看配置
+*git bash 中的复制/粘贴：复制：ctrl+ins，粘贴：shift+ins
+*git bash 的配置文件在：c:/users/admin/.gitconfig
+
 [rejected]错误解决方法(当git仓中已有代码时，从其它本地分支推送就会报此错误)：
 1，git push origin -f 强推覆盖远程分支
 2，git fetch =>git merge;这两句等价于git pull.
@@ -73,7 +95,7 @@ git push origin webs 更新到远程分支 webs
 git pull origin webs 从远程webs拉取更新
 git pull origin :aaa 本地新建分支(aaa)
 
-git push origin --delete bname 删除远程分支
+git push origin --delete bname 删除远程分支（不能直接删除默认主分支，如果是默认分支，则需要在settings里先将默认分支改成别的分支）
 git push origin :aaa 推送时不指定本地分支，则删除远程分支aaa，等价于 push --delete
 
 git remote -v 查看远程仓
