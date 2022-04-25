@@ -175,3 +175,13 @@ git push origin HEAD --force                            --远程更新到github
 更新本地git bash
 windows: git update-git-for-windows
 Linux/Unix: git update
+
+假如有其他的源码托管账号，比如Gitee，那怎么在不影响推送到Github的情况下，同时推送到Gitee呢？
+简单：照着上面给Github添加SSH公钥的方式，在Gitee上也添加一个与本地rsa.pub对应的公钥。
+然后CD到本地仓目录，记得 git push 命令后面的origin吗？
+可以remote -v 查看，已存在的远程仓url
+这个origin不一定非叫origin，是可以任意取的，而且可以不只有一个。
+所以 git remote add gitee https://gitee.com/leeneo/bbb.git
+*https://gitee.com/leeneo/bbb.git 这是gitee远程仓的ssh_url
+添加成功后再执行：git push gitee master
+源码就到了gitee上的bbb仓了，简单吧。
