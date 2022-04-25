@@ -96,12 +96,12 @@ git pull origin webs 从远程webs拉取更新
 git pull origin :aaa 本地新建分支(aaa)
 
 git push origin --delete bname 删除远程分支（不能直接删除默认主分支，如果是默认分支，则需要在settings里先将默认分支改成别的分支）
-git push origin :aaa 推送时不指定本地分支，则删除远程分支aaa，等价于 push --delete
+git push origin :aaa 推送一个空的本地分支，则意味着删除远程分支aaa（如果存在），等价于 push --delete
 
 git remote -v 查看远程仓
-git remote rename old new 修改关联的远程仓
-git remote remove origin 移除远程仓
-git branch --set-upstream devtest origin/devtest 关联到远程分支
+git remote rename gitee tea 修改关联的远程仓url
+git remote remove origin 移除远程仓url
+git branch -u[--set-upstream] gitee remotes/gitee/master 关联到远程分支
 
 
 管理分支
@@ -111,6 +111,7 @@ git branch bn 列出或创建分支 bn
 git checkout -b  bn 创建并切换到分支 bn
 git checkout bn 切换到分支bn
 git branch -d c 删除分支 c
+git branch -a   可以看到远程上的分支
 
 .gitignore(windows下建.gitignore.)
 管理规则
@@ -186,3 +187,8 @@ Linux/Unix: git update
 添加成功后再执行：git push gitee master
 源码就到了gitee上的bbb仓了，简单吧。
 push的过程中，如果弹出用户验证的界面，就输入你在gitee上的用户名，密码进行验证就行了。
+*建议不同的托管使用不同的分支:
+执行 git push gitee master:branchName 
+就可以在不将本地仓分支的情况下，建立远程仓上的分支
+*远程仓的分支名与本地的不一致时使用：
+git push gitee master:branchName
