@@ -185,3 +185,4 @@ Linux/Unix: git update
 *https://gitee.com/leeneo/bbb.git 这是gitee远程仓的ssh_url
 添加成功后再执行：git push gitee master
 源码就到了gitee上的bbb仓了，简单吧。
+push的过程中，如果弹出用户验证的界面，就输入你在gitee上的用户名，密码进行验证就行了。
